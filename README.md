@@ -1,2 +1,2 @@
-# cs4278
-cs4278 project w/Anuja Mehta, Kahero Harriott, Kobin Kempe, and Nolan Raghu
+# Pest Control Utah
+Unname project regarding pest control delivery  w/Anuja Mehta, Kahero Harriott, Kobin Kempe, and Nolan Raghu
