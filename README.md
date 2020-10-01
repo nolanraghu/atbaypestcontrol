@@ -1,2 +1,7 @@
-# Pest Control Utah
-Unname project regarding pest control delivery  w/Anuja Mehta, Kahero Harriott, Kobin Kempe, and Nolan Raghu
+# AtBay Pest Control
+
+Mobile application developed by Kahero Harriott, Kobin Kempe, Anuja Mehta, and Nolan Raghu.
+
+The goal of the project is to create a mobile interface to subscribe for pest control product delivery plans. 
+
+The App is being buit in Expo/ReactNative with MVC architecture 
