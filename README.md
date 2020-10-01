@@ -1,6 +1,6 @@
 # AtBay Pest Control
 
-Mobile application developed by Kahero Harriott, Kobin Kempe, Anuja Mehta, and Nolan Raghu.
+Mobile application developed by Kahero Harriott (:relieved:), Kobin Kempe (:flushed:), Anuja Mehta (:roll_eyes:), and Nolan Raghu (:drooling_face:).
 
 The goal of the project is to create a mobile interface to subscribe for pest control product delivery plans. 
 
