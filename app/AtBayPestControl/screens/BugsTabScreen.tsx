@@ -13,7 +13,7 @@ export default function BugsTabScreen() {
           </Text>
           <Button title="Add to Plan" onPress={()=>{}}/>
         </View>
-        <ScrollView>
+        <ScrollView style={{marginBottom: '18%'}}>
           <View style={styles.container}>
             <Pressable style={styles.preventionButton} onPress={()=>{}} android_ripple={{color: 'rgba(0,0,0,.15)'}}/>
             <Pressable style={styles.fullButton} onPress={()=>{}} android_ripple={{color: 'rgba(0,0,0,.15)'}}/>
@@ -49,6 +49,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     margin: 10,
+    color: 'white'
   },
   separator: {
     marginVertical: 30,
