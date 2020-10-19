@@ -20,14 +20,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a7ddd241-6d14-413e-a90c-d44a72595648" name="Default Changelist" comment="First Commit. Renaming screens/tabs to fit our needs.">
-      <change beforePath="$PROJECT_DIR$/.idea/AtBayPestControl.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/AtBayPestControl.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.expo/settings.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/text/text.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/AtBayPestControl/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/AtBayPestControl/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/AtBayPestControl/navigation/BottomTabNavigator.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/AtBayPestControl/navigation/BottomTabNavigator.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/AtBayPestControl/screens/BugsTabScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/AtBayPestControl/screens/BugsTabScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/AtBayPestControl/screens/PlanTabScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/AtBayPestControl/screens/PlanTabScreen.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="TypeScript File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/app/AtBayPestControl" />
@@ -66,7 +76,8 @@
       <option name="presentableId" value="Default" />
       <updated>1602885028949</updated>
       <workItem from="1602885030368" duration="2910000" />
-      <workItem from="1602888201913" duration="2711000" />
+      <workItem from="1602888201913" duration="3466000" />
+      <workItem from="1603067041373" duration="5585000" />
     </task>
     <task id="LOCAL-00001" summary="First Commit. Renaming screens/tabs to fit our needs.">
       <created>1602888296289</created>
@@ -105,13 +116,14 @@
     <option name="LAST_COMMIT_MESSAGE" value="First Commit. Renaming screens/tabs to fit our needs." />
   </component>
   <component name="WindowStateProjectService">
-    <state x="496" y="278" key="Vcs.Push.Dialog.v2" timestamp="1602890251425">
-      <screen x="0" y="23" width="1792" height="1028" />
+    <state x="496" y="278" key="Vcs.Push.Dialog.v2" timestamp="1602892515801">
+      <screen x="0" y="23" width="1792" height="1026" />
     </state>
+    <state x="496" y="278" key="Vcs.Push.Dialog.v2/0.23.1792.1026@0.23.1792.1026" timestamp="1602892515801" />
     <state x="496" y="278" key="Vcs.Push.Dialog.v2/0.23.1792.1028@0.23.1792.1028" timestamp="1602890251425" />
-    <state x="694" y="459" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1602892260221">
+    <state x="694" y="459" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1603067051274">
       <screen x="0" y="23" width="1792" height="1028" />
     </state>
-    <state x="694" y="459" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1792.1028@0.23.1792.1028" timestamp="1602892260221" />
+    <state x="694" y="459" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1792.1028@0.23.1792.1028" timestamp="1603067051274" />
   </component>
 </project>
