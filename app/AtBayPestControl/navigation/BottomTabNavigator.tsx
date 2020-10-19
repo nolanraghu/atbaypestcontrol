@@ -60,7 +60,7 @@ function BugsTabNavigator() {
       <BugsTabStack.Screen
         name="BugsTabScreen"
         component={BugsTabScreen}
-        options={{ headerTitle: 'Bugs Title' }}
+        options={{ headerTitle: 'AtBay Pest Control' }}
       />
     </BugsTabStack.Navigator>
   );
@@ -74,7 +74,7 @@ function PlanTabNavigator() {
             <PlanTabStack.Screen
                 name="PlanTabScreen"
                 component={PlanTabScreen}
-                options={{headerTitle: 'Plan Title'}}
+                options={{headerTitle: 'AtBay Pest Control'}}
             />
         </PlanTabStack.Navigator>
     );
@@ -88,7 +88,7 @@ function ProfileTabNavigator() {
             <ProfileTabStack.Screen
                 name="ProfileTabScreen"
                 component={ProfileTabScreen}
-                options={{headerTitle: 'Profile Title'}}
+                options={{headerTitle: 'AtBay Pest Control'}}
                 />
         </ProfileTabStack.Navigator>
     );

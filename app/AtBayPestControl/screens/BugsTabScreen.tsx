@@ -4,7 +4,14 @@ import {Button, Pressable, ScrollView, StyleSheet} from 'react-native';
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
 
+interface BugPressProps {
+  button: object
+  //We'll eventually need to put the other parameter here that tell the button which bug it is
+}
+
 export default function BugsTabScreen() {
+
+
   return (
       <View>
         <View style={styles.header}>
@@ -15,18 +22,35 @@ export default function BugsTabScreen() {
         </View>
         <ScrollView style={{marginBottom: '18%'}}>
           <View style={styles.container}>
-            <Pressable style={styles.preventionButton} onPress={()=>{}} android_ripple={{color: 'rgba(0,0,0,.15)'}}/>
-            <Pressable style={styles.fullButton} onPress={()=>{}} android_ripple={{color: 'rgba(0,0,0,.15)'}}/>
-            <Pressable style={styles.fullButton} onPress={()=>{}} android_ripple={{color: 'rgba(0,0,0,.15)'}}/>
-            <Pressable style={styles.fullButton} onPress={()=>{}} android_ripple={{color: 'rgba(0,0,0,.15)'}}/>
-            <Pressable style={styles.fullButton} onPress={()=>{}} android_ripple={{color: 'rgba(0,0,0,.15)'}}/>
-            <Pressable style={styles.fullButton} onPress={()=>{}} android_ripple={{color: 'rgba(0,0,0,.15)'}}/>
-            <Pressable style={styles.fullButton} onPress={()=>{}} android_ripple={{color: 'rgba(0,0,0,.15)'}}/>
-            <Pressable style={styles.fullButton} onPress={()=>{}} android_ripple={{color: 'rgba(0,0,0,.15)'}}/>
+            <BugPressable button={styles.preventionButton}/>
+            <BugPressable button={styles.fullButton}/>
+            <BugPressable button={styles.fullButton}/>
+            <BugPressable button={styles.fullButton}/>
+            <BugPressable button={styles.fullButton}/>
+            <BugPressable button={styles.fullButton}/>
+            <BugPressable button={styles.fullButton}/>
+            <BugPressable button={styles.fullButton}/>
           </View>
         </ScrollView>
       </View>
   );
+}
+
+
+//Sorry Kobin, but you re-typing the specification of the BugButton was giving me
+//anxiety so I did this.
+function BugPressable(props: BugPressProps){
+  return(
+      <Pressable style={props.button}
+                 onPress={()=>{}}
+                 android_ripple={{color: 'rgba(0,0,0,.15)'}
+                 }/>
+  );
+}
+//This is where all the parameters for the BugPressable go
+interface BugPressProps {
+  button: object
+  //We'll eventually need to put the other parameter here that tell the button which bug it is
 }
 
 const styles = StyleSheet.create({
