@@ -21,7 +21,6 @@
   <component name="ChangeListManager">
     <list default="true" id="a7ddd241-6d14-413e-a90c-d44a72595648" name="Default Changelist" comment="Nolan Commit two. Started on PlanTabScreen.tsx">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/AtBayPestControl/screens/PlanTabScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/AtBayPestControl/screens/PlanTabScreen.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,7 +35,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/app/AtBayPestControl" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1iyg1HRAc0Q3o3JPDrMBhZjTu7Q" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -77,6 +76,7 @@
       <workItem from="1603155843078" duration="7834000" />
       <workItem from="1603204410291" duration="85000" />
       <workItem from="1603204613307" duration="7843000" />
+      <workItem from="1603314203909" duration="48000" />
     </task>
     <task id="LOCAL-00001" summary="First Commit. Renaming screens/tabs to fit our needs.">
       <created>1602888296289</created>

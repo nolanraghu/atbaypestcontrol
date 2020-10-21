@@ -23,21 +23,21 @@ export default function BottomTabNavigator() {
         name="BugsTab"
         component={BugsTabNavigator}
         options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name="ios-bug" color={color} />,
         }}
       />
       <BottomTab.Screen
         name="PlanTab"
         component={PlanTabNavigator}
         options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name="ios-paper" color={color} />,
         }}
       />
       <BottomTab.Screen
           name="ProfileTab"
           component={ProfileTabNavigator}
           options={{
-              tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
+              tabBarIcon: ({ color }) => <TabBarIcon name="ios-person" color={color} />,
           }}
               />
     </BottomTab.Navigator>
