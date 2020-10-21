@@ -1,57 +1,65 @@
 import * as React from 'react';
-import {FlatList, LayoutAnimation, ScrollView, StyleSheet, TouchableOpacity} from 'react-native';
+import {FlatList, LayoutAnimation, Pressable, ScrollView, StyleSheet, TouchableOpacity} from 'react-native';
 
 import { Text, View } from '../components/Themed';
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 const PDATA = [
   {
     id: "p1",
     title: "Product 1",
-    description: "This describes product 1",
-    expanded: false,
+    description: "This describes product 1. It will contain a brief descriptions, price, and a link to additional " +
+        "resources (such as instructional videos for application)",
   },
   {
     id: "p2",
     title: "Product 2",
-    description: "This describes product 2",
-    expanded: false,
+    description: "This describes product 2. It will contain a brief descriptions, price, and a link to additional " +
+        "resources (such as instructional videos for application)",
   },
   {
     id: "p3",
     title: "Product 3",
-    description: "This describes product 3",
-    expanded: false,
+    description: "This describes product 3. It will contain a brief descriptions, price, and a link to additional " +
+        "resources (such as instructional videos for application)",
   },
   {
     id: "p4",
     title: "Product 4",
-    description: "This describes product 4",
-    expanded: false,
+    description: "This describes product 4. It will contain a brief descriptions, price, and a link to additional " +
+        "resources (such as instructional videos for application)",
   },
-]
+];
 
 // @ts-ignore
-const ProductItem = ({item, onPress, style}) => (
+const ProductItem = ({item, onPress, style, selected}) => (
+
+
     <TouchableOpacity onPress={onPress} style={[styles.productBox, style]}>
       <Text style={styles.productTitle}>{item.title}</Text>
-      <Text style={styles.productDescription}>{item.description}</Text>
+      <Text style={styles.productDescription}>{selected? item.description: ""}</Text>
+      <Pressable style={[styles.linkBox, style]}>
+        <Text style={styles.link}>{selected? "LINK":""}</Text>
+      </Pressable>
     </TouchableOpacity>
-)
+);
+
 
 
 export default function PlanTabScreen() {
-  const [expandedId, setExpandedId] = useState(null);
+  const [expandedId, setExpandedId] = useState("");
+
 
   //@ts-ignore
   const renderProduct = ({item}) => {
+    const backgroundColor = item.id === expandedId ? 'rgb(115,214,115)' : 'rgb(206,212,206)';
+
     return(
         <ProductItem
           item={item}
-          onPress={() => {LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-            item.expanded = !item.expanded;
-          }}
-          style={item.expanded? styles.productBox2 : styles.productBox}
+          onPress={() => {setExpandedId(item.id)}}
+          style={{backgroundColor}}
+          selected={expandedId == item.id}
           />
     );
   }
@@ -95,9 +103,9 @@ const styles = StyleSheet.create({
   productBox2: {
     width: '89%',
     margin: '5.5%',
-    marginBottom: '9%',
+    marginBottom: '2%',
     aspectRatio: 3,
-    backgroundColor: 'rgb(17,205,17)',
+    backgroundColor: 'rgb(115,214,115)',
     borderRadius: 20,
     padding: 10,
   },
@@ -110,6 +118,13 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: "normal",
 
+  },
+  linkBox:{
+    alignSelf:"flex-end"
+  },
+  link:{
+    color: '#0000EE',
+    fontSize: 20,
   },
   separator: {
     marginVertical: 30,
