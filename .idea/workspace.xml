@@ -19,13 +19,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a7ddd241-6d14-413e-a90c-d44a72595648" name="Default Changelist" comment="Nolan Commit two. Started on PlanTabScreen.tsx">
+    <list default="true" id="a7ddd241-6d14-413e-a90c-d44a72595648" name="Default Changelist" comment="fixed issue w/yarn start, cleaned up extra files">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/AtBayPestControl/navigation/BottomTabNavigator.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/AtBayPestControl/navigation/BottomTabNavigator.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/AtBayPestControl/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/AtBayPestControl/screens/PlanTabScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/AtBayPestControl/screens/PlanTabScreen.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/AtBayPestControl/screens/ProfileTabScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/AtBayPestControl/screens/ProfileTabScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/AtBayPestControl/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/app/AtBayPestControl/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,7 +78,7 @@
       <workItem from="1603204410291" duration="85000" />
       <workItem from="1603204613307" duration="7843000" />
       <workItem from="1603314203909" duration="48000" />
-      <workItem from="1603336814803" duration="990000" />
+      <workItem from="1603336814803" duration="2032000" />
     </task>
     <task id="LOCAL-00001" summary="First Commit. Renaming screens/tabs to fit our needs.">
       <created>1602888296289</created>
@@ -112,7 +108,14 @@
       <option name="project" value="LOCAL" />
       <updated>1603076406759</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="fixed issue w/yarn start, cleaned up extra files">
+      <created>1603338162460</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1603338162460</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -133,7 +136,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="First Commit. Renaming screens/tabs to fit our needs." />
     <MESSAGE value="Nolan Commit two. Started on PlanTabScreen.tsx" />
-    <option name="LAST_COMMIT_MESSAGE" value="Nolan Commit two. Started on PlanTabScreen.tsx" />
+    <MESSAGE value="fixed issue w/yarn start, cleaned up extra files" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed issue w/yarn start, cleaned up extra files" />
   </component>
   <component name="WindowStateProjectService">
     <state x="734" y="414" key="VCS.EditChangelistDialog" timestamp="1603076356758">
