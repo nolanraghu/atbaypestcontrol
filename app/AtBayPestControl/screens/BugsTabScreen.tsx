@@ -2,15 +2,17 @@ import * as React from 'react';
 import {Button, Image, Pressable, ScrollView, StyleSheet, useColorScheme} from 'react-native';
 
 import { Text, View } from '../components/Themed';
+import { useNavigation } from '@react-navigation/native';
 
 export default function BugsTabScreen() {
+  const navigation = useNavigation();
   return (
       <View>
         <View style={styles.header}>
           <Text style={styles.title}>
             New Price: $10.99
           </Text>
-          <Button title="Add to Plan" onPress={()=>{}}/>
+          <Button title="Add to Plan" onPress={()=> navigation.navigate('PlanUpdatePopupScreen')}/>
         </View>
         <ScrollView style={{marginBottom: '18%'}}>
           <View style={styles.container}>
@@ -34,9 +36,10 @@ export default function BugsTabScreen() {
 //anxiety so I did this.
 function BugPressable(props: BugPressProps){
   const scheme = useColorScheme();
+  const navigation = useNavigation();
   return(
       <Pressable style={props.button}
-                 onPress={()=>{}}
+                 onPress={()=> navigation.navigate('BugInfoPopupScreen')}
                  //This toggles based on the color theme now
                  android_ripple= {scheme === "dark"? {color: 'rgba(0,0,0,.15)'} : {color: 'rgba(255,255,255,0.3)'}}>
         <Image source={props.source} style={styles.image}/>

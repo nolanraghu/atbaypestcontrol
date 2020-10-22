@@ -9,6 +9,8 @@ export default {
           BugsTab: {
             screens: {
               BugsTabScreen: 'Bugs',
+              BugInfoPopupScreen: 'Bug Info',
+              PlanUpdatePopupScreen: 'Plan Update'
             },
           },
           PlanTab: {

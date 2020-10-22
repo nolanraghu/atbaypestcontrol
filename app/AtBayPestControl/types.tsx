@@ -11,6 +11,8 @@ export type BottomTabParamList = {
 
 export type BugsTabParamList = {
   BugsTabScreen: undefined;
+  BugInfoPopupScreen: undefined;
+  PlanUpdatePopupScreen: undefined;
 };
 
 export type PlanTabParamList = {
@@ -20,3 +22,7 @@ export type PlanTabParamList = {
 export type ProfileTabParamList = {
   ProfileTabScreen: undefined;
 };
+
+export type BugInfoPopupParamList = {
+  BugInfoPopupScreen: undefined;
+}

@@ -7,8 +7,10 @@ import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import BugsTabScreen from '../screens/BugsTabScreen';
 import PlanTabScreen from '../screens/PlanTabScreen';
-import { BottomTabParamList, BugsTabParamList, PlanTabParamList, ProfileTabParamList } from '../types';
+import { BottomTabParamList, BugsTabParamList, PlanTabParamList, ProfileTabParamList} from '../types';
 import ProfileTabScreen from "../screens/ProfileTabScreen";
+import BugInfoPopup from "../screens/BugInfoPopup";
+import PlanUpdatePopup from "../screens/PlanUpdatePopup";
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -24,6 +26,7 @@ export default function BottomTabNavigator() {
         component={BugsTabNavigator}
         options={{
           tabBarIcon: ({ color }) => <TabBarIcon name="ios-bug" color={color} />,
+            tabBarLabel: "Infestation Packages"
         }}
       />
       <BottomTab.Screen
@@ -31,6 +34,7 @@ export default function BottomTabNavigator() {
         component={PlanTabNavigator}
         options={{
           tabBarIcon: ({ color }) => <TabBarIcon name="ios-paper" color={color} />,
+            tabBarLabel: "Your Plan"
         }}
       />
       <BottomTab.Screen
@@ -38,6 +42,7 @@ export default function BottomTabNavigator() {
           component={ProfileTabNavigator}
           options={{
               tabBarIcon: ({ color }) => <TabBarIcon name="ios-person" color={color} />,
+              tabBarLabel: "Profile"
           }}
               />
     </BottomTab.Navigator>
@@ -61,6 +66,16 @@ function BugsTabNavigator() {
         name="BugsTabScreen"
         component={BugsTabScreen}
         options={{ headerTitle: 'AtBay Pest Control' }}
+      />
+      <BugsTabStack.Screen
+          name="BugInfoPopupScreen"
+          component={BugInfoPopup}
+          options={{cardStyle: {backgroundColor: 'transparent'}}}
+      />
+      <BugsTabStack.Screen
+          name="PlanUpdatePopupScreen"
+          component={PlanUpdatePopup}
+          options={{cardStyle: {backgroundColor: 'transparent'}}}
       />
     </BugsTabStack.Navigator>
   );
