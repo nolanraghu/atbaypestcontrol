@@ -1,8 +1,7 @@
 import * as React from 'react';
-import { Button, Pressable, ScrollView, StyleSheet } from 'react-native';
+import { Button, Pressable, ScrollView, StyleSheet, Appearance } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
-import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
 
 // Idea: can we make a basic object that has an icon, text, and an edit button all arranged in
@@ -30,6 +29,9 @@ const UDATA = [
 // Could we do the same with the payment data as was proposed with the user data?
 //]
 
+const ionColor = Appearance.getColorScheme() === 'dark'? 'white':'black'
+
+
 // Only for asthetic use, barely functional
 export default function ProfileTabScreen() {
   return (
@@ -42,13 +44,13 @@ export default function ProfileTabScreen() {
           <View style={styles.container}>
 
             <View style={styles.userEntry}>
-              <Ionicons name="md-person" size={64} color="white" />
+              <Ionicons name="md-person" size={64} color={ionColor} />
               <Text style={styles.title}> John Doe </Text>
               <EditPressable button={styles.editButton}/>
             </View>
 
             <View style={styles.userEntry}>
-              <Ionicons name="md-home" size={64} color="white" />
+              <Ionicons name="md-home" size={64} color={ionColor} />
               <View style={styles.container}>
                 <Text style={styles.title}> 123 Main St. </Text>
                 <Text style={styles.title}> New York, NY 12345 </Text>
@@ -57,7 +59,7 @@ export default function ProfileTabScreen() {
             </View>
 
             <View style={styles.userEntry}>
-              <Ionicons name="md-paper" size={64} color="white" />
+              <Ionicons name="md-paper" size={64} color={ionColor} />
               <Text style={styles.title}> Basic Plan ($6.99 Month) </Text>
             </View>
 
@@ -69,19 +71,19 @@ export default function ProfileTabScreen() {
             </View>
 
             <View style={styles.userEntry}>
-              <Ionicons name="md-card" size={64} color="white" />
+              <Ionicons name="md-card" size={64} color={ionColor} />
               <Text style={styles.title}> XXXX-1234 </Text>
               <EditPressable button={styles.editButton}/>
             </View>
 
             <View style={styles.userEntry}>
-              <Ionicons name="md-card" size={64} color="white" />
+              <Ionicons name="md-card" size={64} color={ionColor} />
               <Text style={styles.title}> XXXX-5678 </Text>
               <EditPressable button={styles.editButton}/>
             </View>
 
             <View style={styles.userEntry}>
-              <Ionicons name="md-card" size={64} color="white" />
+              <Ionicons name="md-card" size={64} color={ionColor} />
               <Text style={styles.title}> Bank Account </Text>
               <EditPressable button={styles.editButton}/>
             </View>
@@ -93,6 +95,7 @@ export default function ProfileTabScreen() {
 }
 
 // My function now
+// lol -N
 function EditPressable(props: EditPressProps){
   return(
       <Pressable style={props.button}
@@ -119,7 +122,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     flexWrap: 'wrap',
     flexDirection: 'row',
-    backgroundColor: 'rgb(41,41,41)'
+    backgroundColor: 'rgba(0,0,0,.15)'
   },
   title: {
     fontSize: 30,
