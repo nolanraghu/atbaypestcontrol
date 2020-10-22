@@ -14,7 +14,7 @@ export default function BugsTabScreen() {
         </View>
         <ScrollView style={{marginBottom: '18%'}}>
           <View style={styles.container}>
-            <BugPressable button={styles.preventionButton} source={require('../assets/images/icon.png')}/>
+            <BugPressable button={styles.preventionButton} source={require('../assets/images/honey_bee.png')}/>
             <BugPressable button={styles.fullButton} source={require('../assets/images/ant.png')}/>
             <BugPressable button={styles.fullButton} source={require('../assets/images/beetle.png')}/>
             <BugPressable button={styles.fullButton} source={require('../assets/images/blue_beetle.png')}/>
@@ -38,8 +38,9 @@ function BugPressable(props: BugPressProps){
       <Pressable style={props.button}
                  onPress={()=>{}}
                  //This toggles based on the color theme now
-                 android_ripple= {scheme === "dark"? {color: 'rgba(0,0,0,.15)'} : {color: 'rgba(255,255,255,.15)'}}>
+                 android_ripple= {scheme === "dark"? {color: 'rgba(0,0,0,.15)'} : {color: 'rgba(255,255,255,0.3)'}}>
         <Image source={props.source} style={styles.image}/>
+        <Text style={{color: 'black', alignSelf: 'center', flex: 2, textAlign: "center"}}>Ant, bee, etc.</Text>
       </Pressable>
   );
 }
@@ -83,7 +84,8 @@ const styles = StyleSheet.create({
     aspectRatio: 1,
     backgroundColor: 'pink',
     borderRadius: 20,
-    alignContent: "center"
+    justifyContent: "center",
+    flexDirection: "column"
   },
   preventionButton: {
     width: '89%',
@@ -92,10 +94,15 @@ const styles = StyleSheet.create({
     aspectRatio: 3,
     backgroundColor: 'rgb(131,195,140)',
     borderRadius: 20,
+    justifyContent: "center",
+    flexDirection: "row-reverse"
   },
   image: {
+    flex: 1,
     width: '85%',
     height: '85%',
-    alignSelf: "center"
+    alignSelf: "center",
+    // borderWidth: 3,
+    // borderColor: 'black',
   }
 });
