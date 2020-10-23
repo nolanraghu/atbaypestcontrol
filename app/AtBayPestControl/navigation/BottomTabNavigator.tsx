@@ -70,12 +70,12 @@ function BugsTabNavigator() {
       <BugsTabStack.Screen
           name="BugInfoPopupScreen"
           component={BugInfoPopup}
-          options={{cardStyle: {backgroundColor: 'transparent'}}}
+          options={{cardStyle: {backgroundColor: 'transparent'}, headerShown: false}}
       />
       <BugsTabStack.Screen
           name="PlanUpdatePopupScreen"
           component={PlanUpdatePopup}
-          options={{cardStyle: {backgroundColor: 'transparent'}}}
+          options={{cardStyle: {backgroundColor: 'transparent'}, headerShown: false}}
       />
     </BugsTabStack.Navigator>
   );
@@ -108,5 +108,3 @@ function ProfileTabNavigator() {
         </ProfileTabStack.Navigator>
     );
 }
-
-
