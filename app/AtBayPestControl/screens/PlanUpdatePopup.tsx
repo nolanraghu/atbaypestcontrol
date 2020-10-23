@@ -4,6 +4,8 @@ import { Text, View } from '../components/Themed';
 import {Button, ScrollView, StyleSheet} from "react-native";
 import {useNavigation} from "@react-navigation/native";
 
+// TODO: Fix how everything shifts up, fix colors, add payment info, figure out navigating back w/o back button
+
 export default function PlanUpdatePopup() {
     const navigation = useNavigation();
     return(

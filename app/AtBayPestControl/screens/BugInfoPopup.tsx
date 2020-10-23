@@ -4,6 +4,8 @@ import { Text, View } from '../components/Themed';
 import {Button, Image, ScrollView, StyleSheet} from "react-native";
 import {useNavigation} from "@react-navigation/native";
 
+//TODO: Fix how everything shifts up, fix colors, ** figure out navigating back w/o back button!!! **
+
 export default function BugInfoPopup() {
     const navigation = useNavigation();
     return(
@@ -67,7 +69,7 @@ const styles = StyleSheet.create({
         margin: '5%',
         flex: 1,
         backgroundColor: 'white',
-        aspectRatio: 1
+        aspectRatio: 1,
     },
     section: {
         width: '100%',

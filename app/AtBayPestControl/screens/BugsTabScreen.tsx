@@ -16,14 +16,14 @@ export default function BugsTabScreen() {
         </View>
         <ScrollView style={{marginBottom: '18%'}}>
           <View style={styles.container}>
-            <BugPressable button={styles.preventionButton} source={require('../assets/images/honey_bee.png')}/>
-            <BugPressable button={styles.fullButton} source={require('../assets/images/ant.png')}/>
-            <BugPressable button={styles.fullButton} source={require('../assets/images/beetle.png')}/>
-            <BugPressable button={styles.fullButton} source={require('../assets/images/blue_beetle.png')}/>
-            <BugPressable button={styles.fullButton} source={require('../assets/images/honey_bee.png')}/>
-            <BugPressable button={styles.fullButton} source={require('../assets/images/icon.png')}/>
-            <BugPressable button={styles.fullButton} source={require('../assets/images/icon.png')}/>
-            <BugPressable button={styles.fullButton} source={require('../assets/images/icon.png')}/>
+            <BugPressable button={styles.preventionButton} isPreventionButton={true}/>
+            <BugPressable source={require('../assets/images/ant.png')}/>
+            <BugPressable source={require('../assets/images/beetle.png')}/>
+            <BugPressable source={require('../assets/images/blue_beetle.png')}/>
+            <BugPressable/>
+            <BugPressable/>
+            <BugPressable/>
+            <BugPressable/>
           </View>
         </ScrollView>
       </View>
@@ -34,23 +34,31 @@ export default function BugsTabScreen() {
 
 //Sorry Kobin, but you re-typing the specification of the BugButton was giving me
 //anxiety so I did this.
-function BugPressable(props: BugPressProps){
+function BugPressable({button = styles.fullButton,
+                        source = require('../assets/images/honey_bee.png'),
+                        isPreventionButton = false}: BugPressProps){
+  //TODO make states, based on whether or not the bug is covered
   const scheme = useColorScheme();
   const navigation = useNavigation();
   return(
-      <Pressable style={props.button}
+      <Pressable style={button}
                  onPress={()=> navigation.navigate('BugInfoPopupScreen')}
                  //This toggles based on the color theme now
                  android_ripple= {scheme === "dark"? {color: 'rgba(0,0,0,.15)'} : {color: 'rgba(255,255,255,0.3)'}}>
-        <Image source={props.source} style={styles.image}/>
-        <Text style={{color: 'black', alignSelf: 'center', flex: 2, textAlign: "center"}}>Ant, bee, etc.</Text>
+
+        <Image source={source} style={styles.image}/>
+        {isPreventionButton ?
+            <Text style={{color: 'black', alignSelf: 'center', flex: 2, textAlign: "center"}}>Ant, bee, etc.</Text>
+            : <Text style={{color: 'black', alignSelf: 'center', textAlign: "center"}}>Ant, bee, etc.</Text>}
+
       </Pressable>
   );
 }
 //This is where all the parameters for the BugPressable go
 interface BugPressProps {
-  button: object
-  source: object
+  button?: object
+  source?: object
+  isPreventionButton?: boolean
   //We'll eventually need to put the other parameter here that tell the button which bug it is
 }
 
@@ -102,10 +110,9 @@ const styles = StyleSheet.create({
   },
   image: {
     flex: 1,
-    width: '85%',
-    height: '85%',
+    height: '70%',
+    width: '70%',
     alignSelf: "center",
-    // borderWidth: 3,
-    // borderColor: 'black',
-  }
+    resizeMode: 'contain',
+  },
 });
