@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {FlatList, LayoutAnimation, Pressable, ScrollView, StyleSheet, TouchableOpacity} from 'react-native';
-
+import Modal from 'react-native-modal'
 import { Text, View } from '../components/Themed';
 import {useEffect, useState} from "react";
 
@@ -37,10 +37,10 @@ const ProductItem = ({item, onPress, style, selected}) => (
 
     <TouchableOpacity onPress={onPress} style={[styles.productBox, style]}>
       <Text style={styles.productTitle}>{item.title}</Text>
-      <Text style={styles.productDescription}>{selected? item.description: ""}</Text>
-      <Pressable style={[styles.linkBox, style]}>
-        <Text style={styles.link}>{selected? "LINK":""}</Text>
-      </Pressable>
+        <Text style={styles.productDescription}>{selected? item.description: ""}</Text>
+        <Pressable style={[styles.linkBox, style]}>
+         <Text style={styles.link}>{selected? "LINK":""}</Text>
+        </Pressable>
     </TouchableOpacity>
 );
 
@@ -49,6 +49,13 @@ const ProductItem = ({item, onPress, style, selected}) => (
 export default function PlanTabScreen() {
   const [expandedId, setExpandedId] = useState("");
 
+  const toggleSelected = (id: React.SetStateAction<string>) => {
+    if(expandedId == id){
+      setExpandedId("");
+    } else {
+      setExpandedId(id);
+    }
+  };
 
   //@ts-ignore
   const renderProduct = ({item}) => {
@@ -57,7 +64,7 @@ export default function PlanTabScreen() {
     return(
         <ProductItem
           item={item}
-          onPress={() => {setExpandedId(item.id)}}
+          onPress={() => {toggleSelected(item.id)}}
           style={{backgroundColor}}
           selected={expandedId == item.id}
           />

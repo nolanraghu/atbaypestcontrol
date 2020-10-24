@@ -61,7 +61,7 @@ const BugsTabStack = createStackNavigator<BugsTabParamList>();
 
 function BugsTabNavigator() {
   return (
-    <BugsTabStack.Navigator>
+    <BugsTabStack.Navigator mode='modal'>
       <BugsTabStack.Screen
         name="BugsTabScreen"
         component={BugsTabScreen}
