@@ -32,8 +32,6 @@ export default function BugsTabScreen() {
 
 
 
-//Sorry Kobin, but you re-typing the specification of the BugButton was giving me
-//anxiety so I did this.
 function BugPressable({button = styles.fullButton,
                         source = require('../assets/images/honey_bee.png'),
                         isPreventionButton = false}: BugPressProps){
