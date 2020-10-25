@@ -4,6 +4,9 @@ import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
 
 import Colors from '../constants/Colors';
+
+
+//All our stuff
 import useColorScheme from '../hooks/useColorScheme';
 import BugsTabScreen from '../screens/BugsTabScreen';
 import PlanTabScreen from '../screens/PlanTabScreen';
@@ -11,6 +14,9 @@ import { BottomTabParamList, BugsTabParamList, PlanTabParamList, ProfileTabParam
 import ProfileTabScreen from "../screens/ProfileTabScreen";
 import BugInfoPopup from "../screens/BugInfoPopup";
 import PlanUpdatePopup from "../screens/PlanUpdatePopup";
+import BugsTabNavigator from "../navigation/BugsTabNavigator"
+import PlanTabNavigator from "./PlanTabNavigator";
+import ProfileTabNavigator from "./ProfileTabNavigator";
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -55,56 +61,5 @@ function TabBarIcon(props: { name: string; color: string }) {
   return <Ionicons size={30} style={{ marginBottom: -3 }} {...props} />;
 }
 
-// Each tab has its own navigation stack, you can read more about this pattern here:
-// https://reactnavigation.org/docs/tab-based-navigation#a-stack-navigator-for-each-tab
-const BugsTabStack = createStackNavigator<BugsTabParamList>();
 
-function BugsTabNavigator() {
-  return (
-    <BugsTabStack.Navigator mode='modal'>
-      <BugsTabStack.Screen
-        name="BugsTabScreen"
-        component={BugsTabScreen}
-        options={{ headerTitle: 'AtBay Pest Control' }}
-      />
-      <BugsTabStack.Screen
-          name="BugInfoPopupScreen"
-          component={BugInfoPopup}
-          options={{cardStyle: {backgroundColor: 'transparent'}, headerShown: false}}
-      />
-      <BugsTabStack.Screen
-          name="PlanUpdatePopupScreen"
-          component={PlanUpdatePopup}
-          options={{cardStyle: {backgroundColor: 'transparent'}, headerShown: false}}
-      />
-    </BugsTabStack.Navigator>
-  );
-}
 
-const PlanTabStack = createStackNavigator<PlanTabParamList>();
-
-function PlanTabNavigator() {
-    return (
-        <PlanTabStack.Navigator>
-            <PlanTabStack.Screen
-                name="PlanTabScreen"
-                component={PlanTabScreen}
-                options={{headerTitle: 'AtBay Pest Control'}}
-            />
-        </PlanTabStack.Navigator>
-    );
-}
-
-const ProfileTabStack = createStackNavigator<ProfileTabParamList>();
-
-function ProfileTabNavigator() {
-    return (
-        <ProfileTabStack.Navigator>
-            <ProfileTabStack.Screen
-                name="ProfileTabScreen"
-                component={ProfileTabScreen}
-                options={{headerTitle: 'AtBay Pest Control'}}
-                />
-        </ProfileTabStack.Navigator>
-    );
-}
