@@ -1,8 +1,7 @@
 import * as React from 'react';
-import {FlatList, Image, LayoutAnimation, Pressable, ScrollView, StyleSheet, TouchableOpacity} from 'react-native';
-import Modal from 'react-native-modal'
+import {FlatList, Image, Pressable, StyleSheet, TouchableOpacity} from 'react-native';
 import { Text, View } from '../components/Themed';
-import {useEffect, useState} from "react";
+import {useState} from "react";
 
 const PDATA = [
   {

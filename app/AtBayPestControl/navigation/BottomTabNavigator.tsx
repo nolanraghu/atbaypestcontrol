@@ -1,24 +1,20 @@
 import { Ionicons } from '@expo/vector-icons';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createStackNavigator } from '@react-navigation/stack';
+// NOTE: you might have to run this command on your terminal:
+// yarn add @react-navigation/material-top-tabs react-native-tab-view react-native-reanimated
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import * as React from 'react';
 
 import Colors from '../constants/Colors';
 
 
+
 //All our stuff
 import useColorScheme from '../hooks/useColorScheme';
-import BugsTabScreen from '../screens/BugsTabScreen';
-import PlanTabScreen from '../screens/PlanTabScreen';
-import { BottomTabParamList, BugsTabParamList, PlanTabParamList, ProfileTabParamList} from '../types';
-import ProfileTabScreen from "../screens/ProfileTabScreen";
-import BugInfoPopup from "../screens/BugInfoPopup";
-import PlanUpdatePopup from "../screens/PlanUpdatePopup";
 import BugsTabNavigator from "../navigation/BugsTabNavigator"
 import PlanTabNavigator from "./PlanTabNavigator";
 import ProfileTabNavigator from "./ProfileTabNavigator";
 
-const BottomTab = createBottomTabNavigator<BottomTabParamList>();
+const BottomTab = createMaterialTopTabNavigator();
 
 export default function BottomTabNavigator() {
   const colorScheme = useColorScheme();
@@ -26,20 +22,26 @@ export default function BottomTabNavigator() {
   return (
     <BottomTab.Navigator
       initialRouteName="BugsTab"
-      tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}>
+      tabBarPosition={"bottom"}
+      tabBarOptions={{
+          activeTintColor: Colors[colorScheme].tint,
+          showIcon: true,
+          labelStyle: {fontSize: 10},
+          indicatorStyle: {hidden: true}
+      }}>
       <BottomTab.Screen
         name="BugsTab"
         component={BugsTabNavigator}
         options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-bug" color={color} />,
-            tabBarLabel: "Infestation Packages"
+            tabBarIcon: ({ color }) => <TabBarIcon name="ios-bug" color={color} />,
+            tabBarLabel: "Packages"
         }}
       />
       <BottomTab.Screen
         name="PlanTab"
         component={PlanTabNavigator}
         options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-paper" color={color} />,
+            tabBarIcon: ({ color }) => <TabBarIcon name="ios-paper" color={color} />,
             tabBarLabel: "Your Plan"
         }}
       />

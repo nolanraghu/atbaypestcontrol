@@ -4,13 +4,12 @@ import { Text, View } from '../components/Themed';
 import {Button, Image, ScrollView, StyleSheet} from "react-native";
 import {useNavigation} from "@react-navigation/native";
 
-//TODO: Fix how everything shifts up, fix colors, ** figure out navigating back w/o back button!!! **
+//TODO: Fix how everything shifts up, fix colors
 
 export default function BugInfoPopup() {
     const navigation = useNavigation();
     return(
         <View style={styles.container}>
-            <View style={styles.popupContainer}>
                 <Text style={styles.title}>Ant Infestation:</Text>
                 <ScrollView>
                     <View style={styles.section}>
@@ -33,7 +32,6 @@ export default function BugInfoPopup() {
 
                 </ScrollView>
 
-            </View>
         </View>
     )
 }
@@ -41,7 +39,7 @@ const styles = StyleSheet.create({
     container: {
         justifyContent: "center",
         flexDirection: "column",
-        backgroundColor: 'transparent',
+        // backgroundColor: 'transparent',
         height: '100%'
     },
     popupContainer: {
@@ -57,12 +55,12 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 25,
-        backgroundColor: 'black',
+        // backgroundColor: 'black',
         padding: '2%',
         margin: '5%',
         width: '60%',
         textAlign: 'center',
-        borderRadius: 8
+        // borderRadius: 8
     },
     image: {
         borderRadius: 8,

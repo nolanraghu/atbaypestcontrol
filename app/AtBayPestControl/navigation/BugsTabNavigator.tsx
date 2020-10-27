@@ -9,7 +9,7 @@ const BugsTabStack = createStackNavigator<BugsTabParamList>();
 
 function BugsTabNavigator() {
     return (
-        <BugsTabStack.Navigator mode='modal'>
+        <BugsTabStack.Navigator>
         <BugsTabStack.Screen
             name="BugsTabScreen"
     component={BugsTabScreen}
@@ -18,12 +18,12 @@ function BugsTabNavigator() {
     <BugsTabStack.Screen
     name="BugInfoPopupScreen"
     component={BugInfoPopup}
-    options={{cardStyle: {backgroundColor: 'transparent'}, headerShown: false}}
+    options={{ headerTitle: 'AtBay Pest Control' }}
     />
     <BugsTabStack.Screen
     name="PlanUpdatePopupScreen"
     component={PlanUpdatePopup}
-    options={{cardStyle: {backgroundColor: 'transparent'}, headerShown: false}}
+    options={{ headerTitle: 'AtBay Pest Control' }}
     />
     </BugsTabStack.Navigator>
 );

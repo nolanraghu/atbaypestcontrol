@@ -10,7 +10,6 @@ export default function PlanUpdatePopup() {
     const navigation = useNavigation();
     return(
         <View style={styles.container}>
-            <View style={styles.popupContainer}>
                 <Text style={styles.title}>New Plan:</Text>
                 <ScrollView>
                     <Text style={styles.caption}>
@@ -29,7 +28,6 @@ export default function PlanUpdatePopup() {
 
                 </ScrollView>
 
-            </View>
         </View>
     )
 }
@@ -37,7 +35,6 @@ const styles = StyleSheet.create({
     container: {
         justifyContent: "center",
         flexDirection: "column",
-        backgroundColor: 'transparent',
         height: '100%'
     },
     popupContainer: {
@@ -53,12 +50,10 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 25,
-        backgroundColor: 'black',
         padding: '2%',
         margin: '5%',
         width: '60%',
         textAlign: 'center',
-        borderRadius: 8
     },
     image: {
         borderRadius: 8,
