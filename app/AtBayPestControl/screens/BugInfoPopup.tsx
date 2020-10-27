@@ -8,33 +8,51 @@ import {useNavigation} from "@react-navigation/native";
 
 export default function BugInfoPopup() {
     const navigation = useNavigation();
+    // This is just an array of arrays of parameters for <CaptionImage>
+    const captionImageListData = [
+        [require('../assets/images/ant.png'),
+            'Here is where you\'ll put a bunch of information about ants, such as their size, friendliness, death ' +
+            'rate, art styles, etc.'],
+        [require('../assets/images/1831477.webp'),
+            'It turns out, making text wrap in React is VERY difficult :/']
+    ]
+
+    //This maps those onto CaptionImages. There's probably a cleaner way to do this, by just making
+    // <CaptionImage> return a list? That seems potentially bad tho
+    // I just add this in as JS by putting it in brackets in the ScrollView
+    let captionImageListArr = captionImageListData.map(function([source, text], index){
+        return <CaptionImage source={source} text={text} key={index}/>
+    })
     return(
         <View style={styles.container}>
-                <Text style={styles.title}>Ant Infestation:</Text>
-                <ScrollView>
-                    <View style={styles.section}>
-                        <Image source={require('../assets/images/ant.png')}  style={styles.image}/>
-                        <Text style={styles.caption}>Here is where you'll put a bunch of information
-                            about ants, such as their size, friendliness, death rate, art styles, etc.</Text>
+            <Text style={styles.title}>Ant Infestation:</Text>
+            <ScrollView>
+                {captionImageListArr}
+                <View style={styles.section}>
+                    <Text style={styles.price}>Price to add: $3.99</Text>
+                    <View style={styles.button}>
+                        <Button title="Add to Plan" onPress={()=> navigation.navigate('BugsTabScreen')}/>
                     </View>
-                    <View style={styles.section}>
-                        <Image source={require('../assets/images/1831477.webp')} style={styles.image}/>
-                        <Text style={styles.caption}> It turns out,
-                            making text wrap in React is VERY difficult :/</Text>
-                    </View>
-                    <View style={styles.section}>
-                        <Text style={styles.price}>Price to add: $3.99</Text>
-                        <View style={styles.button}>
-                            <Button title="Add to Plan" onPress={()=> navigation.navigate('BugsTabScreen')}/>
-                        </View>
-                    </View>
-
-
-                </ScrollView>
-
+                </View>
+            </ScrollView>
         </View>
     )
 }
+
+function CaptionImage({source, text = 'information'}: CaptionImageProps){
+    return(
+        <View style={styles.section}>
+            <Image source={source}  style={styles.image}/>
+            <Text style={styles.caption}>{text}</Text>
+        </View>
+    )
+}
+
+interface CaptionImageProps{
+    source: object
+    text?: string
+}
+
 const styles = StyleSheet.create({
     container: {
         justifyContent: "center",

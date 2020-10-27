@@ -10,24 +10,21 @@ export default function PlanUpdatePopup() {
     const navigation = useNavigation();
     return(
         <View style={styles.container}>
-                <Text style={styles.title}>New Plan:</Text>
-                <ScrollView>
-                    <Text style={styles.caption}>
-                        This is all the information about the plan.
-                    </Text>
-                    <Text style={styles.caption}>
-                        This is another paragraph
-                    </Text>
-                    <View style={styles.section}>
-                        <Text style={styles.price}>New monthly cost: $11.99</Text>
-                        <View style={styles.button}>
-                            <Button title="Update Plan" onPress={()=> navigation.navigate('BugsTabScreen')}/>
-                        </View>
+            <Text style={styles.title}>New Plan:</Text>
+            <ScrollView>
+                <Text style={styles.caption}>
+                    This is all the information about the plan.
+                </Text>
+                <Text style={styles.caption}>
+                    This is another paragraph
+                </Text>
+                <View style={styles.section}>
+                    <Text style={styles.price}>New monthly cost: $11.99</Text>
+                    <View style={styles.button}>
+                        <Button title="Update Plan" onPress={()=> navigation.navigate('BugsTabScreen')}/>
                     </View>
-
-
-                </ScrollView>
-
+                </View>
+            </ScrollView>
         </View>
     )
 }
