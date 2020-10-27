@@ -1,8 +1,9 @@
 import * as React from 'react';
 
 import { Text, View } from '../components/Themed';
-import {Button, Image, ScrollView, StyleSheet} from "react-native";
+import {Button, Image, NativeSyntheticEvent, ScrollView, StyleSheet, TextLayoutEventData} from "react-native";
 import {useNavigation} from "@react-navigation/native";
+import {useState} from "react";
 
 //TODO: Fix how everything shifts up, fix colors
 
@@ -11,10 +12,19 @@ export default function BugInfoPopup() {
     // This is just an array of arrays of parameters for <CaptionImage>
     const captionImageListData = [
         [require('../assets/images/ant.png'),
-            'Here is where you\'ll put a bunch of information about ants, such as their size, friendliness, death ' +
-            'rate, art styles, etc.'],
+            'Ant example info paragraph here is for you to know how this works and so ' +
+            'ant. Example info paragraph here is for you to know how this works and so ' +
+            'ant example info paragraph here. Is for you to know how this works and so ' +
+            'ant example info paragraph here is for you to know how this works and so ' +
+            'ant example info paragraph here is for you to know how this works and so ' +
+            'ant example info paragraph here is for you to know. \n     How this works and so ' +
+            'ant example info paragraph. Here is for you to know how this works and so ' +
+            'ant example info paragraph here is for you to know how this works and so ' +
+            'ant example info paragraph here is for you to know how this works and so ' +
+            'ant example info paragraph here is. For you to know how this works and so ' +
+            'ant example info paragraph here is for you to know how this works and so.'],
         [require('../assets/images/1831477.webp'),
-            'It turns out, making text wrap in React is VERY difficult :/']
+            'It turns out, making text wrap in React is VERY difficult :/. The good news is, I did it!']
     ]
 
     //This maps those onto CaptionImages. There's probably a cleaner way to do this, by just making
@@ -23,6 +33,7 @@ export default function BugInfoPopup() {
     let captionImageListArr = captionImageListData.map(function([source, text], index){
         return <CaptionImage source={source} text={text} key={index}/>
     })
+
     return(
         <View style={styles.container}>
             <Text style={styles.title}>Ant Infestation:</Text>
@@ -40,10 +51,35 @@ export default function BugInfoPopup() {
 }
 
 function CaptionImage({source, text = 'information'}: CaptionImageProps){
+    //  These states say what text is in the top and in the bottom, defaulting
+    // to everything being in the top
+    const [topText, setTopText] = useState(text);
+    const [bottomText, setBottomText] = useState('');
+
+    //  When we layout the text, it will split the text into top and bottom, and if
+    // it needs to be split, it will show that
+    const _onTextLayout = (e: NativeSyntheticEvent<TextLayoutEventData>) => {
+        let top = "";
+        let bottom = "";
+        //  Right now it just splits it into 8 lines by the picture, the rest underneath.
+        // If we need to measure it, we can use e.nativeEvent.lines[].height
+        for(let i = 0; i < e.nativeEvent.lines.length; i++){
+            if (i < 8){
+                top = top + e.nativeEvent.lines[i].text;
+            } else {
+                bottom = bottom + e.nativeEvent.lines[i].text;
+            }
+        }
+        if(top != topText){
+            setTopText(top);
+            setBottomText(bottom);
+        }
+    }
     return(
         <View style={styles.section}>
             <Image source={source}  style={styles.image}/>
-            <Text style={styles.caption}>{text}</Text>
+            <Text style={styles.caption} onTextLayout={_onTextLayout}>{topText}</Text>
+            <Text style={styles.caption2}>{bottomText}</Text>
         </View>
     )
 }
@@ -57,7 +93,6 @@ const styles = StyleSheet.create({
     container: {
         justifyContent: "center",
         flexDirection: "column",
-        // backgroundColor: 'transparent',
         height: '100%'
     },
     popupContainer: {
@@ -73,12 +108,10 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 25,
-        // backgroundColor: 'black',
         padding: '2%',
         margin: '5%',
         width: '60%',
         textAlign: 'center',
-        // borderRadius: 8
     },
     image: {
         borderRadius: 8,
@@ -91,11 +124,20 @@ const styles = StyleSheet.create({
         width: '100%',
         backgroundColor: 'transparent',
         flexDirection: 'row',
+        flexWrap: 'wrap',
     },
     caption: {
         flex: 2,
-        textAlign: 'center',
+        textAlign: 'left',
         margin: '5%',
+        marginBottom: 0,
+        marginLeft: '2.5%',
+    },
+    caption2: {
+        textAlign: 'left',
+        margin: '5%',
+        width: '90%',
+        marginTop: -2.5
     },
     price: {
         textAlign: 'center',
