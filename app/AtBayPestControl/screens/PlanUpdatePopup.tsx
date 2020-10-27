@@ -10,26 +10,21 @@ export default function PlanUpdatePopup() {
     const navigation = useNavigation();
     return(
         <View style={styles.container}>
-            <View style={styles.popupContainer}>
-                <Text style={styles.title}>New Plan:</Text>
-                <ScrollView>
-                    <Text style={styles.caption}>
-                        This is all the information about the plan.
-                    </Text>
-                    <Text style={styles.caption}>
-                        This is another paragraph
-                    </Text>
-                    <View style={styles.section}>
-                        <Text style={styles.price}>New monthly cost: $11.99</Text>
-                        <View style={styles.button}>
-                            <Button title="Update Plan" onPress={()=> navigation.navigate('BugsTabScreen')}/>
-                        </View>
+            <Text style={styles.title}>New Plan:</Text>
+            <ScrollView>
+                <Text style={styles.caption}>
+                    This is all the information about the plan.
+                </Text>
+                <Text style={styles.caption}>
+                    This is another paragraph
+                </Text>
+                <View style={styles.section}>
+                    <Text style={styles.price}>New monthly cost: $11.99</Text>
+                    <View style={styles.button}>
+                        <Button title="Update Plan" onPress={()=> navigation.navigate('BugsTabScreen')}/>
                     </View>
-
-
-                </ScrollView>
-
-            </View>
+                </View>
+            </ScrollView>
         </View>
     )
 }
@@ -37,7 +32,6 @@ const styles = StyleSheet.create({
     container: {
         justifyContent: "center",
         flexDirection: "column",
-        backgroundColor: 'transparent',
         height: '100%'
     },
     popupContainer: {
@@ -53,12 +47,10 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 25,
-        backgroundColor: 'black',
         padding: '2%',
         margin: '5%',
         width: '60%',
         textAlign: 'center',
-        borderRadius: 8
     },
     image: {
         borderRadius: 8,
