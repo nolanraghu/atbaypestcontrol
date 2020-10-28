@@ -5,7 +5,12 @@ import { Text, View } from '../components/Themed';
 import { useNavigation } from '@react-navigation/native';
 
 export default function BugsTabScreen() {
+  const scheme = useColorScheme();
   const navigation = useNavigation();
+  let styles = stylesLight;
+  if(scheme === "dark"){
+    styles = stylesDark;
+  }
   return (
       <View>
         <View style={styles.header}>
@@ -32,22 +37,23 @@ export default function BugsTabScreen() {
 
 
 
-function BugPressable({button = styles.fullButton,
-                        source = require('../assets/images/honey_bee.png'),
+function BugPressable({source = require('../assets/images/honey_bee.png'),
                         isPreventionButton = false}: BugPressProps){
   //TODO make states, based on whether or not the bug is covered
-  const scheme = useColorScheme();
   const navigation = useNavigation();
+  const scheme = useColorScheme();
+  let styles = stylesLight;
+  if(scheme === "dark"){
+    styles = stylesDark;
+  }
   return(
-      <Pressable style={button}
+      <Pressable style={isPreventionButton ? styles.preventionButton: styles.fullButton}
                  onPress={()=> navigation.navigate('BugInfoPopupScreen')}
                  //This toggles based on the color theme now
                  android_ripple= {scheme === "dark"? {color: 'rgba(0,0,0,.15)'} : {color: 'rgba(255,255,255,0.3)'}}>
 
         <Image source={source} style={styles.image}/>
-        {isPreventionButton ?
-            <Text style={{color: 'black', alignSelf: 'center', flex: 2, textAlign: "center"}}>Ant, bee, etc.</Text>
-            : <Text style={{color: 'black', alignSelf: 'center', textAlign: "center"}}>Ant, bee, etc.</Text>}
+        <Text style={isPreventionButton? styles.preventionText : styles.fullText}>Ant, bee, etc.</Text>
 
       </Pressable>
   );
@@ -60,7 +66,7 @@ interface BugPressProps {
   //We'll eventually need to put the other parameter here that tell the button which bug it is
 }
 
-const styles = StyleSheet.create({
+const stylesDark = StyleSheet.create({
   container: {
     padding: '2.5%',
     alignItems: 'flex-start',
@@ -113,4 +119,80 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     resizeMode: 'contain',
   },
+  preventionText: {
+    color: 'black',
+    alignSelf: 'center',
+    flex: 2,
+    textAlign: "center"
+  },
+  fullText: {
+    color: 'black',
+    alignSelf: 'center',
+    textAlign: "center"
+  }
+});
+const stylesLight = StyleSheet.create({
+  container: {
+    padding: '2.5%',
+    alignItems: 'flex-start',
+    alignContent: 'flex-start',
+    flexWrap: 'wrap',
+    flexDirection: 'row',
+  },
+  header: {
+    padding: '3%',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    flexWrap: 'wrap',
+    flexDirection: 'row',
+    backgroundColor: 'rgb(226,226,226)'
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    margin: 10,
+    color: 'rgb(0,0,0)'
+  },
+  separator: {
+    marginVertical: 30,
+    height: 1,
+    width: '80%',
+  },
+  fullButton: {
+    width: '39%',
+    margin: '5.5%',
+    aspectRatio: 1,
+    backgroundColor: 'pink',
+    borderRadius: 20,
+    justifyContent: "center",
+    flexDirection: "column"
+  },
+  preventionButton: {
+    width: '89%',
+    margin: '5.5%',
+    marginBottom: '9%',
+    aspectRatio: 3,
+    backgroundColor: 'rgb(131,195,140)',
+    borderRadius: 20,
+    justifyContent: "center",
+    flexDirection: "row-reverse"
+  },
+  image: {
+    flex: 1,
+    height: '70%',
+    width: '70%',
+    alignSelf: "center",
+    resizeMode: 'contain',
+  },
+  preventionText: {
+    color: 'black',
+    alignSelf: 'center',
+    flex: 2,
+    textAlign: "center"
+  },
+  fullText: {
+    color: 'black',
+    alignSelf: 'center',
+    textAlign: "center"
+  }
 });

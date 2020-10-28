@@ -1,7 +1,15 @@
 import * as React from 'react';
 
 import { Text, View } from '../components/Themed';
-import {Button, Image, NativeSyntheticEvent, ScrollView, StyleSheet, TextLayoutEventData} from "react-native";
+import {
+    Button,
+    Image,
+    NativeSyntheticEvent,
+    ScrollView,
+    StyleSheet,
+    TextLayoutEventData,
+    useColorScheme
+} from "react-native";
 import {useNavigation} from "@react-navigation/native";
 import {useState} from "react";
 
@@ -9,6 +17,11 @@ import {useState} from "react";
 
 export default function BugInfoPopup() {
     const navigation = useNavigation();
+    const scheme = useColorScheme();
+    let styles = stylesLight;
+    if(scheme === "dark"){
+        styles = stylesDark;
+    }
     // This is just an array of arrays of parameters for <CaptionImage>
     const captionImageListData = [
         [require('../assets/images/ant.png'),
@@ -36,21 +49,31 @@ export default function BugInfoPopup() {
 
     return(
         <View style={styles.container}>
-            <Text style={styles.title}>Ant Infestation:</Text>
+            <View style={styles.back}>
+                <Text style={styles.title}>Ant Infestation:</Text>
+            </View>
             <ScrollView>
                 {captionImageListArr}
+            </ScrollView>
+            <View style={styles.back}>
                 <View style={styles.section}>
                     <Text style={styles.price}>Price to add: $3.99</Text>
                     <View style={styles.button}>
                         <Button title="Add to Plan" onPress={()=> navigation.navigate('BugsTabScreen')}/>
                     </View>
                 </View>
-            </ScrollView>
+            </View>
         </View>
     )
 }
 
 function CaptionImage({source, text = 'information'}: CaptionImageProps){
+    const scheme = useColorScheme();
+    let styles = stylesLight;
+    if(scheme === "dark"){
+        styles = stylesDark;
+    }
+
     //  These states say what text is in the top and in the bottom, defaulting
     // to everything being in the top
     const [topText, setTopText] = useState(text);
@@ -89,7 +112,7 @@ interface CaptionImageProps{
     text?: string
 }
 
-const styles = StyleSheet.create({
+const stylesLight = StyleSheet.create({
     container: {
         justifyContent: "center",
         flexDirection: "column",
@@ -152,5 +175,76 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'center',
         padding: '5%',
+    },
+    back: {
+        backgroundColor: 'rgb(226,226,226)'
+    }
+})
+const stylesDark = StyleSheet.create({
+    container: {
+        justifyContent: "center",
+        flexDirection: "column",
+        height: '100%'
+    },
+    popupContainer: {
+        width: '90%',
+        height: 'auto',
+        maxHeight: '74%',
+        marginTop: '40%',
+        borderRadius: 28,
+        backgroundColor: 'rgba(90,98,87,.95)',
+        alignSelf: "center",
+        alignContent: "center",
+        overflow: "hidden"
+    },
+    title: {
+        fontSize: 25,
+        padding: '2%',
+        margin: '5%',
+        width: '60%',
+        textAlign: 'center',
+    },
+    image: {
+        borderRadius: 8,
+        margin: '5%',
+        flex: 1,
+        backgroundColor: 'white',
+        aspectRatio: 1,
+    },
+    section: {
+        width: '100%',
+        backgroundColor: 'transparent',
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+    },
+    caption: {
+        flex: 2,
+        textAlign: 'left',
+        margin: '5%',
+        marginBottom: 0,
+        marginLeft: '2.5%',
+    },
+    caption2: {
+        textAlign: 'left',
+        margin: '5%',
+        width: '90%',
+        marginTop: -2.5
+    },
+    price: {
+        textAlign: 'center',
+        fontSize: 20,
+        margin: '5%',
+        marginRight: 0,
+        flex: 2,
+    },
+    button: {
+        flex: 1.5,
+        backgroundColor: 'transparent',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        padding: '5%',
+    },
+    back: {
+        backgroundColor: 'rgb(41,41,41)'
     }
 })
