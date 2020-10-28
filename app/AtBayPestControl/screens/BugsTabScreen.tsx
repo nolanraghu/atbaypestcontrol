@@ -3,6 +3,18 @@ import {Button, Image, Pressable, ScrollView, StyleSheet, useColorScheme} from '
 
 import { Text, View } from '../components/Themed';
 import { useNavigation } from '@react-navigation/native';
+import {useState} from "react";
+
+const bugsData = [
+    ["Prevention Plan", require('../assets/images/honey_bee.png'), 'off', true],
+  ["Ants", require('../assets/images/ant.png'), 'on', false],
+  ["Beetles", require('../assets/images/ant.png'), 'off', false],
+  ["Ants", require('../assets/images/blue_beetle.png'), 'pending', false],
+  ["Ants", require('../assets/images/beetle.png'), 'off', false],
+  ["Ants", require('../assets/images/honey_bee.png'), 'off', false],
+  ["Ants", require('../assets/images/honey_bee.png'), 'off', false],
+  ["Ants", require('../assets/images/ant.png'), 'off', false]
+]
 
 export default function BugsTabScreen() {
   const scheme = useColorScheme();
@@ -11,6 +23,11 @@ export default function BugsTabScreen() {
   if(scheme === "dark"){
     styles = stylesDark;
   }
+
+  let bugPressArray = bugsData.map(function([text, source, state, preventionButton], index){
+    return <BugPressable text={text} source={source} state={state} isPreventionButton={preventionButton} key={index}/>
+  })
+
   return (
       <View>
         <View style={styles.header}>
@@ -21,14 +38,7 @@ export default function BugsTabScreen() {
         </View>
         <ScrollView style={{marginBottom: '18%'}}>
           <View style={styles.container}>
-            <BugPressable button={styles.preventionButton} isPreventionButton={true}/>
-            <BugPressable source={require('../assets/images/ant.png')}/>
-            <BugPressable source={require('../assets/images/beetle.png')}/>
-            <BugPressable source={require('../assets/images/blue_beetle.png')}/>
-            <BugPressable/>
-            <BugPressable/>
-            <BugPressable/>
-            <BugPressable/>
+            {bugPressArray}
           </View>
         </ScrollView>
       </View>
@@ -37,7 +47,8 @@ export default function BugsTabScreen() {
 
 
 
-function BugPressable({source = require('../assets/images/honey_bee.png'),
+function BugPressable({text, source = require('../assets/images/honey_bee.png'),
+                        state = 'off',
                         isPreventionButton = false}: BugPressProps){
   //TODO make states, based on whether or not the bug is covered
   const navigation = useNavigation();
@@ -46,24 +57,38 @@ function BugPressable({source = require('../assets/images/honey_bee.png'),
   if(scheme === "dark"){
     styles = stylesDark;
   }
+
+  const getStyle = (stateString: string, preventionButton: boolean = false) => {
+    switch (stateString){
+      case 'off':
+        return (preventionButton? styles.preventionButtonOff: styles.fullButtonOff);
+      case 'on':
+        return (preventionButton? styles.preventionButtonOn: styles.fullButtonOn);
+      case 'pending':
+        return (preventionButton? styles.preventionButtonPending: styles.fullButtonPending);
+    }
+  }
+
+  const [getState, setState] = useState(getStyle(state, isPreventionButton));
+
   return(
-      <Pressable style={isPreventionButton ? styles.preventionButton: styles.fullButton}
+      <Pressable style={getState}
                  onPress={()=> navigation.navigate('BugInfoPopupScreen')}
                  //This toggles based on the color theme now
                  android_ripple= {scheme === "dark"? {color: 'rgba(0,0,0,.15)'} : {color: 'rgba(255,255,255,0.3)'}}>
 
         <Image source={source} style={styles.image}/>
-        <Text style={isPreventionButton? styles.preventionText : styles.fullText}>Ant, bee, etc.</Text>
+        <Text style={isPreventionButton? styles.preventionText : styles.fullText}>{text}</Text>
 
       </Pressable>
   );
 }
 //This is where all the parameters for the BugPressable go
 interface BugPressProps {
-  button?: object
+  text: string
   source?: object
+  state?: 'off'|'on'|'pending'
   isPreventionButton?: boolean
-  //We'll eventually need to put the other parameter here that tell the button which bug it is
 }
 
 const stylesDark = StyleSheet.create({
@@ -93,7 +118,7 @@ const stylesDark = StyleSheet.create({
     height: 1,
     width: '80%',
   },
-  fullButton: {
+  fullButtonOff: {
     width: '39%',
     margin: '5.5%',
     aspectRatio: 1,
@@ -102,7 +127,45 @@ const stylesDark = StyleSheet.create({
     justifyContent: "center",
     flexDirection: "column"
   },
-  preventionButton: {
+  fullButtonOn: {
+    width: '39%',
+    margin: '5.5%',
+    aspectRatio: 1,
+    backgroundColor: 'pink',
+    borderRadius: 20,
+    justifyContent: "center",
+    flexDirection: "column"
+  },
+  fullButtonPending: {
+    width: '39%',
+    margin: '5.5%',
+    aspectRatio: 1,
+    backgroundColor: 'pink',
+    borderRadius: 20,
+    justifyContent: "center",
+    flexDirection: "column"
+  },
+  preventionButtonOff: {
+    width: '89%',
+    margin: '5.5%',
+    marginBottom: '9%',
+    aspectRatio: 3,
+    backgroundColor: 'rgb(131,195,140)',
+    borderRadius: 20,
+    justifyContent: "center",
+    flexDirection: "row-reverse"
+  },
+  preventionButtonOn: {
+    width: '89%',
+    margin: '5.5%',
+    marginBottom: '9%',
+    aspectRatio: 3,
+    backgroundColor: 'rgb(131,195,140)',
+    borderRadius: 20,
+    justifyContent: "center",
+    flexDirection: "row-reverse"
+  },
+  preventionButtonPending: {
     width: '89%',
     margin: '5.5%',
     marginBottom: '9%',
@@ -158,7 +221,7 @@ const stylesLight = StyleSheet.create({
     height: 1,
     width: '80%',
   },
-  fullButton: {
+  fullButtonOff: {
     width: '39%',
     margin: '5.5%',
     aspectRatio: 1,
@@ -167,7 +230,45 @@ const stylesLight = StyleSheet.create({
     justifyContent: "center",
     flexDirection: "column"
   },
-  preventionButton: {
+  fullButtonOn: {
+    width: '39%',
+    margin: '5.5%',
+    aspectRatio: 1,
+    backgroundColor: 'pink',
+    borderRadius: 20,
+    justifyContent: "center",
+    flexDirection: "column"
+  },
+  fullButtonPending: {
+    width: '39%',
+    margin: '5.5%',
+    aspectRatio: 1,
+    backgroundColor: 'pink',
+    borderRadius: 20,
+    justifyContent: "center",
+    flexDirection: "column"
+  },
+  preventionButtonOff: {
+    width: '89%',
+    margin: '5.5%',
+    marginBottom: '9%',
+    aspectRatio: 3,
+    backgroundColor: 'rgb(131,195,140)',
+    borderRadius: 20,
+    justifyContent: "center",
+    flexDirection: "row-reverse"
+  },
+  preventionButtonOn: {
+    width: '89%',
+    margin: '5.5%',
+    marginBottom: '9%',
+    aspectRatio: 3,
+    backgroundColor: 'rgb(131,195,140)',
+    borderRadius: 20,
+    justifyContent: "center",
+    flexDirection: "row-reverse"
+  },
+  preventionButtonPending: {
     width: '89%',
     margin: '5.5%',
     marginBottom: '9%',
