@@ -27,7 +27,7 @@ export default function BottomTabNavigator() {
           activeTintColor: Colors[colorScheme].tint,
           showIcon: true,
           labelStyle: {fontSize: 10},
-          indicatorStyle: {hidden: true}
+          indicatorStyle: {}
       }}>
       <BottomTab.Screen
         name="BugsTab"
