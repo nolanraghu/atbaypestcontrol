@@ -6,8 +6,6 @@ import * as React from 'react';
 
 import Colors from '../constants/Colors';
 
-
-
 //All our stuff
 import useColorScheme from '../hooks/useColorScheme';
 import BugsTabNavigator from "../navigation/BugsTabNavigator"

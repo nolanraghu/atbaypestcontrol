@@ -13,6 +13,24 @@ import {
 import {useNavigation} from "@react-navigation/native";
 import {useState} from "react";
 
+// This is just an array of arrays of parameters for <CaptionImage>
+const captionImageListData = [
+    [require('../assets/images/ant.png'),
+        'Ant example info paragraph here is for you to know how this works and so ' +
+        'ant. Example info paragraph here is for you to know how this works and so ' +
+        'ant example info paragraph here. Is for you to know how this works and so ' +
+        'ant example info paragraph here is for you to know how this works and so ' +
+        'ant example info paragraph here is for you to know how this works and so ' +
+        'ant example info paragraph here is for you to know. \n     How this works and so ' +
+        'ant example info paragraph. Here is for you to know how this works and so ' +
+        'ant example info paragraph here is for you to know how this works and so ' +
+        'ant example info paragraph here is for you to know how this works and so ' +
+        'ant example info paragraph here is. For you to know how this works and so ' +
+        'ant example info paragraph here is for you to know how this works and so.'],
+    [require('../assets/images/1831477.webp'),
+        'It turns out, making text wrap in React is VERY difficult :/. The good news is, I did it!']
+]
+
 //TODO: Fix how everything shifts up, fix colors
 
 export default function BugInfoPopup() {
@@ -22,25 +40,8 @@ export default function BugInfoPopup() {
     if(scheme === "dark"){
         styles = stylesDark;
     }
-    // This is just an array of arrays of parameters for <CaptionImage>
-    const captionImageListData = [
-        [require('../assets/images/ant.png'),
-            'Ant example info paragraph here is for you to know how this works and so ' +
-            'ant. Example info paragraph here is for you to know how this works and so ' +
-            'ant example info paragraph here. Is for you to know how this works and so ' +
-            'ant example info paragraph here is for you to know how this works and so ' +
-            'ant example info paragraph here is for you to know how this works and so ' +
-            'ant example info paragraph here is for you to know. \n     How this works and so ' +
-            'ant example info paragraph. Here is for you to know how this works and so ' +
-            'ant example info paragraph here is for you to know how this works and so ' +
-            'ant example info paragraph here is for you to know how this works and so ' +
-            'ant example info paragraph here is. For you to know how this works and so ' +
-            'ant example info paragraph here is for you to know how this works and so.'],
-        [require('../assets/images/1831477.webp'),
-            'It turns out, making text wrap in React is VERY difficult :/. The good news is, I did it!']
-    ]
 
-    //This maps those onto CaptionImages. There's probably a cleaner way to do this, by just making
+    //This maps the data onto CaptionImages. There's probably a cleaner way to do this, by just making
     // <CaptionImage> return a list? That seems potentially bad tho
     // I just add this in as JS by putting it in brackets in the ScrollView
     let captionImageListArr = captionImageListData.map(function([source, text], index){
