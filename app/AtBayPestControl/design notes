@@ -1,0 +1,4 @@
+- I think we need to create an ubiquitous set of styleProps (i.e. color, padding, ) 
+that any screen can reference in order to make sure changes last-minute are easier
+(and so I don't lose my mind copying and pasting every freaking style from another screen).
+    -N

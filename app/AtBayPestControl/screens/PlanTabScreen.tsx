@@ -7,28 +7,28 @@ const PDATA = [
   {
     id: "p1",
     title: "Product 1",
-    imgSource: "../assets/images/product2.png",
+    imgSource: require("../assets/images/product2.png"),
     description: "This describes product 1. It will contain a brief descriptions, price, and a link to additional " +
         "resources (such as instructional videos for application)",
   },
   {
     id: "p2",
     title: "Product 2",
-    imgSource: "../assets/images/product3.jpg",
+    imgSource: require("../assets/images/product3.jpg"),
     description: "This describes product 2. It will contain a brief descriptions, price, and a link to additional " +
         "resources (such as instructional videos for application)",
   },
   {
     id: "p3",
     title: "Product 3",
-    imgSource: "../assets/images/product4.jpeg",
+    imgSource: require("../assets/images/product4.jpeg"),
     description: "This describes product 3. It will contain a brief descriptions, price, and a link to additional " +
         "resources (such as instructional videos for application)",
   },
   {
     id: "p4",
     title: "Product 4",
-    imgSource: "../assets/images/product5.jpeg",
+    imgSource: require("../assets/images/product5.jpeg"),
     description: "This describes product 4. It will contain a brief descriptions, price, and a link to additional " +
         "resources (such as instructional videos for application)",
   },
@@ -39,17 +39,14 @@ const PDATA = [
 // , and description + Link on right side
 
 // @ts-ignore
-const ProductItem = ({item, onPress, style, selected}) => (
+const ProductItem = ({item, onPress, style}) => (
     <TouchableOpacity onPress={onPress} style={[styles.productBox, style]}>
-      <View style={{flex: 1, flexDirection: 'column'}}>
+      <View style={{flex: 1, flexDirection: 'column',  backgroundColor: 'rgb(206,212,206)'}}>
         <Text style={styles.productTitle}>{item.title}</Text>
-        <Image source={require("../assets/images/product2.png")} style={styles.image}/>
+        <Image source={item.imgSource} style={styles.image}/>
       </View>
-      <View style={{flex: 2, flexDirection:'column'}}>
-          <Text style={styles.productDescription}>{selected? item.description: ""}</Text>
-          <Pressable style={[styles.linkBox, style]}>
-            <Text style={styles.link}>{selected? "LINK":""}</Text>
-          </Pressable>
+      <View style={{flex: 2, flexDirection:'column',  backgroundColor: 'rgb(206,212,206)'}}>
+          <Text style={styles.productDescription}>{item.description}</Text>
       </View>
     </TouchableOpacity>
 );
@@ -69,14 +66,13 @@ export default function PlanTabScreen() {
 
   //@ts-ignore
   const renderProduct = ({item}) => {
-    const backgroundColor = item.id === expandedId ? 'rgb(115,214,115)' : 'rgb(206,212,206)';
+    const backgroundColor = 'rgb(206,212,206)';
 
     return(
         <ProductItem
           item={item}
           onPress={() => {toggleSelected(item.id)}}
           style={{backgroundColor}}
-          selected={expandedId == item.id}
           />
     );
   }
@@ -108,9 +104,6 @@ const styles = StyleSheet.create({
   bContainer: {
     alignItems: 'flex-start',
   },
-  header: {
-    alignItems: 'flex-start'
-  },
   productBox: {
     width: '89%',
     margin: '5.5%',
@@ -120,38 +113,27 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 10,
     alignItems: "flex-start",
-    flexDirection: 'column',
-  },
-  productBox2: {
-    width: '89%',
-    margin: '5.5%',
-    marginBottom: '2%',
-    aspectRatio: 3,
-    backgroundColor: 'rgb(115,214,115)',
-    borderRadius: 20,
-    padding: 10,
+    flexDirection: 'row',
   },
   productTitle:{
     fontSize: 16,
     fontWeight: "bold",
 
   },
+  section: {
+    width: '100%',
+    backgroundColor: 'transparent',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
   productDescription:{
     fontSize: 12,
     fontWeight: "normal",
 
   },
-  linkBox:{
-    alignSelf:"flex-end"
-  },
   link:{
     color: '#0000EE',
     fontSize: 20,
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
   },
   topText: {
     fontSize: 50,
@@ -168,7 +150,6 @@ const styles = StyleSheet.create({
     flex: 1,
     height: '50%',
     width: '50%',
-    alignSelf: "flex-start",
     resizeMode: 'contain',
   },
 });
