@@ -1,5 +1,4 @@
 import * as React from 'react';
-import * as Text from '../assets/text/text';
 
 //this is kinda fakey right now because idk about the db
 export function getProductInfo(pid: String) {

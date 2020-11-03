@@ -11,23 +11,22 @@ const BugsTabStack = createStackNavigator<BugsTabParamList>();
 function BugsTabNavigator() {
     return (
         <BugsTabStack.Navigator>
-        <BugsTabStack.Screen
-            name="BugsTabScreen"
-    component={BugsTabScreen}
-    options={{ headerTitle: appName}}
-    />
-    <BugsTabStack.Screen
-    name="BugInfoPopupScreen"
-    component={BugInfoPopup}
-    options={{ headerTitle: appName}}
-    />
-    <BugsTabStack.Screen
-    name="PlanUpdatePopupScreen"
-    component={PlanUpdatePopup}
-    options={{ headerTitle: appName}}
-    />
-    </BugsTabStack.Navigator>
-);
+            <BugsTabStack.Screen
+                name="BugsTabScreen"
+                component={BugsTabScreen}
+                options={{ headerTitle: appName}}
+            />
+            <BugsTabStack.Screen
+                name="BugInfoPopupScreen"
+                component={BugInfoPopup}
+                options={{ headerTitle: appName}}
+            />
+            <BugsTabStack.Screen
+                name="PlanUpdatePopupScreen"
+                component={PlanUpdatePopup}
+                options={{ headerTitle: appName}}
+            />
+        </BugsTabStack.Navigator>);
 }
 
 export default BugsTabNavigator;

@@ -1,9 +1,8 @@
 import * as React from 'react';
-import {FlatList, Image, Pressable, StyleSheet, TouchableOpacity} from 'react-native';
+import {FlatList, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import { Text, View } from '../components/Themed';
 import {useState} from "react";
 import {useNavigation} from "@react-navigation/native";
-
 
 const PDATA = [
   {
@@ -41,7 +40,7 @@ interface productInterface{
   title: String,
   imgSource: any,
   description: String,
-};
+}
 
 
 //TODO: Make product boxes contain the title on top left, picture on bottom left

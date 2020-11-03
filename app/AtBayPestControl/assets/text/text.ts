@@ -1,3 +1,1 @@
-export function appName(){
-    return "AtBay Pest Control"
-}
+export const appName = "AtBay Pest Control";
