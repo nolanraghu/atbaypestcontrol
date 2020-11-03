@@ -15,7 +15,7 @@ import {useNavigation} from "@react-navigation/native";
 
 //@ts-ignore
 const PlanProductPopup = ({route, navigation}) => {
-    const {prodId, currentPlan} = route.params;
+    const {prodId} = route.params;
     let prodInfo = getProductInfo(prodId);
     const scheme = useColorScheme();
     let styles = stylesLight;

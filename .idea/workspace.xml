@@ -25,7 +25,9 @@
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/images/ant.png" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/images/beetle.png" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/images/blue_beetle.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/images/error.jpg" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/images/honey_bee.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/images/product1.jpg" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/images/product2.png" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/images/product3.jpg" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/images/product4.jpeg" afterDir="false" />
@@ -118,7 +120,7 @@
       <workItem from="1603377344329" duration="443000" />
       <workItem from="1603484472574" duration="701000" />
       <workItem from="1603566728221" duration="8603000" />
-      <workItem from="1603982462982" duration="13718000" />
+      <workItem from="1603982462982" duration="17622000" />
     </task>
     <task id="LOCAL-00001" summary="First Commit. Renaming screens/tabs to fit our needs.">
       <created>1602888296289</created>

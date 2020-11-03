@@ -2,6 +2,8 @@ import * as React from 'react';
 import {FlatList, Image, Pressable, StyleSheet, TouchableOpacity} from 'react-native';
 import { Text, View } from '../components/Themed';
 import {useState} from "react";
+import {useNavigation} from "@react-navigation/native";
+
 
 const PDATA = [
   {
@@ -34,6 +36,13 @@ const PDATA = [
   },
 ];
 
+interface productInterface{
+  id: String,
+  title: String,
+  imgSource: any,
+  description: String,
+};
+
 
 //TODO: Make product boxes contain the title on top left, picture on bottom left
 // , and description + Link on right side
@@ -54,6 +63,8 @@ const ProductItem = ({item, onPress, style}) => (
 
 
 export default function PlanTabScreen() {
+  const navigation = useNavigation();
+
   const [expandedId, setExpandedId] = useState("");
 
   const toggleSelected = (id: React.SetStateAction<string>) => {
@@ -64,14 +75,17 @@ export default function PlanTabScreen() {
     }
   };
 
-  //@ts-ignore
+
+  // @ts-ignore
   const renderProduct = ({item}) => {
     const backgroundColor = 'rgb(206,212,206)';
 
     return(
         <ProductItem
           item={item}
-          onPress={() => {toggleSelected(item.id)}}
+          onPress={() => {navigation.navigate("PlanProductPopup",{
+            prodId: item.id}
+              )}}
           style={{backgroundColor}}
           />
     );
