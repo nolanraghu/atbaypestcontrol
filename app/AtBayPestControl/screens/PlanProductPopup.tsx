@@ -13,6 +13,8 @@ import {useState} from "react";
 import {getProductInfo} from "../controller/ProductPulling"
 import {useNavigation} from "@react-navigation/native";
 
+
+
 //@ts-ignore
 const PlanProductPopup = ({route, navigation}) => {
     const {prodId} = route.params;
@@ -35,7 +37,7 @@ const PlanProductPopup = ({route, navigation}) => {
             </ScrollView>
             <View style={styles.back}>
                 <View>
-                    <Text>Price to add: $3.99</Text>
+                    <Text>Price to add: {prodInfo.price}</Text>
                     <View>
                         <Button title="Add to Plan" onPress={()=> navigation.navigate('PlanTabScreen')}/>
                     </View>
@@ -83,7 +85,7 @@ function CaptionImage({source, text = 'information'}: CaptionImageProps){
     }
     return(
         <View style={lazyStyles.section}>
-            <Image source={require("../assets/images/product4.jpeg")} style={lazyStyles.image}/>
+            <Image source={source} style={lazyStyles.image}/>
             <Text style={lazyStyles.caption} onTextLayout={_onTextLayout}>{topText}</Text>
             <Text style={lazyStyles.caption2}>{bottomText}</Text>
         </View>
@@ -91,7 +93,7 @@ function CaptionImage({source, text = 'information'}: CaptionImageProps){
 }
 
 interface CaptionImageProps{
-    source: string
+    source: object
     text?: string
 }
 

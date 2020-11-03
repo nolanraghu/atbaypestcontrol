@@ -8,29 +8,36 @@ const PDATA = [
   {
     id: "p1",
     title: "Product 1",
-    imgSource: require("../assets/images/product2.png"),
+    imgSource: require("../assets/images/product1.jpg"),
     description: "This describes product 1. It will contain a brief descriptions, price, and a link to additional " +
         "resources (such as instructional videos for application)",
   },
   {
     id: "p2",
     title: "Product 2",
-    imgSource: require("../assets/images/product3.jpg"),
+    imgSource: require("../assets/images/product2.png"),
     description: "This describes product 2. It will contain a brief descriptions, price, and a link to additional " +
         "resources (such as instructional videos for application)",
   },
   {
     id: "p3",
     title: "Product 3",
-    imgSource: require("../assets/images/product4.jpeg"),
+    imgSource: require("../assets/images/product3.jpg"),
     description: "This describes product 3. It will contain a brief descriptions, price, and a link to additional " +
         "resources (such as instructional videos for application)",
   },
   {
     id: "p4",
     title: "Product 4",
-    imgSource: require("../assets/images/product5.jpeg"),
+    imgSource: require("../assets/images/product4.jpeg"),
     description: "This describes product 4. It will contain a brief descriptions, price, and a link to additional " +
+        "resources (such as instructional videos for application)",
+  },
+  {
+    id: "p5",
+    title: "Product 5",
+    imgSource: require("../assets/images/product5.jpeg"),
+    description: "This describes product 5. It will contain a brief descriptions, price, and a link to additional " +
         "resources (such as instructional videos for application)",
   },
 ];

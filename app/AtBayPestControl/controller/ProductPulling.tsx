@@ -1,14 +1,15 @@
 import * as React from 'react';
 
 //this is kinda fakey right now because idk about the db
+
 export function getProductInfo(pid: String) {
     let k ={
         pid: pid,
-        name: "MockName",
-        price: "Stuff @ ../assets/text/prices/product"+pid+".txt",
+        name: "Product "+pid.substr(1),
+        price: "Price of Product "+pid.substr(1),
         image: require("../assets/images/error.jpg"),
-        shortDescription:"Stuff @../assets/text/shortDescriptions/product"+pid+".txt",
-        description: "Stuff @../assets/text/descriptions/product"+pid+".txt",
+        shortDescription:"Short Description of Product"+pid.substr(1),
+        description: " (Long) Description of Product"+pid.substr(1),
     };
     switch(pid){
         case "p1":
