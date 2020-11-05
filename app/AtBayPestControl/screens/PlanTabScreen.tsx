@@ -107,7 +107,7 @@ export default function PlanTabScreen() {
               This is the plan description! Here are the products. Here are the different bugs that are covered! 🐛 🐝🐞🦋
             </Text>
         </View>
-          <FlatList style = {{marginBottom: '35%'}}
+          <FlatList style = {{marginBottom: '50%'}}
             data={PDATA}
             renderItem={renderProduct}
             keyExtractor={(item) => item.id}
