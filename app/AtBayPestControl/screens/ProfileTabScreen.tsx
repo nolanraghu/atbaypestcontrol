@@ -16,6 +16,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import Email from './Email'
+import Separator from './Separator'
 
 import { Text, View } from '../components/Themed';
 import { useNavigation } from '@react-navigation/native';
@@ -48,6 +49,7 @@ export default function ProfileTabScreen() {
           <Card containerStyle={styles.cardContainer}>
             {renderHeader({})}
             {renderEmail()}
+            {Separator()}
           </Card>
         </View>
       </ScrollView>
