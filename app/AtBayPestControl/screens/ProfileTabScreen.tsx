@@ -1,156 +1,212 @@
 import * as React from 'react';
-import { Button, Pressable, ScrollView, StyleSheet, Appearance } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import {Component} from 'react';
+import {Card, Icon} from 'react-native-elements';
+import {
+  Button,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Appearance,
+  useColorScheme,
+  ImageBackground,
+  Platform,
+  Image,
+  Linking,
+  FlatList,
+  TouchableOpacity,
+} from 'react-native';
+import Email from './Email'
 
 import { Text, View } from '../components/Themed';
+import { useNavigation } from '@react-navigation/native';
+import {useState} from "react";
 
-// Idea: can we make a basic object that has an icon, text, and an edit button all arranged in
-// a horizontal plane. This way we can just change the text and icon for each section of the Personal
-// Information screen
-const UDATA = [
+const EMAIL = [
   {
-    id: "UserName",
-    title: "John Doe",
-    editButton: "Edit",
+    id: 1,
+    name: 'personal',
+    email: 'fake.person@gmail.com',
   },
   {
-    id: "Address",
-    title: "123 Main Street" +
-        "New York, NY 12345",
-    editButton: "Edit",
+    id: 2,
+    name: 'work',
+    email: 'fake.person2@gmail.com',
   },
   {
-    id: "Plan",
-    title: "Basic Plan",
-  },
+    id: 3,
+    name: 'play',
+    email: 'fake.person3@gmail.com',
+  }
 ]
 
-//const PAYDATA = [
-// Could we do the same with the payment data as was proposed with the user data?
-//]
+export default function ProfileTabScreen() {
+
+
+  return (
+      <ScrollView style={styles.scroll}>
+        <View style={styles.container}>
+          <Card containerStyle={styles.cardContainer}>
+            {renderHeader({})}
+            {renderEmail()}
+          </Card>
+        </View>
+      </ScrollView>
+  )
+
+}
+
+function renderHeader ({avatar = require('../assets/images/profile_picture.jpg'), avatarBackground = require('../assets/images/splash.png'),
+                         name = 'John Doe', city = 'New York', state = 'New York'}: RenderHProps) {
+
+  console.log(avatar, avatarBackground)
+  function onPressPlace () {
+    console.log('place')
+  }
+
+  return (
+      <View style={styles.headerContainer}>
+        <ImageBackground
+            style={styles.headerBackgroundImage}
+            blurRadius={10}
+            source={avatarBackground}
+        >
+          <View style={styles.headerColumn}>
+            <Image
+                style={styles.userImage}
+                source={avatar}
+            />
+            <Text style={styles.userNameText}>{name}</Text>
+            <View style={styles.userAddressRow}>
+              <View>
+                <Icon
+                    name="place"
+                    underlayColor="transparent"
+                    iconStyle={styles.placeIcon}
+                    onPress={onPressPlace}
+                />
+              </View>
+              <View style={styles.userCityRow}>
+                <Text style={styles.userCityText}>
+                  {city}, {state}
+                </Text>
+              </View>
+            </View>
+          </View>
+        </ImageBackground>
+      </View>
+  )
+}
+
+interface RenderHProps {
+  avatar?: object
+  avatarBackground?: object
+  name?: string
+  city?: string
+  state?: string
+
+}
+
+function renderEmail () {
+
+  function onPressEmail () {
+    console.log('place')
+  }
+
+  return (
+    <FlatList
+        contentContainerStyle={styles.emailContainer}
+        data={EMAIL}
+        renderItem={(list) => {
+          const { email, id, name } = list.item
+
+          return (
+              <Email
+                  key={`email-${id}`}
+                  index={list.index}
+                  name={name}
+                  email={email}
+                  onPressEmail={onPressEmail}
+              />
+          )
+        }}
+    />
+  )
+}
 
 const ionColor = Appearance.getColorScheme() === 'dark'? 'white':'black'
 
-
-// Only for asthetic use, barely functional
-export default function ProfileTabScreen() {
-  return (
-
-      <View>
-        <View style={styles.header}>
-          <Text style={styles.topText}> Personal Information </Text>
-        </View>
-        <ScrollView style={{marginBottom: '18%'}}>
-          <View style={styles.container}>
-
-            <View style={styles.userEntry}>
-              <Ionicons name="md-person" size={64} color={ionColor} />
-              <Text style={styles.title}> John Doe </Text>
-              <EditPressable button={styles.editButton}/>
-            </View>
-
-            <View style={styles.userEntry}>
-              <Ionicons name="md-home" size={64} color={ionColor} />
-              <View style={styles.container}>
-                <Text style={styles.title}> 123 Main St. </Text>
-                <Text style={styles.title}> New York, NY 12345 </Text>
-              </View>
-              <EditPressable button={styles.editButton}/>
-            </View>
-
-            <View style={styles.userEntry}>
-              <Ionicons name="md-paper" size={64} color={ionColor} />
-              <Text style={styles.title}> Basic Plan ($6.99 Month) </Text>
-            </View>
-
-          </View>
-
-          <View style={styles.container}>
-            <View style={styles.header}>
-              <Text style={styles.topText}> Payment Information </Text>
-            </View>
-
-            <View style={styles.userEntry}>
-              <Ionicons name="md-card" size={64} color={ionColor} />
-              <Text style={styles.title}> XXXX-1234 </Text>
-              <EditPressable button={styles.editButton}/>
-            </View>
-
-            <View style={styles.userEntry}>
-              <Ionicons name="md-card" size={64} color={ionColor} />
-              <Text style={styles.title}> XXXX-5678 </Text>
-              <EditPressable button={styles.editButton}/>
-            </View>
-
-            <View style={styles.userEntry}>
-              <Ionicons name="md-card" size={64} color={ionColor} />
-              <Text style={styles.title}> Bank Account </Text>
-              <EditPressable button={styles.editButton}/>
-            </View>
-          </View>
-        </ScrollView>
-      </View>
-
-  );
-}
-
-// My function now
-// lol -N
-function EditPressable(props: EditPressProps){
-  return(
-      <Pressable style={props.button}
-                 onPress={()=>{}}
-                 android_ripple={{color: 'rgba(0,0,0,.15)'}
-                 }/>
-  );
-}
-//This is where all the parameters for the BugPressable go
-interface EditPressProps {
-  button: object
-  //We'll eventually need to put the other parameter here that tell the button which bug it is
-}
-
 const styles = StyleSheet.create({
+  cardContainer: {
+    backgroundColor: '#FFF',
+    borderWidth: 0,
+    flex: 1,
+    margin: 0,
+    padding: 0,
+  },
   container: {
     flex: 1,
-    alignContent: 'space-between',
-    justifyContent: 'center',
   },
-  header: {
-    padding: '3%',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    flexWrap: 'wrap',
-    flexDirection: 'row',
-    backgroundColor: 'rgba(0,0,0,.15)'
-  },
-  title: {
-    fontSize: 30,
-    fontWeight: 'bold',
-  },
-  topText: {
-    fontSize: 35,
-    fontWeight: "bold",
-    alignItems: 'flex-start',
-    margin: 10,
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
-  userEntry: {
+  emailContainer: {
+    backgroundColor: '#FFF',
     flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
+    paddingTop: 30,
   },
-  editButton: {
-    width: '10%',
-    margin: '5.5%',
-    aspectRatio: 1,
-    backgroundColor: 'green',
-    borderRadius: 20,
-    padding: 10,
+  headerBackgroundImage: {
+    paddingBottom: 20,
+    paddingTop: 45,
   },
-});
+  headerContainer: {},
+  headerColumn: {
+    backgroundColor: 'transparent',
+    ...Platform.select({
+      ios: {
+        alignItems: 'center',
+        elevation: 1,
+        marginTop: -1,
+      },
+      android: {
+        alignItems: 'center',
+      },
+    }),
+  },
+  placeIcon: {
+    color: 'white',
+    fontSize: 26,
+  },
+  scroll: {
+    backgroundColor: '#FFF',
+  },
+  telContainer: {
+    backgroundColor: '#FFF',
+    flex: 1,
+    paddingTop: 30,
+  },
+  userAddressRow: {
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
+  userCityRow: {
+    backgroundColor: 'transparent',
+  },
+  userCityText: {
+    color: '#A5A5A5',
+    fontSize: 15,
+    fontWeight: '600',
+    textAlign: 'center',
+  },
+  userImage: {
+    borderColor: '#FFF',
+    borderRadius: 85,
+    borderWidth: 3,
+    height: 170,
+    marginBottom: 15,
+    width: 170,
+  },
+  userNameText: {
+    color: '#FFF',
+    fontSize: 22,
+    fontWeight: 'bold',
+    paddingBottom: 8,
+    textAlign: 'center',
+  },
+})
