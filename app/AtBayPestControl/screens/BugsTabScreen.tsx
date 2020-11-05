@@ -4,7 +4,7 @@ import {Button, Image, Pressable, ScrollView, StyleSheet, useColorScheme} from '
 import { Text, View } from '../components/Themed';
 import { useNavigation } from '@react-navigation/native';
 import {useState} from "react";
-import {getStyle, buttonColor, getRippleColor} from '../assets/Stylesheets/Styles'
+import {getStyle, buttonColor, getRippleColor, getBackgroundColor} from '../assets/Stylesheets/Styles'
 
 const bugsData = [
     ["Prevention Plan", require('../assets/images/honey_bee.png'), 'on', true],
@@ -32,7 +32,7 @@ export default function BugsTabScreen() {
           <Text style={styles.title}>
             New Price: $10.99
           </Text>
-          <Button title="Add to Plan"
+          <Button title="Update Plan"
                   color= {buttonColor}
                   //TODO: add parameters to screens, interactivity
                   onPress={()=> navigation.navigate('PlanUpdatePopupScreen')}/>
@@ -70,9 +70,9 @@ function BugPressable({text, source = require('../assets/images/honey_bee.png'),
   return(
       <Pressable style={getPressStyle(state, isPreventionButton)}
                  onPress={()=> navigation.navigate('BugInfoPopupScreen')}
-                 android_ripple= {{color: getRippleColor(scheme)}}>
+                 android_ripple= {{color: getBackgroundColor(scheme)}}>
 
-        <Image source={source} style={styles.image}/>
+        <Image source={source} style={styles.buttonImage}/>
         <Text style={isPreventionButton? styles.preventionText : styles.fullText}>{text}</Text>
 
       </Pressable>

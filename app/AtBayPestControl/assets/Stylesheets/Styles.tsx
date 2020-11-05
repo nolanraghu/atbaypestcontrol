@@ -9,6 +9,7 @@ const textDark = 'rgb(229,229,229)';
 const onButtonDark = 'rgb(105,105,105)';
 const offButtonDark = 'rgb(60,60,60)';
 const highlightDark = 'lightgreen';
+const fadedTextDark = 'rgb(90,90,90)';
 
 const backgroundLight = 'rgb(236,236,236)';
 const headerLight = 'rgb(245,245,245)';
@@ -16,8 +17,9 @@ const textLight = 'rgb(50,50,50)';
 const onButtonLight = 'white';
 const offButtonLight = 'rgb(231,231,231)';
 const highlightLight = 'rgb(72,190,87)';
+const fadedTextLight = 'rgb(150,150,150)';
 
-export function getRippleColor(state:ColorSchemeName){
+export function getBackgroundColor(state:ColorSchemeName){
     if(state === 'dark'){
         return backgroundDark;
     } else {
@@ -26,7 +28,7 @@ export function getRippleColor(state:ColorSchemeName){
 }
 
 export function getStyle(state:ColorSchemeName){
-    let background, header, text, onButton, offButton, highlight
+    let background, header, text, onButton, offButton, highlight, fadedText
 
     if(state === 'dark'){
         background = backgroundDark;
@@ -35,6 +37,7 @@ export function getStyle(state:ColorSchemeName){
         onButton = onButtonDark;
         offButton = offButtonDark;
         highlight = highlightDark;
+        fadedText = fadedTextDark;
     } else {
         background = backgroundLight;
         header = headerLight;
@@ -42,6 +45,7 @@ export function getStyle(state:ColorSchemeName){
         onButton = onButtonLight;
         offButton = offButtonLight;
         highlight = highlightLight;
+        fadedText = fadedTextLight;
     }
     return StyleSheet.create({
         container: {
@@ -166,7 +170,7 @@ export function getStyle(state:ColorSchemeName){
             borderColor: highlight,
             opacity: .8
         },
-        image: {
+        buttonImage: {
             flex: 1,
             height: '70%',
             width: '70%',
@@ -184,6 +188,56 @@ export function getStyle(state:ColorSchemeName){
             color: text,
             alignSelf: 'center',
             textAlign: "center"
-        }
+        },
+        image: {
+            borderRadius: 8,
+            margin: '5%',
+            flex: 1,
+            backgroundColor: 'white',
+            aspectRatio: 1,
+        },
+        section: {
+            width: '100%',
+            backgroundColor: 'transparent',
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+        },
+        caption: {
+            flex: 2,
+            textAlign: 'left',
+            margin: '4%',
+            marginLeft: 10,
+            color: text,
+        },
+        caption1: {
+            flex: 2,
+            textAlign: 'left',
+            margin: '5%',
+            marginBottom: 0,
+            marginLeft: '2.5%',
+            color: text,
+        },
+        caption2: {
+            textAlign: 'left',
+            margin: '5%',
+            width: '90%',
+            marginTop: -2.5,
+            color: text,
+        },
+        captionFade: {
+            flex: 2,
+            textAlign: 'left',
+            margin: '4%',
+            marginLeft: 10,
+            color: text,
+            opacity: .45
+        },
+        price: {
+            textAlign: 'center',
+            fontSize: 20,
+            margin: '5%',
+            marginRight: 0,
+            flex: 2,
+        },
     });
 }
