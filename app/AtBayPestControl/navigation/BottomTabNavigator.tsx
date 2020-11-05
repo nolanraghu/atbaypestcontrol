@@ -22,10 +22,10 @@ export default function BottomTabNavigator() {
       initialRouteName="BugsTab"
       tabBarPosition={"bottom"}
       tabBarOptions={{
-          activeTintColor: Colors[colorScheme].tint,
+          activeTintColor: 'rgb(63,164,76)',
           showIcon: true,
           labelStyle: {fontSize: 10},
-          indicatorStyle: {}
+          indicatorStyle: {height: 0},
       }}>
       <BottomTab.Screen
         name="BugsTab"
