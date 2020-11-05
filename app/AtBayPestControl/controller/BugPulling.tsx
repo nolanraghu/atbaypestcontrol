@@ -45,10 +45,12 @@ export function getBugInfo(bId: String) {
         case "b7":
             k.name = "And Yet Another Honey Bee";
             k.image=require("../assets/images/honey_bee3.jpg");
+            k.price = "4.99"
             break;
         case "b8":
             k.name = "Antz"
             k.image=require("../assets/images/ant3.jpg");
+            k.price = "$10.99 at Blockbusters"
             break;
     }
     k.shortDescription = "A short description on the nature of "+k.name;

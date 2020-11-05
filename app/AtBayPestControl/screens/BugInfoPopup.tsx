@@ -13,50 +13,36 @@ import {
 import {useNavigation} from "@react-navigation/native";
 import {useState} from "react";
 import {getStyle, buttonColor} from '../assets/Stylesheets/Styles';
-
-// This is just an array of arrays of parameters for <CaptionImage>
-const captionImageListData = [
-    [require('../assets/images/ant.png'),
-        'Ant example info paragraph here is for you to know how this works and so ' +
-        'ant. Example info paragraph here is for you to know how this works and so ' +
-        'ant example info paragraph here. Is for you to know how this works and so ' +
-        'ant example hi info paragraph here is for you to know how this works and so ' +
-        'ant example info paragraph here is for you to know how this works and so ' +
-        'ant example info paragraph here is for you to know the thing about that. \n     How this works and so ' +
-        'ant example info paragraph. Here is for you to know how this works and so ' +
-        'ant example info paragraph here is for you to know how this works and so ' +
-        'ant example info paragraph here is for you to know how this works and so ' +
-        'ant example info paragraph here is. For you to know how this works and so ' +
-        'ant example info paragraph here is for you to know how this works and so.'],
-    [require('../assets/images/1831477.webp'),
-        'It turns out, making text wrap in React is VERY difficult :/. The good news is, I did it!']
-]
+import {getBugInfo} from "../controller/BugPulling";
 
 //TODO: Fix how everything shifts up, fix colors
 
-export default function BugInfoPopup() {
-    const navigation = useNavigation();
+//@ts-ignore
+export default function BugInfoPopup({route, navigation}) {
+    const {bugId} = route.params;
+    const bugInfo = getBugInfo(bugId);
     const scheme = useColorScheme();
     let styles = getStyle(scheme);
 
     //This maps the data onto CaptionImages. There's probably a cleaner way to do this, by just making
     // <CaptionImage> return a list? That seems potentially bad tho
     // I just add this in as JS by putting it in brackets in the ScrollView
-    let captionImageListArr = captionImageListData.map(function([source, text], index){
-        return <CaptionImage source={source} text={text} key={index}/>
+    /*
+    let captionImageListArr = captionImageListData.map(function(bugInfo, index){
+        return <CaptionImage source={bugInfo.image} text={bugInfo.name} key={index}/>
     })
-
+    */
     return(
         <View style={{height: '100%'}}>
             <View style={styles.header}>
-                <Text style={styles.title}>Ant Infestation:</Text>
+                <Text style={styles.title}>{bugInfo.name + " Infestation"}</Text>
                 <Button title="Add to Plan"
                         color= {buttonColor}
                         onPress={()=> navigation.navigate('BugsTabScreen')}/>
             </View>
             <ScrollView>
                 <View style={styles.container}>
-                    {captionImageListArr}
+                    {CaptionImage({source: bugInfo.image, text: bugInfo.description})}
                 </View>
             </ScrollView>
             <View style={styles.header}>

@@ -127,7 +127,9 @@
       <workItem from="1604429534434" duration="875000" />
       <workItem from="1604430432177" duration="1234000" />
       <workItem from="1604594707835" duration="2047000" />
-      <workItem from="1604615900795" duration="1046000" />
+      <workItem from="1604615900795" duration="2107000" />
+      <workItem from="1604618041520" duration="69000" />
+      <workItem from="1604618114470" duration="1517000" />
     </task>
     <task id="LOCAL-00001" summary="First Commit. Renaming screens/tabs to fit our needs.">
       <created>1602888296289</created>
@@ -193,6 +195,10 @@
       <screen x="0" y="23" width="1792" height="1026" />
     </state>
     <state x="582" y="334" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1792.1026@0.23.1792.1026" timestamp="1604121225554" />
+    <state x="730" y="261" key="#com.intellij.ide.util.MemberChooser" timestamp="1604619596708">
+      <screen x="0" y="23" width="1792" height="1033" />
+    </state>
+    <state x="730" y="261" key="#com.intellij.ide.util.MemberChooser/0.23.1792.1033@0.23.1792.1033" timestamp="1604619596708" />
     <state width="1771" height="274" key="GridCell.Tab.0.bottom" timestamp="1603982707390">
       <screen x="0" y="23" width="1792" height="1028" />
     </state>
@@ -224,10 +230,11 @@
     </state>
     <state x="694" y="459" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1792.1028@0.23.1792.1028" timestamp="1603067051274" />
     <state x="694" y="461" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1792.1033@0.23.1792.1033" timestamp="1603336820403" />
-    <state x="906" y="0" width="886" height="1120" key="dock-window-1" timestamp="1604616971370">
-      <screen x="0" y="0" width="1792" height="1120" />
+    <state x="276" y="59" width="1218" height="874" key="dock-window-1" timestamp="1604618880663">
+      <screen x="0" y="23" width="1792" height="1031" />
     </state>
-    <state x="906" y="0" width="886" height="1120" key="dock-window-1/0.0.1792.1120@0.0.1792.1120" timestamp="1604616971370" />
+    <state x="1161" y="23" width="631" height="1031" key="dock-window-1/0.0.1792.1120@0.0.1792.1120" timestamp="1604618110087" />
+    <state x="276" y="59" width="1218" height="874" key="dock-window-1/0.23.1792.1031@0.23.1792.1031" timestamp="1604618880663" />
     <state x="661" y="444" width="670" height="676" key="search.everywhere.popup" timestamp="1603157958240">
       <screen x="0" y="23" width="1792" height="1033" />
     </state>

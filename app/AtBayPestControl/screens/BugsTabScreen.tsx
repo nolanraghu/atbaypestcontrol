@@ -5,16 +5,17 @@ import { Text, View } from '../components/Themed';
 import { useNavigation } from '@react-navigation/native';
 import {useState} from "react";
 import {getStyle, buttonColor, getBackgroundColor} from '../assets/Stylesheets/Styles'
+import {getBugInfo} from "../controller/BugPulling";
 
 const bugsData = [
-    ["b1", "Prevention Plan", require('../assets/images/honey_bee.png'), 'on', true],
-  ["b2", "Ants", require('../assets/images/ant.png'), 'on', false],
-  ["b3", "Another Ant", require('../assets/images/ant.png'), 'off', false],
-  ["b4", "Ants", require('../assets/images/blue_beetle.png'), 'pending', false],
-  ["b5","Ants", require('../assets/images/beetle.png'), 'pending', false],
-  ["b6","Ants", require('../assets/images/honey_bee.png'), 'off', false],
-  ["b7","Ants", require('../assets/images/honey_bee.png'), 'off', false],
-  ["b8", "Ants", require('../assets/images/ant.png'), 'off', false]
+        {bId: "b1", state: 'on', isPreventionButton: true},
+    {bId: "b2", state: 'on', isPreventionButton: false},
+    {bId: "b3", state: 'off', isPreventionButton: false},
+    {bId: "b4", state: 'pending', isPreventionButton: false},
+    {bId: "b5", state: 'pending', isPreventionButton: false},
+    {bId: "b6", state: 'off', isPreventionButton: false},
+    {bId: "b7", state: 'off', isPreventionButton: false},
+    {bId: "b8", state: 'off', isPreventionButton: false},
 ]
 
 export default function BugsTabScreen() {
@@ -22,8 +23,8 @@ export default function BugsTabScreen() {
   const navigation = useNavigation();
   let styles = getStyle(scheme);
 
-  let bugPressArray = bugsData.map(function([bId, text, source, state, preventionButton], index){
-    return <BugPressable bId={bId} text={text} source={source} state={state} isPreventionButton={preventionButton} key={index}/>
+  let bugPressArray = bugsData.map(function({bId, state, isPreventionButton}, index){
+    return <BugPressable bId={bId}  state={state} isPreventionButton={isPreventionButton} key={index}/>
   })
 
   return (
@@ -48,10 +49,11 @@ export default function BugsTabScreen() {
 
 
 
-function BugPressable({bId, text, source = require('../assets/images/error.jpg'),
+function BugPressable({bId,
                         state = 'off',
                         isPreventionButton = false}: BugPressProps){
 
+    const thisBugData = getBugInfo(bId);
   const navigation = useNavigation();
   const scheme = useColorScheme();
   let styles = getStyle(scheme);
@@ -74,8 +76,8 @@ function BugPressable({bId, text, source = require('../assets/images/error.jpg')
                  })}
                  android_ripple= {{color: getBackgroundColor(scheme)}}>
 
-        <Image source={source} style={styles.buttonImage}/>
-        <Text style={isPreventionButton? styles.preventionText : styles.fullText}>{text}</Text>
+        <Image source={thisBugData.image} style={styles.buttonImage}/>
+        <Text style={isPreventionButton? styles.preventionText : styles.fullText}>{thisBugData.name}</Text>
 
       </Pressable>
   );
@@ -83,9 +85,7 @@ function BugPressable({bId, text, source = require('../assets/images/error.jpg')
 
 //This is where all the parameters for the BugPressable go
 interface BugPressProps {
-    bId: string,
-  text: string
-  source?: object
-  state?: 'off'|'on'|'pending'
+  bId: string,
+  state?: string,
   isPreventionButton?: boolean
 }
