@@ -11,6 +11,7 @@ import useColorScheme from '../hooks/useColorScheme';
 import BugsTabNavigator from "../navigation/BugsTabNavigator"
 import PlanTabNavigator from "./PlanTabNavigator";
 import ProfileTabNavigator from "./ProfileTabNavigator";
+import {tintColor} from "../assets/Stylesheets/Styles";
 
 const BottomTab = createMaterialTopTabNavigator();
 
@@ -22,7 +23,7 @@ export default function BottomTabNavigator() {
       initialRouteName="BugsTab"
       tabBarPosition={"bottom"}
       tabBarOptions={{
-          activeTintColor: 'rgb(63,164,76)',
+          activeTintColor: tintColor,
           showIcon: true,
           labelStyle: {fontSize: 10},
           indicatorStyle: {height: 0},

@@ -97,14 +97,16 @@ export default function PlanTabScreen() {
     );
   }
 
-
+//TODO: I think we want this to be a ScrollView instead of FlatList. Also, we need a view if there are no
+// products in the customer's plan (something like "Nothing here yet! Go to the packages page to start
+// adding products to your plan!)
 
   return (
       <View>
         <View style={styles.bContainer}>
             <Text style={styles.topText}>Your Plan</Text>
             <Text style={styles.description}>
-              This is the plan description! Here are the products. Here are the different bugs that are covered! 🐛 🐝🐞🦋
+              This is the plan description! Here are the products. Here are the different bugs that are covered! 🐛🐝🐞🦋
             </Text>
         </View>
           <FlatList style = {{marginBottom: '35%'}}
