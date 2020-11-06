@@ -6,16 +6,17 @@ import { useNavigation } from '@react-navigation/native';
 import {useState} from "react";
 import {getStyle, buttonColor, getBackgroundColor} from '../assets/Stylesheets/Styles'
 import {getBugInfo} from "../controller/BugPulling";
+import getCurrentPlan from "../profile/CurrentPlan";
 
 const bugsData = [
-        {bId: "b1", state: 'on', isPreventionButton: true},
-    {bId: "b2", state: 'on', isPreventionButton: false},
-    {bId: "b3", state: 'off', isPreventionButton: false},
-    {bId: "b4", state: 'pending', isPreventionButton: false},
-    {bId: "b5", state: 'pending', isPreventionButton: false},
-    {bId: "b6", state: 'off', isPreventionButton: false},
-    {bId: "b7", state: 'off', isPreventionButton: false},
-    {bId: "b8", state: 'off', isPreventionButton: false},
+        {bId: "b1", isPreventionButton: true},
+    {bId: "b2", isPreventionButton: false},
+    {bId: "b3",  isPreventionButton: false},
+    {bId: "b4",  isPreventionButton: false},
+    {bId: "b5", isPreventionButton: false},
+    {bId: "b6",  isPreventionButton: false},
+    {bId: "b7", isPreventionButton: false},
+    {bId: "b8",  isPreventionButton: false},
 ]
 
 // @ts-ignore
@@ -23,8 +24,8 @@ export default function BugsTabScreen({route, navigation}) {
   const scheme = useColorScheme();
   let styles = getStyle(scheme);
 
-  let bugPressArray = bugsData.map(function({bId, state, isPreventionButton}, index){
-    return <BugPressable bId={bId}  state={state} isPreventionButton={isPreventionButton} key={index}/>
+  let bugPressArray = bugsData.map(function({bId, isPreventionButton}, index){
+    return <BugPressable bId={bId}   isPreventionButton={isPreventionButton} key={index}/>
   })
 
   return (
@@ -49,14 +50,15 @@ export default function BugsTabScreen({route, navigation}) {
 
 
 
-function BugPressable({bId,
-                        state = 'off',
-                        isPreventionButton = false}: BugPressProps){
 
+function BugPressable({bId, isPreventionButton = false}: BugPressProps){
+    const plan = getCurrentPlan();
     const thisBugData = getBugInfo(bId);
   const navigation = useNavigation();
   const scheme = useColorScheme();
   let styles = getStyle(scheme);
+  // @ts-ignore
+    const bugIsIn = plan["bugs"].includes(bId)? "on":"off";
 
   const getPressStyle = (stateString: string, preventionButton: boolean = false) => {
     switch (stateString){
@@ -69,8 +71,8 @@ function BugPressable({bId,
     }
   }
 
-  return(
-      <Pressable style={getPressStyle(state, isPreventionButton)}
+    return(
+      <Pressable style={getPressStyle(bugIsIn, isPreventionButton)}
                  onPress={()=> navigation.navigate('BugInfoPopupScreen', {
                      bugId: bId,
                  })}
@@ -86,6 +88,5 @@ function BugPressable({bId,
 //This is where all the parameters for the BugPressable go
 interface BugPressProps {
   bId: string,
-  state?: string,
   isPreventionButton?: boolean
 }
