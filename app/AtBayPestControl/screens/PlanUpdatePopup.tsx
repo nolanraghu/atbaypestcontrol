@@ -2,7 +2,8 @@ import * as React from 'react';
 
 import { Text, View } from '../components/Themed';
 import {Button, ScrollView, StyleSheet, useColorScheme} from "react-native";
-import {useNavigation} from "@react-navigation/native";
+// @ts-ignore
+import { useNavigation } from '@react-navigation/native';
 import {buttonColor, getBackgroundColor, getStyle} from "../assets/Stylesheets/Styles";
 
 // TODO: Payment info, dynamify, and probably change the way the text stuff is styled in the ScrollView

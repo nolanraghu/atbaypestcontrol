@@ -1,17 +1,13 @@
 import * as React from 'react';
 import {
     Button,
-    Image,
-    NativeSyntheticEvent,
     ScrollView,
     StyleSheet,
-    TextLayoutEventData,
     useColorScheme
 } from "react-native";
 import { Text, View } from '../components/Themed';
-import {useState} from "react";
 import {getProductInfo} from "../controller/ProductPulling"
-import {useNavigation} from "@react-navigation/native";
+import CaptionImage from "../components/Components";
 
 
 
@@ -49,55 +45,6 @@ const PlanProductPopup = ({route, navigation}) => {
     );
 
 };
-
-////////EVERYTHING PAST THIS LINE SHOULD GO IN A TOP-LEVEL DIRECTORY HELPER FOLDER//////////////////////
-
-function CaptionImage({source, text = 'information'}: CaptionImageProps){
-    const scheme = useColorScheme();
-    let styles = stylesLight;
-    if(scheme === "dark"){
-        styles = stylesDark;
-    }
-
-    //  These states say what text is in the top and in the bottom, defaulting
-    // to everything being in the top
-    const [topText, setTopText] = useState(text);
-    const [bottomText, setBottomText] = useState('');
-
-    //  When we layout the text, it will split the text into top and bottom, and if
-    // it needs to be split, it will show that
-    const _onTextLayout = (e: NativeSyntheticEvent<TextLayoutEventData>) => {
-        let top = "";
-        let bottom = "";
-        //  Right now it just splits it into 8 lines by the picture, the rest underneath.
-        // If we need to measure it, we can use e.nativeEvent.lines[].height
-        for(let i = 0; i < e.nativeEvent.lines.length; i++){
-            if (i < 8){
-                top = top + e.nativeEvent.lines[i].text;
-            } else {
-                bottom = bottom + e.nativeEvent.lines[i].text;
-            }
-        }
-        if(top != topText){
-            setTopText(top);
-            setBottomText(bottom);
-        }
-    }
-    return(
-        <View style={lazyStyles.section}>
-            <Image source={source} style={lazyStyles.image}/>
-            <Text style={lazyStyles.caption} onTextLayout={_onTextLayout}>{topText}</Text>
-            <Text style={lazyStyles.caption2}>{bottomText}</Text>
-        </View>
-    )
-}
-
-interface CaptionImageProps{
-    source: object
-    text?: string
-}
-
-/////SHITTY COPY AND PAST STRAT ENDS/////////////////
 
 //These should probably be somewhere better to
 const lazyStyles = StyleSheet.create({

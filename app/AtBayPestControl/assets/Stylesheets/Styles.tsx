@@ -9,7 +9,6 @@ const textDark = 'rgb(229,229,229)';
 const onButtonDark = 'rgb(105,105,105)';
 const offButtonDark = 'rgb(60,60,60)';
 const highlightDark = 'lightgreen';
-const fadedTextDark = 'rgb(90,90,90)';
 
 const backgroundLight = 'rgb(236,236,236)';
 const headerLight = 'rgb(245,245,245)';
@@ -17,7 +16,6 @@ const textLight = 'rgb(50,50,50)';
 const onButtonLight = 'white';
 const offButtonLight = 'rgb(231,231,231)';
 const highlightLight = 'rgb(72,190,87)';
-const fadedTextLight = 'rgb(150,150,150)';
 
 export function getBackgroundColor(state:ColorSchemeName){
     if(state === 'dark'){
@@ -37,7 +35,6 @@ export function getStyle(state:ColorSchemeName){
         onButton = onButtonDark;
         offButton = offButtonDark;
         highlight = highlightDark;
-        fadedText = fadedTextDark;
     } else {
         background = backgroundLight;
         header = headerLight;
@@ -45,9 +42,12 @@ export function getStyle(state:ColorSchemeName){
         onButton = onButtonLight;
         offButton = offButtonLight;
         highlight = highlightLight;
-        fadedText = fadedTextLight;
     }
     return StyleSheet.create({
+        screen: {
+            height: '100%',
+            backgroundColor: background
+        },
         container: {
             padding: '2.5%',
             alignItems: 'flex-start',
@@ -74,6 +74,21 @@ export function getStyle(state:ColorSchemeName){
             fontWeight: 'bold',
             margin: 10,
             color: text
+        },
+        product: {
+            width: '94%',
+            margin: '3%',
+            marginBottom: '3.5%',
+            aspectRatio: 3,
+            backgroundColor: onButton,
+            borderRadius: 20,
+            justifyContent: "center",
+            flexDirection: "row",
+            shadowColor: 'black',
+            shadowOffset: { width: 0, height: 2 },
+            shadowOpacity: 0.5,
+            shadowRadius: 2,
+            elevation: 4,
         },
         fullButtonOn: {
             width: '39%',
@@ -176,6 +191,7 @@ export function getStyle(state:ColorSchemeName){
             width: '70%',
             alignSelf: "center",
             resizeMode: 'contain',
+            borderRadius: 8
         },
         preventionText: {
             color: text,
@@ -203,7 +219,6 @@ export function getStyle(state:ColorSchemeName){
             flexWrap: 'wrap',
         },
         caption: {
-            flex: 2,
             textAlign: 'left',
             margin: '4%',
             marginLeft: 10,
@@ -225,7 +240,6 @@ export function getStyle(state:ColorSchemeName){
             color: text,
         },
         captionFade: {
-            flex: 2,
             textAlign: 'left',
             margin: '4%',
             marginLeft: 10,
