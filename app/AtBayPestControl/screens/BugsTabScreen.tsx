@@ -18,9 +18,9 @@ const bugsData = [
     {bId: "b8", state: 'off', isPreventionButton: false},
 ]
 
-export default function BugsTabScreen() {
+// @ts-ignore
+export default function BugsTabScreen({route, navigation}) {
   const scheme = useColorScheme();
-  const navigation = useNavigation();
   let styles = getStyle(scheme);
 
   let bugPressArray = bugsData.map(function({bId, state, isPreventionButton}, index){

@@ -18,6 +18,7 @@ const BottomTab = createMaterialTopTabNavigator();
 export default function BottomTabNavigator() {
   const colorScheme = useColorScheme();
 
+
   return (
     <BottomTab.Navigator
       initialRouteName="BugsTab"
