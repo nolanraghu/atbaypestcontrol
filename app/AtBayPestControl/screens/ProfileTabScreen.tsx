@@ -12,10 +12,11 @@ import {
   Platform,
   Image,
   Linking,
-  FlatList,
   TouchableOpacity,
 } from 'react-native';
 import Email from './Email'
+import Payment from './Payment'
+import ShippingLocations from "./ShippingLocations";
 import Separator from './Separator'
 
 import { Text, View } from '../components/Themed';
@@ -23,22 +24,46 @@ import { useNavigation } from '@react-navigation/native';
 import {useState} from "react";
 
 const EMAIL = [
-  {
-    id: 1,
-    name: 'personal',
-    email: 'fake.person@gmail.com',
-  },
-  {
-    id: 2,
-    name: 'work',
-    email: 'fake.person2@gmail.com',
-  },
-  {
-    id: 3,
-    name: 'play',
-    email: 'fake.person3@gmail.com',
-  }
+  [
+    "1",
+    "personal",
+    "fake.person@gmail.com",
+  ],
+  [
+    "2",
+    "work",
+    "fake.person2@gmail.com",
+  ],
+  [
+    "3",
+    "play",
+    "fake.person3@gmail.com",
+  ]
 ]
+
+const PAY = [
+    [
+        "1",
+        "debit",
+        "1234 5678 9101 1121"
+    ],
+    [
+        "2",
+        "credit",
+        "3141 5161 7181 9202",
+    ]
+]
+
+const LOC = [
+    [
+        ['1 Real Place', 'New York City', 'New York', '12345'],
+    ],
+    [
+        ['2 Real Place', 'Nashville', 'Tennessee', '678910'],
+    ]
+]
+
+const PLAN = "Current Plan"
 
 export default function ProfileTabScreen() {
 
@@ -50,6 +75,12 @@ export default function ProfileTabScreen() {
             {renderHeader({})}
             {renderEmail()}
             {Separator()}
+            {/*<Text style={styles.userCityText}></Text>*/}
+            {renderPlan()}
+            {Separator()}
+            {renderLoc()}
+            {Separator()}
+            {renderPay()}
           </Card>
         </View>
       </ScrollView>
@@ -57,13 +88,14 @@ export default function ProfileTabScreen() {
 
 }
 
+function onPressPlace () {
+  console.log('place')
+}
+
 function renderHeader ({avatar = require('../assets/images/profile_picture.jpg'), avatarBackground = require('../assets/images/splash.png'),
                          name = 'John Doe', city = 'New York', state = 'New York'}: RenderHProps) {
 
   console.log(avatar, avatarBackground)
-  function onPressPlace () {
-    console.log('place')
-  }
 
   return (
       <View style={styles.headerContainer}>
@@ -111,27 +143,100 @@ interface RenderHProps {
 function renderEmail () {
 
   function onPressEmail () {
-    console.log('place')
+    console.log('email')
   }
 
-  return (
-    <FlatList
-        contentContainerStyle={styles.emailContainer}
-        data={EMAIL}
-        renderItem={(list) => {
-          const { email, id, name } = list.item
+  let EmailArray = EMAIL.map(function([id, name, email], index) {
+    return  <Email
+              key={id}
+              index={index}
+              name={name}
+              email={email}
+              onPressEmail={onPressEmail}
 
-          return (
-              <Email
-                  key={`email-${id}`}
-                  index={list.index}
-                  name={name}
-                  email={email}
-                  onPressEmail={onPressEmail}
+            />
+  })
+
+
+  return (
+      <View style={styles.emailContainer}>
+        {EmailArray}
+      </View>
+  )
+}
+
+function renderPlan () {
+
+  function onPressPlan () {
+    console.log('email')
+  }
+
+
+  return (
+      <View style={styles.emailContainer}>
+        <TouchableOpacity onPress={() => onPressPlan()}>
+          <View style={[styles.planContainer]}>
+            <View style={styles.iconRow}>
+              <Icon
+                  name= 'payment'
+                  underlayColor = 'transparent'
+                  iconStyle={styles.Icon}
+                  onPress={() => onPressPlan()}
               />
-          )
-        }}
+            </View>
+            <View style={styles.Row}>
+              <Text style={styles.Text}>{PLAN}</Text>
+            </View>
+          </View>
+        </TouchableOpacity>
+      </View>
+  )
+}
+
+function renderPay () {
+
+  function onPressPayment () {
+    console.log('payed')
+  }
+
+  function onPressEdit () {
+    console.log('edit')
+  }
+
+  let PayArray = PAY.map(function([id, name, card], index) {
+    return  <Payment
+        key={id}
+        index={index}
+        name={name}
+        card={card}
+        onPressEdit={onPressEdit}
+        onPressPayment={onPressPayment}
+
     />
+  })
+
+  return (
+      <View style={styles.emailContainer}>
+        {PayArray}
+      </View>
+  )
+}
+
+function renderLoc () {
+
+  let LocationArray = LOC.map(function([location], index) {
+    return  <ShippingLocations
+        key={location[1]}
+        index={index}
+        location={location}
+        onPressPlace={onPressPlace}
+    />
+  })
+
+  return (
+      <View style={styles.emailContainer}>
+        {LocationArray}
+      </View>
   )
 }
 
@@ -147,6 +252,11 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
+  },
+  planContainer: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    marginBottom: 25,
   },
   emailContainer: {
     backgroundColor: '#FFF',
@@ -210,5 +320,21 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     paddingBottom: 8,
     textAlign: 'center',
+  },
+  iconRow: {
+    flex: 2,
+    justifyContent: 'center',
+  },
+  Icon: {
+    color: 'gray',
+    fontSize: 30,
+  },
+  Row: {
+    flex: 8,
+    flexDirection: 'column',
+    justifyContent: 'center',
+  },
+  Text: {
+    fontSize: 16,
   },
 })

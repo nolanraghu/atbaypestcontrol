@@ -2,27 +2,27 @@ import React from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { Icon } from 'react-native-elements'
 
-export default function renderItem ({email, index, name, onPressEmail}: renderProps) {
+export default function renderItem ({location, index, onPressPlace}: renderProps) {
     return (
-        <TouchableOpacity onPress={() => onPressEmail(email)}>
+        <TouchableOpacity onPress={() => onPressPlace()}>
             <View style={[styles.container]}>
                 <View style={styles.iconRow}>
                     {index === 0 && (
                         <Icon
-                            name= 'email'
+                            name= 'place'
                             underlayColor = 'transparent'
                             iconStyle={styles.emailIcon}
-                            onPress={() => onPressEmail()}
+                            onPress={() => onPressPlace()}
                         />
                     )}
                 </View>
                 <View style={styles.emailRow}>
                     <View style={styles.emailColumn}>
-                        <Text style={styles.emailText}>{email}</Text>
+                        <Text style={styles.emailText}>{location[0] + ', ' + location[1]}</Text>
                     </View>
                     <View style={styles.emailNameColumn}>
-                        {name.length !== 0 && (
-                            <Text style={styles.emailNameText}>{name}</Text>
+                        {location[2].length !== 0 && (
+                            <Text style={styles.emailNameText}>{location[2] + ', ' + location[3]}</Text>
                         )}
                     </View>
                 </View>
@@ -32,10 +32,9 @@ export default function renderItem ({email, index, name, onPressEmail}: renderPr
 }
 
 interface renderProps {
-    email: string
+    location: string[]
     index: number
-    name: string
-    onPressEmail: (email?: string) => void
+    onPressPlace: () => void
 }
 
 const styles = StyleSheet.create({
