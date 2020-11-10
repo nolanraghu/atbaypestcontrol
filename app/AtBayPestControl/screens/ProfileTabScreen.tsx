@@ -22,48 +22,7 @@ import Payment from '../components/Payment'
 import ShippingLocations from '../components/ShippingLocations';
 import Separator from '../components/Separator'
 import {useState} from "react";
-
-const EMAIL = [
-  [
-    "1",
-    "personal",
-    "fake.person@gmail.com",
-  ],
-  [
-    "2",
-    "work",
-    "fake.person2@gmail.com",
-  ],
-  [
-    "3",
-    "play",
-    "fake.person3@gmail.com",
-  ]
-]
-
-const PAY = [
-    [
-        "1",
-        "debit",
-        "1234 5678 9101 1121"
-    ],
-    [
-        "2",
-        "credit",
-        "3141 5161 7181 9202",
-    ]
-]
-
-const LOC = [
-    [
-        ['1 Real Place', 'New York City', 'New York', '12345'],
-    ],
-    [
-        ['2 Real Place', 'Nashville', 'Tennessee', '678910'],
-    ]
-]
-
-const PLAN = "Current Plan"
+import {EMAIL, LOC, PAY, PLAN} from "../assets/Data/Data";
 
 export default function ProfileTabScreen() {
 
@@ -92,7 +51,7 @@ function onPressPlace () {
   console.log('place')
 }
 
-function renderHeader ({avatar = require('../assets/images/profile_picture.jpg'), avatarBackground = require('../assets/images/ant3.jpg'),
+function renderHeader ({avatar = require('../assets/images/profile_picture.jpg'), avatarBackground = require('../assets/images/splash.png'),
                          name = 'John Doe', city = 'New York', state = 'New York'}: RenderHProps) {
 
   console.log(avatar, avatarBackground)
