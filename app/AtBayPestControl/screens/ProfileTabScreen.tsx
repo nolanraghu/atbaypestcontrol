@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Ionicons } from '@expo/vector-icons';
 import {Component} from 'react';
 import {Card, Icon} from 'react-native-elements';
 import {
@@ -177,7 +178,8 @@ function renderPlan () {
           <View style={styles.planContainer}>
             <View style={styles.iconRow}>
               <Icon
-                  name= 'email'
+                  name= 'ios-paper'
+                  type= 'ionicon'
                   underlayColor = 'transparent'
                   iconStyle={styles.Icon}
                   onPress={() => onPressPlan()}
