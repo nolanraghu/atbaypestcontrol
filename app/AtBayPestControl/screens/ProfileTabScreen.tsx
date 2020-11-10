@@ -16,7 +16,7 @@ import {
 } from 'react-native';
 import Email from './Email'
 import Payment from './Payment'
-import ShippingLocations from "./ShippingLocations";
+import ShippingLocations from './ShippingLocations';
 import Separator from './Separator'
 
 import { Text, View } from '../components/Themed';
