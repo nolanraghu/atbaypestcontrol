@@ -11,21 +11,23 @@ import useColorScheme from '../hooks/useColorScheme';
 import BugsTabNavigator from "../navigation/BugsTabNavigator"
 import PlanTabNavigator from "./PlanTabNavigator";
 import ProfileTabNavigator from "./ProfileTabNavigator";
+import {tintColor} from "../assets/Stylesheets/Styles";
 
 const BottomTab = createMaterialTopTabNavigator();
 
 export default function BottomTabNavigator() {
   const colorScheme = useColorScheme();
 
+
   return (
     <BottomTab.Navigator
       initialRouteName="BugsTab"
       tabBarPosition={"bottom"}
       tabBarOptions={{
-          activeTintColor: Colors[colorScheme].tint,
+          activeTintColor: tintColor,
           showIcon: true,
           labelStyle: {fontSize: 10},
-          indicatorStyle: {}
+          indicatorStyle: {height: 0},
       }}>
       <BottomTab.Screen
         name="BugsTab"

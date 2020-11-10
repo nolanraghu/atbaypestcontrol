@@ -1,3 +1,1 @@
-export function planDescription1(){
-
-}
+export const appName = "AtBay Pest Control";

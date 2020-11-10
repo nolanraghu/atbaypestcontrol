@@ -20,13 +20,39 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a7ddd241-6d14-413e-a90c-d44a72595648" name="Default Changelist" comment="fixed issue w/yarn start, cleaned up extra files">
+      <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/Notes on data controlling.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/Stylesheets/Styles.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/images/1831477.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/images/ant.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/images/ant2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/images/ant3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/images/beetle.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/images/blue_beetle.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/images/error.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/images/honey_bee.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/images/honey_bee2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/images/honey_bee3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/images/product1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/images/product2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/images/product3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/images/product4.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/images/product5.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/images/splash1 (2).png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/controller/BugPulling.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/controller/ProductPulling.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/design notes" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/navigation/BugsTabNavigator.tsx" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/navigation/PlanTabNavigator.tsx" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/navigation/ProfileTabNavigator.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/screens/BugInfoPopup.tsx" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/screens/PlanProductPopup.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/screens/PlanUpdatePopup.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/AtBayPestControl/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/AtBayPestControl/app.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/AtBayPestControl/assets/images/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/images/icon.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/AtBayPestControl/assets/images/splash.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/images/splash.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/AtBayPestControl/assets/text/text.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/text/text.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/AtBayPestControl/navigation/BottomTabNavigator.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/AtBayPestControl/navigation/BottomTabNavigator.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/AtBayPestControl/navigation/LinkingConfiguration.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/AtBayPestControl/navigation/LinkingConfiguration.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/AtBayPestControl/screens/BugsTabScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/AtBayPestControl/screens/BugsTabScreen.tsx" afterDir="false" />
@@ -60,6 +86,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="Markdown" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/app/AtBayPestControl/screens" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -72,6 +99,10 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/AtBayPestControl" />
+      <recent name="$PROJECT_DIR$/app/AtBayPestControl/assets" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/app/AtBayPestControl/screens" />
     </key>
@@ -95,6 +126,13 @@
       <workItem from="1603377344329" duration="443000" />
       <workItem from="1603484472574" duration="701000" />
       <workItem from="1603566728221" duration="8603000" />
+      <workItem from="1603982462982" duration="17622000" />
+      <workItem from="1604429534434" duration="875000" />
+      <workItem from="1604430432177" duration="1234000" />
+      <workItem from="1604594707835" duration="2047000" />
+      <workItem from="1604615900795" duration="2107000" />
+      <workItem from="1604618041520" duration="69000" />
+      <workItem from="1604618114470" duration="2926000" />
     </task>
     <task id="LOCAL-00001" summary="First Commit. Renaming screens/tabs to fit our needs.">
       <created>1602888296289</created>
@@ -156,6 +194,30 @@
     <option name="LAST_COMMIT_MESSAGE" value="fixed issue w/yarn start, cleaned up extra files" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="582" y="334" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1604121225554">
+      <screen x="0" y="23" width="1792" height="1026" />
+    </state>
+    <state x="582" y="334" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1792.1026@0.23.1792.1026" timestamp="1604121225554" />
+    <state x="730" y="261" key="#com.intellij.ide.util.MemberChooser" timestamp="1604619596708">
+      <screen x="0" y="23" width="1792" height="1033" />
+    </state>
+    <state x="730" y="261" key="#com.intellij.ide.util.MemberChooser/0.23.1792.1033@0.23.1792.1033" timestamp="1604619596708" />
+    <state width="1771" height="274" key="GridCell.Tab.0.bottom" timestamp="1603982707390">
+      <screen x="0" y="23" width="1792" height="1028" />
+    </state>
+    <state width="1771" height="274" key="GridCell.Tab.0.bottom/0.23.1792.1028@0.23.1792.1028" timestamp="1603982707390" />
+    <state width="1771" height="274" key="GridCell.Tab.0.center" timestamp="1603982707390">
+      <screen x="0" y="23" width="1792" height="1028" />
+    </state>
+    <state width="1771" height="274" key="GridCell.Tab.0.center/0.23.1792.1028@0.23.1792.1028" timestamp="1603982707390" />
+    <state width="1771" height="274" key="GridCell.Tab.0.left" timestamp="1603982707389">
+      <screen x="0" y="23" width="1792" height="1028" />
+    </state>
+    <state width="1771" height="274" key="GridCell.Tab.0.left/0.23.1792.1028@0.23.1792.1028" timestamp="1603982707389" />
+    <state width="1771" height="274" key="GridCell.Tab.0.right" timestamp="1603982707390">
+      <screen x="0" y="23" width="1792" height="1028" />
+    </state>
+    <state width="1771" height="274" key="GridCell.Tab.0.right/0.23.1792.1028@0.23.1792.1028" timestamp="1603982707390" />
     <state x="734" y="414" key="VCS.EditChangelistDialog" timestamp="1603076356758">
       <screen x="0" y="23" width="1792" height="1030" />
     </state>
@@ -171,6 +233,11 @@
     </state>
     <state x="694" y="459" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1792.1028@0.23.1792.1028" timestamp="1603067051274" />
     <state x="694" y="461" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1792.1033@0.23.1792.1033" timestamp="1603336820403" />
+    <state x="276" y="59" width="1218" height="874" key="dock-window-1" timestamp="1604618880663">
+      <screen x="0" y="23" width="1792" height="1031" />
+    </state>
+    <state x="1161" y="23" width="631" height="1031" key="dock-window-1/0.0.1792.1120@0.0.1792.1120" timestamp="1604618110087" />
+    <state x="276" y="59" width="1218" height="874" key="dock-window-1/0.23.1792.1031@0.23.1792.1031" timestamp="1604618880663" />
     <state x="661" y="444" width="670" height="676" key="search.everywhere.popup" timestamp="1603157958240">
       <screen x="0" y="23" width="1792" height="1033" />
     </state>

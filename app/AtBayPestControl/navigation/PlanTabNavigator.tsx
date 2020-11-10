@@ -2,6 +2,8 @@ import {createStackNavigator} from "@react-navigation/stack";
 import {PlanTabParamList} from "../types";
 import PlanTabScreen from "../screens/PlanTabScreen";
 import * as React from "react";
+import PlanProductPopup from "../screens/PlanProductPopup";
+import {appName} from "../assets/text/text";
 
 const PlanTabStack = createStackNavigator<PlanTabParamList>();
 
@@ -11,7 +13,12 @@ function PlanTabNavigator() {
             <PlanTabStack.Screen
                 name="PlanTabScreen"
                 component={PlanTabScreen}
-                options={{headerTitle: 'AtBay Pest Control'}}
+                options={{headerTitle: appName}}
+            />
+            <PlanTabStack.Screen
+                name="PlanProductPopup" /*try saying that five times fast*/
+                component={PlanProductPopup}
+                options={{headerTitle: appName}}
             />
         </PlanTabStack.Navigator>
     );

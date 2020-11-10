@@ -12,57 +12,41 @@ import {
 } from "react-native";
 import {useNavigation} from "@react-navigation/native";
 import {useState} from "react";
-
-// This is just an array of arrays of parameters for <CaptionImage>
-const captionImageListData = [
-    [require('../assets/images/ant.png'),
-        'Ant example info paragraph here is for you to know how this works and so ' +
-        'ant. Example info paragraph here is for you to know how this works and so ' +
-        'ant example info paragraph here. Is for you to know how this works and so ' +
-        'ant example info paragraph here is for you to know how this works and so ' +
-        'ant example info paragraph here is for you to know how this works and so ' +
-        'ant example info paragraph here is for you to know. \n     How this works and so ' +
-        'ant example info paragraph. Here is for you to know how this works and so ' +
-        'ant example info paragraph here is for you to know how this works and so ' +
-        'ant example info paragraph here is for you to know how this works and so ' +
-        'ant example info paragraph here is. For you to know how this works and so ' +
-        'ant example info paragraph here is for you to know how this works and so.'],
-    [require('../assets/images/1831477.webp'),
-        'It turns out, making text wrap in React is VERY difficult :/. The good news is, I did it!']
-]
+import {getStyle, buttonColor} from '../assets/Stylesheets/Styles';
+import {getBugInfo} from "../controller/BugPulling";
 
 //TODO: Fix how everything shifts up, fix colors
 
-export default function BugInfoPopup() {
-    const navigation = useNavigation();
+//@ts-ignore
+export default function BugInfoPopup({route, navigation}) {
+    const {bugId} = route.params;
+    const bugInfo = getBugInfo(bugId);
     const scheme = useColorScheme();
-    let styles = stylesLight;
-    if(scheme === "dark"){
-        styles = stylesDark;
-    }
+    let styles = getStyle(scheme);
 
     //This maps the data onto CaptionImages. There's probably a cleaner way to do this, by just making
     // <CaptionImage> return a list? That seems potentially bad tho
     // I just add this in as JS by putting it in brackets in the ScrollView
-    let captionImageListArr = captionImageListData.map(function([source, text], index){
-        return <CaptionImage source={source} text={text} key={index}/>
+    /*
+    let captionImageListArr = captionImageListData.map(function(bugInfo, index){
+        return <CaptionImage source={bugInfo.image} text={bugInfo.name} key={index}/>
     })
-
+    */
     return(
-        <View style={styles.container}>
-            <View style={styles.back}>
-                <Text style={styles.title}>Ant Infestation:</Text>
+        <View style={{height: '100%'}}>
+            <View style={styles.header}>
+                <Text style={styles.title}>{bugInfo.name + " Infestation"}</Text>
+                <Button title="Add to Plan"
+                        color= {buttonColor}
+                        onPress={()=> navigation.navigate('BugsTabScreen')}/>
             </View>
             <ScrollView>
-                {captionImageListArr}
-            </ScrollView>
-            <View style={styles.back}>
-                <View style={styles.section}>
-                    <Text style={styles.price}>Price to add: $3.99</Text>
-                    <View style={styles.button}>
-                        <Button title="Add to Plan" onPress={()=> navigation.navigate('BugsTabScreen')}/>
-                    </View>
+                <View style={styles.container}>
+                    {CaptionImage({source: bugInfo.image, text: bugInfo.description})}
                 </View>
+            </ScrollView>
+            <View style={styles.header}>
+                <Text style={styles.fullText}>Price to add: $3.99</Text>
             </View>
         </View>
     )
@@ -70,14 +54,12 @@ export default function BugInfoPopup() {
 
 function CaptionImage({source, text = 'information'}: CaptionImageProps){
     const scheme = useColorScheme();
-    let styles = stylesLight;
-    if(scheme === "dark"){
-        styles = stylesDark;
-    }
+    let styles = getStyle(scheme);
 
     //  These states say what text is in the top and in the bottom, defaulting
     // to everything being in the top
-    const [topText, setTopText] = useState(text);
+    const [topText, setTopText] = useState(text); //This is just so we know what is being displayed
+    const [topHeight, setTopHeight] = useState(-1); // -1 means auto, but it messes up if you type 'auto'
     const [bottomText, setBottomText] = useState('');
 
     //  When we layout the text, it will split the text into top and bottom, and if
@@ -85,24 +67,39 @@ function CaptionImage({source, text = 'information'}: CaptionImageProps){
     const _onTextLayout = (e: NativeSyntheticEvent<TextLayoutEventData>) => {
         let top = "";
         let bottom = "";
+        let height = 0;
         //  Right now it just splits it into 8 lines by the picture, the rest underneath.
         // If we need to measure it, we can use e.nativeEvent.lines[].height
         for(let i = 0; i < e.nativeEvent.lines.length; i++){
             if (i < 8){
                 top = top + e.nativeEvent.lines[i].text;
+                height += e.nativeEvent.lines[i].height;
             } else {
                 bottom = bottom + e.nativeEvent.lines[i].text;
             }
         }
         if(top != topText){
+            // I had to change the way this was done because changing the text on top
+            // was somehow changing how much text could display in a single line
+            setTopHeight(height);
             setTopText(top);
             setBottomText(bottom);
         }
     }
+
+    //This function is because it won't let the state represent numbers and strings
+    const getHeight = (height: number) => {
+        if(height === -1){
+            return 'auto';
+        } else {
+            return height;
+        }
+    }
+
     return(
         <View style={styles.section}>
             <Image source={source}  style={styles.image}/>
-            <Text style={styles.caption} onTextLayout={_onTextLayout}>{topText}</Text>
+            <Text style={[styles.caption, {height: getHeight(topHeight)}]} onTextLayout={_onTextLayout}>{text}</Text>
             <Text style={styles.caption2}>{bottomText}</Text>
         </View>
     )
