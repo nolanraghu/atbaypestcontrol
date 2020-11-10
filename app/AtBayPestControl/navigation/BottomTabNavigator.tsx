@@ -1,13 +1,8 @@
 import { Ionicons } from '@expo/vector-icons';
-// NOTE: you might have to run this command on your terminal:
-// yarn add @react-navigation/material-top-tabs react-native-tab-view react-native-reanimated
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import * as React from 'react';
 
-import Colors from '../constants/Colors';
-
 //All our stuff
-import useColorScheme from '../hooks/useColorScheme';
 import BugsTabNavigator from "../navigation/BugsTabNavigator"
 import PlanTabNavigator from "./PlanTabNavigator";
 import ProfileTabNavigator from "./ProfileTabNavigator";
@@ -16,9 +11,6 @@ import {tintColor} from "../assets/Stylesheets/Styles";
 const BottomTab = createMaterialTopTabNavigator();
 
 export default function BottomTabNavigator() {
-  const colorScheme = useColorScheme();
-
-
   return (
     <BottomTab.Navigator
       initialRouteName="BugsTab"

@@ -1,8 +1,11 @@
 import * as React from 'react';
-import {FlatList, Image, StyleSheet, TouchableOpacity} from 'react-native';
+import {Image, Pressable, ScrollView, StyleSheet, useColorScheme} from 'react-native';
 import { Text, View } from '../components/Themed';
 import {useState} from "react";
+// @ts-ignore
 import {useNavigation} from "@react-navigation/native";
+import {getBackgroundColor, getStyle} from "../assets/Stylesheets/Styles";
+import {noProductText} from "../assets/text/text";
 
 const PDATA = [
   {
@@ -51,20 +54,29 @@ interface productInterface{
 
 
 //TODO: Make product boxes contain the title on top left, picture on bottom left
-// , and description + Link on right side
+// , and description + Link on right side.
+// Make it so it can render overflowing text (Expand?)
+
 
 // @ts-ignore
-const ProductItem = ({item, onPress, style}) => (
-    <TouchableOpacity onPress={onPress} style={[styles.productBox, style]}>
-      <View style={{flex: 1, flexDirection: 'column',  backgroundColor: 'rgb(206,212,206)'}}>
-        <Text style={styles.productTitle}>{item.title}</Text>
-        <Image source={item.imgSource} style={styles.image}/>
-      </View>
-      <View style={{flex: 2, flexDirection:'column',  backgroundColor: 'rgb(206,212,206)'}}>
-          <Text style={styles.productDescription}>{item.description}</Text>
-      </View>
-    </TouchableOpacity>
-);
+function ProductItem({item}) {
+  const navigation = useNavigation();
+  const scheme = useColorScheme();
+  let styles = getStyle(scheme);
+  return(
+      <Pressable onPress={() => {navigation.navigate("PlanProductPopup", {prodId: item.id})}}
+                 style={styles.product}
+                 android_ripple= {{color: getBackgroundColor(scheme)}}>
+        <View style={{flex: 1, flexDirection: 'column', backgroundColor: 'transparent', margin: 12, marginHorizontal: -10}}>
+          <Text style={[styles.fullText, {fontWeight: 'bold', marginBottom: 3}]}>{item.title}</Text>
+          <Image source={item.imgSource}  style={styles.buttonImage}/>
+        </View>
+        <View style={{flex: 2, flexDirection:'column', backgroundColor: 'transparent', margin: 8, marginLeft: 0}}>
+          <Text style={styles.fullText}>{item.description}</Text>
+        </View>
+      </Pressable>
+  );
+}
 
 
 
@@ -72,6 +84,8 @@ export default function PlanTabScreen() {
   const navigation = useNavigation();
 
   const [expandedId, setExpandedId] = useState("");
+  const scheme = useColorScheme();
+  const styles = getStyle(scheme);
 
   const toggleSelected = (id: React.SetStateAction<string>) => {
     if(expandedId == id){
@@ -81,97 +95,27 @@ export default function PlanTabScreen() {
     }
   };
 
-
-  // @ts-ignore
-  const renderProduct = ({item}) => {
-    const backgroundColor = 'rgb(206,212,206)';
-
-    return(
-        <ProductItem
-          item={item}
-          onPress={() => {navigation.navigate("PlanProductPopup",{
-            prodId: item.id}
-              )}}
-          style={{backgroundColor}}
-          />
-    );
-  }
-
-//TODO: I think we want this to be a ScrollView instead of FlatList. Also, we need a view if there are no
-// products in the customer's plan (something like "Nothing here yet! Go to the packages page to start
-// adding products to your plan!)
+  let productsArray = PDATA.length == 0?
+      noProductText :
+      PDATA.map(function(item, index){
+        return (<ProductItem item={item} key={index}/>)
+      })
 
   return (
-      <View>
-        <View style={styles.bContainer}>
-            <Text style={styles.topText}>Your Plan</Text>
-            <Text style={styles.description}>
-              This is the plan description! Here are the products. Here are the different bugs that are covered! 🐛🐝🐞🦋
-            </Text>
+      <View style={styles.screen}>
+        <View style={styles.header}>
+          <Text style={[styles.title, {marginBottom: 2}]}>
+            Your Plan
+          </Text>
+          <Text style={[styles.caption, {marginBottom: 0}]}>
+            This is the plan description! Here are the products. Here are the different bugs that are covered! 🐛🐝🐞🦋
+          </Text>
         </View>
-          <FlatList style = {{marginBottom: '50%'}}
-            data={PDATA}
-            renderItem={renderProduct}
-            keyExtractor={(item) => item.id}
-          />
+        <ScrollView>
+          <View style={styles.container}>
+            {productsArray}
+          </View>
+        </ScrollView>
       </View>
   );
 }
-
-
-
-//I wonder if every web dev just has a huge compilation of various styles that they use 10% of
-const styles = StyleSheet.create({
-
-  bContainer: {
-    alignItems: 'flex-start',
-  },
-  productBox: {
-    width: '89%',
-    margin: '5.5%',
-    marginBottom: '2%',
-    aspectRatio: 3,
-    backgroundColor: 'rgb(206,212,206)',
-    borderRadius: 20,
-    padding: 10,
-    alignItems: "flex-start",
-    flexDirection: 'row',
-  },
-  productTitle:{
-    fontSize: 16,
-    fontWeight: "bold",
-
-  },
-  section: {
-    width: '100%',
-    backgroundColor: 'transparent',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-  },
-  productDescription:{
-    fontSize: 12,
-    fontWeight: "normal",
-
-  },
-  link:{
-    color: '#0000EE',
-    fontSize: 20,
-  },
-  topText: {
-    fontSize: 50,
-    fontWeight: "bold",
-    alignItems: 'flex-start',
-    margin: 10,
-  },
-  description: {
-    fontSize: 15,
-    margin: 10,
-    alignItems: 'flex-start',
-  },
-  image: {
-    flex: 1,
-    height: '50%',
-    width: '50%',
-    resizeMode: 'contain',
-  },
-});
