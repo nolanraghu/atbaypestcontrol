@@ -27,11 +27,7 @@
     "expo-splash-screen": "~0.6.2",
     "expo-status-bar": "~1.0.2",
     "expo-web-browser": "~8.5.0",
-<<<<<<< HEAD
-    "prop-types": "^15.7.2",
-=======
     "node-forge": "^0.10.0",
->>>>>>> master
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-39.0.3.tar.gz",
@@ -42,13 +38,8 @@
     "react-native-safe-area-context": "3.1.4",
     "react-native-screens": "~2.10.1",
     "react-native-tab-view": "^2.15.2",
-<<<<<<< HEAD
-    "react-native-vector-icons": "^7.1.0",
-    "react-native-web": "~0.13.12"
-=======
     "react-native-web": "~0.13.12",
     "react-navigation": "^4.4.3"
->>>>>>> master
   },
   "devDependencies": {
     "@babel/core": "~7.9.0",
