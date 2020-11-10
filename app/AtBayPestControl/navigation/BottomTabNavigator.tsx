@@ -11,6 +11,13 @@ import {tintColor} from "../assets/Stylesheets/Styles";
 const BottomTab = createMaterialTopTabNavigator();
 
 export default function BottomTabNavigator() {
+    const renderIcon = (name:string) => {
+        return (color:any) => {
+            return (
+                <TabBarIcon name={name} color={color.color} />
+            );
+        }
+    }
   return (
     <BottomTab.Navigator
       initialRouteName="BugsTab"
@@ -25,7 +32,7 @@ export default function BottomTabNavigator() {
         name="BugsTab"
         component={BugsTabNavigator}
         options={{
-            tabBarIcon: ({ color }) => <TabBarIcon name="ios-bug" color={color} />,
+            tabBarIcon: renderIcon("ios-bug"),
             tabBarLabel: "Packages"
         }}
       />
@@ -33,7 +40,7 @@ export default function BottomTabNavigator() {
         name="PlanTab"
         component={PlanTabNavigator}
         options={{
-            tabBarIcon: ({ color }) => <TabBarIcon name="ios-paper" color={color} />,
+            tabBarIcon: renderIcon('ios-paper'),
             tabBarLabel: "Your Plan"
         }}
       />
@@ -41,7 +48,7 @@ export default function BottomTabNavigator() {
           name="ProfileTab"
           component={ProfileTabNavigator}
           options={{
-              tabBarIcon: ({ color }) => <TabBarIcon name="ios-person" color={color} />,
+              tabBarIcon: renderIcon('ios-person'),
               tabBarLabel: "Profile"
           }}
               />
