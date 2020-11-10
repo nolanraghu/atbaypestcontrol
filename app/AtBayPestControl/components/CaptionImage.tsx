@@ -1,9 +1,7 @@
-import {Image, NativeSyntheticEvent, Pressable, TextLayoutEventData, useColorScheme} from "react-native";
+import {Image, NativeSyntheticEvent, Pressable, TextLayoutEventData, useColorScheme, Text, View} from "react-native";
 import {getBackgroundColor, getStyle} from "../assets/Stylesheets/Styles";
 import {useState} from "react";
-import {Text, View} from "./Themed";
 import * as React from "react";
-import {useNavigation} from "@react-navigation/native";
 
 export default function CaptionImage({source, text = 'information'}: CaptionImageProps){
     const scheme = useColorScheme();

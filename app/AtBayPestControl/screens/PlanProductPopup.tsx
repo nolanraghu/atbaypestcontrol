@@ -3,11 +3,13 @@ import {
     Button,
     ScrollView,
     StyleSheet,
-    useColorScheme
+    useColorScheme,
+    Text,
+    View
 } from "react-native";
-import { Text, View } from '../components/Themed';
+
 import {getProductInfo} from "../controller/ProductPulling"
-import CaptionImage from "../components/Components";
+import CaptionImage from "../components/CaptionImage";
 import {buttonColor, getStyle} from "../assets/Stylesheets/Styles";
 import {getBugInfo} from "../controller/BugPulling";
 

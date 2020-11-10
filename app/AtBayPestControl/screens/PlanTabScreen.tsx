@@ -1,6 +1,5 @@
 import * as React from 'react';
-import {Image, Pressable, ScrollView, StyleSheet, useColorScheme} from 'react-native';
-import { Text, View } from '../components/Themed';
+import {Image, Pressable, ScrollView, StyleSheet, useColorScheme, Text, View} from 'react-native';
 import {useState} from "react";
 // @ts-ignore
 import {useNavigation} from "@react-navigation/native";

@@ -13,14 +13,13 @@ import {
   Image,
   Linking,
   TouchableOpacity,
+    Text,
+    View
 } from 'react-native';
-import Email from './Email'
-import Payment from './Payment'
-import ShippingLocations from './ShippingLocations';
-import Separator from './Separator'
-
-import { Text, View } from '../components/Themed';
-import { useNavigation } from '@react-navigation/native';
+import Email from '../components/Email'
+import Payment from '../components/Payment'
+import ShippingLocations from '../components/ShippingLocations';
+import Separator from '../components/Separator'
 import {useState} from "react";
 
 const EMAIL = [
@@ -92,7 +91,7 @@ function onPressPlace () {
   console.log('place')
 }
 
-function renderHeader ({avatar = require('../assets/images/profile_picture.jpg'), avatarBackground = require('../assets/images/splash.png'),
+function renderHeader ({avatar = require('../assets/images/profile_picture.jpg'), avatarBackground = require('../assets/images/ant3.jpg'),
                          name = 'John Doe', city = 'New York', state = 'New York'}: RenderHProps) {
 
   console.log(avatar, avatarBackground)
@@ -175,10 +174,10 @@ function renderPlan () {
   return (
       <View style={styles.emailContainer}>
         <TouchableOpacity onPress={() => onPressPlan()}>
-          <View style={[styles.planContainer]}>
+          <View style={styles.planContainer}>
             <View style={styles.iconRow}>
               <Icon
-                  name= 'payment'
+                  name= 'email'
                   underlayColor = 'transparent'
                   iconStyle={styles.Icon}
                   onPress={() => onPressPlan()}

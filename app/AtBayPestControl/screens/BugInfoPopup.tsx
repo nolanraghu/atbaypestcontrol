@@ -1,14 +1,14 @@
 import * as React from 'react';
-
-import { Text, View } from '../components/Themed';
 import {
     Button,
     ScrollView,
-    useColorScheme
+    useColorScheme,
+    Text,
+    View
 } from "react-native";
 import {getStyle, buttonColor, getBackgroundColor} from '../assets/Stylesheets/Styles';
 import {getBugInfo} from "../controller/BugPulling";
-import CaptionImage from "../components/Components";
+import CaptionImage from "../components/CaptionImage";
 
 //TODO: Fix how everything shifts up, fix colors
 
