@@ -12,9 +12,9 @@ const BottomTab = createMaterialTopTabNavigator();
 
 export default function BottomTabNavigator() {
     const renderIcon = (name:string) => {
-        return (color:any) => {
+        return (props:any) => {
             return (
-                <TabBarIcon name={name} color={color.color} />
+                <TabBarIcon name={name} color={props.color} />
             );
         }
     }
