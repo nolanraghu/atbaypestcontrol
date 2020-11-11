@@ -1,7 +1,6 @@
 import * as React from 'react';
-import {Button, Image, Pressable, ScrollView, StyleSheet, useColorScheme} from 'react-native';
-
-import { Text, View } from '../components/Themed';
+import {Button, Image, Pressable, ScrollView, StyleSheet, useColorScheme, Text, View} from 'react-native';
+// @ts-ignore
 import { useNavigation } from '@react-navigation/native';
 import {useState} from "react";
 import {getStyle, buttonColor, getBackgroundColor} from '../assets/Stylesheets/Styles'
@@ -28,7 +27,7 @@ export default function BugsTabScreen({route, navigation}) {
   })
 
   return (
-      <View>
+      <View style={styles.screen}>
         <View style={styles.header}>
           <Text style={styles.title}>
             New Price: $10.99
@@ -38,7 +37,7 @@ export default function BugsTabScreen({route, navigation}) {
                   //TODO: add parameters to screens, interactivity
                   onPress={()=> navigation.navigate('PlanUpdatePopupScreen')}/>
         </View>
-        <ScrollView style={{marginBottom: '18%'}}>
+        <ScrollView>
           <View style={styles.container}>
             {bugPressArray}
           </View>
@@ -49,14 +48,11 @@ export default function BugsTabScreen({route, navigation}) {
 
 
 
-function BugPressable({bId,
-                        state = 'off',
-                        isPreventionButton = false}: BugPressProps){
-
+function BugPressable({bId, state = 'off', isPreventionButton = false}: BugPressProps){
     const thisBugData = getBugInfo(bId);
-  const navigation = useNavigation();
-  const scheme = useColorScheme();
-  let styles = getStyle(scheme);
+    const navigation = useNavigation();
+    const scheme = useColorScheme();
+    let styles = getStyle(scheme);
 
   const getPressStyle = (stateString: string, preventionButton: boolean = false) => {
     switch (stateString){

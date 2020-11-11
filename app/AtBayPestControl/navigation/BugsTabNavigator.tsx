@@ -3,7 +3,7 @@ import {createStackNavigator} from "@react-navigation/stack";
 import {BugsTabParamList} from "../types";
 import BugsTabScreen from "../screens/BugsTabScreen";
 import BugInfoPopup from "../screens/BugInfoPopup";
-import PlanUpdatePopup from "../screens/PlanUpdatePopup";
+import UpdatePlanPopup from "../screens/UpdatePlanPopup";
 import {appName} from "../assets/text/text";
 
 const BugsTabStack = createStackNavigator<BugsTabParamList>();
@@ -23,7 +23,7 @@ function BugsTabNavigator() {
             />
             <BugsTabStack.Screen
                 name="PlanUpdatePopupScreen"
-                component={PlanUpdatePopup}
+                component={UpdatePlanPopup}
                 options={{ headerTitle: appName}}
             />
         </BugsTabStack.Navigator>);

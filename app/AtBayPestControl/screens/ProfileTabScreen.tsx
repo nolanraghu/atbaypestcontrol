@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Ionicons } from '@expo/vector-icons';
 import {Component} from 'react';
 import {Card, Icon} from 'react-native-elements';
 import {
@@ -13,56 +14,15 @@ import {
   Image,
   Linking,
   TouchableOpacity,
+    Text,
+    View
 } from 'react-native';
-import Email from './Email'
-import Payment from './Payment'
-import ShippingLocations from './ShippingLocations';
-import Separator from './Separator'
-
-import { Text, View } from '../components/Themed';
-import {getStyle} from "../assets/Stylesheets/Styles";
-
-const EMAIL = [
-  [
-    "1",
-    "personal",
-    "fake.person@gmail.com",
-  ],
-  [
-    "2",
-    "work",
-    "fake.person2@gmail.com",
-  ],
-  [
-    "3",
-    "play",
-    "fake.person3@gmail.com",
-  ]
-]
-
-const PAY = [
-    [
-        "1",
-        "debit",
-        "1234 5678 9101 1121"
-    ],
-    [
-        "2",
-        "credit",
-        "3141 5161 7181 9202",
-    ]
-]
-
-const LOC = [
-    [
-        ['1 Real Place', 'New York City', 'New York', '12345'],
-    ],
-    [
-        ['2 Real Place', 'Nashville', 'Tennessee', '678910'],
-    ]
-]
-
-const PLAN = "Current Plan"
+import Email from '../components/Email'
+import Payment from '../components/Payment'
+import ShippingLocations from '../components/ShippingLocations';
+import Separator from '../components/Separator'
+import {useState} from "react";
+import {EMAIL, LOC, PAY, PLAN} from "../assets/Data/Data";
 
 export default function ProfileTabScreen() {
   const scheme = useColorScheme();
@@ -182,10 +142,11 @@ function renderPlan () {
   return (
       <View style={styles.emailContainer}>
         <TouchableOpacity onPress={() => onPressPlan()}>
-          <View style={[styles.planContainer]}>
+          <View style={styles.planContainer}>
             <View style={styles.iconRow}>
               <Icon
-                  name= 'payment'
+                  name= 'ios-paper'
+                  type= 'ionicon'
                   underlayColor = 'transparent'
                   iconStyle={styles.Icon}
                   onPress={() => onPressPlan()}

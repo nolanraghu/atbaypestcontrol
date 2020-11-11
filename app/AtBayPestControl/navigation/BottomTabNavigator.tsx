@@ -1,13 +1,8 @@
 import { Ionicons } from '@expo/vector-icons';
-// NOTE: you might have to run this command on your terminal:
-// yarn add @react-navigation/material-top-tabs react-native-tab-view react-native-reanimated
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import * as React from 'react';
 
-import Colors from '../constants/Colors';
-
 //All our stuff
-import useColorScheme from '../hooks/useColorScheme';
 import BugsTabNavigator from "../navigation/BugsTabNavigator"
 import PlanTabNavigator from "./PlanTabNavigator";
 import ProfileTabNavigator from "./ProfileTabNavigator";
@@ -16,9 +11,13 @@ import {tintColor} from "../assets/Stylesheets/Styles";
 const BottomTab = createMaterialTopTabNavigator();
 
 export default function BottomTabNavigator() {
-  const colorScheme = useColorScheme();
-
-
+    const renderIcon = (name:string) => {
+        return (color:any) => {
+            return (
+                <TabBarIcon name={name} color={color.color} />
+            );
+        }
+    }
   return (
     <BottomTab.Navigator
       initialRouteName="BugsTab"
@@ -33,7 +32,7 @@ export default function BottomTabNavigator() {
         name="BugsTab"
         component={BugsTabNavigator}
         options={{
-            tabBarIcon: ({ color }) => <TabBarIcon name="ios-bug" color={color} />,
+            tabBarIcon: renderIcon("ios-bug"),
             tabBarLabel: "Packages"
         }}
       />
@@ -41,7 +40,7 @@ export default function BottomTabNavigator() {
         name="PlanTab"
         component={PlanTabNavigator}
         options={{
-            tabBarIcon: ({ color }) => <TabBarIcon name="ios-paper" color={color} />,
+            tabBarIcon: renderIcon('ios-paper'),
             tabBarLabel: "Your Plan"
         }}
       />
@@ -49,7 +48,7 @@ export default function BottomTabNavigator() {
           name="ProfileTab"
           component={ProfileTabNavigator}
           options={{
-              tabBarIcon: ({ color }) => <TabBarIcon name="ios-person" color={color} />,
+              tabBarIcon: renderIcon('ios-person'),
               tabBarLabel: "Profile"
           }}
               />

@@ -1,16 +1,49 @@
 import * as React from 'react';
-
-import { Text, View } from '../components/Themed';
-import {Button, ScrollView, StyleSheet, useColorScheme} from "react-native";
-import {useNavigation} from "@react-navigation/native";
+import {Button, ScrollView, StyleSheet, useColorScheme, Text, View} from "react-native";
+// @ts-ignore
+import { useNavigation } from '@react-navigation/native';
 import {buttonColor, getBackgroundColor, getStyle} from "../assets/Stylesheets/Styles";
+import Payment from "../components/Payment";
+import {PAY} from "../assets/Data/Data";
 
 // TODO: Payment info, dynamify, and probably change the way the text stuff is styled in the ScrollView
 
-export default function PlanUpdatePopup() {
+export default function UpdatePlanPopup() {
     const navigation = useNavigation();
     const scheme = useColorScheme();
     const styles = getStyle(scheme);
+
+    function renderPay () {
+
+        function onPressPayment () {
+            console.log('payed')
+        }
+
+        function onPressEdit () {
+            console.log('edit')
+        }
+
+        let PayArray = PAY.map(function([id, name, card], index) {
+            return  <Payment
+                key={id}
+                index={index}
+                name={name}
+                card={card}
+                onPressEdit={onPressEdit}
+                onPressPayment={onPressPayment}
+            />
+        })
+
+        return (
+            <View style={{
+                width: '100%',
+                paddingTop: 30,
+            }}>
+                {PayArray[0]}
+            </View>
+        )
+    }
+
     return(
         <View style={{height: '100%', backgroundColor: getBackgroundColor(scheme)}}>
             <View style={styles.header}>
@@ -27,9 +60,7 @@ export default function PlanUpdatePopup() {
                     <View style={styles.section}>
                         <Text style={styles.title}>Payment information:</Text>
                     </View>
-                    <View style={styles.section}>
-                        <Text style={styles.caption}>I'm just gonna copy this part from Kahero later</Text>
-                    </View>
+                    {renderPay()}
                     <View style={styles.section}>
                         <Text style={styles.captionFade}>Notes!</Text>
                     </View>
