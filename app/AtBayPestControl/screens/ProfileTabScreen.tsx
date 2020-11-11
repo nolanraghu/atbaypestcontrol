@@ -17,6 +17,7 @@ import {
     Text,
     View
 } from 'react-native';
+import {getStyle, buttonColor, getBackgroundColor} from '../assets/Stylesheets/Styles'
 import Email from '../components/Email'
 import Payment from '../components/Payment'
 import ShippingLocations from '../components/ShippingLocations';

@@ -1,8 +1,12 @@
 import React from 'react'
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import {StyleSheet, Text, TouchableOpacity, useColorScheme, View} from 'react-native'
 import { Icon } from 'react-native-elements'
+import {getStyle} from "../assets/Stylesheets/Styles";
 
 export default function renderItem ({card, index, name, onPressEdit, onPressPayment}: renderProps) {
+    const scheme = useColorScheme();
+    let styles = getStyle(scheme);
+
     card = card.replace(/\s/g, "")
 
     return (
@@ -13,18 +17,18 @@ export default function renderItem ({card, index, name, onPressEdit, onPressPaym
                         <Icon
                             name= 'payment'
                             underlayColor = 'transparent'
-                            iconStyle={styles.payIcon}
+                            iconStyle={styles.Icon}
                             onPress={() => onPressPayment()}
                         />
                     )}
                 </View>
-                <View style={styles.payRow}>
-                    <View style={styles.payColumn}>
+                <View style={styles.Row}>
+                    <View style={styles.column}>
                         <Text style={styles.payText}>{"xxxx-xxxx-xxxx-" + card.substr(card.length - 4,)}</Text>
                     </View>
-                    <View style={styles.payNameColumn}>
+                    <View style={styles.nameColumn}>
                         {name.length !== 0 && (
-                            <Text style={styles.payNameText}>{name}</Text>
+                            <Text style={styles.subText}>{name}</Text>
                         )}
                     </View>
                 </View>
@@ -32,7 +36,7 @@ export default function renderItem ({card, index, name, onPressEdit, onPressPaym
                     <Icon
                         name="edit"
                         underlayColor="transparent"
-                        iconStyle={styles.payIcon}
+                        iconStyle={styles.Icon}
                         onPress={() => onPressEdit()}
                     />
                 </View>
@@ -48,46 +52,3 @@ interface renderProps {
     onPressEdit: () => void
     onPressPayment: () => void
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flexDirection: 'row',
-        justifyContent: 'flex-start',
-        marginBottom: 25,
-    },
-    payColumn: {
-        flexDirection: 'row',
-        justifyContent: 'flex-start',
-        marginBottom: 5,
-    },
-    payIcon: {
-        color: 'darkgray',
-        fontSize: 30,
-    },
-    payNameColumn: {
-        flexDirection: 'row',
-        justifyContent: 'flex-start',
-    },
-    payNameText: {
-        color: 'gray',
-        fontSize: 14,
-        fontWeight: '200',
-    },
-    payRow: {
-        flex: 8,
-        flexDirection: 'column',
-        justifyContent: 'center',
-    },
-    payText: {
-        fontSize: 18,
-        fontWeight: 'bold',
-    },
-    iconRow: {
-        flex: 2,
-        justifyContent: 'center',
-    },
-    editRow: {
-        flex: 2,
-        justifyContent: 'flex-start',
-    },
-})

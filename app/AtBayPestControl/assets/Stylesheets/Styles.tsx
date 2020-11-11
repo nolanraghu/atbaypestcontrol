@@ -317,7 +317,7 @@ export function getStyle(state:ColorSchemeName){
             width: 170,
         },
         userNameText: {
-            color: background,
+            color: text,
             fontSize: 22,
             fontWeight: 'bold',
             paddingBottom: 8,
@@ -337,7 +337,31 @@ export function getStyle(state:ColorSchemeName){
             justifyContent: 'center',
         },
         Text: {
+            color: text,
             fontSize: 16,
+        },
+        subText: {
+            color: 'gray',
+            fontSize: 14,
+            fontWeight: '200',
+        },
+        column: {
+            flexDirection: 'row',
+            justifyContent: 'flex-start',
+            marginBottom: 5,
+        },
+        nameColumn: {
+            flexDirection: 'row',
+            justifyContent: 'flex-start',
+        },
+        payText: {
+            color: text,
+            fontSize: 18,
+            fontWeight: 'bold',
+        },
+        editRow: {
+            flex: 2,
+            justifyContent: 'flex-start',
         },
     });
 }
