@@ -1,4 +1,4 @@
-import {ColorSchemeName, StyleSheet} from "react-native";
+import {ColorSchemeName, Platform, StyleSheet} from "react-native";
 
 export const buttonColor = 'rgb(72,190,87)';
 export const tintColor = 'rgb(63,164,76)';
@@ -252,6 +252,116 @@ export function getStyle(state:ColorSchemeName){
             margin: '5%',
             marginRight: 0,
             flex: 2,
+        },
+        cardContainer: {
+            backgroundColor: background,
+            borderWidth: 0,
+            flex: 1,
+            margin: 0,
+            padding: 0,
+        },
+        planContainer: {
+            flexDirection: 'row',
+            justifyContent: 'flex-start',
+            marginBottom: 25,
+        },
+        emailContainer: {
+            backgroundColor: background,
+            flex: 1,
+            paddingTop: 30,
+        },
+        headerBackgroundImage: {
+            paddingBottom: 20,
+            paddingTop: 45,
+        },
+        headerContainer: {},
+        headerColumn: {
+            backgroundColor: 'transparent',
+            ...Platform.select({
+                ios: {
+                    alignItems: 'center',
+                    elevation: 1,
+                    marginTop: -1,
+                },
+                android: {
+                    alignItems: 'center',
+                },
+            }),
+        },
+        placeIcon: {
+            color: 'white',
+            fontSize: 26,
+        },
+        scroll: {
+            backgroundColor: background,
+        },
+        userAddressRow: {
+            alignItems: 'center',
+            flexDirection: 'row',
+        },
+        userCityRow: {
+            backgroundColor: 'transparent',
+        },
+        userCityText: {
+            color: '#A5A5A5',
+            fontSize: 15,
+            fontWeight: '600',
+            textAlign: 'center',
+        },
+        userImage: {
+            borderColor: background,
+            borderRadius: 85,
+            borderWidth: 3,
+            height: 170,
+            marginBottom: 15,
+            width: 170,
+        },
+        userNameText: {
+            color: text,
+            fontSize: 22,
+            fontWeight: 'bold',
+            paddingBottom: 8,
+            textAlign: 'center',
+        },
+        iconRow: {
+            flex: 2,
+            justifyContent: 'center',
+        },
+        Icon: {
+            color: 'gray',
+            fontSize: 30,
+        },
+        Row: {
+            flex: 8,
+            flexDirection: 'column',
+            justifyContent: 'center',
+        },
+        Text: {
+            color: text,
+            fontSize: 16,
+        },
+        subText: {
+            color: 'gray',
+            fontSize: 14,
+            fontWeight: '200',
+        },
+        column: {
+            flexDirection: 'row',
+            justifyContent: 'flex-start',
+            marginBottom: 5,
+        },
+        nameColumn: {
+            flexDirection: 'row',
+            justifyContent: 'flex-start',
+        },
+        payText: {
+            color: text,
+            fontSize: 18,
+            fontWeight: 'bold',
+        },
+        editRow: {
+            flex: 2,
+            justifyContent: 'flex-start',
         },
     });
 }

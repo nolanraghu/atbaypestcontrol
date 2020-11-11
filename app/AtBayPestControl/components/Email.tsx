@@ -1,8 +1,12 @@
 import React from 'react'
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import {StyleSheet, Text, TouchableOpacity, useColorScheme, View} from 'react-native'
 import { Icon } from 'react-native-elements'
+import {getStyle, buttonColor, getBackgroundColor} from '../assets/Stylesheets/Styles'
 
 export default function renderItem ({email, index, name, onPressEmail}: renderProps) {
+    const scheme = useColorScheme();
+    let styles = getStyle(scheme);
+
     return (
         <TouchableOpacity onPress={() => onPressEmail(email)}>
             <View style={[styles.container]}>
@@ -11,18 +15,18 @@ export default function renderItem ({email, index, name, onPressEmail}: renderPr
                         <Icon
                             name= 'email'
                             underlayColor = 'transparent'
-                            iconStyle={styles.emailIcon}
+                            iconStyle={styles.Icon}
                             onPress={() => onPressEmail()}
                         />
                     )}
                 </View>
-                <View style={styles.emailRow}>
-                    <View style={styles.emailColumn}>
-                        <Text style={styles.emailText}>{email}</Text>
+                <View style={styles.Row}>
+                    <View style={styles.column}>
+                        <Text style={styles.Text}>{email}</Text>
                     </View>
-                    <View style={styles.emailNameColumn}>
+                    <View style={styles.nameColumn}>
                         {name.length !== 0 && (
-                            <Text style={styles.emailNameText}>{name}</Text>
+                            <Text style={styles.subText}>{name}</Text>
                         )}
                     </View>
                 </View>
@@ -38,40 +42,3 @@ interface renderProps {
     onPressEmail: (email?: string) => void
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flexDirection: 'row',
-        justifyContent: 'flex-start',
-        marginBottom: 25,
-    },
-    emailColumn: {
-        flexDirection: 'row',
-        justifyContent: 'flex-start',
-        marginBottom: 5,
-    },
-    emailIcon: {
-        color: 'gray',
-        fontSize: 30,
-    },
-    emailNameColumn: {
-        flexDirection: 'row',
-        justifyContent: 'flex-start',
-    },
-    emailNameText: {
-        color: 'gray',
-        fontSize: 14,
-        fontWeight: '200',
-    },
-    emailRow: {
-        flex: 8,
-        flexDirection: 'column',
-        justifyContent: 'center',
-    },
-    emailText: {
-        fontSize: 16,
-    },
-    iconRow: {
-        flex: 2,
-        justifyContent: 'center',
-    },
-})
