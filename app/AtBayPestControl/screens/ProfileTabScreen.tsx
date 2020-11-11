@@ -53,7 +53,8 @@ function onPressPlace () {
   console.log('place')
 }
 
-function renderHeader ({avatar = require('../assets/images/profile_picture.jpg'), avatarBackground = require('../assets/images/splash.png'),
+function renderHeader ({avatar = require('../assets/images/profile_picture.jpg'),
+                         avatarBackground = require('../assets/images/splash.png'),
                          name = 'John Doe', city = 'New York', state = 'New York'}: RenderHProps) {
 
   const scheme = useColorScheme();

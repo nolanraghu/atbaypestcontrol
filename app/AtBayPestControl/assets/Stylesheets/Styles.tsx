@@ -9,6 +9,7 @@ const textDark = 'rgb(229,229,229)';
 const onButtonDark = 'rgb(105,105,105)';
 const offButtonDark = 'rgb(60,60,60)';
 const highlightDark = 'lightgreen';
+const fadedTextDark = 'rgb(118,118,118)';
 
 const backgroundLight = 'rgb(236,236,236)';
 const headerLight = 'rgb(245,245,245)';
@@ -16,6 +17,7 @@ const textLight = 'rgb(50,50,50)';
 const onButtonLight = 'white';
 const offButtonLight = 'rgb(231,231,231)';
 const highlightLight = 'rgb(72,190,87)';
+const fadedTextLight = 'rgb(153,153,153)';
 
 export function getBackgroundColor(state:ColorSchemeName){
     if(state === 'dark'){
@@ -35,6 +37,7 @@ export function getStyle(state:ColorSchemeName){
         onButton = onButtonDark;
         offButton = offButtonDark;
         highlight = highlightDark;
+        fadedText = fadedTextDark;
     } else {
         background = backgroundLight;
         header = headerLight;
@@ -42,6 +45,7 @@ export function getStyle(state:ColorSchemeName){
         onButton = onButtonLight;
         offButton = offButtonLight;
         highlight = highlightLight;
+        fadedText = fadedTextLight;
     }
     return StyleSheet.create({
         screen: {
@@ -243,8 +247,7 @@ export function getStyle(state:ColorSchemeName){
             textAlign: 'left',
             margin: '4%',
             marginLeft: 10,
-            color: text,
-            opacity: .45
+            color: fadedText,
         },
         price: {
             textAlign: 'center',
@@ -328,7 +331,7 @@ export function getStyle(state:ColorSchemeName){
             justifyContent: 'center',
         },
         Icon: {
-            color: 'gray',
+            color: fadedText,
             fontSize: 30,
         },
         Row: {
@@ -341,7 +344,7 @@ export function getStyle(state:ColorSchemeName){
             fontSize: 16,
         },
         subText: {
-            color: 'gray',
+            color: fadedText,
             fontSize: 14,
             fontWeight: '200',
         },

@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {Button, ScrollView, StyleSheet, useColorScheme, Text, View} from "react-native";
-// @ts-ignore
 import { useNavigation } from '@react-navigation/native';
 import {buttonColor, getBackgroundColor, getStyle} from "../assets/Stylesheets/Styles";
 import Payment from "../components/Payment";

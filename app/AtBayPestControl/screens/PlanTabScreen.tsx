@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {Image, Pressable, ScrollView, StyleSheet, useColorScheme, Text, View} from 'react-native';
 import {useState} from "react";
-// @ts-ignore
 import {useNavigation} from "@react-navigation/native";
 import {getBackgroundColor, getStyle} from "../assets/Stylesheets/Styles";
 import {noProductText} from "../assets/text/text";
