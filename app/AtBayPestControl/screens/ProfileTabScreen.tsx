@@ -20,8 +20,7 @@ import ShippingLocations from './ShippingLocations';
 import Separator from './Separator'
 
 import { Text, View } from '../components/Themed';
-import { useNavigation } from '@react-navigation/native';
-import {useState} from "react";
+import {getStyle} from "../assets/Stylesheets/Styles";
 
 const EMAIL = [
   [
@@ -66,7 +65,8 @@ const LOC = [
 const PLAN = "Current Plan"
 
 export default function ProfileTabScreen() {
-
+  const scheme = useColorScheme();
+  let styles = getStyle(scheme);
 
   return (
       <ScrollView style={styles.scroll}>
@@ -95,6 +95,8 @@ function onPressPlace () {
 function renderHeader ({avatar = require('../assets/images/profile_picture.jpg'), avatarBackground = require('../assets/images/splash.png'),
                          name = 'John Doe', city = 'New York', state = 'New York'}: RenderHProps) {
 
+  const scheme = useColorScheme();
+  let styles = getStyle(scheme);
   console.log(avatar, avatarBackground)
 
   return (
@@ -142,6 +144,9 @@ interface RenderHProps {
 
 function renderEmail () {
 
+  const scheme = useColorScheme();
+  let styles = getStyle(scheme);
+
   function onPressEmail () {
     console.log('email')
   }
@@ -167,10 +172,12 @@ function renderEmail () {
 
 function renderPlan () {
 
+  const scheme = useColorScheme();
+  let styles = getStyle(scheme);
+
   function onPressPlan () {
     console.log('email')
   }
-
 
   return (
       <View style={styles.emailContainer}>
@@ -194,6 +201,9 @@ function renderPlan () {
 }
 
 function renderPay () {
+
+  const scheme = useColorScheme();
+  let styles = getStyle(scheme);
 
   function onPressPayment () {
     console.log('payed')
@@ -224,6 +234,9 @@ function renderPay () {
 
 function renderLoc () {
 
+  const scheme = useColorScheme();
+  let styles = getStyle(scheme);
+
   let LocationArray = LOC.map(function([location], index) {
     return  <ShippingLocations
         key={location[1]}
@@ -240,101 +253,3 @@ function renderLoc () {
   )
 }
 
-const ionColor = Appearance.getColorScheme() === 'dark'? 'white':'black'
-
-const styles = StyleSheet.create({
-  cardContainer: {
-    backgroundColor: '#FFF',
-    borderWidth: 0,
-    flex: 1,
-    margin: 0,
-    padding: 0,
-  },
-  container: {
-    flex: 1,
-  },
-  planContainer: {
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    marginBottom: 25,
-  },
-  emailContainer: {
-    backgroundColor: '#FFF',
-    flex: 1,
-    paddingTop: 30,
-  },
-  headerBackgroundImage: {
-    paddingBottom: 20,
-    paddingTop: 45,
-  },
-  headerContainer: {},
-  headerColumn: {
-    backgroundColor: 'transparent',
-    ...Platform.select({
-      ios: {
-        alignItems: 'center',
-        elevation: 1,
-        marginTop: -1,
-      },
-      android: {
-        alignItems: 'center',
-      },
-    }),
-  },
-  placeIcon: {
-    color: 'white',
-    fontSize: 26,
-  },
-  scroll: {
-    backgroundColor: '#FFF',
-  },
-  telContainer: {
-    backgroundColor: '#FFF',
-    flex: 1,
-    paddingTop: 30,
-  },
-  userAddressRow: {
-    alignItems: 'center',
-    flexDirection: 'row',
-  },
-  userCityRow: {
-    backgroundColor: 'transparent',
-  },
-  userCityText: {
-    color: '#A5A5A5',
-    fontSize: 15,
-    fontWeight: '600',
-    textAlign: 'center',
-  },
-  userImage: {
-    borderColor: '#FFF',
-    borderRadius: 85,
-    borderWidth: 3,
-    height: 170,
-    marginBottom: 15,
-    width: 170,
-  },
-  userNameText: {
-    color: '#FFF',
-    fontSize: 22,
-    fontWeight: 'bold',
-    paddingBottom: 8,
-    textAlign: 'center',
-  },
-  iconRow: {
-    flex: 2,
-    justifyContent: 'center',
-  },
-  Icon: {
-    color: 'gray',
-    fontSize: 30,
-  },
-  Row: {
-    flex: 8,
-    flexDirection: 'column',
-    justifyContent: 'center',
-  },
-  Text: {
-    fontSize: 16,
-  },
-})
