@@ -24,6 +24,10 @@ import ShippingLocations from '../components/ShippingLocations';
 import Separator from '../components/Separator'
 import {useState} from "react";
 import {EMAIL, LOC, PAY, PLAN} from "../assets/Data/Data";
+import { useNavigation } from '@react-navigation/native';
+import PlanTabScreen from "./PlanTabScreen";
+
+//TODO: make editable, have a situation for no user yet
 
 export default function ProfileTabScreen() {
   const scheme = useColorScheme();
@@ -133,12 +137,12 @@ function renderEmail () {
 }
 
 function renderPlan () {
-
+  const navigation = useNavigation();
   const scheme = useColorScheme();
   let styles = getStyle(scheme);
 
   function onPressPlan () {
-    console.log('email')
+    navigation.navigate("PlanTabScreen")
   }
 
   return (
