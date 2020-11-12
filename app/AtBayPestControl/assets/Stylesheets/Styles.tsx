@@ -6,16 +6,16 @@ export const tintColor = 'rgb(63,164,76)';
 const backgroundDark = 'rgb(27,27,27)';
 const headerDark = 'rgb(50,50,50)';
 const textDark = 'rgb(229,229,229)';
-const onButtonDark = 'rgb(105,105,105)';
-const offButtonDark = 'rgb(60,60,60)';
+const buttonDark = 'rgb(105,105,105)';
+const fadedItemDark = 'rgb(60,60,60)';
 const highlightDark = 'lightgreen';
 const fadedTextDark = 'rgb(118,118,118)';
 
 const backgroundLight = 'rgb(236,236,236)';
 const headerLight = 'rgb(245,245,245)';
 const textLight = 'rgb(50,50,50)';
-const onButtonLight = 'white';
-const offButtonLight = 'rgb(231,231,231)';
+const buttonLight = 'white';
+const fadedItemLight = 'rgb(231,231,231)';
 const highlightLight = 'rgb(72,190,87)';
 const fadedTextLight = 'rgb(153,153,153)';
 
@@ -28,22 +28,22 @@ export function getBackgroundColor(state:ColorSchemeName){
 }
 
 export function getStyle(state:ColorSchemeName){
-    let background, header, text, onButton, offButton, highlight, fadedText
+    let background, header, text, button, fadedItem, highlight, fadedText
 
     if(state === 'dark'){
         background = backgroundDark;
         header = headerDark;
         text = textDark;
-        onButton = onButtonDark;
-        offButton = offButtonDark;
+        button = buttonDark;
+        fadedItem = fadedItemDark;
         highlight = highlightDark;
         fadedText = fadedTextDark;
     } else {
         background = backgroundLight;
         header = headerLight;
         text = textLight;
-        onButton = onButtonLight;
-        offButton = offButtonLight;
+        button = buttonLight;
+        fadedItem = fadedItemLight;
         highlight = highlightLight;
         fadedText = fadedTextLight;
     }
@@ -84,7 +84,7 @@ export function getStyle(state:ColorSchemeName){
             margin: '3%',
             marginBottom: '3.5%',
             aspectRatio: 3,
-            backgroundColor: onButton,
+            backgroundColor: button,
             borderRadius: 20,
             justifyContent: "center",
             flexDirection: "row",
@@ -98,36 +98,7 @@ export function getStyle(state:ColorSchemeName){
             width: '39%',
             margin: '5.5%',
             aspectRatio: 1,
-            backgroundColor: onButton,
-            borderRadius: 20,
-            justifyContent: "center",
-            flexDirection: "column",
-            shadowColor: 'black',
-            shadowOffset: { width: 0, height: 2 },
-            shadowOpacity: 0.5,
-            shadowRadius: 2,
-            elevation: 4,
-        },
-        fullButtonOff: {
-            width: '39%',
-            margin: '5.5%',
-            aspectRatio: 1,
-            backgroundColor: offButton,
-            borderRadius: 20,
-            justifyContent: "center",
-            flexDirection: "column",
-            shadowColor: 'rgb(0,0,0)',
-            shadowOffset: { width: 0, height: 2 },
-            shadowOpacity: 0.5,
-            shadowRadius: 2,
-            elevation: 4,
-            opacity: .8,
-        },
-        fullButtonPending: {
-            width: '39%',
-            margin: '5.5%',
-            aspectRatio: 1,
-            backgroundColor: offButton,
+            backgroundColor: button,
             borderRadius: 20,
             justifyContent: "center",
             flexDirection: "column",
@@ -138,14 +109,44 @@ export function getStyle(state:ColorSchemeName){
             elevation: 4,
             borderWidth: 2.5,
             borderColor: highlight,
-            opacity: .8
+        },
+        fullButtonOff: {
+            width: '39%',
+            margin: '5.5%',
+            aspectRatio: 1,
+            backgroundColor: button,
+            borderRadius: 20,
+            justifyContent: "center",
+            flexDirection: "column",
+            shadowColor: 'rgb(0,0,0)',
+            shadowOffset: { width: 0, height: 2 },
+            shadowOpacity: 0.5,
+            shadowRadius: 2,
+            elevation: 4,
+        },
+        fullButtonPending: {
+            width: '39%',
+            margin: '5.5%',
+            aspectRatio: 1,
+            backgroundColor: button,
+            borderRadius: 20,
+            justifyContent: "center",
+            flexDirection: "column",
+            shadowColor: 'black',
+            shadowOffset: { width: 0, height: 2 },
+            shadowOpacity: 0.5,
+            shadowRadius: 2,
+            elevation: 4,
+            borderWidth: 2.5,
+            borderColor: highlight,
+            borderStyle: 'dashed'
         },
         preventionButtonOff: {
             width: '89%',
             margin: '5.5%',
             marginBottom: '9%',
             aspectRatio: 3,
-            backgroundColor: offButton,
+            backgroundColor: button,
             borderRadius: 20,
             justifyContent: "center",
             flexDirection: "row-reverse",
@@ -154,14 +155,13 @@ export function getStyle(state:ColorSchemeName){
             shadowOpacity: 0.5,
             shadowRadius: 2,
             elevation: 4,
-            opacity: .8,
         },
         preventionButtonOn: {
             width: '89%',
             margin: '5.5%',
             marginBottom: '9%',
             aspectRatio: 3,
-            backgroundColor: onButton,
+            backgroundColor: button,
             borderRadius: 20,
             justifyContent: "center",
             flexDirection: "row-reverse",
@@ -170,13 +170,15 @@ export function getStyle(state:ColorSchemeName){
             shadowOpacity: 0.5,
             shadowRadius: 2,
             elevation: 4,
+            borderWidth: 2.5,
+            borderColor: highlight,
         },
         preventionButtonPending: {
             width: '89%',
             margin: '5.5%',
             marginBottom: '9%',
             aspectRatio: 3,
-            backgroundColor: offButton,
+            backgroundColor: button,
             borderRadius: 20,
             justifyContent: "center",
             flexDirection: "row-reverse",
@@ -187,7 +189,7 @@ export function getStyle(state:ColorSchemeName){
             elevation: 4,
             borderWidth: 2.5,
             borderColor: highlight,
-            opacity: .8
+            borderStyle: 'dotted'
         },
         buttonImage: {
             flex: 1,
