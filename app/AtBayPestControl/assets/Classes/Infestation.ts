@@ -6,14 +6,18 @@
 //  a url? Or is it stored in the www folder and then updates itself?
 
 class Infestation {
+    // We should use id's so we can find them in the database, everything else should be accessed from the database
+    // using accessor functions, probably. Just in case we need it for local changes or something, I've included other
+    // examples
+    private id: number
     // I don't think we want to directly get any of this because we want it to be accessed from the database.
     // There will probably not be many of these
-    private name: string
-    //? = optional
+    private name?: string
+    // ? = optional
     private image?: object
     private productList?: Product[]
-    constructor(name: string, productList?: Product[]){
-        this.name = name
+    constructor(id:number, productList?: Product[]){
+        this.id = id;
         this.image = require('../images/ant.png')
     }
 
@@ -23,7 +27,7 @@ class Infestation {
         return this.productList
     }
 
-    // See I don't use this in this one
+    // See I don't use 'this' in this one
     getImage(){
         return require('../images/ant.png')
     }
