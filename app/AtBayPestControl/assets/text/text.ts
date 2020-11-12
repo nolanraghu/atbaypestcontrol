@@ -1,2 +1,6 @@
-export const appName = "AtBay Pest Control";
-export const noProductText = "Nothing here yet! Go to the packages page to start adding products to your plan!";
+export function appName(){
+    return "AtBay Pest Control";
+}
+export function noProductText(){
+    return "Nothing here yet! Go to the packages page to start adding products to your plan!";
+}

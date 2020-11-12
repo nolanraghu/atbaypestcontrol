@@ -13,12 +13,12 @@ function PlanTabNavigator() {
             <PlanTabStack.Screen
                 name="PlanTabScreen"
                 component={PlanTabScreen}
-                options={{headerTitle: appName}}
+                options={{headerTitle: appName()}}
             />
             <PlanTabStack.Screen
                 name="PlanProductPopup" /*try saying that five times fast*/
                 component={PlanProductPopup}
-                options={{headerTitle: appName}}
+                options={{headerTitle: appName()}}
             />
         </PlanTabStack.Navigator>
     );

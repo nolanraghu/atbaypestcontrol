@@ -94,7 +94,7 @@ export default function PlanTabScreen() {
   };
 
   let productsArray = PDATA.length == 0?
-      noProductText :
+      noProductText() :
       PDATA.map(function(item, index){
         return (<ProductItem item={item} key={index}/>)
       })

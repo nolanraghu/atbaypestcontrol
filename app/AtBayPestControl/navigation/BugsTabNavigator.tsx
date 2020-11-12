@@ -14,17 +14,17 @@ function BugsTabNavigator() {
             <BugsTabStack.Screen
                 name="BugsTabScreen"
                 component={BugsTabScreen}
-                options={{ headerTitle: appName}}
+                options={{ headerTitle: appName()}}
             />
             <BugsTabStack.Screen
                 name="BugInfoPopupScreen"
                 component={BugInfoPopup}
-                options={{ headerTitle: appName}}
+                options={{ headerTitle: appName()}}
             />
             <BugsTabStack.Screen
                 name="PlanUpdatePopupScreen"
                 component={UpdatePlanPopup}
-                options={{ headerTitle: appName}}
+                options={{ headerTitle: appName()}}
             />
         </BugsTabStack.Navigator>);
 }
