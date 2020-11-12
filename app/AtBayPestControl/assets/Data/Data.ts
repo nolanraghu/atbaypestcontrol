@@ -41,5 +41,5 @@ export const LOC = [
 export const PLAN = "Current Plan"
 
 export function getBugsList(){
-    return new Infestation("ant")
+    return new Infestation(1)
 }
