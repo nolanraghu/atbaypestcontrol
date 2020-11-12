@@ -1,8 +1,6 @@
 import * as React from 'react';
 import {
-    Button,
     ScrollView,
-    StyleSheet,
     useColorScheme,
     Text,
     View
@@ -10,13 +8,10 @@ import {
 
 import {getProductInfo} from "../controller/ProductPulling"
 import CaptionImage from "../components/CaptionImage";
-import {buttonColor, getStyle} from "../assets/Stylesheets/Styles";
-import {getBugInfo} from "../controller/BugPulling";
+import {getStyle} from "../assets/Stylesheets/Styles";
 
 
-
-//@ts-ignore
-const PlanProductPopup = ({route, navigation}) => {
+export default function PlanProductPopup({route, navigation}:any){
     const {prodId} = route.params;
     let prodInfo = getProductInfo(prodId);
     const scheme = useColorScheme();
@@ -35,5 +30,3 @@ const PlanProductPopup = ({route, navigation}) => {
         </View>
     );
 };
-
-export default PlanProductPopup;

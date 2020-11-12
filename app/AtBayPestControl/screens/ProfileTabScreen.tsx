@@ -1,28 +1,19 @@
 import * as React from 'react';
-import { Ionicons } from '@expo/vector-icons';
-import {Component} from 'react';
 import {Card, Icon} from 'react-native-elements';
 import {
-  Button,
-  Pressable,
   ScrollView,
-  StyleSheet,
-  Appearance,
   useColorScheme,
   ImageBackground,
-  Platform,
   Image,
-  Linking,
   TouchableOpacity,
     Text,
     View
 } from 'react-native';
-import {getStyle, buttonColor, getBackgroundColor} from '../assets/Stylesheets/Styles'
+import {getStyle} from '../assets/Stylesheets/Styles'
 import Email from '../components/Email'
 import Payment from '../components/Payment'
 import ShippingLocations from '../components/ShippingLocations';
 import Separator from '../components/Separator'
-import {useState} from "react";
 import {EMAIL, LOC, PAY, PLAN} from "../assets/Data/Data";
 import { useNavigation } from '@react-navigation/native';
 import PlanTabScreen from "./PlanTabScreen";
@@ -40,7 +31,6 @@ export default function ProfileTabScreen() {
             {renderHeader({})}
             {renderEmail()}
             {Separator()}
-            {/*<Text style={styles.userCityText}></Text>*/}
             {renderPlan()}
             {Separator()}
             {renderLoc()}

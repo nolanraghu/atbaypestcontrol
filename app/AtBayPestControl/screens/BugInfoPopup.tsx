@@ -6,14 +6,11 @@ import {
     Text,
     View
 } from "react-native";
-import {getStyle, buttonColor, getBackgroundColor} from '../assets/Stylesheets/Styles';
+import {getStyle, buttonColor} from '../assets/Stylesheets/Styles';
 import {getBugInfo} from "../controller/BugPulling";
 import CaptionImage from "../components/CaptionImage";
 
-//TODO: Fix how everything shifts up, fix colors
-
-//@ts-ignore
-export default function BugInfoPopup({route, navigation}) {
+export default function BugInfoPopup({route, navigation}: any) {
     const {bugId} = route.params;
     const bugInfo = getBugInfo(bugId);
     const scheme = useColorScheme();

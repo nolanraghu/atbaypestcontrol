@@ -1,11 +1,10 @@
 import * as React from 'react';
-import {Image, Pressable, ScrollView, StyleSheet, useColorScheme, Text, View} from 'react-native';
-import {useState} from "react";
+import {Image, Pressable, ScrollView, useColorScheme, Text, View} from 'react-native';
 import {useNavigation} from "@react-navigation/native";
 import {getBackgroundColor, getStyle} from "../assets/Stylesheets/Styles";
 import {noProductText} from "../assets/text/text";
 
-const PDATA = [
+const PDATA: productInterface[] = [
   {
     id: "p1",
     title: "Product 1",
@@ -56,8 +55,7 @@ interface productInterface{
 // Make it so it can render overflowing text (Expand?)
 
 
-// @ts-ignore
-function ProductItem({item}) {
+function ProductItem({item}: any) {
   const navigation = useNavigation();
   const scheme = useColorScheme();
   let styles = getStyle(scheme);
@@ -79,19 +77,19 @@ function ProductItem({item}) {
 
 
 export default function PlanTabScreen() {
-  const navigation = useNavigation();
+  //const navigation = useNavigation();
 
-  const [expandedId, setExpandedId] = useState("");
+  // const [expandedId, setExpandedId] = useState("");
   const scheme = useColorScheme();
   const styles = getStyle(scheme);
 
-  const toggleSelected = (id: React.SetStateAction<string>) => {
-    if(expandedId == id){
-      setExpandedId("");
-    } else {
-      setExpandedId(id);
-    }
-  };
+  // const toggleSelected = (id: React.SetStateAction<string>) => {
+  //   if(expandedId == id){
+  //     setExpandedId("");
+  //   } else {
+  //     setExpandedId(id);
+  //   }
+  // };
 
   let productsArray = PDATA.length == 0?
       noProductText() :
