@@ -1,3 +1,6 @@
+import Infestation from "../Classes/Infestation";
+import User from "../Classes/User";
+
 export const EMAIL = [
     [
         "1",
@@ -41,5 +44,12 @@ export const LOC = [
 export const PLAN = "Current Plan"
 
 export function getBugsList(){
-    return new Infestation(1)
+    //TODO
+    const bug1 = new Infestation(0);
+    return [bug1]
+}
+
+export function getUser(){
+    //TODO
+    return new User()
 }
