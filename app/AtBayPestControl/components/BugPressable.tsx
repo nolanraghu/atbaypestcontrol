@@ -30,7 +30,7 @@ export default function BugPressable({bug}: bugProps){
     return(
         <Pressable style={getPressStyle(user.getPlan().getButtonStatus(bug), bug.isPreventionPlan())}
                    onPress={()=> navigation.navigate('BugInfoPopupScreen', {
-                       infestation: bug
+                       infestationID: bug.getID()
                    })}
                    android_ripple= {{color: getBackgroundColor(scheme)}}>
 

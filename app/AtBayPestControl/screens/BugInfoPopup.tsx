@@ -9,14 +9,15 @@ import {
 import {getStyle, buttonColor} from '../assets/Stylesheets/Styles';
 import CaptionImage from "../components/CaptionImage";
 import {useState} from "react";
-import {getUser} from "../assets/Data/Data";
+import {getBugsList, getUser} from "../assets/Data/Data";
 import {noInfestationProductText, productEquipmentText} from "../assets/text/text";
 import Equipment from "../assets/Classes/Equipment";
 import Product from "../assets/Classes/Product";
 
 
 export default function BugInfoPopup({route, navigation}: any) {
-    const {infestation} = route.params;
+    const {infestationID} = route.params;
+    const infestation = getBugsList()[infestationID]
     const [user, updateUser] = useState(getUser())
     const scheme = useColorScheme();
     let styles = getStyle(scheme);
@@ -57,9 +58,6 @@ export default function BugInfoPopup({route, navigation}: any) {
             return retVal;
         })
     }
-
-
-
 
     return(
         <View style={styles.screen}>

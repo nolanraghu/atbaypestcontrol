@@ -17,22 +17,21 @@ export default class Infestation {
         // implement it in Data.ts I suppose
         this.id = id;
     }
-
+    getID = () => {
+        return this.id;
+    }
     isPreventionPlan = () => {
         return this.id == 0
     }
-
     //Gets the image source for the bug
     getBugImage = () => {
         //TODO
         return require('../images/honey_bee.png')
     }
-
     getBugName = () => {
         //TODO
         return 'Honeybee'
     }
-
     getBugDescription = () => {
         //TODO
         return 'Now, let me tell you about bees.....Now, let me tell you about bees.....Now, let me tell you ' +
