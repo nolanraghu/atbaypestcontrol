@@ -50,4 +50,8 @@ export default class Infestation {
         //TODO
         return [this.product1, this.product2];
     }
+    getPrice = ():number => {
+        //TODO
+        return 3.99
+    }
 }

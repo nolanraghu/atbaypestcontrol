@@ -12,6 +12,7 @@ export default function BugPressable({bug}: bugProps){
     const user = getUser();
 
     const getPressStyle = (stateString: string, preventionButton: boolean) => {
+        //Add case PendingRemoval
         switch (stateString){
             case 'off':
                 return (preventionButton? styles.preventionButtonOff: styles.fullButtonOff);

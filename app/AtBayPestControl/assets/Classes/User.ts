@@ -20,10 +20,12 @@ export default class User {
     }
     hasEquipment = (equipment:Equipment) => {
         //TODO
-        return false;
-
+        return true;
     }
     removeEquipment = (equipment:Equipment) => {
+        //TODO
+    }
+    addEquipment = (equipment:Equipment) => {
         //TODO
     }
 }
