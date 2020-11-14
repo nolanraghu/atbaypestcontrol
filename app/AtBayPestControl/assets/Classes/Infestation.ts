@@ -5,30 +5,49 @@
 //  an error? That's what I think it should be? Which brings up my question about the database. Is the database at
 //  a url? Or is it stored in the www folder and then updates itself?
 
-class Infestation {
+import Product from "./Product";
+
+export default class Infestation {
     // We should use id's so we can find them in the database, everything else should be accessed from the database
     // using accessor functions, probably. Just in case we need it for local changes or something, I've included other
     // examples
     private id: number
-    // I don't think we want to directly get any of this because we want it to be accessed from the database.
-    // There will probably not be many of these
-    private name?: string
-    // ? = optional
-    private image?: object
-    private productList?: Product[]
-    constructor(id:number, productList?: Product[]){
+    product1 = new Product(0);
+    product2 = new Product(2);
+    constructor(id:number){
+        //TODO: ideally we probably don't need the id in the constructor? Depends on how we
+        // implement it in Data.ts I suppose
         this.id = id;
-        this.image = require('../images/ant.png')
+    }
+    getID = () => {
+        return this.id;
+    }
+    isPreventionPlan = () => {
+        return this.id == 0
+    }
+    //Gets the image source for the bug
+    getBugImage = () => {
+        //TODO
+        return require('../images/honey_bee.png')
+    }
+    getBugName = () => {
+        //TODO
+        return 'Honeybee'
+    }
+    getBugDescription = () => {
+        //TODO
+        return 'Now, let me tell you about bees.....Now, let me tell you about bees.....Now, let me tell you ' +
+            'about bees.....Now, let me tell you about bees.....Now, let me tell you about bees.....Now, let ' +
+            'me tell you about bees.....Now, let me tell you about bees.....Now, let me tell you about bees...' +
+            '..Now, let me tell you about bees.....Now, let me tell you about bees.....Now, let me tell you about ' +
+            'bees.....Now, let me tell you about bees.....Now, let me tell you about bees.....Now, let me tell you ' +
+            'about bees.....Now, let me tell you about bees.....Now, let me tell you about bees.....Now, let me ' +
+            'tell you about bees.....Now, let me tell you about bees.....Now, let me tell you about bees.....Now, ' +
+            'let me tell you about bees.....'
     }
 
-    // There's a reason I did it this way; Otherwise, if you call getProductList within an object,
-    // 'this' will refer to that object. Stupid javascript. You don't have to do this if you aren't using 'this'
-    getProductList = () => {
-        return this.productList
-    }
-
-    // See I don't use 'this' in this one
-    getImage(){
-        return require('../images/ant.png')
+    getProducts = () => {
+        //TODO
+        return [this.product1, this.product2];
     }
 }

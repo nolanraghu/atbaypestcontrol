@@ -1,27 +1,23 @@
 import * as React from 'react';
-import {Button, Image, Pressable, ScrollView, useColorScheme, Text, View} from 'react-native';
+import {Button, ScrollView, useColorScheme, Text, View} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import {getStyle, buttonColor, getBackgroundColor} from '../assets/Stylesheets/Styles'
-import {getBugInfo} from "../controller/BugPulling";
-
-const bugsData = [
-        {bId: "b1", state: 'on', isPreventionButton: true},
-    {bId: "b2", state: 'on', isPreventionButton: false},
-    {bId: "b3", state: 'off', isPreventionButton: false},
-    {bId: "b4", state: 'pending', isPreventionButton: false},
-    {bId: "b5", state: 'pending', isPreventionButton: false},
-    {bId: "b6", state: 'off', isPreventionButton: false},
-    {bId: "b7", state: 'off', isPreventionButton: false},
-    {bId: "b8", state: 'off', isPreventionButton: false},
-]
+import {getStyle, buttonColor} from '../assets/Stylesheets/Styles'
+import BugPressable from "../components/BugPressable";
+import {getBugsList, getUser} from "../assets/Data/Data";
 
 export default function BugsTabScreen() {
     const navigation = useNavigation();
   const scheme = useColorScheme();
   let styles = getStyle(scheme);
+  const user = getUser()
+    // This might be a terrible way to do it, but this gets the bugs in order, from prevention plan,
+    // to added infestations, to other infestations
+    let bugs = [getBugsList()[0]].concat(
+        user.getPlan().getInfestations().concat(
+            user.getPlan().getOtherInfestations()))
 
-  let bugPressArray = bugsData.map(function({bId, state, isPreventionButton}, index){
-    return <BugPressable bId={bId}  state={state} isPreventionButton={isPreventionButton} key={index}/>
+  let bugPressArray = bugs.map(function(bug, index){
+    return <BugPressable bug={bug} key={index}/>
   })
 
   return (
@@ -42,44 +38,4 @@ export default function BugsTabScreen() {
         </ScrollView>
       </View>
   );
-}
-
-
-
-function BugPressable({bId, state = 'off', isPreventionButton = false}: BugPressProps){
-    const thisBugData = getBugInfo(bId);
-    const navigation = useNavigation();
-    const scheme = useColorScheme();
-    let styles = getStyle(scheme);
-
-  const getPressStyle = (stateString: string, preventionButton: boolean = false) => {
-    switch (stateString){
-      case 'off':
-        return (preventionButton? styles.preventionButtonOff: styles.fullButtonOff);
-      case 'on':
-        return (preventionButton? styles.preventionButtonOn: styles.fullButtonOn);
-      case 'pending':
-        return (preventionButton? styles.preventionButtonPending: styles.fullButtonPending);
-    }
-  }
-
-  return(
-      <Pressable style={getPressStyle(state, isPreventionButton)}
-                 onPress={()=> navigation.navigate('BugInfoPopupScreen', {
-                     bugId: bId,
-                 })}
-                 android_ripple= {{color: getBackgroundColor(scheme)}}>
-
-        <Image source={thisBugData.image} style={styles.buttonImage}/>
-        <Text style={isPreventionButton? styles.preventionText : styles.fullText}>{thisBugData.name}</Text>
-
-      </Pressable>
-  );
-}
-
-//This is where all the parameters for the BugPressable go
-interface BugPressProps {
-  bId: string,
-  state?: string,
-  isPreventionButton?: boolean
 }

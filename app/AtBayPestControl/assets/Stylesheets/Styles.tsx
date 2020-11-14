@@ -224,6 +224,10 @@ export function getStyle(state:ColorSchemeName){
             flexDirection: 'row',
             flexWrap: 'wrap',
         },
+        link:{
+            color: highlight,
+            textDecorationLine: 'underline'
+        },
         caption: {
             textAlign: 'left',
             margin: '4%',
