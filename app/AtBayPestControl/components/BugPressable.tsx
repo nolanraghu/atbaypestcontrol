@@ -2,19 +2,14 @@ import {useNavigation} from "@react-navigation/native";
 import {Image, Pressable, Text, useColorScheme} from "react-native";
 import {getBackgroundColor, getStyle} from "../assets/Stylesheets/Styles";
 import * as React from "react";
-import {useState} from "react";
 import {getUser} from "../assets/Data/Data";
-import Equipment from "../assets/Classes/Equipment";
-import Product from "../assets/Classes/Product";
 import Infestation from "../Assets/Classes/Infestation";
-import User from "../Assets/Classes/User";
-import Plan from "../Assets/Classes/Plan";
 
 export default function BugPressable({bug}: bugProps){
     const navigation = useNavigation();
     const scheme = useColorScheme();
     let styles = getStyle(scheme);
-    const [user, updateUser] = useState(getUser())
+    const user = getUser();
 
     const getPressStyle = (stateString: string, preventionButton: boolean) => {
         switch (stateString){

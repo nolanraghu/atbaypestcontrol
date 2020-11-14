@@ -44,13 +44,19 @@ export const LOC = [
 export const PLAN = "Current Plan"
 
 const bug1 = new Infestation(0);
+const user = new User()
 
 export function getBugsList(){
     //TODO
-    return [bug1]
+    return [bug1];
+}
+
+export function getBugByID(id: number){
+    //TODO
+    return bug1;
 }
 
 export function getUser(){
     //TODO
-    return new User()
+    return user;
 }

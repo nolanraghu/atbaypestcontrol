@@ -7,23 +7,19 @@
 // customer does
 
 import Infestation from "./Infestation";
+import Product from "./Product";
 
 export default class Plan {
     private id: number
     constructor(id:number){
         this.id = id;
     }
-
     containsInfestation = (bug:Infestation) => {
-        // TODO
         return false;
     }
-
     isPendingInfestation = (bug:Infestation) => {
-        //TODO
         return false;
     }
-
     getButtonStatus = (bug:Infestation) => {
         if (this.containsInfestation(bug)){
             return 'on'
@@ -32,5 +28,19 @@ export default class Plan {
         } else {
             return 'off'
         }
+    }
+    getInfestations = ():Infestation[] => {
+        return []
+    }
+    getPendingInfestations = ():Infestation[] => {
+        return []
+    }
+    getOtherInfestations = ():Infestation[] => {
+        //This includes Pending Infestations
+        return []
+    }
+    getProducts = ():Product[] => {
+        //TODO
+        return []
     }
 }

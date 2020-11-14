@@ -3,6 +3,7 @@
 // Also the user information will determine all the state details of the app
 
 import Plan from "./Plan";
+import Equipment from "./Equipment";
 
 export default class User {
     // If this is 0, that should mean they haven't made an account yet
@@ -16,5 +17,13 @@ export default class User {
     getPlan = () => {
         //TODO
         return new Plan(0)
+    }
+    hasEquipment = (equipment:Equipment) => {
+        //TODO
+        return false;
+
+    }
+    removeEquipment = (equipment:Equipment) => {
+        //TODO
     }
 }

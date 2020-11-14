@@ -12,6 +12,8 @@ export default class Infestation {
     // using accessor functions, probably. Just in case we need it for local changes or something, I've included other
     // examples
     private id: number
+    product1 = new Product(0);
+    product2 = new Product(2);
     constructor(id:number){
         //TODO: ideally we probably don't need the id in the constructor? Depends on how we
         // implement it in Data.ts I suppose
@@ -45,9 +47,7 @@ export default class Infestation {
     }
 
     getProducts = () => {
-        let product1 = new Product(0);
-        let product2 = new Product(2)
         //TODO
-        return [product1, product2];
+        return [this.product1, this.product2];
     }
 }

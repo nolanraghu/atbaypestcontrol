@@ -1,5 +1,5 @@
-import {Image, NativeSyntheticEvent, Pressable, TextLayoutEventData, useColorScheme, Text, View} from "react-native";
-import {getBackgroundColor, getStyle} from "../assets/Stylesheets/Styles";
+import {Image, NativeSyntheticEvent, TextLayoutEventData, useColorScheme, Text, View} from "react-native";
+import {getStyle} from "../assets/Stylesheets/Styles";
 import {useState} from "react";
 import * as React from "react";
 
@@ -58,5 +58,5 @@ export default function CaptionImage({source, text = 'information'}: CaptionImag
 
 interface CaptionImageProps{
     source: object
-    text?: string
+    text?: string | any
 }

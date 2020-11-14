@@ -5,6 +5,7 @@ import Equipment from "./Equipment";
 
 export default class Product{
     id: number
+    equipment1 = new Equipment(0)
     constructor(id: number){
         this.id = id
     }
@@ -21,7 +22,6 @@ export default class Product{
     }
 
     equipmentList = () => {
-        let equipment1 = new Equipment(0)
-        return [equipment1];
+        return [this.equipment1];
     }
 }
