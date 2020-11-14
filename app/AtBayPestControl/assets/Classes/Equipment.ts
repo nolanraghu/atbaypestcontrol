@@ -18,4 +18,8 @@ export default class Equipment {
         //TODO
         return 'Sprayer'
     }
+    getPrice = () => {
+        //TODO
+        return 3.00
+    }
 }

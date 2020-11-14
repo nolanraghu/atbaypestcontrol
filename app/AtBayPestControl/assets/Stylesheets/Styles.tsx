@@ -27,6 +27,14 @@ export function getBackgroundColor(state:ColorSchemeName){
     }
 }
 
+export function getOffButtonColor(state:ColorSchemeName){
+    if(state === 'dark'){
+        return fadedItemDark;
+    } else {
+        return fadedItemLight;
+    }
+}
+
 export function getStyle(state:ColorSchemeName){
     let background, header, text, button, fadedItem, highlight, fadedText
 

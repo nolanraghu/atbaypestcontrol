@@ -10,6 +10,8 @@ import {getProductInfo} from "../controller/ProductPulling"
 import CaptionImage from "../components/CaptionImage";
 import {getStyle} from "../assets/Stylesheets/Styles";
 
+//TODO: Add button in header that allows you to repurchase the product before you would normally receive it. Add
+// the equipment views, and allow the user to repurchase lost equipment.
 
 export default function PlanProductPopup({route, navigation}:any){
     const {prodId} = route.params;

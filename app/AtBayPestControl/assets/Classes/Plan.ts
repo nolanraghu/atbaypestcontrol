@@ -15,10 +15,22 @@ export default class Plan {
         this.id = id;
     }
     containsInfestation = (bug:Infestation) => {
+        //TODO
         return false;
     }
     isPendingInfestation = (bug:Infestation) => {
+        //TODO
         return false;
+    }
+    isPendingRemoval = (bug:Infestation) => {
+        //TODO
+        return false;
+    }
+    isRemovable = (bug:Infestation) => {
+        // False if this infestation cannot be removed (ex. if you have to pay for at least three months
+        // once you get the package)
+        // TODO
+        return true;
     }
     getButtonStatus = (bug:Infestation) => {
         if (this.containsInfestation(bug)){
@@ -30,9 +42,13 @@ export default class Plan {
         }
     }
     getInfestations = ():Infestation[] => {
+        //  returns a list of the infestations that are part of the user's plan
+        //TODO
         return []
     }
     getPendingInfestations = ():Infestation[] => {
+        // returns a list of the infestations that are pending
+        // TODO
         return []
     }
     getOtherInfestations = ():Infestation[] => {
@@ -42,5 +58,9 @@ export default class Plan {
     getProducts = ():Product[] => {
         //TODO
         return []
+    }
+    getNewPrice = ():number => {
+        // Returns the new price of the plan, with the pending additions and deletions
+        return 10.99
     }
 }
