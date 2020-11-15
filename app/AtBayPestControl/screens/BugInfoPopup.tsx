@@ -23,7 +23,8 @@ import Product from "../assets/Classes/Product";
 import Infestation from "../assets/Classes/Infestation";
 
 //TODO: Test this screen a lot! Example cases: what if an infestation is pending and then you realize you are missing
-// some of the equipment? Or if you are removing an infestation, but you click on missing equipment?
+// some of the equipment? Or if you are removing an infestation, but you click on missing equipment? What happens when
+// the products are changed and someone who already owns that infestation with changed details goes back into the app?
 
 
 export default function BugInfoPopup({route, navigation}: any) {
@@ -42,8 +43,10 @@ export default function BugInfoPopup({route, navigation}: any) {
     const adding = !(user.getPlan().containsInfestation(infestation) ||
         user.getPlan().isPendingInfestation(infestation))
 
-    // True if you are getting missing equipment for an infestation on your plan
-    const [purchasing, setPurchasing] = useState(false);
+    // The number of MISSING equipment for the infestation you will be purchasing
+    const [numPurchasing, setPurchasing] = useState(0);
+    // True if you will be purchasing MISSING equipment (equipment once owned)
+    const purchasing = numPurchasing != 0;
 
     //False if the user is not allowed to remove the infestation from their plan
     const canRemove = user.getPlan().isRemovable(infestation)
@@ -76,13 +79,13 @@ export default function BugInfoPopup({route, navigation}: any) {
                             if (ownedEquipment.has(item)){
                                 ownedEquipment.get(item).push(product);
                             } else {
-                                ownedEquipment.set(item, [product])
+                                ownedEquipment.set(item, [product]);
                             }
                         } else {
                             if (newEquipment.has(item)){
                                 newEquipment.get(item).push(product);
                             } else {
-                                newEquipment.set(item, [product])
+                                newEquipment.set(item, [product]);
                             }
                         }
                     }
@@ -121,18 +124,22 @@ export default function BugInfoPopup({route, navigation}: any) {
         // Makes a list of all the equipment
         equipmentList.forEach(function(products,equipment){
             price += equipment.getPrice();
+            let onceOwned = user.hadEquipment(equipment);
 
             let link = (text:string) => {
                 return(
                     <Text style={styles.link}
                           onPress={()=>{
-                              // TODO: Just realized this needs to be undoable... need to add a link for unowned
-                              //  equipment that they have received, just in case they accidentally clicked the link
-                              user.removeEquipment(equipment);
+                              if (onceOwned){
+                                  user.addHasEquipment(equipment);
+                                  setPurchasing(numPurchasing - 1);
+                              } else {
+                                  user.removeEquipment(equipment);
 
-                              // Now we'll be purchasing equipment, which will change the text if we are not
-                              // adding to the plan
-                              setPurchasing(true);
+                                  // Now we'll be purchasing equipment, which will change the text if we are not
+                                  // adding to the plan
+                                  setPurchasing(numPurchasing + 1);
+                              }
 
                               // This makes the screen re-render
                               update(i + 1)
@@ -143,7 +150,7 @@ export default function BugInfoPopup({route, navigation}: any) {
 
             //This adds the equipment and description to the return array
             imageList.push(<CaptionImage source={equipment.getEquipmentImage()}
-                                         text={equipmentDescription(equipment, products, owned, link)}
+                                         text={equipmentDescription(equipment, products, owned, link, onceOwned)}
                                          key={keys++}/>)
         })
 
@@ -153,8 +160,20 @@ export default function BugInfoPopup({route, navigation}: any) {
 
     function pressButton(){
         // The button should do nothing if you cannot remove, add to plan, or purchase equipment
+        // TODO: if the main BugsTab screen doesn't update after this button is pushed (once the classes are working),
+        //  it needs to be refreshed from here somehow, probably by passing a prop to navigate or adding [i, update]
+        //  to BugsTabScreen
         if(canRemove || adding || purchasing){
-            //TODO
+            if (adding) {
+                user.getPlan().addPendingAddition(infestation);
+            }
+            if (newEquipment.size != 0){
+                newEquipment.forEach(( products, equipment) => {
+                    user.addEquipment(equipment);
+                })
+            } else if(!adding) {
+                user.getPlan().addPendingRemoval(infestation)
+            }
             navigation.navigate('BugsTabScreen')
         }
     }
@@ -170,6 +189,8 @@ export default function BugInfoPopup({route, navigation}: any) {
     return(
         <View style={styles.screen}>
             <View style={styles.header}>
+                {/*TODO: sometimes the title is too big and it pushes the button to the next line. I'd rather the
+                title go to the next line*/}
                 <Text style={styles.title}>{infestationName(infestation)}</Text>
                 <Button title={changePlan(adding, purchasing)}
                         color={getButtonColor()}

@@ -22,10 +22,23 @@ export default class User {
         //TODO
         return true;
     }
+    hadEquipment = (equipment:Equipment) => {
+        // This returns true if the user once had the equipment, but it has been removed
+        //TODO
+        return false;
+    }
     removeEquipment = (equipment:Equipment) => {
+        // This removes the equipment from the list of equipment the user has, but adds it to a list of equipment
+        // the user once owned
         //TODO
     }
     addEquipment = (equipment:Equipment) => {
+        // This adds the equipment to the list of equipment the user has, and also adds it to the upcoming
+        // purchases in the plan
+        //TODO
+    }
+    addHasEquipment = (equipment:Equipment) => {
+        // This ONLY adds the equipment to the list of equipment the user has
         //TODO
     }
 }

@@ -10,30 +10,35 @@ export default function BugsTabScreen() {
     const navigation = useNavigation();
     const scheme = useColorScheme();
     let styles = getStyle(scheme);
-    const user = getUser()
+
+    // //For rerendering the screen
+    // const [i, update] = useState(0);
+
+    const plan = getUser().getPlan();
     // This might be a terrible way to do it, but this gets the bugs in order, from prevention plan,
     // to added infestations, to other infestations
     let bugs = [getBugByID(0)].concat(
-        user.getPlan().getInfestations().concat(
-            user.getPlan().getOtherInfestations()))
+        plan.getInfestations().concat(
+            plan.getOtherInfestations()))
 
-    let hasPendingBugs:boolean = false;
+    let bugPressArray = bugs.map(function(bug, index){
+        // If this isn't refreshing when new infestations are added, it needs to be fixed in pressButton()
+        // in BugInfoPopup.tsx
+        return <BugPressable bug={bug} key={index}/>
+    })
 
-  let bugPressArray = bugs.map(function(bug, index){
-      if(user.getPlan().isPendingInfestation(bug)){
-          hasPendingBugs = true;
-      }
-      return <BugPressable bug={bug} key={index}/>
-  })
+    let changing:boolean =
+        plan.hasPendingChanges() ||
+        plan.getNewPrice().upFront != 0
 
     let getHeader = () => {
-      if(hasPendingBugs){
+      if(changing){
           return (
               <View style={styles.header}>
                   <Text style={styles.title}>
-                      {newPriceText(user.getPlan().getNewPrice())}
+                      {newPriceText(plan)}
                   </Text>
-                  <Button title= {updatePlan()}
+                  <Button title= {updatePlan(plan.hasPendingChanges())}
                           color= {buttonColor}
                           onPress={()=> navigation.navigate('PlanUpdatePopupScreen')}/>
               </View>
