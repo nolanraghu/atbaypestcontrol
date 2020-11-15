@@ -9,6 +9,7 @@ const textDark = 'rgb(229,229,229)';
 const buttonDark = 'rgb(105,105,105)';
 const fadedItemDark = 'rgb(60,60,60)';
 const highlightDark = 'lightgreen';
+const highlightRemovingDark = 'rgb(239,99,99)';
 const fadedTextDark = 'rgb(118,118,118)';
 
 const backgroundLight = 'rgb(236,236,236)';
@@ -16,7 +17,8 @@ const headerLight = 'rgb(245,245,245)';
 const textLight = 'rgb(50,50,50)';
 const buttonLight = 'white';
 const fadedItemLight = 'rgb(231,231,231)';
-const highlightLight = 'rgb(72,190,87)';
+const highlightLight = 'rgb(62,176,76)';
+const highlightRemovingLight = 'rgb(255,43,43)';
 const fadedTextLight = 'rgb(153,153,153)';
 
 export function getBackgroundColor(state:ColorSchemeName){
@@ -36,7 +38,7 @@ export function getOffButtonColor(state:ColorSchemeName){
 }
 
 export function getStyle(state:ColorSchemeName){
-    let background, header, text, button, fadedItem, highlight, fadedText
+    let background, header, text, button, fadedItem, highlight, fadedText, highlightRemoving
 
     if(state === 'dark'){
         background = backgroundDark;
@@ -46,6 +48,7 @@ export function getStyle(state:ColorSchemeName){
         fadedItem = fadedItemDark;
         highlight = highlightDark;
         fadedText = fadedTextDark;
+        highlightRemoving = highlightRemovingDark;
     } else {
         background = backgroundLight;
         header = headerLight;
@@ -54,6 +57,7 @@ export function getStyle(state:ColorSchemeName){
         fadedItem = fadedItemLight;
         highlight = highlightLight;
         fadedText = fadedTextLight;
+        highlightRemoving = highlightRemovingLight;
     }
     return StyleSheet.create({
         screen: {
@@ -149,6 +153,23 @@ export function getStyle(state:ColorSchemeName){
             borderColor: highlight,
             borderStyle: 'dashed'
         },
+        fullButtonRemoving: {
+            width: '39%',
+            margin: '5.5%',
+            aspectRatio: 1,
+            backgroundColor: button,
+            borderRadius: 20,
+            justifyContent: "center",
+            flexDirection: "column",
+            shadowColor: 'black',
+            shadowOffset: { width: 0, height: 2 },
+            shadowOpacity: 0.5,
+            shadowRadius: 2,
+            elevation: 4,
+            borderWidth: 2.5,
+            borderColor: highlightRemoving,
+            borderStyle: 'dashed'
+        },
         preventionButtonOff: {
             width: '89%',
             margin: '5.5%',
@@ -197,7 +218,25 @@ export function getStyle(state:ColorSchemeName){
             elevation: 4,
             borderWidth: 2.5,
             borderColor: highlight,
-            borderStyle: 'dotted'
+            borderStyle: "dashed"
+        },
+        preventionButtonRemoving: {
+            width: '89%',
+            margin: '5.5%',
+            marginBottom: '9%',
+            aspectRatio: 3,
+            backgroundColor: button,
+            borderRadius: 20,
+            justifyContent: "center",
+            flexDirection: "row-reverse",
+            shadowColor: 'rgb(0,0,0)',
+            shadowOffset: { width: 0, height: 2 },
+            shadowOpacity: 0.5,
+            shadowRadius: 2,
+            elevation: 4,
+            borderWidth: 2.5,
+            borderColor: highlightRemoving,
+            borderStyle: "dashed"
         },
         buttonImage: {
             flex: 1,

@@ -20,6 +20,8 @@ export default function BugPressable({bug}: bugProps){
                 return (preventionButton? styles.preventionButtonOn: styles.fullButtonOn);
             case 'pending':
                 return (preventionButton? styles.preventionButtonPending: styles.fullButtonPending);
+            case 'removing':
+                return (preventionButton? styles.preventionButtonRemoving: styles.fullButtonRemoving)
         }
     }
 

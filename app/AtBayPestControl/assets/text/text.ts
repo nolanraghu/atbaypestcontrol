@@ -1,6 +1,7 @@
 import Equipment from "../Classes/Equipment";
 import Product from "../Classes/Product";
 import Infestation from "../Classes/Infestation";
+import Plan from "../Classes/Plan";
 
 export function appName(){
     return "AtBay Pest Control";
@@ -39,7 +40,11 @@ export function productOwnedEquipmentText(adding: boolean){
 export function captionProductDescription(product:Product){
     return product.getProductName() + ':\n' + product.getProductDetails();
 }
-export function equipmentDescription(equipment:Equipment, products:Product[], owned:boolean, linkFunction?:any){
+export function equipmentDescription(equipment:Equipment,
+                                     products:Product[],
+                                     owned:boolean,
+                                     linkFunction?:any,
+                                     onceOwned?:boolean){
     // The text used to describe equipment in a list of equipment needed for an infestation.
     // MUST ADD LINK if owned is true
 
@@ -71,6 +76,8 @@ export function equipmentDescription(equipment:Equipment, products:Product[], ow
     // unlikely to be a problem, so I didn't think it was worth it to fix
     if (owned) {
         equipmentText.push(linkFunction(lostProduct()));
+    } else if (onceOwned){
+        equipmentText.push(linkFunction(foundProduct()));
     }
 
     // This is the description of the equipment
@@ -80,9 +87,31 @@ export function equipmentDescription(equipment:Equipment, products:Product[], ow
 export function lostProduct(){
     return "Click here if you no longer have this item and would like to purchase it again\n"
 }
-export function newPriceText(price:number){
-    // This is when you are about to update your plan
-    return "New Price: $" + price;
+export function foundProduct(){
+    return "Click here if you already have this product\n"
+}
+export function newPriceText(plan:Plan){
+    // This is when you are about to update your plan from bugs tab
+    let price = plan.getNewPrice();
+    let changing = price.monthly != plan.getCurrentPrice();
+
+    if(changing){
+        let text = "New Price: \n$" + price.monthly + ' per month';
+        if (price.upFront != 0) {
+            text = text + ', \nplus $' + price.upFront + ' for equipment'
+        }
+        return text;
+    } else {
+        if (price.upFront != 0) {
+            let text = "New equipment: $" + price.upFront;
+            if (plan.hasPendingChanges()){
+                text += "\nNo price change"
+            }
+            return text;
+        } else {
+            return "No price change"
+        }
+    }
 }
 export function priceText(price:number, equipmentPrice: number, adding: boolean, purchasing: boolean){
     let text:string = '';
@@ -102,9 +131,14 @@ export function priceText(price:number, equipmentPrice: number, adding: boolean,
     }
 
 }
-export function updatePlan(){
+export function updatePlan(newPlan:boolean){
     // This button updates the plan
-    return "Update Plan";
+    if(newPlan){
+        return "Update Plan";
+    } else {
+        return "Purchase";
+    }
+
 }
 export function changePlan(adding: boolean, purchasing: boolean){
     // This button adds or removes the infestation from the plan, or purchases the missing equipment
