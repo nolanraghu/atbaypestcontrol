@@ -2,7 +2,7 @@ import Equipment from "../Classes/Equipment";
 import Product from "../Classes/Product";
 import Infestation from "../Classes/Infestation";
 import Plan from "../Classes/Plan";
-import {requiredPlanTime} from "../Data/Data";
+import {getUser, requiredPlanTime} from "../Data/Data";
 
 export function appName(){
     return "AtBay Pest Control";
@@ -241,8 +241,11 @@ function dateText(date:number){
     }
 }
 function monthlyRemaining(monthly:number){
-    //TODO This isn't correct
-    return (monthly / 30) * (30 - new Date().getDate())
+    //TODO: Idk how this is supposed to work
+    let today = new Date();
+    let planDueDate = getUser().getPlan().getDueDate();
+    let daysInMonth = new Date(today.getMonth(), today.getFullYear(), 0).getDate();
+    return (monthly / daysInMonth) * (daysInMonth - today.getDate() + planDueDate);
 }
 export function newPriceTextFooter(plan:Plan){
     let price = plan.getNewPrice();
