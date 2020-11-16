@@ -45,7 +45,7 @@ export default function UpdatePlanPopup({route, navigation}:any) {
 
         let PayArray = PAY.map(function([id, name, card], index) {
             return  <Payment
-                key={id}
+                key={keys++}
                 index={index}
                 name={name}
                 card={card}
@@ -65,6 +65,7 @@ export default function UpdatePlanPopup({route, navigation}:any) {
     }
 
     function pressButton(){
+        //TODO
         navigation.navigate('BugsTabScreen');
     }
 
@@ -104,7 +105,6 @@ export default function UpdatePlanPopup({route, navigation}:any) {
 
     function newEquipment(){
         let pendingEquipment:Equipment[] = plan.getPendingEquipment();
-        console.log(pendingEquipment)
         if (pendingEquipment.length == 0){
             return ;
         } else {
@@ -127,7 +127,7 @@ export default function UpdatePlanPopup({route, navigation}:any) {
             return (
                 [
                     <View style={styles.section} key={keys++}>
-                        <Text style={styles.title} key={keys++}>Payment information:</Text>
+                        <Text style={styles.title}>Payment information:</Text>
                     </View>
                 ].concat(renderPay())
             );
@@ -139,10 +139,22 @@ export default function UpdatePlanPopup({route, navigation}:any) {
             return;
         } else {
             return (
-                <View style={styles.header} key={keys++}>
-                    <Text style={styles.fullText} key={keys++}>{newPriceTextFooter(plan)}</Text>
+                <View style={styles.header}>
+                    <Text style={styles.fullText}>{newPriceTextFooter(plan)}</Text>
                 </View>
             )
+        }
+    }
+
+    function notes(){
+        if(deleting){
+            return;
+        } else {
+            return(
+                <View style={styles.section}>
+                    <Text style={styles.captionFade}>{confirmationNotes(plan)}</Text>
+                </View>
+            );
         }
     }
 
@@ -156,13 +168,11 @@ export default function UpdatePlanPopup({route, navigation}:any) {
             </View>
             <ScrollView>
                 <View style={styles.container}>
+                    {paymentInfo()}
+                    {notes()}
                     {newProducts()}
                     {removingProducts()}
                     {newEquipment()}
-                    {paymentInfo()}
-                    <View style={styles.section}>
-                        <Text style={styles.captionFade}>{confirmationNotes(plan)}</Text>
-                    </View>
                 </View>
             </ScrollView>
             {footer()}

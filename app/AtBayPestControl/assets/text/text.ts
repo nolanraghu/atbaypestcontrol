@@ -180,7 +180,7 @@ export function confirmButton(deleting: boolean, isChangingPlan: boolean){
 }
 export function confirmationTitle(deleting: boolean, isChangingPlan: boolean){
     if (deleting) {
-        return "Confirm Delete:";
+        return "Confirm Delete Changes:";
     } else if (isChangingPlan) {
         return "Confirm Update Plan:";
     } else {
@@ -209,6 +209,7 @@ export function newEquipmentConfirm(deleting: boolean){
     }
 }
 export function confirmationNotes(plan:Plan){
+    //TODO I think it would be good to have the prices highlighted, or important information
     let price = plan.getNewPrice();
     let currentMonthly = plan.getCurrentPrice();
     let remainingPrice = monthlyRemaining(currentMonthly);
