@@ -49,12 +49,14 @@
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/profile/profile.txt" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/screens/BugInfoPopup.tsx" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/screens/PlanProductPopup.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/screens/PlanUpdatePopup.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/AtBayPestControl/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/AtBayPestControl/app.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/AtBayPestControl/assets/images/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/images/icon.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/AtBayPestControl/assets/images/splash.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/images/splash.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/AtBayPestControl/assets/text/text.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/text/text.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/AtBayPestControl/components/EditScreenInfo.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/AtBayPestControl/components/StyledText.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/AtBayPestControl/components/StyledText.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/AtBayPestControl/components/Themed.tsx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/AtBayPestControl/navigation/BottomTabNavigator.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/AtBayPestControl/navigation/BottomTabNavigator.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/AtBayPestControl/navigation/LinkingConfiguration.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/AtBayPestControl/navigation/LinkingConfiguration.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/AtBayPestControl/screens/BugsTabScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/AtBayPestControl/screens/BugsTabScreen.tsx" afterDir="false" />
@@ -135,7 +137,12 @@
       <workItem from="1604594707835" duration="2047000" />
       <workItem from="1604615900795" duration="2107000" />
       <workItem from="1604618041520" duration="69000" />
+<<<<<<< Updated upstream
       <workItem from="1604618114470" duration="6835000" />
+=======
+      <workItem from="1604618114470" duration="2926000" />
+      <workItem from="1604975702910" duration="915000" />
+>>>>>>> Stashed changes
     </task>
     <task id="LOCAL-00001" summary="First Commit. Renaming screens/tabs to fit our needs.">
       <created>1602888296289</created>
@@ -205,21 +212,25 @@
       <screen x="0" y="23" width="1792" height="1033" />
     </state>
     <state x="730" y="261" key="#com.intellij.ide.util.MemberChooser/0.23.1792.1033@0.23.1792.1033" timestamp="1604619596708" />
-    <state width="1771" height="274" key="GridCell.Tab.0.bottom" timestamp="1603982707390">
-      <screen x="0" y="23" width="1792" height="1028" />
+    <state width="1448" height="279" key="GridCell.Tab.0.bottom" timestamp="1605061174192">
+      <screen x="0" y="23" width="1792" height="1026" />
     </state>
+    <state width="1448" height="279" key="GridCell.Tab.0.bottom/0.23.1792.1026@0.23.1792.1026" timestamp="1605061174192" />
     <state width="1771" height="274" key="GridCell.Tab.0.bottom/0.23.1792.1028@0.23.1792.1028" timestamp="1603982707390" />
-    <state width="1771" height="274" key="GridCell.Tab.0.center" timestamp="1603982707390">
-      <screen x="0" y="23" width="1792" height="1028" />
+    <state width="1448" height="279" key="GridCell.Tab.0.center" timestamp="1605061174192">
+      <screen x="0" y="23" width="1792" height="1026" />
     </state>
+    <state width="1448" height="279" key="GridCell.Tab.0.center/0.23.1792.1026@0.23.1792.1026" timestamp="1605061174192" />
     <state width="1771" height="274" key="GridCell.Tab.0.center/0.23.1792.1028@0.23.1792.1028" timestamp="1603982707390" />
-    <state width="1771" height="274" key="GridCell.Tab.0.left" timestamp="1603982707389">
-      <screen x="0" y="23" width="1792" height="1028" />
+    <state width="1448" height="279" key="GridCell.Tab.0.left" timestamp="1605061174191">
+      <screen x="0" y="23" width="1792" height="1026" />
     </state>
+    <state width="1448" height="279" key="GridCell.Tab.0.left/0.23.1792.1026@0.23.1792.1026" timestamp="1605061174191" />
     <state width="1771" height="274" key="GridCell.Tab.0.left/0.23.1792.1028@0.23.1792.1028" timestamp="1603982707389" />
-    <state width="1771" height="274" key="GridCell.Tab.0.right" timestamp="1603982707390">
-      <screen x="0" y="23" width="1792" height="1028" />
+    <state width="1448" height="279" key="GridCell.Tab.0.right" timestamp="1605061174192">
+      <screen x="0" y="23" width="1792" height="1026" />
     </state>
+    <state width="1448" height="279" key="GridCell.Tab.0.right/0.23.1792.1026@0.23.1792.1026" timestamp="1605061174192" />
     <state width="1771" height="274" key="GridCell.Tab.0.right/0.23.1792.1028@0.23.1792.1028" timestamp="1603982707390" />
     <state x="734" y="414" key="VCS.EditChangelistDialog" timestamp="1603076356758">
       <screen x="0" y="23" width="1792" height="1030" />
