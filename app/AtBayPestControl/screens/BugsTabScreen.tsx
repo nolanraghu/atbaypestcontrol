@@ -55,6 +55,10 @@ export default function BugsTabScreen() {
               <View style={styles.container}>
                   {bugPressArray}
               </View>
+              <Text style={[styles.fullText, {marginTop: 10}, styles.link]}
+                    onPress={()=>{navigation.navigate('PlanUpdatePopupScreen', {deleting:true})}}>
+                  Delete changes
+              </Text>
           </ScrollView>
       </View>
   );

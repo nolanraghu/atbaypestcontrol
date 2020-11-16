@@ -2,6 +2,7 @@ import Equipment from "../Classes/Equipment";
 import Product from "../Classes/Product";
 import Infestation from "../Classes/Infestation";
 import Plan from "../Classes/Plan";
+import {requiredPlanTime} from "../Data/Data";
 
 export function appName(){
     return "AtBay Pest Control";
@@ -39,6 +40,24 @@ export function productOwnedEquipmentText(adding: boolean){
 }
 export function captionProductDescription(product:Product){
     return product.getProductName() + ':\n' + product.getProductDetails();
+}
+export function captionProductandReqEquipment(product:Product){
+    let equipmentText:string = '';
+    let equipment:Equipment[] = product.equipmentList();
+    for(let i = equipment.length - 1; i >= 0; i--){
+        if(i == equipment.length - 1){
+            equipmentText = equipment[i].getEquipmentName();
+        } else if (i == equipment.length - 2) {
+            equipmentText = equipment[i].getEquipmentName() + " and " + equipmentText;
+        } else {
+            equipmentText = equipment[i].getEquipmentName() + ", " + equipmentText;
+        }
+    }
+    equipmentText = "\nYou will need the " + equipmentText + " to apply this product."
+    return product.getProductName() + ':\n' + product.getProductDetails() + equipmentText;
+}
+export function captionEquipmentDescription(equipment:Equipment){
+    return equipment.getEquipmentName() + ':\n' + equipment.getEquipmentDescription();
 }
 export function equipmentDescription(equipment:Equipment,
                                      products:Product[],
@@ -149,4 +168,86 @@ export function changePlan(adding: boolean, purchasing: boolean){
     } else {
         return "Remove from Plan"
     }
+}
+export function confirmButton(deleting: boolean, isChangingPlan: boolean){
+    if (deleting) {
+        return "Delete";
+    } else if (isChangingPlan) {
+        return "Update";
+    } else {
+        return "Purchase";
+    }
+}
+export function confirmationTitle(deleting: boolean, isChangingPlan: boolean){
+    if (deleting) {
+        return "Confirm Delete:";
+    } else if (isChangingPlan) {
+        return "Confirm Update Plan:";
+    } else {
+        return "Confirm Purchase:";
+    }
+}
+export function newProductsConfirm(deleting: boolean){
+    if(deleting){
+        return "I don't need these products:";
+    } else {
+        return "New products:";
+    }
+}
+export function removeProductsConfirm(deleting: boolean){
+    if(deleting){
+        return "I still want to receive these products:";
+    } else {
+        return "Products being removed:";
+    }
+}
+export function newEquipmentConfirm(deleting: boolean){
+    if(deleting){
+        return "I won't need this equipment";
+    } else {
+        return "New equipment:";
+    }
+}
+export function confirmationNotes(plan:Plan){
+    let price = plan.getNewPrice();
+    let currentMonthly = plan.getCurrentPrice();
+    let remainingPrice = monthlyRemaining(currentMonthly);
+    let todayCharge = price.monthly - remainingPrice + price.upFront;
+    //TODO round todayCharge to the nearest cent, probably rounding up
+    let day = new Date().getDate();
+
+    let todayText;
+    if (todayCharge < 0){
+        todayText = "Today you will be refunded $";
+    } else {
+        todayText = "Your total charge today will be $";
+    }
+
+    return todayText + todayCharge + ". Then, your credit card will automatically " +
+        "be billed $" + price.monthly + " on the " + dateText(day) + " of each month. Once you subscribe to a " +
+        "new infestation plan, you must keep it for at least " + requiredPlanTime() + " before you unsubscribe."
+}
+function dateText(date:number){
+    switch (date){
+        case 1:
+            return "1st";
+        case 2:
+            return "2nd";
+        case 3:
+            return "3rd";
+        default:
+            return date + "th";
+    }
+}
+function monthlyRemaining(monthly:number){
+    //TODO This isn't correct
+    return (monthly / 30) * (30 - new Date().getDate())
+}
+export function newPriceTextFooter(plan:Plan){
+    let price = plan.getNewPrice();
+    let text = "New monthly cost: $" + price.monthly + " per month";
+    if (price.upFront > 0){
+        text = text + ", plus a one time charge of $" + price.upFront;
+    }
+    return text;
 }

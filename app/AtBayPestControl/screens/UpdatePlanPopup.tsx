@@ -1,16 +1,37 @@
 import * as React from 'react';
 import {Button, ScrollView, useColorScheme, Text, View} from "react-native";
-import { useNavigation } from '@react-navigation/native';
-import {buttonColor, getBackgroundColor, getStyle} from "../assets/Stylesheets/Styles";
+import {buttonColor, getStyle} from "../assets/Stylesheets/Styles";
 import Payment from "../components/Payment";
 import {getUser, PAY} from "../assets/Data/Data";
+import {
+    captionEquipmentDescription, captionProductandReqEquipment,
+    captionProductDescription, confirmationNotes,
+    confirmationTitle,
+    confirmButton,
+    newEquipmentConfirm, newPriceTextFooter,
+    newProductsConfirm,
+    removeProductsConfirm
+} from "../assets/text/text";
+import Product from "../assets/Classes/Product";
+import CaptionImage from "../components/CaptionImage";
+import Equipment from "../assets/Classes/Equipment";
 
-export default function UpdatePlanPopup() {
-    const navigation = useNavigation();
+export default function UpdatePlanPopup({route, navigation}:any) {
+    const params = route.params;
+    //This is for if you are just confirming that you want to delete the changes
+    let deleting = false;
+    if(params != undefined){
+        //I think this is the only way to make an optional screen parameter
+        deleting = params.deleting;
+    }
     const scheme = useColorScheme();
     const styles = getStyle(scheme);
 
-    const isChangingPlan = getUser().getPlan().hasPendingChanges();
+    const user = getUser();
+    const plan = user.getPlan();
+    const isChangingPlan = plan.hasPendingChanges();
+
+    let keys = 0;
 
     function renderPay () {
 
@@ -43,37 +64,108 @@ export default function UpdatePlanPopup() {
         )
     }
 
-    return(
-        <View style={{height: '100%', backgroundColor: getBackgroundColor(scheme)}}>
-            <View style={styles.header}>
-                <Text style={styles.title}>Confirm Changes:</Text>
-                <View>
-                    <Button title="Update Plan"
-                            color= {buttonColor}
-                            onPress={()=> navigation.navigate('BugsTabScreen')}/>
-                    <Text style={[styles.fullText, {marginTop: 10}, styles.link]}
-                          onPress={()=>{navigation.navigate('BugsTabScreen')}}>
-                        Delete changes
-                    </Text>
+    function pressButton(){
+        navigation.navigate('BugsTabScreen');
+    }
+
+    function newProducts(){
+        let pendingProducts:Product[] = plan.getPendingProducts();
+        if (pendingProducts.length == 0){
+            return ;
+        } else {
+            return(
+                [<Text style={styles.title} key={keys++}>{newProductsConfirm(deleting)}</Text>].concat(
+                    pendingProducts.map((product:Product) => {
+                        return <CaptionImage source={product.getProductImage()}
+                                             text={captionProductDescription(product)}
+                                             key={keys++}/>
+                    })
+                )
+            )
+        }
+    }
+
+    function removingProducts(){
+        let removingProducts:Product[] = plan.getRemovingProducts();
+        if (removingProducts.length == 0){
+            return ;
+        } else {
+            return(
+                [<Text style={styles.title} key={keys++}>{removeProductsConfirm(deleting)}</Text>].concat(
+                    removingProducts.map((product:Product) => {
+                        return <CaptionImage source={product.getProductImage()}
+                                             text={captionProductandReqEquipment(product)}
+                                             key={keys++}/>
+                    })
+                )
+            )
+        }
+    }
+
+    function newEquipment(){
+        let pendingEquipment:Equipment[] = plan.getPendingEquipment();
+        console.log(pendingEquipment)
+        if (pendingEquipment.length == 0){
+            return ;
+        } else {
+            return(
+                [<Text style={styles.title} key={keys++}>{newEquipmentConfirm(deleting)}</Text>].concat(
+                    pendingEquipment.map((equipment:Equipment) => {
+                        return <CaptionImage source={equipment.getEquipmentImage()}
+                                             text={captionEquipmentDescription(equipment)}
+                                             key={keys++}/>
+                    })
+                )
+            )
+        }
+    }
+
+    function paymentInfo(){
+        if (deleting) {
+            return;
+        } else {
+            return (
+                [
+                    <View style={styles.section} key={keys++}>
+                        <Text style={styles.title} key={keys++}>Payment information:</Text>
+                    </View>
+                ].concat(renderPay())
+            );
+        }
+    }
+
+    function footer(){
+        if(deleting){
+            return;
+        } else {
+            return (
+                <View style={styles.header} key={keys++}>
+                    <Text style={styles.fullText} key={keys++}>{newPriceTextFooter(plan)}</Text>
                 </View>
+            )
+        }
+    }
+
+    return(
+        <View style={styles.screen}>
+            <View style={styles.header}>
+                <Text style={styles.title}>{confirmationTitle(deleting, isChangingPlan)}</Text>
+                <Button title= {confirmButton(deleting, isChangingPlan)}
+                        color= {buttonColor}
+                        onPress={pressButton}/>
             </View>
             <ScrollView>
                 <View style={styles.container}>
+                    {newProducts()}
+                    {removingProducts()}
+                    {newEquipment()}
+                    {paymentInfo()}
                     <View style={styles.section}>
-                        <Text style={styles.caption}>This is a paragraph</Text>
-                    </View>
-                    <View style={styles.section}>
-                        <Text style={styles.title}>Payment information:</Text>
-                    </View>
-                    {renderPay()}
-                    <View style={styles.section}>
-                        <Text style={styles.captionFade}>Notes!</Text>
+                        <Text style={styles.captionFade}>{confirmationNotes(plan)}</Text>
                     </View>
                 </View>
             </ScrollView>
-            <View style={styles.header}>
-                <Text style={styles.fullText}>New monthly cost: $11.99</Text>
-            </View>
+            {footer()}
         </View>
     )
 }

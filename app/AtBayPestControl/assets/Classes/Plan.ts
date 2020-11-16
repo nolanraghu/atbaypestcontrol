@@ -8,6 +8,7 @@
 
 import Infestation from "./Infestation";
 import Product from "./Product";
+import Equipment from "./Equipment";
 
 export default class Plan {
     private id: number
@@ -61,6 +62,21 @@ export default class Plan {
         //TODO
         return []
     }
+    getPendingProducts = ():Product[] => {
+        // Returns a list of the products in the pending infestations
+        //TODO
+        return []
+    }
+    getPendingEquipment = ():Equipment[] => {
+        // This gets added by the functions in User, but can get removed by addPendingRemoval()
+        //TODO
+        return []
+    }
+    getRemovingProducts = ():Product[] => {
+        // Returns a list of the products on the infestations that are pending removal
+        //TODO
+        return [new Product(1)]
+    }
     getCurrentPrice = ():number => {
         // Returns the current price of the plan
         return 10.99
@@ -83,6 +99,12 @@ export default class Plan {
     }
     addPendingRemoval = (bug:Infestation) => {
         // Removes the infestation to the plan, but only pending. If it is not in the plan but pending,
-        // removes from pending list.
+        // removes from pending list. IMPORTANT: If it is removed from the pending list, it needs to also remove
+        // the equipment from the pending equipment list, UNLESS it is needed for another infestation that is part of
+        // the plan or Pending being added
+    }
+    getDueDate = () => {
+        //Gets the day the payments are due, for now just the first
+        return 1;
     }
 }

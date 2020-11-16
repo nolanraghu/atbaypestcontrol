@@ -273,7 +273,7 @@ export function getStyle(state:ColorSchemeName){
         },
         link:{
             color: highlight,
-            textDecorationLine: 'underline'
+            textDecorationLine: 'underline',
         },
         caption: {
             textAlign: 'left',

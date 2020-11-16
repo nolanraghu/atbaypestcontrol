@@ -39,6 +39,6 @@ export default class User {
     }
     addHasEquipment = (equipment:Equipment) => {
         // This ONLY adds the equipment to the list of equipment the user has
-        //TODO
+        // TODO
     }
 }
