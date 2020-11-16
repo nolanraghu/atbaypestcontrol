@@ -1,16 +1,16 @@
 import * as React from 'react';
-import {Button, ScrollView, StyleSheet, useColorScheme, Text, View} from "react-native";
+import {Button, ScrollView, useColorScheme, Text, View} from "react-native";
 import { useNavigation } from '@react-navigation/native';
 import {buttonColor, getBackgroundColor, getStyle} from "../assets/Stylesheets/Styles";
 import Payment from "../components/Payment";
-import {PAY} from "../assets/Data/Data";
-
-// TODO: Payment info, dynamify, and probably change the way the text stuff is styled in the ScrollView
+import {getUser, PAY} from "../assets/Data/Data";
 
 export default function UpdatePlanPopup() {
     const navigation = useNavigation();
     const scheme = useColorScheme();
     const styles = getStyle(scheme);
+
+    const isChangingPlan = getUser().getPlan().hasPendingChanges();
 
     function renderPay () {
 
@@ -46,10 +46,16 @@ export default function UpdatePlanPopup() {
     return(
         <View style={{height: '100%', backgroundColor: getBackgroundColor(scheme)}}>
             <View style={styles.header}>
-                <Text style={styles.title}>Confirm New Plan:</Text>
-                <Button title="Update Plan"
-                        color= {buttonColor}
-                        onPress={()=> navigation.navigate('BugsTabScreen')}/>
+                <Text style={styles.title}>Confirm Changes:</Text>
+                <View>
+                    <Button title="Update Plan"
+                            color= {buttonColor}
+                            onPress={()=> navigation.navigate('BugsTabScreen')}/>
+                    <Text style={[styles.fullText, {marginTop: 10}, styles.link]}
+                          onPress={()=>{navigation.navigate('BugsTabScreen')}}>
+                        Delete changes
+                    </Text>
+                </View>
             </View>
             <ScrollView>
                 <View style={styles.container}>

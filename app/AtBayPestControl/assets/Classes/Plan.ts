@@ -33,12 +33,12 @@ export default class Plan {
         return true;
     }
     getButtonStatus = (bug:Infestation) => {
-        if (this.containsInfestation(bug)){
-            return 'on';
-        } else if (this.isPendingInfestation(bug)){
+        if (this.isPendingInfestation(bug)){
             return 'pending';
         } else if (this.isPendingRemoval(bug)){
             return 'removing';
+        } else if (this.containsInfestation(bug)){
+            return 'on';
         } else {
             return 'off';
         }
