@@ -3,6 +3,7 @@
 
 import {getEquipmentInfo} from "../../controller/EquipmentPulling";
 
+
 export default class Equipment {
     private readonly id: string;
     private readonly image: NodeRequire;

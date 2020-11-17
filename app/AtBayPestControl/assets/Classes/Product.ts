@@ -6,7 +6,6 @@ import {getEquipmentInfo} from "../../controller/EquipmentPulling";
 import {getInfestationInfo} from "../../controller/InfestationPulling";
 import {getProductInfo} from "../../controller/ProductPulling";
 
-
 // This bitch unsued
 interface ProductProps {
     id: string,
