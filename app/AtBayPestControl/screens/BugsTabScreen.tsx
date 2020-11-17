@@ -73,3 +73,10 @@ export default function BugsTabScreen() {
       </View>
   );
 }
+
+
+//This is where all the parameters for the BugPressable go
+interface BugPressProps {
+  bId: string,
+  isPreventionButton?: boolean
+}

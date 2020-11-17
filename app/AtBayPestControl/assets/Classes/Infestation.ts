@@ -5,53 +5,75 @@
 //  an error? That's what I think it should be? Which brings up my question about the database. Is the database at
 //  a url? Or is it stored in the www folder and then updates itself?
 
+
 import Product from "./Product";
+import {getInfestationInfo} from "../../controller/InfestationPulling";
+
+interface InfestationProps {
+    id: string,
+    image: NodeRequire,
+    name: string,
+    description: string,
+    products: Array<string>,
+    price: number
+}
+
 
 export default class Infestation {
     // We should use id's so we can find them in the database, everything else should be accessed from the database
     // using accessor functions, probably. Just in case we need it for local changes or something, I've included other
     // examples
-    private id: number
-    product1 = new Product(0);
-    product2 = new Product(2);
-    constructor(id:number){
+    private readonly id: string
+    private readonly image: NodeRequire
+    private readonly name: string
+    private readonly description: string
+    private readonly products: Array<Product>
+    private readonly price: number
+    constructor(id:string){
         //TODO: ideally we probably don't need the id in the constructor? Depends on how we
         // implement it in Data.ts I suppose
         this.id = id;
+        let pData = getInfestationInfo(this.id);
+        this.image = pData.image;
+        this.name = pData.name;
+        this.description = pData.description;
+        let counter = 0;
+        this.products = [];
+        for(let x in pData.products){
+            this.products.push(new Product(x));
+            counter += 1;
+        }
+        this.price = pData.price;
+
+
+
     }
     getID = () => {
         return this.id;
     }
     isPreventionPlan = () => {
-        return this.id == 0
+        return this.id == "b1"
     }
     //Gets the image source for the bug
     getBugImage = () => {
         //TODO
-        return require('../images/honey_bee.png')
+        return this.image
     }
     getBugName = () => {
         //TODO
-        return 'Honeybee'
+        return this.name
     }
     getBugDescription = () => {
         // Note: This should include the required time they have to be on the plan before they delete it, if that
         // exists. You could program this in or pass the instructions along to the client, or whoever is filling
         // in the database
         //TODO
-        return 'Now, let me tell you about bees.....Now, let me tell you about bees.....Now, let me tell you ' +
-            'about bees.....Now, let me tell you about bees.....Now, let me tell you about bees.....Now, let ' +
-            'me tell you about bees.....Now, let me tell you about bees.....Now, let me tell you about bees...' +
-            '..Now, let me tell you about bees.....Now, let me tell you about bees.....Now, let me tell you about ' +
-            'bees.....Now, let me tell you about bees.....Now, let me tell you about bees.....Now, let me tell you ' +
-            'about bees.....Now, let me tell you about bees.....Now, let me tell you about bees.....Now, let me ' +
-            'tell you about bees.....Now, let me tell you about bees.....Now, let me tell you about bees.....Now, ' +
-            'let me tell you about bees.....'
+        return this.description
     }
 
     getProducts = () => {
         //TODO
-        return [this.product1, this.product2];
+        return this.products
     }
     getPrice = ():{monthly: number, upFront: number} => {
         // Note: the monthly price does not include the equipment, but should include any one time products. I

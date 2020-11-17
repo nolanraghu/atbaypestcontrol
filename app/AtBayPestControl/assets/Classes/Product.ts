@@ -2,26 +2,50 @@
 // instructions, etc.
 
 import Equipment from "./Equipment";
+import {getEquipmentInfo} from "../../controller/EquipmentPulling";
+
+interface ProductProps {
+    id: string,
+    image: NodeRequire,
+    name: string,
+    description: string,
+    equipment: Array<string>,
+    price: number,
+}
+
+
+
 
 export default class Product{
-    id: number
-    equipment1 = new Equipment(0)
-    constructor(id: number){
-        this.id = id
+    id: string
+    equipment: Array<Equipment>
+    image: NodeRequire
+    name: string
+    description: string
+    price: number
+    constructor(props: ProductProps){
+        this.id = props.id;
+        this.equipment = [];
+        for(var id in props.equipment){
+            this.equipment.push(getEquipmentInfo(props.id))
+        };
+        this.image = props.image;
+        this.productName = props.productName;
+        this.productDetails = props.productDetails;
     }
     getProductImage = () => {
-        return require('../images/product1.jpg');
+        return this.image;
     }
 
     getProductName = () => {
-        return "Bug Killer 3000";
+        return this.productName;
     }
 
     getProductDetails = () => {
-        return "This kills bugs";
+        return this.productDetails;
     }
 
     equipmentList = () => {
-        return [this.equipment1];
+        return this.equipment;
     }
 }
