@@ -41,9 +41,11 @@ export default class User {
         // This ONLY adds the equipment to the list of equipment the user has
         // TODO
     }
-    makePayment = () => {
-        // If it is after the 28th, make sure they won't be making another payment on the 1st. See plan.setDueDate, the
-        // way this is done can be changed there
+    makePayment = (price:number) => {
+        // TODO: but not related to the database
+    }
+    setMonthlyPayments = (price:number, nextDate:Date) => {
+        // Note: the date of nextDate should be <= 28
         // TODO: but not related to the database
     }
 }

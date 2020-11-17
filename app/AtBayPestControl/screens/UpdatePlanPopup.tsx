@@ -4,10 +4,10 @@ import {buttonColor, getStyle} from "../assets/Stylesheets/Styles";
 import Payment from "../components/Payment";
 import {getUser, PAY} from "../assets/Data/Data";
 import {
-    captionEquipmentDescription, captionProductandReqEquipment,
+    captionEquipmentDescription, captionProductAndReqEquipment,
     captionProductDescription, confirmationNotes,
     confirmationTitle,
-    confirmButton,
+    confirmButton, confirmPayment,
     newEquipmentConfirm, newPriceTextFooter,
     newProductsConfirm,
     removeProductsConfirm
@@ -34,7 +34,7 @@ export default function UpdatePlanPopup({route, navigation}:any) {
     let keys = 0;
 
     function renderPay () {
-
+        //TODO
         function onPressPayment () {
             console.log('payed')
         }
@@ -43,29 +43,30 @@ export default function UpdatePlanPopup({route, navigation}:any) {
             console.log('edit')
         }
 
-        let PayArray = PAY.map(function([id, name, card], index) {
-            return  <Payment
-                key={keys++}
-                index={index}
-                name={name}
-                card={card}
-                onPressEdit={onPressEdit}
-                onPressPayment={onPressPayment}
-            />
-        })
-
         return (
-            <View style={{
-                width: '100%',
-                paddingTop: 30,
-            }}>
-                {PayArray[0]}
+            <View style={{width: '100%'}} key={keys++}>
+                <Payment
+                    name={PAY[0][1]}
+                    index={0}
+                    card={PAY[0][2]}
+                    onPressEdit={onPressEdit}
+                    onPressPayment={onPressPayment}/>
             </View>
         )
     }
 
     function pressButton(){
-        //TODO
+        if(deleting){
+            plan.removePendingChanges();
+        } else {
+
+            user.makePayment(plan.getNewPrice().upFront);
+            if(isChangingPlan){
+                let nextDate = plan.setDueDate(plan.getDueDate());
+                user.setMonthlyPayments(plan.getNewPrice().monthly, nextDate);
+            }
+            plan.addChangesToPlan();
+        }
         navigation.navigate('BugsTabScreen');
     }
 
@@ -74,15 +75,14 @@ export default function UpdatePlanPopup({route, navigation}:any) {
         if (pendingProducts.length == 0){
             return ;
         } else {
-            return(
-                [<Text style={styles.title} key={keys++}>{newProductsConfirm(deleting)}</Text>].concat(
-                    pendingProducts.map((product:Product) => {
-                        return <CaptionImage source={product.getProductImage()}
-                                             text={captionProductDescription(product)}
-                                             key={keys++}/>
-                    })
-                )
-            )
+            return([
+                <Text style={styles.title} key={keys++}>{newProductsConfirm(deleting)}</Text>,
+                pendingProducts.map((product:Product) => {
+                    return <CaptionImage source={product.getProductImage()}
+                                         text={captionProductDescription(product)}
+                                         key={keys++}/>
+                })
+            ])
         }
     }
 
@@ -91,15 +91,14 @@ export default function UpdatePlanPopup({route, navigation}:any) {
         if (removingProducts.length == 0){
             return ;
         } else {
-            return(
-                [<Text style={styles.title} key={keys++}>{removeProductsConfirm(deleting)}</Text>].concat(
-                    removingProducts.map((product:Product) => {
-                        return <CaptionImage source={product.getProductImage()}
-                                             text={captionProductandReqEquipment(product)}
-                                             key={keys++}/>
-                    })
-                )
-            )
+            return([
+                <Text style={styles.title} key={keys++}>{removeProductsConfirm(deleting)}</Text>,
+                removingProducts.map((product:Product) => {
+                    return <CaptionImage source={product.getProductImage()}
+                                         text={captionProductAndReqEquipment(product)}
+                                         key={keys++}/>
+                })
+            ])
         }
     }
 
@@ -108,15 +107,14 @@ export default function UpdatePlanPopup({route, navigation}:any) {
         if (pendingEquipment.length == 0){
             return ;
         } else {
-            return(
-                [<Text style={styles.title} key={keys++}>{newEquipmentConfirm(deleting)}</Text>].concat(
-                    pendingEquipment.map((equipment:Equipment) => {
-                        return <CaptionImage source={equipment.getEquipmentImage()}
-                                             text={captionEquipmentDescription(equipment)}
-                                             key={keys++}/>
-                    })
-                )
-            )
+            return ([
+                <Text style={styles.title} key={keys++}>{newEquipmentConfirm(deleting)}</Text>,
+                pendingEquipment.map((equipment:Equipment) => {
+                    return <CaptionImage source={equipment.getEquipmentImage()}
+                                         text={captionEquipmentDescription(equipment)}
+                                         key={keys++}/>
+                })
+            ])
         }
     }
 
@@ -127,9 +125,10 @@ export default function UpdatePlanPopup({route, navigation}:any) {
             return (
                 [
                     <View style={styles.section} key={keys++}>
-                        <Text style={[styles.title, {marginBottom: -13}]}>Payment information:</Text>
-                    </View>
-                ].concat(renderPay())
+                        <Text style={styles.title}>{confirmPayment()}</Text>
+                    </View>,
+                    renderPay()
+                ]
             );
         }
     }
@@ -148,7 +147,7 @@ export default function UpdatePlanPopup({route, navigation}:any) {
 
     function highlight(text:string){
         return (
-            <Text style={styles.highlightedText}>{text}</Text>
+            <Text style={styles.highlightedText} key={keys++}>{text}</Text>
         )
     }
 
@@ -158,7 +157,9 @@ export default function UpdatePlanPopup({route, navigation}:any) {
         } else {
             return(
                 <View style={styles.section}>
-                    <Text style={styles.captionFade}>{confirmationNotes(plan, isChangingPlan, highlight)}</Text>
+                    <Text style={styles.captionFade}>
+                        {confirmationNotes(plan, isChangingPlan, highlight)}
+                    </Text>
                 </View>
             );
         }

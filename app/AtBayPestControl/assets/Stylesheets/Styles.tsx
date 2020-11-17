@@ -297,7 +297,7 @@ export function getStyle(state:ColorSchemeName){
             margin: '5%',
             width: '90%',
             marginTop: -2.5,
-            color: text,
+            color: text
         },
         captionFade: {
             textAlign: 'left',

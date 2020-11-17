@@ -93,7 +93,11 @@ export default class Plan {
         return true;
     }
     removePendingChanges = () => {
-
+        // Removes anthing pending on the plan and sets it back to what it was before, including equipment
+    }
+    addChangesToPlan = () => {
+        // Adds pending packages, removes pending removal packages, then sends all that information to the client,
+        // along with the pending equipment list, which is then cleared
     }
     addPendingAddition = (bug:Infestation) => {
         // Adds the infestation to the plan, but only pending. If it is already in the plan but pending removal,
@@ -107,13 +111,34 @@ export default class Plan {
     }
     getDueDate = () => {
         //Gets the day the payments are due. If it hasn't been set, return today's date (ie 5 for the 5th)
-        return 1;
+        //TODO
+        return new Date().getDate();
     }
     setDueDate = (date:number) => {
+        // Sets 'date' as the new due date in the database, and returns the next date that the customer will have to pay
         let setDate = date;
-        // This is so you can't set the due date to be the 31st, then they only have to pay every other month...
+        // This is so you can't set the due date to be the 31st, then only have to pay every other month...
         if (date > 28){
             setDate = 1;
         }
+
+        // Also make sure it works if they're in a different time zone...? And then this will have to somehow schedule
+        // the automatic payments...
+
+        //TODO
+
+        // Returns the next due date
+        let today = new Date();
+        let month = today.getMonth();
+        let year = today.getFullYear();
+        month++;
+        if (date >= 28){
+            month++
+        }
+        if (month > 11){
+            month -= 12;
+            year++;
+        }
+        return new Date(year, month, setDate);
     }
 }

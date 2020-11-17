@@ -2,7 +2,6 @@ import Equipment from "../Classes/Equipment";
 import Product from "../Classes/Product";
 import Infestation from "../Classes/Infestation";
 import Plan from "../Classes/Plan";
-import {getUser, requiredPlanTime} from "../Data/Data";
 
 //Overarching app text
 export function appName(){
@@ -23,7 +22,7 @@ export function tab3label(){
 export function captionProductDescription(product:Product){
     return product.getProductName() + ':\n' + product.getProductDetails();
 }
-export function captionProductandReqEquipment(product:Product){
+export function captionProductAndReqEquipment(product:Product){
     let equipmentText:string = '';
     let equipment:Equipment[] = product.equipmentList();
     for(let i = equipment.length - 1; i >= 0; i--){
@@ -204,6 +203,9 @@ export function confirmButton(deleting: boolean, isChangingPlan: boolean){
         return "Purchase";
     }
 }
+export function confirmPayment(){
+    return "Payment Information:"
+}
 export function confirmationNotes(plan:Plan, isChangingPlan:boolean, highlight:any){
     let price = plan.getNewPrice();
     let currentMonthly = plan.getCurrentPrice();
@@ -226,7 +228,7 @@ export function confirmationNotes(plan:Plan, isChangingPlan:boolean, highlight:a
 
     let notesText = [highlight(todayText + "$" + todayCharge + '.')];
     if (isChangingPlan){
-        notesText = notesText.concat([ "Then, your card will automatically be billed ",
+        notesText = notesText.concat([" Then, your card will automatically be billed ",
             highlight("$" + price.monthly + " on the " + dateText(day) + " of each month"),
             changeText + ". You will receive an email reminder before that day each month. If you need " +
             "a new product before it is scheduled to ship, you can purchase it from the \'"
