@@ -60,3 +60,7 @@ export function getUser(){
     //TODO
     return user;
 }
+
+export function requiredPlanTime(){
+    return "3 months";
+}

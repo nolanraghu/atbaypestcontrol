@@ -273,7 +273,10 @@ export function getStyle(state:ColorSchemeName){
         },
         link:{
             color: highlight,
-            textDecorationLine: 'underline'
+            textDecorationLine: 'underline',
+        },
+        highlightedText:{
+            color: highlight
         },
         caption: {
             textAlign: 'left',
@@ -294,7 +297,7 @@ export function getStyle(state:ColorSchemeName){
             margin: '5%',
             width: '90%',
             marginTop: -2.5,
-            color: text,
+            color: text
         },
         captionFade: {
             textAlign: 'left',
