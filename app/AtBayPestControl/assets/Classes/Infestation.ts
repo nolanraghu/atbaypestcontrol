@@ -23,14 +23,12 @@ export default class Infestation {
     // We should use id's so we can find them in the database, everything else should be accessed from the database
     // using accessor functions, probably. Just in case we need it for local changes or something, I've included other
     // examples
-    private id: string
-    private image: NodeRequire
-    private name: string
-    private description: string
-    private products: Array<Product>
-    private price: number
-    product1 = new Product(0);
-    product2 = new Product(2);
+    private readonly id: string
+    private readonly image: NodeRequire
+    private readonly name: string
+    private readonly description: string
+    private readonly products: Array<Product>
+    private readonly price: number
     constructor(id:string){
         //TODO: ideally we probably don't need the id in the constructor? Depends on how we
         // implement it in Data.ts I suppose
@@ -42,6 +40,8 @@ export default class Infestation {
         let counter = 0;
         this.products = [];
         for(let x in pData.products){
+            this.products.push(new Product(x));
+            counter += 1;
         }
         this.price = pData.price;
 
@@ -52,35 +52,28 @@ export default class Infestation {
         return this.id;
     }
     isPreventionPlan = () => {
-        return this.id == 0
+        return this.id == "b1"
     }
     //Gets the image source for the bug
     getBugImage = () => {
         //TODO
-        return require('../images/honey_bee.png')
+        return this.image
     }
     getBugName = () => {
         //TODO
-        return 'Honeybee'
+        return this.name
     }
     getBugDescription = () => {
         //TODO
-        return 'Now, let me tell you about bees.....Now, let me tell you about bees.....Now, let me tell you ' +
-            'about bees.....Now, let me tell you about bees.....Now, let me tell you about bees.....Now, let ' +
-            'me tell you about bees.....Now, let me tell you about bees.....Now, let me tell you about bees...' +
-            '..Now, let me tell you about bees.....Now, let me tell you about bees.....Now, let me tell you about ' +
-            'bees.....Now, let me tell you about bees.....Now, let me tell you about bees.....Now, let me tell you ' +
-            'about bees.....Now, let me tell you about bees.....Now, let me tell you about bees.....Now, let me ' +
-            'tell you about bees.....Now, let me tell you about bees.....Now, let me tell you about bees.....Now, ' +
-            'let me tell you about bees.....'
+        return this.description
     }
 
     getProducts = () => {
         //TODO
-        return [this.product1, this.product2];
+        return this.products
     }
     getPrice = ():number => {
         //TODO
-        return 3.99
+        return this.price
     }
 }
