@@ -37,11 +37,9 @@ export default class Infestation {
         this.image = pData.image;
         this.name = pData.name;
         this.description = pData.description;
-        let counter = 0;
         this.products = [];
         for(let x in pData.products){
             this.products.push(new Product(x));
-            counter += 1;
         }
         this.price = pData.price;
 
