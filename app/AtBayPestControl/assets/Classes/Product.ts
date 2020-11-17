@@ -3,7 +3,11 @@
 
 import Equipment from "./Equipment";
 import {getEquipmentInfo} from "../../controller/EquipmentPulling";
+import {getInfestationInfo} from "../../controller/InfestationPulling";
+import {getProductInfo} from "../../controller/ProductPulling";
 
+
+// This bitch unsued
 interface ProductProps {
     id: string,
     image: NodeRequire,
@@ -13,36 +17,40 @@ interface ProductProps {
     price: number,
 }
 
-
-
-
 export default class Product{
-    id: string
-    equipment: Array<Equipment>
-    image: NodeRequire
-    name: string
-    description: string
-    price: number
-    constructor(props: ProductProps){
-        this.id = props.id;
+    private readonly id: string
+    private readonly image: NodeRequire
+    private readonly name: string
+    private readonly description: string
+    private readonly equipment: Array<Equipment>
+    private readonly price: number
+
+    constructor(id:string){
+        this.id = id;
+        let pData = getProductInfo(this.id);
+        this.image = pData.image;
+        this.name = pData.name;
+        this.description = pData.description;
+
+        let counter = 0;
         this.equipment = [];
-        for(var id in props.equipment){
-            this.equipment.push(getEquipmentInfo(props.id))
+        for(let x in pData.equipments){
+            this.equipment.push(new Equipment(x));
+            counter += 1;
         };
-        this.image = props.image;
-        this.productName = props.productName;
-        this.productDetails = props.productDetails;
+
+        this.price = pData.price;
     }
     getProductImage = () => {
         return this.image;
     }
 
     getProductName = () => {
-        return this.productName;
+        return this.name;
     }
 
     getProductDetails = () => {
-        return this.productDetails;
+        return this.description;
     }
 
     equipmentList = () => {
