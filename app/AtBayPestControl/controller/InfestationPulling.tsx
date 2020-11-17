@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {allInfestations} from '../assets/Data/allInfestations';
+import {allInfestions} from '../assets/Data/allInfestations';
 
 //this is kinda fakey right now because idk about the db
 
@@ -10,21 +10,21 @@ export function getInfestationInfo(bId: String) {
         image: require("../assets/images/error.jpg"),
         name: "ErrorName",
         description: "Error",
-        products: ["0"],
+        products: [-1],
         price: 0
     };
     switch(bId){
         case "b1":
-            k = allInfestations[0];
+            k = allInfestions[0];
             break;
         case "b2":
-            k = allInfestations[1];
+            k = allInfestions[1];
             break;
         case "b3":
-            k = allInfestations[2];
+            k = allInfestions[2];
             break;
         case "b4":
-            k = allInfestations[3]
+            k = allInfestions[3]
             break;
     }
     return k;
