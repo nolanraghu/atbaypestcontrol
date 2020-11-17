@@ -12,7 +12,7 @@ export default function ProfileTabNavigator() {
             <ProfileTabStack.Screen
                 name="ProfileTabScreen"
                 component={ProfileTabScreen}
-                options={{headerTitle: appName}}
+                options={{headerTitle: appName()}}
             />
         </ProfileTabStack.Navigator>
     );

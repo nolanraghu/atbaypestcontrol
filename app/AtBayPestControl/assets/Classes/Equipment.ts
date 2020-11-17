@@ -1,6 +1,7 @@
 // This will be very simple, including probably a picture and a name, perhaps a description and instructions,
 // all straight from the database
 
+
 interface EquipmentProps {
     id: number,
     image: NodeRequire,
@@ -21,7 +22,8 @@ export default class Equipment {
         this.name = props.name;
         this.description = props.description;
         this.price = props.price;
-    }
+      }
+
     getEquipmentImage = () => {
         //TODO
         return require('../images/product3.jpg')
@@ -29,6 +31,7 @@ export default class Equipment {
     getEquipmentDescription = () => {
         //TODO
         return this.description
+
     }
     getEquipmentName = () => {
         //TODO

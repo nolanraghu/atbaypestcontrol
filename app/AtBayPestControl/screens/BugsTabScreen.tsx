@@ -1,49 +1,61 @@
 import * as React from 'react';
-import {Button, Image, Pressable, ScrollView, StyleSheet, useColorScheme} from 'react-native';
-
-import { Text, View } from '../components/Themed';
+import {Button, ScrollView, useColorScheme, Text, View} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import {useState} from "react";
-import {getStyle, buttonColor, getBackgroundColor} from '../assets/Stylesheets/Styles'
-import {getBugInfo} from "../controller/BugPulling";
-import getCurrentPlan from "../profile/CurrentPlan";
+import {getStyle, buttonColor} from '../assets/Stylesheets/Styles'
+import BugPressable from "../components/BugPressable";
+import {getBugByID, getUser} from "../assets/Data/Data";
+import {newPriceText, updatePlan} from "../assets/text/text";
 
-const bugsData = [
-        {bId: "b1", isPreventionButton: true},
-    {bId: "b2", isPreventionButton: false},
-    {bId: "b3",  isPreventionButton: false},
-    {bId: "b4",  isPreventionButton: false},
-    {bId: "b5", isPreventionButton: false},
-    {bId: "b6",  isPreventionButton: false},
-    {bId: "b7", isPreventionButton: false},
-    {bId: "b8",  isPreventionButton: false},
-]
+export default function BugsTabScreen() {
+    const navigation = useNavigation();
+    const scheme = useColorScheme();
+    let styles = getStyle(scheme);
 
-// @ts-ignore
-export default function BugsTabScreen({route, navigation}) {
-  const scheme = useColorScheme();
-  let styles = getStyle(scheme);
+    // //For rerendering the screen
+    // const [i, update] = useState(0);
 
-  let bugPressArray = bugsData.map(function({bId, isPreventionButton}, index){
-    return <BugPressable bId={bId}   isPreventionButton={isPreventionButton} key={index}/>
-  })
+    const plan = getUser().getPlan();
+    // This might be a terrible way to do it, but this gets the bugs in order, from prevention plan,
+    // to added infestations, to other infestations
+    let bugs = [getBugByID(0)].concat(
+        plan.getInfestations().concat(
+            plan.getOtherInfestations()))
+
+    let bugPressArray = bugs.map(function(bug, index){
+        // If this isn't refreshing when new infestations are added, it needs to be fixed in pressButton()
+        // in BugInfoPopup.tsx
+        return <BugPressable bug={bug} key={index}/>
+    })
+
+    let changing:boolean =
+        plan.hasPendingChanges() ||
+        plan.getNewPrice().upFront != 0
+
+    let getHeader = () => {
+      if(changing){
+          return (
+              <View style={styles.header}>
+                  <Text style={styles.title}>
+                      {newPriceText(plan)}
+                  </Text>
+                  <Button title= {updatePlan(plan.hasPendingChanges())}
+                          color= {buttonColor}
+                          onPress={()=> navigation.navigate('PlanUpdatePopupScreen')}/>
+              </View>
+          )
+      } else {
+          return ;
+      }
+    }
 
   return (
-      <View>
-        <View style={styles.header}>
-          <Text style={styles.title}>
-            New Price: $10.99
-          </Text>
-          <Button title="Update Plan"
-                  color= {buttonColor}
-                  //TODO: add parameters to screens, interactivity
-                  onPress={()=> navigation.navigate('PlanUpdatePopupScreen')}/>
-        </View>
-        <ScrollView style={{marginBottom: '18%'}}>
-          <View style={styles.container}>
-            {bugPressArray}
-          </View>
-        </ScrollView>
+      <View style={styles.screen}>
+          {getHeader()}
+          <ScrollView>
+              <View style={styles.container}>
+                  {bugPressArray}
+              </View>
+          </ScrollView>
       </View>
   );
 }

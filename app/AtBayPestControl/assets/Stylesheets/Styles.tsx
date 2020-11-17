@@ -1,4 +1,4 @@
-import {ColorSchemeName, StyleSheet} from "react-native";
+import {ColorSchemeName, Platform, StyleSheet} from "react-native";
 
 export const buttonColor = 'rgb(72,190,87)';
 export const tintColor = 'rgb(63,164,76)';
@@ -6,18 +6,20 @@ export const tintColor = 'rgb(63,164,76)';
 const backgroundDark = 'rgb(27,27,27)';
 const headerDark = 'rgb(50,50,50)';
 const textDark = 'rgb(229,229,229)';
-const onButtonDark = 'rgb(105,105,105)';
-const offButtonDark = 'rgb(60,60,60)';
+const buttonDark = 'rgb(105,105,105)';
+const fadedItemDark = 'rgb(60,60,60)';
 const highlightDark = 'lightgreen';
-const fadedTextDark = 'rgb(90,90,90)';
+const highlightRemovingDark = 'rgb(239,99,99)';
+const fadedTextDark = 'rgb(118,118,118)';
 
 const backgroundLight = 'rgb(236,236,236)';
 const headerLight = 'rgb(245,245,245)';
 const textLight = 'rgb(50,50,50)';
-const onButtonLight = 'white';
-const offButtonLight = 'rgb(231,231,231)';
-const highlightLight = 'rgb(72,190,87)';
-const fadedTextLight = 'rgb(150,150,150)';
+const buttonLight = 'white';
+const fadedItemLight = 'rgb(231,231,231)';
+const highlightLight = 'rgb(62,176,76)';
+const highlightRemovingLight = 'rgb(255,43,43)';
+const fadedTextLight = 'rgb(153,153,153)';
 
 export function getBackgroundColor(state:ColorSchemeName){
     if(state === 'dark'){
@@ -27,27 +29,41 @@ export function getBackgroundColor(state:ColorSchemeName){
     }
 }
 
+export function getOffButtonColor(state:ColorSchemeName){
+    if(state === 'dark'){
+        return fadedItemDark;
+    } else {
+        return fadedItemLight;
+    }
+}
+
 export function getStyle(state:ColorSchemeName){
-    let background, header, text, onButton, offButton, highlight, fadedText
+    let background, header, text, button, fadedItem, highlight, fadedText, highlightRemoving
 
     if(state === 'dark'){
         background = backgroundDark;
         header = headerDark;
         text = textDark;
-        onButton = onButtonDark;
-        offButton = offButtonDark;
+        button = buttonDark;
+        fadedItem = fadedItemDark;
         highlight = highlightDark;
         fadedText = fadedTextDark;
+        highlightRemoving = highlightRemovingDark;
     } else {
         background = backgroundLight;
         header = headerLight;
         text = textLight;
-        onButton = onButtonLight;
-        offButton = offButtonLight;
+        button = buttonLight;
+        fadedItem = fadedItemLight;
         highlight = highlightLight;
         fadedText = fadedTextLight;
+        highlightRemoving = highlightRemovingLight;
     }
     return StyleSheet.create({
+        screen: {
+            height: '100%',
+            backgroundColor: background
+        },
         container: {
             padding: '2.5%',
             alignItems: 'flex-start',
@@ -75,40 +91,26 @@ export function getStyle(state:ColorSchemeName){
             margin: 10,
             color: text
         },
-        fullButtonOn: {
-            width: '39%',
-            margin: '5.5%',
-            aspectRatio: 1,
-            backgroundColor: onButton,
+        product: {
+            width: '94%',
+            margin: '3%',
+            marginBottom: '3.5%',
+            aspectRatio: 3,
+            backgroundColor: button,
             borderRadius: 20,
             justifyContent: "center",
-            flexDirection: "column",
+            flexDirection: "row",
             shadowColor: 'black',
             shadowOffset: { width: 0, height: 2 },
             shadowOpacity: 0.5,
             shadowRadius: 2,
             elevation: 4,
         },
-        fullButtonOff: {
+        fullButtonOn: {
             width: '39%',
             margin: '5.5%',
             aspectRatio: 1,
-            backgroundColor: offButton,
-            borderRadius: 20,
-            justifyContent: "center",
-            flexDirection: "column",
-            shadowColor: 'rgb(0,0,0)',
-            shadowOffset: { width: 0, height: 2 },
-            shadowOpacity: 0.5,
-            shadowRadius: 2,
-            elevation: 4,
-            opacity: .8,
-        },
-        fullButtonPending: {
-            width: '39%',
-            margin: '5.5%',
-            aspectRatio: 1,
-            backgroundColor: offButton,
+            backgroundColor: button,
             borderRadius: 20,
             justifyContent: "center",
             flexDirection: "column",
@@ -119,14 +121,61 @@ export function getStyle(state:ColorSchemeName){
             elevation: 4,
             borderWidth: 2.5,
             borderColor: highlight,
-            opacity: .8
+        },
+        fullButtonOff: {
+            width: '39%',
+            margin: '5.5%',
+            aspectRatio: 1,
+            backgroundColor: button,
+            borderRadius: 20,
+            justifyContent: "center",
+            flexDirection: "column",
+            shadowColor: 'rgb(0,0,0)',
+            shadowOffset: { width: 0, height: 2 },
+            shadowOpacity: 0.5,
+            shadowRadius: 2,
+            elevation: 4,
+        },
+        fullButtonPending: {
+            width: '39%',
+            margin: '5.5%',
+            aspectRatio: 1,
+            backgroundColor: button,
+            borderRadius: 20,
+            justifyContent: "center",
+            flexDirection: "column",
+            shadowColor: 'black',
+            shadowOffset: { width: 0, height: 2 },
+            shadowOpacity: 0.5,
+            shadowRadius: 2,
+            elevation: 4,
+            borderWidth: 2.5,
+            borderColor: highlight,
+            borderStyle: 'dashed'
+        },
+        fullButtonRemoving: {
+            width: '39%',
+            margin: '5.5%',
+            aspectRatio: 1,
+            backgroundColor: button,
+            borderRadius: 20,
+            justifyContent: "center",
+            flexDirection: "column",
+            shadowColor: 'black',
+            shadowOffset: { width: 0, height: 2 },
+            shadowOpacity: 0.5,
+            shadowRadius: 2,
+            elevation: 4,
+            borderWidth: 2.5,
+            borderColor: highlightRemoving,
+            borderStyle: 'dashed'
         },
         preventionButtonOff: {
             width: '89%',
             margin: '5.5%',
             marginBottom: '9%',
             aspectRatio: 3,
-            backgroundColor: offButton,
+            backgroundColor: button,
             borderRadius: 20,
             justifyContent: "center",
             flexDirection: "row-reverse",
@@ -135,14 +184,13 @@ export function getStyle(state:ColorSchemeName){
             shadowOpacity: 0.5,
             shadowRadius: 2,
             elevation: 4,
-            opacity: .8,
         },
         preventionButtonOn: {
             width: '89%',
             margin: '5.5%',
             marginBottom: '9%',
             aspectRatio: 3,
-            backgroundColor: onButton,
+            backgroundColor: button,
             borderRadius: 20,
             justifyContent: "center",
             flexDirection: "row-reverse",
@@ -151,13 +199,15 @@ export function getStyle(state:ColorSchemeName){
             shadowOpacity: 0.5,
             shadowRadius: 2,
             elevation: 4,
+            borderWidth: 2.5,
+            borderColor: highlight,
         },
         preventionButtonPending: {
             width: '89%',
             margin: '5.5%',
             marginBottom: '9%',
             aspectRatio: 3,
-            backgroundColor: offButton,
+            backgroundColor: button,
             borderRadius: 20,
             justifyContent: "center",
             flexDirection: "row-reverse",
@@ -168,7 +218,25 @@ export function getStyle(state:ColorSchemeName){
             elevation: 4,
             borderWidth: 2.5,
             borderColor: highlight,
-            opacity: .8
+            borderStyle: "dashed"
+        },
+        preventionButtonRemoving: {
+            width: '89%',
+            margin: '5.5%',
+            marginBottom: '9%',
+            aspectRatio: 3,
+            backgroundColor: button,
+            borderRadius: 20,
+            justifyContent: "center",
+            flexDirection: "row-reverse",
+            shadowColor: 'rgb(0,0,0)',
+            shadowOffset: { width: 0, height: 2 },
+            shadowOpacity: 0.5,
+            shadowRadius: 2,
+            elevation: 4,
+            borderWidth: 2.5,
+            borderColor: highlightRemoving,
+            borderStyle: "dashed"
         },
         buttonImage: {
             flex: 1,
@@ -176,6 +244,7 @@ export function getStyle(state:ColorSchemeName){
             width: '70%',
             alignSelf: "center",
             resizeMode: 'contain',
+            borderRadius: 8
         },
         preventionText: {
             color: text,
@@ -202,8 +271,11 @@ export function getStyle(state:ColorSchemeName){
             flexDirection: 'row',
             flexWrap: 'wrap',
         },
+        link:{
+            color: highlight,
+            textDecorationLine: 'underline'
+        },
         caption: {
-            flex: 2,
             textAlign: 'left',
             margin: '4%',
             marginLeft: 10,
@@ -225,12 +297,10 @@ export function getStyle(state:ColorSchemeName){
             color: text,
         },
         captionFade: {
-            flex: 2,
             textAlign: 'left',
             margin: '4%',
             marginLeft: 10,
-            color: text,
-            opacity: .45
+            color: fadedText,
         },
         price: {
             textAlign: 'center',
@@ -238,6 +308,116 @@ export function getStyle(state:ColorSchemeName){
             margin: '5%',
             marginRight: 0,
             flex: 2,
+        },
+        cardContainer: {
+            backgroundColor: background,
+            borderWidth: 0,
+            flex: 1,
+            margin: 0,
+            padding: 0,
+        },
+        planContainer: {
+            flexDirection: 'row',
+            justifyContent: 'flex-start',
+            marginBottom: 25,
+        },
+        emailContainer: {
+            backgroundColor: background,
+            flex: 1,
+            paddingTop: 30,
+        },
+        headerBackgroundImage: {
+            paddingBottom: 20,
+            paddingTop: 45,
+        },
+        headerContainer: {},
+        headerColumn: {
+            backgroundColor: 'transparent',
+            ...Platform.select({
+                ios: {
+                    alignItems: 'center',
+                    elevation: 1,
+                    marginTop: -1,
+                },
+                android: {
+                    alignItems: 'center',
+                },
+            }),
+        },
+        placeIcon: {
+            color: 'white',
+            fontSize: 26,
+        },
+        scroll: {
+            backgroundColor: background,
+        },
+        userAddressRow: {
+            alignItems: 'center',
+            flexDirection: 'row',
+        },
+        userCityRow: {
+            backgroundColor: 'transparent',
+        },
+        userCityText: {
+            color: '#A5A5A5',
+            fontSize: 15,
+            fontWeight: '600',
+            textAlign: 'center',
+        },
+        userImage: {
+            borderColor: background,
+            borderRadius: 85,
+            borderWidth: 3,
+            height: 170,
+            marginBottom: 15,
+            width: 170,
+        },
+        userNameText: {
+            color: text,
+            fontSize: 22,
+            fontWeight: 'bold',
+            paddingBottom: 8,
+            textAlign: 'center',
+        },
+        iconRow: {
+            flex: 2,
+            justifyContent: 'center',
+        },
+        Icon: {
+            color: fadedText,
+            fontSize: 30,
+        },
+        Row: {
+            flex: 8,
+            flexDirection: 'column',
+            justifyContent: 'center',
+        },
+        Text: {
+            color: text,
+            fontSize: 16,
+        },
+        subText: {
+            color: fadedText,
+            fontSize: 14,
+            fontWeight: '200',
+        },
+        column: {
+            flexDirection: 'row',
+            justifyContent: 'flex-start',
+            marginBottom: 5,
+        },
+        nameColumn: {
+            flexDirection: 'row',
+            justifyContent: 'flex-start',
+        },
+        payText: {
+            color: text,
+            fontSize: 18,
+            fontWeight: 'bold',
+        },
+        editRow: {
+            flex: 2,
+            justifyContent: 'flex-start',
         },
     });
 }

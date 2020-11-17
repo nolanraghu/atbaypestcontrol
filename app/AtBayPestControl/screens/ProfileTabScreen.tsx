@@ -1,156 +1,212 @@
 import * as React from 'react';
-import { Button, Pressable, ScrollView, StyleSheet, Appearance } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import {Card, Icon} from 'react-native-elements';
+import {
+  ScrollView,
+  useColorScheme,
+  ImageBackground,
+  Image,
+  TouchableOpacity,
+    Text,
+    View
+} from 'react-native';
+import {getStyle} from '../assets/Stylesheets/Styles'
+import Email from '../components/Email'
+import Payment from '../components/Payment'
+import ShippingLocations from '../components/ShippingLocations';
+import Separator from '../components/Separator'
+import {EMAIL, LOC, PAY, PLAN} from "../assets/Data/Data";
+import { useNavigation } from '@react-navigation/native';
+import PlanTabScreen from "./PlanTabScreen";
 
-import { Text, View } from '../components/Themed';
+//TODO: make editable, have a situation for no user yet
 
-// Idea: can we make a basic object that has an icon, text, and an edit button all arranged in
-// a horizontal plane. This way we can just change the text and icon for each section of the Personal
-// Information screen
-const UDATA = [
-  {
-    id: "UserName",
-    title: "John Doe",
-    editButton: "Edit",
-  },
-  {
-    id: "Address",
-    title: "123 Main Street" +
-        "New York, NY 12345",
-    editButton: "Edit",
-  },
-  {
-    id: "Plan",
-    title: "Basic Plan",
-  },
-]
-
-//const PAYDATA = [
-// Could we do the same with the payment data as was proposed with the user data?
-//]
-
-const ionColor = Appearance.getColorScheme() === 'dark'? 'white':'black'
-
-
-// Only for asthetic use, barely functional
 export default function ProfileTabScreen() {
+  const scheme = useColorScheme();
+  let styles = getStyle(scheme);
+
   return (
-
-      <View>
-        <View style={styles.header}>
-          <Text style={styles.topText}> Personal Information </Text>
+      <ScrollView style={styles.scroll}>
+        <View style={styles.container}>
+          <Card containerStyle={styles.cardContainer}>
+            {renderHeader({})}
+            {renderEmail()}
+            {Separator()}
+            {renderPlan()}
+            {Separator()}
+            {renderLoc()}
+            {Separator()}
+            {renderPay()}
+          </Card>
         </View>
-        <ScrollView style={{marginBottom: '18%'}}>
-          <View style={styles.container}>
+      </ScrollView>
+  )
 
-            <View style={styles.userEntry}>
-              <Ionicons name="md-person" size={64} color={ionColor} />
-              <Text style={styles.title}> John Doe </Text>
-              <EditPressable button={styles.editButton}/>
-            </View>
+}
 
-            <View style={styles.userEntry}>
-              <Ionicons name="md-home" size={64} color={ionColor} />
-              <View style={styles.container}>
-                <Text style={styles.title}> 123 Main St. </Text>
-                <Text style={styles.title}> New York, NY 12345 </Text>
+function onPressPlace () {
+  console.log('place')
+}
+
+function renderHeader ({avatar = require('../assets/images/profile_picture.jpg'),
+                         avatarBackground = require('../assets/images/splash.png'),
+                         name = 'John Doe', city = 'New York', state = 'New York'}: RenderHProps) {
+
+  const scheme = useColorScheme();
+  let styles = getStyle(scheme);
+  console.log(avatar, avatarBackground)
+
+  return (
+      <View style={styles.headerContainer}>
+        <ImageBackground
+            style={styles.headerBackgroundImage}
+            blurRadius={10}
+            source={avatarBackground}
+        >
+          <View style={styles.headerColumn}>
+            <Image
+                style={styles.userImage}
+                source={avatar}
+            />
+            <Text style={styles.userNameText}>{name}</Text>
+            <View style={styles.userAddressRow}>
+              <View>
+                <Icon
+                    name="place"
+                    underlayColor="transparent"
+                    iconStyle={styles.placeIcon}
+                    onPress={onPressPlace}
+                />
               </View>
-              <EditPressable button={styles.editButton}/>
-            </View>
-
-            <View style={styles.userEntry}>
-              <Ionicons name="md-paper" size={64} color={ionColor} />
-              <Text style={styles.title}> Basic Plan ($6.99 Month) </Text>
-            </View>
-
-          </View>
-
-          <View style={styles.container}>
-            <View style={styles.header}>
-              <Text style={styles.topText}> Payment Information </Text>
-            </View>
-
-            <View style={styles.userEntry}>
-              <Ionicons name="md-card" size={64} color={ionColor} />
-              <Text style={styles.title}> XXXX-1234 </Text>
-              <EditPressable button={styles.editButton}/>
-            </View>
-
-            <View style={styles.userEntry}>
-              <Ionicons name="md-card" size={64} color={ionColor} />
-              <Text style={styles.title}> XXXX-5678 </Text>
-              <EditPressable button={styles.editButton}/>
-            </View>
-
-            <View style={styles.userEntry}>
-              <Ionicons name="md-card" size={64} color={ionColor} />
-              <Text style={styles.title}> Bank Account </Text>
-              <EditPressable button={styles.editButton}/>
+              <View style={styles.userCityRow}>
+                <Text style={styles.userCityText}>
+                  {city}, {state}
+                </Text>
+              </View>
             </View>
           </View>
-        </ScrollView>
+        </ImageBackground>
       </View>
-
-  );
+  )
 }
 
-// My function now
-// lol -N
-function EditPressable(props: EditPressProps){
-  return(
-      <Pressable style={props.button}
-                 onPress={()=>{}}
-                 android_ripple={{color: 'rgba(0,0,0,.15)'}
-                 }/>
-  );
-}
-//This is where all the parameters for the BugPressable go
-interface EditPressProps {
-  button: object
-  //We'll eventually need to put the other parameter here that tell the button which bug it is
+interface RenderHProps {
+  avatar?: object
+  avatarBackground?: object
+  name?: string
+  city?: string
+  state?: string
+
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignContent: 'space-between',
-    justifyContent: 'center',
-  },
-  header: {
-    padding: '3%',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    flexWrap: 'wrap',
-    flexDirection: 'row',
-    backgroundColor: 'rgba(0,0,0,.15)'
-  },
-  title: {
-    fontSize: 30,
-    fontWeight: 'bold',
-  },
-  topText: {
-    fontSize: 35,
-    fontWeight: "bold",
-    alignItems: 'flex-start',
-    margin: 10,
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
-  userEntry: {
-    flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
-  editButton: {
-    width: '10%',
-    margin: '5.5%',
-    aspectRatio: 1,
-    backgroundColor: 'green',
-    borderRadius: 20,
-    padding: 10,
-  },
-});
+function renderEmail () {
+
+  const scheme = useColorScheme();
+  let styles = getStyle(scheme);
+
+  function onPressEmail () {
+    console.log('email')
+  }
+
+  let EmailArray = EMAIL.map(function([id, name, email], index) {
+    return  <Email
+              key={id}
+              index={index}
+              name={name}
+              email={email}
+              onPressEmail={onPressEmail}
+
+            />
+  })
+
+
+  return (
+      <View style={styles.emailContainer}>
+        {EmailArray}
+      </View>
+  )
+}
+
+function renderPlan () {
+  const navigation = useNavigation();
+  const scheme = useColorScheme();
+  let styles = getStyle(scheme);
+
+  function onPressPlan () {
+    navigation.navigate("PlanTabScreen")
+  }
+
+  return (
+      <View style={styles.emailContainer}>
+        <TouchableOpacity onPress={() => onPressPlan()}>
+          <View style={styles.planContainer}>
+            <View style={styles.iconRow}>
+              <Icon
+                  name= 'ios-paper'
+                  type= 'ionicon'
+                  underlayColor = 'transparent'
+                  iconStyle={styles.Icon}
+                  onPress={() => onPressPlan()}
+              />
+            </View>
+            <View style={styles.Row}>
+              <Text style={styles.Text}>{PLAN}</Text>
+            </View>
+          </View>
+        </TouchableOpacity>
+      </View>
+  )
+}
+
+function renderPay () {
+
+  const scheme = useColorScheme();
+  let styles = getStyle(scheme);
+
+  function onPressPayment () {
+    console.log('payed')
+  }
+
+  function onPressEdit () {
+    console.log('edit')
+  }
+
+  let PayArray = PAY.map(function([id, name, card], index) {
+    return  <Payment
+        key={id}
+        index={index}
+        name={name}
+        card={card}
+        onPressEdit={onPressEdit}
+        onPressPayment={onPressPayment}
+
+    />
+  })
+
+  return (
+      <View style={styles.emailContainer}>
+        {PayArray}
+      </View>
+  )
+}
+
+function renderLoc () {
+
+  const scheme = useColorScheme();
+  let styles = getStyle(scheme);
+
+  let LocationArray = LOC.map(function([location], index) {
+    return  <ShippingLocations
+        key={location[1]}
+        index={index}
+        location={location}
+        onPressPlace={onPressPlace}
+    />
+  })
+
+  return (
+      <View style={styles.emailContainer}>
+        {LocationArray}
+      </View>
+  )
+}
+

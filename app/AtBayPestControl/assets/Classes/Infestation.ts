@@ -6,7 +6,6 @@
 //  a url? Or is it stored in the www folder and then updates itself?
 
 
-//
 import Product from "./Product";
 
 export default class Infestation {

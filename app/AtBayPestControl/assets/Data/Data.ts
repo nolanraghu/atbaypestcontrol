@@ -2,7 +2,9 @@ import Infestation from "../Classes/Infestation";
 import User from "../Classes/User";
 
 
+
 //EXAMPLE FORMATS
+
 export const EMAIL = [
     [
         "1",
@@ -45,8 +47,10 @@ export const LOC = [
 
 export const PLAN = "Current Plan"
 
+
 //Infestation pulls from Async
 //User from a database
+
 const bug1 = new Infestation(0);
 const user = new User()
 
@@ -63,4 +67,5 @@ export function getBugByID(id: number){
 export function getUser(){
     //TODO
     return user;
+
 }

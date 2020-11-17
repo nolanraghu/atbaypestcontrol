@@ -1,248 +1,219 @@
 import * as React from 'react';
-
-import { Text, View } from '../components/Themed';
 import {
     Button,
-    Image,
-    NativeSyntheticEvent,
     ScrollView,
-    StyleSheet,
-    TextLayoutEventData,
-    useColorScheme
+    useColorScheme,
+    Text,
+    View
 } from "react-native";
-import {useNavigation} from "@react-navigation/native";
+import {getStyle, buttonColor, getOffButtonColor} from '../assets/Stylesheets/Styles';
+import CaptionImage from "../components/CaptionImage";
 import {useState} from "react";
-import {getStyle, buttonColor} from '../assets/Stylesheets/Styles';
-import {getBugInfo} from "../controller/BugPulling";
+import {getBugByID, getUser} from "../assets/Data/Data";
+import {
+    changePlan,
+    captionProductDescription,
+    equipmentDescription, infestationName,
+    noInfestationProductText, priceText,
+    productEquipmentText,
+    productOwnedEquipmentText, productsIntro
+} from "../assets/text/text";
+import Equipment from "../assets/Classes/Equipment";
+import Product from "../assets/Classes/Product";
+import Infestation from "../assets/Classes/Infestation";
 
-//TODO: Fix how everything shifts up, fix colors
+//TODO: Test this screen a lot! Example cases: what if an infestation is pending and then you realize you are missing
+// some of the equipment? Or if you are removing an infestation, but you click on missing equipment? What happens when
+// the products are changed and someone who already owns that infestation with changed details goes back into the app?
 
-//@ts-ignore
-export default function BugInfoPopup({route, navigation}) {
-    const {bugId} = route.params;
-    const bugInfo = getBugInfo(bugId);
+
+export default function BugInfoPopup({route, navigation}: any) {
+    const {infestationID} = route.params;
+    const infestation:Infestation = getBugByID(infestationID)
+
+    const user = getUser();
+
+    // This is for making the screen re-render. If it isn't
+    // working, set a View around productImages, and have its key={i}
+    const [i, update] = useState(0);
     const scheme = useColorScheme();
     let styles = getStyle(scheme);
 
-    //This maps the data onto CaptionImages. There's probably a cleaner way to do this, by just making
-    // <CaptionImage> return a list? That seems potentially bad tho
-    // I just add this in as JS by putting it in brackets in the ScrollView
-    /*
-    let captionImageListArr = captionImageListData.map(function(bugInfo, index){
-        return <CaptionImage source={bugInfo.image} text={bugInfo.name} key={index}/>
-    })
-    */
+    // True if the infestation can be added to the plan, false if it can be removed
+    const adding = !(user.getPlan().containsInfestation(infestation) ||
+        user.getPlan().isPendingInfestation(infestation))
+
+    // The number of MISSING equipment for the infestation you will be purchasing
+    const [numPurchasing, setPurchasing] = useState(0);
+    // True if you will be purchasing MISSING equipment (equipment once owned)
+    const purchasing = numPurchasing != 0;
+
+    //False if the user is not allowed to remove the infestation from their plan
+    const canRemove = user.getPlan().isRemovable(infestation)
+
+    const products:Product[] = infestation.getProducts()
+
+    // These will make a comprehensive list of any equipment that would be needed for this infestation.
+    let newEquipment:Map<Equipment,Product[]|any> = new Map<Equipment, Product[]>()
+    let ownedEquipment:Map<Equipment,Product[]|any> = new Map<Equipment, Product[]>()
+
+    let equipmentPrice:number = 0;
+
+    //Otherwise its hard to give everything its own key
+    let keys = 1;
+
+    // Creates the list of product images and descriptions
+    let productImages = () => {
+        let retVal;
+        if (products.length == 0){
+            retVal = <Text style={styles.captionFade}>{noInfestationProductText()}</Text>
+        } else {
+            retVal = products.map(function(product){
+                let equipment = product.equipmentList();
+
+                // Makes lists of equipment that will be needed, along with the product(or products)
+                // that they are needed for, in a map
+                if (equipment.length != 0){
+                    for (let item of equipment){
+                        if(user.hasEquipment(item)){
+                            if (ownedEquipment.has(item)){
+                                ownedEquipment.get(item).push(product);
+                            } else {
+                                ownedEquipment.set(item, [product]);
+                            }
+                        } else {
+                            if (newEquipment.has(item)){
+                                newEquipment.get(item).push(product);
+                            } else {
+                                newEquipment.set(item, [product]);
+                            }
+                        }
+                    }
+                }
+
+                return <CaptionImage source={product.getProductImage()}
+                                     text={captionProductDescription(product)}
+                                     key={keys++}/>;
+            })
+
+            // Makes the list of new equipment that will need to be added, if any
+            if (newEquipment.size != 0){
+                retVal.push(<Text style={styles.title} key={keys++}>{productEquipmentText(adding)}</Text> );
+                let {imageList:imageList, price:price} = equipmentImages(newEquipment)
+                retVal = retVal.concat(imageList);
+                equipmentPrice = price;
+            }
+
+            // Makes the list of equipment they already own, and gives them the option to add it if they don't have it
+            if (ownedEquipment.size != 0){
+                retVal.push(<Text style={styles.title} key={keys++}>{productOwnedEquipmentText(adding)}</Text> );
+                retVal = retVal.concat(equipmentImages(ownedEquipment, true).imageList);
+            }
+        }
+        return retVal;
+    }
+
+    //Returns a list of CaptionImages for the equipment given, with links if it is owned
+    function equipmentImages(equipmentList: Map<Equipment, Product[]>, owned = false){
+        //The return value
+        let imageList: JSX.Element[] = [];
+
+        //The price to purchase all the equipment
+        let price:number = 0;
+
+        // Makes a list of all the equipment
+        equipmentList.forEach(function(products,equipment){
+            price += equipment.getPrice();
+            let onceOwned = user.hadEquipment(equipment);
+
+            let link = (text:string) => {
+                return(
+                    <Text style={styles.link}
+                          onPress={()=>{
+                              if (onceOwned){
+                                  user.addHasEquipment(equipment);
+                                  setPurchasing(numPurchasing - 1);
+                              } else {
+                                  user.removeEquipment(equipment);
+
+                                  // Now we'll be purchasing equipment, which will change the text if we are not
+                                  // adding to the plan
+                                  setPurchasing(numPurchasing + 1);
+                              }
+
+                              // This makes the screen re-render
+                              update(i + 1)
+                          }}
+                          key={keys++}>{text}</Text>
+                )
+            }
+
+            //This adds the equipment and description to the return array
+            imageList.push(<CaptionImage source={equipment.getEquipmentImage()}
+                                         text={equipmentDescription(equipment, products, owned, link, onceOwned)}
+                                         key={keys++}/>)
+        })
+
+        // Returns the array of CaptionImages for the equipment
+        return {imageList, price};
+    }
+
+    function pressButton(){
+        // The button should do nothing if you cannot remove, add to plan, or purchase equipment
+        // TODO: if the main BugsTab screen doesn't update after this button is pushed (once the classes are working),
+        //  it needs to be refreshed from here somehow, probably by passing a prop to navigate or adding [i, update]
+        //  to BugsTabScreen
+        if(canRemove || adding || purchasing){
+            if (adding) {
+                user.getPlan().addPendingAddition(infestation);
+            }
+            if (newEquipment.size != 0){
+                newEquipment.forEach(( products, equipment) => {
+                    user.addEquipment(equipment);
+                })
+            } else if(!adding) {
+                user.getPlan().addPendingRemoval(infestation)
+            }
+            navigation.navigate('BugsTabScreen')
+        }
+    }
+
+    function getButtonColor(){
+        if(!(canRemove || adding || purchasing)){
+            return getOffButtonColor(scheme);
+        } else {
+            return buttonColor;
+        }
+    }
+
     return(
-        <View style={{height: '100%'}}>
+        <View style={styles.screen}>
             <View style={styles.header}>
-                <Text style={styles.title}>{bugInfo.name + " Infestation"}</Text>
-                <Button title="Add to Plan"
-                        color= {buttonColor}
-                        onPress={()=> navigation.navigate('BugsTabScreen')}/>
+                {/*TODO: sometimes the title is too big and it pushes the button to the next line. I'd rather the
+                title go to the next line*/}
+                <Text style={styles.title}>{infestationName(infestation)}</Text>
+                <Button title={changePlan(adding, purchasing)}
+                        color={getButtonColor()}
+                        onPress={pressButton}/>
             </View>
             <ScrollView>
                 <View style={styles.container}>
-                    {CaptionImage({source: bugInfo.image, text: bugInfo.description})}
+                    <CaptionImage source={infestation.getBugImage()}
+                                  text={infestation.getBugDescription()}/>
+                    <View style={styles.section}>
+                        <Text style={styles.title}>{productsIntro(adding)}</Text>
+                    </View>
+                    {productImages()}
                 </View>
             </ScrollView>
             <View style={styles.header}>
-                <Text style={styles.fullText}>Price to add: $3.99</Text>
+                <Text style={styles.fullText}>
+                    {priceText(infestation.getPrice(), equipmentPrice, adding, purchasing)}
+                </Text>
             </View>
         </View>
     )
 }
 
-function CaptionImage({source, text = 'information'}: CaptionImageProps){
-    const scheme = useColorScheme();
-    let styles = getStyle(scheme);
 
-    //  These states say what text is in the top and in the bottom, defaulting
-    // to everything being in the top
-    const [topText, setTopText] = useState(text); //This is just so we know what is being displayed
-    const [topHeight, setTopHeight] = useState(-1); // -1 means auto, but it messes up if you type 'auto'
-    const [bottomText, setBottomText] = useState('');
 
-    //  When we layout the text, it will split the text into top and bottom, and if
-    // it needs to be split, it will show that
-    const _onTextLayout = (e: NativeSyntheticEvent<TextLayoutEventData>) => {
-        let top = "";
-        let bottom = "";
-        let height = 0;
-        //  Right now it just splits it into 8 lines by the picture, the rest underneath.
-        // If we need to measure it, we can use e.nativeEvent.lines[].height
-        for(let i = 0; i < e.nativeEvent.lines.length; i++){
-            if (i < 8){
-                top = top + e.nativeEvent.lines[i].text;
-                height += e.nativeEvent.lines[i].height;
-            } else {
-                bottom = bottom + e.nativeEvent.lines[i].text;
-            }
-        }
-        if(top != topText){
-            // I had to change the way this was done because changing the text on top
-            // was somehow changing how much text could display in a single line
-            setTopHeight(height);
-            setTopText(top);
-            setBottomText(bottom);
-        }
-    }
-
-    //This function is because it won't let the state represent numbers and strings
-    const getHeight = (height: number) => {
-        if(height === -1){
-            return 'auto';
-        } else {
-            return height;
-        }
-    }
-
-    return(
-        <View style={styles.section}>
-            <Image source={source}  style={styles.image}/>
-            <Text style={[styles.caption, {height: getHeight(topHeight)}]} onTextLayout={_onTextLayout}>{text}</Text>
-            <Text style={styles.caption2}>{bottomText}</Text>
-        </View>
-    )
-}
-
-interface CaptionImageProps{
-    source: object
-    text?: string
-}
-
-const stylesLight = StyleSheet.create({
-    container: {
-        justifyContent: "center",
-        flexDirection: "column",
-        height: '100%'
-    },
-    popupContainer: {
-        width: '90%',
-        height: 'auto',
-        maxHeight: '74%',
-        marginTop: '40%',
-        borderRadius: 28,
-        backgroundColor: 'rgba(90,98,87,.95)',
-        alignSelf: "center",
-        alignContent: "center",
-        overflow: "hidden"
-    },
-    title: {
-        fontSize: 25,
-        padding: '2%',
-        margin: '5%',
-        width: '60%',
-        textAlign: 'center',
-    },
-    image: {
-        borderRadius: 8,
-        margin: '5%',
-        flex: 1,
-        backgroundColor: 'white',
-        aspectRatio: 1,
-    },
-    section: {
-        width: '100%',
-        backgroundColor: 'transparent',
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-    },
-    caption: {
-        flex: 2,
-        textAlign: 'left',
-        margin: '5%',
-        marginBottom: 0,
-        marginLeft: '2.5%',
-    },
-    caption2: {
-        textAlign: 'left',
-        margin: '5%',
-        width: '90%',
-        marginTop: -2.5
-    },
-    price: {
-        textAlign: 'center',
-        fontSize: 20,
-        margin: '5%',
-        marginRight: 0,
-        flex: 2,
-    },
-    button: {
-        flex: 1.5,
-        backgroundColor: 'transparent',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        padding: '5%',
-    },
-    back: {
-        backgroundColor: 'rgb(226,226,226)'
-    }
-})
-const stylesDark = StyleSheet.create({
-    container: {
-        justifyContent: "center",
-        flexDirection: "column",
-        height: '100%'
-    },
-    popupContainer: {
-        width: '90%',
-        height: 'auto',
-        maxHeight: '74%',
-        marginTop: '40%',
-        borderRadius: 28,
-        backgroundColor: 'rgba(90,98,87,.95)',
-        alignSelf: "center",
-        alignContent: "center",
-        overflow: "hidden"
-    },
-    title: {
-        fontSize: 25,
-        padding: '2%',
-        margin: '5%',
-        width: '60%',
-        textAlign: 'center',
-    },
-    image: {
-        borderRadius: 8,
-        margin: '5%',
-        flex: 1,
-        backgroundColor: 'white',
-        aspectRatio: 1,
-    },
-    section: {
-        width: '100%',
-        backgroundColor: 'transparent',
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-    },
-    caption: {
-        flex: 2,
-        textAlign: 'left',
-        margin: '5%',
-        marginBottom: 0,
-        marginLeft: '2.5%',
-    },
-    caption2: {
-        textAlign: 'left',
-        margin: '5%',
-        width: '90%',
-        marginTop: -2.5
-    },
-    price: {
-        textAlign: 'center',
-        fontSize: 20,
-        margin: '5%',
-        marginRight: 0,
-        flex: 2,
-    },
-    button: {
-        flex: 1.5,
-        backgroundColor: 'transparent',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        padding: '5%',
-    },
-    back: {
-        backgroundColor: 'rgb(41,41,41)'
-    }
-})

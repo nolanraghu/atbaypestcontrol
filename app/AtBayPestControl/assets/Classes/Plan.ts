@@ -20,7 +20,7 @@ export default class Plan {
     }
     isPendingInfestation = (bug:Infestation) => {
         //TODO
-        return false;
+        return true;
     }
     isPendingRemoval = (bug:Infestation) => {
         //TODO
