@@ -83,7 +83,9 @@ export default class Plan {
     }
     getNewPrice = ():{monthly: number, upFront: number} => {
         // Returns the new price of the plan, with the pending additions and deletions, as well as any upfront costs
-        // which would come from new equipment
+        // which would come from new equipment. Remember that the upfront cost is just the sum of the pending upfront
+        // costs plus the pending equipment cost, while the monthly is the sum of the pending and existing packages'
+        // monthly price, minus the ones being removed
         return {monthly:11.99, upFront:0}
     }
     hasPendingChanges = () => {
@@ -104,7 +106,14 @@ export default class Plan {
         // the plan or Pending being added
     }
     getDueDate = () => {
-        //Gets the day the payments are due, for now just the first
+        //Gets the day the payments are due. If it hasn't been set, return today's date (ie 5 for the 5th)
         return 1;
+    }
+    setDueDate = (date:number) => {
+        let setDate = date;
+        // This is so you can't set the due date to be the 31st, then they only have to pay every other month...
+        if (date > 28){
+            setDate = 1;
+        }
     }
 }

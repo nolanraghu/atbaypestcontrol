@@ -275,6 +275,9 @@ export function getStyle(state:ColorSchemeName){
             color: highlight,
             textDecorationLine: 'underline',
         },
+        highlightedText:{
+            color: highlight
+        },
         caption: {
             textAlign: 'left',
             margin: '4%',

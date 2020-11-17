@@ -127,7 +127,7 @@ export default function UpdatePlanPopup({route, navigation}:any) {
             return (
                 [
                     <View style={styles.section} key={keys++}>
-                        <Text style={styles.title}>Payment information:</Text>
+                        <Text style={[styles.title, {marginBottom: -13}]}>Payment information:</Text>
                     </View>
                 ].concat(renderPay())
             );
@@ -146,13 +146,19 @@ export default function UpdatePlanPopup({route, navigation}:any) {
         }
     }
 
+    function highlight(text:string){
+        return (
+            <Text style={styles.highlightedText}>{text}</Text>
+        )
+    }
+
     function notes(){
         if(deleting){
             return;
         } else {
             return(
                 <View style={styles.section}>
-                    <Text style={styles.captionFade}>{confirmationNotes(plan)}</Text>
+                    <Text style={styles.captionFade}>{confirmationNotes(plan, isChangingPlan, highlight)}</Text>
                 </View>
             );
         }

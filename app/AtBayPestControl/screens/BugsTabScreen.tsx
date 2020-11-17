@@ -4,7 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import {getStyle, buttonColor} from '../assets/Stylesheets/Styles'
 import BugPressable from "../components/BugPressable";
 import {getBugByID, getUser} from "../assets/Data/Data";
-import {newPriceText, updatePlan} from "../assets/text/text";
+import {deleteChanges, newPriceText, updatePlan} from "../assets/text/text";
 
 export default function BugsTabScreen() {
     const navigation = useNavigation();
@@ -48,6 +48,19 @@ export default function BugsTabScreen() {
       }
     }
 
+    let deleteLink = () => {
+        if(changing){
+            return (
+                <Text style={[styles.fullText, {marginTop: 10}, styles.link]}
+                      onPress={()=>{navigation.navigate('PlanUpdatePopupScreen', {deleting:true})}}>
+                    {deleteChanges()}
+                </Text>
+            )
+        } else {
+            return;
+        }
+    }
+
   return (
       <View style={styles.screen}>
           {getHeader()}
@@ -55,10 +68,7 @@ export default function BugsTabScreen() {
               <View style={styles.container}>
                   {bugPressArray}
               </View>
-              <Text style={[styles.fullText, {marginTop: 10}, styles.link]}
-                    onPress={()=>{navigation.navigate('PlanUpdatePopupScreen', {deleting:true})}}>
-                  Delete changes
-              </Text>
+              {deleteLink()}
           </ScrollView>
       </View>
   );
