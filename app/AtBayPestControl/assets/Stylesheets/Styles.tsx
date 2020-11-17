@@ -37,10 +37,10 @@ export function getOffButtonColor(state:ColorSchemeName){
     }
 }
 
-export function getStyle(state:ColorSchemeName){
+export function getStyle(state:ColorSchemeName) {
     let background, header, text, button, fadedItem, highlight, fadedText, highlightRemoving
 
-    if(state === 'dark'){
+    if (state === 'dark') {
         background = backgroundDark;
         header = headerDark;
         text = textDark;
@@ -80,7 +80,7 @@ export function getStyle(state:ColorSchemeName){
             flexDirection: 'row',
             backgroundColor: header,
             shadowColor: 'black',
-            shadowOffset: { width: 0, height: 2 },
+            shadowOffset: {width: 0, height: 2},
             shadowOpacity: 0.5,
             shadowRadius: 2,
             elevation: 4,
@@ -101,7 +101,7 @@ export function getStyle(state:ColorSchemeName){
             justifyContent: "center",
             flexDirection: "row",
             shadowColor: 'black',
-            shadowOffset: { width: 0, height: 2 },
+            shadowOffset: {width: 0, height: 2},
             shadowOpacity: 0.5,
             shadowRadius: 2,
             elevation: 4,
@@ -115,7 +115,7 @@ export function getStyle(state:ColorSchemeName){
             justifyContent: "center",
             flexDirection: "column",
             shadowColor: 'black',
-            shadowOffset: { width: 0, height: 2 },
+            shadowOffset: {width: 0, height: 2},
             shadowOpacity: 0.5,
             shadowRadius: 2,
             elevation: 4,
@@ -131,7 +131,7 @@ export function getStyle(state:ColorSchemeName){
             justifyContent: "center",
             flexDirection: "column",
             shadowColor: 'rgb(0,0,0)',
-            shadowOffset: { width: 0, height: 2 },
+            shadowOffset: {width: 0, height: 2},
             shadowOpacity: 0.5,
             shadowRadius: 2,
             elevation: 4,
@@ -145,7 +145,7 @@ export function getStyle(state:ColorSchemeName){
             justifyContent: "center",
             flexDirection: "column",
             shadowColor: 'black',
-            shadowOffset: { width: 0, height: 2 },
+            shadowOffset: {width: 0, height: 2},
             shadowOpacity: 0.5,
             shadowRadius: 2,
             elevation: 4,
@@ -162,7 +162,7 @@ export function getStyle(state:ColorSchemeName){
             justifyContent: "center",
             flexDirection: "column",
             shadowColor: 'black',
-            shadowOffset: { width: 0, height: 2 },
+            shadowOffset: {width: 0, height: 2},
             shadowOpacity: 0.5,
             shadowRadius: 2,
             elevation: 4,
@@ -180,7 +180,7 @@ export function getStyle(state:ColorSchemeName){
             justifyContent: "center",
             flexDirection: "row-reverse",
             shadowColor: 'black',
-            shadowOffset: { width: 0, height: 2 },
+            shadowOffset: {width: 0, height: 2},
             shadowOpacity: 0.5,
             shadowRadius: 2,
             elevation: 4,
@@ -195,7 +195,7 @@ export function getStyle(state:ColorSchemeName){
             justifyContent: "center",
             flexDirection: "row-reverse",
             shadowColor: 'black',
-            shadowOffset: { width: 0, height: 2 },
+            shadowOffset: {width: 0, height: 2},
             shadowOpacity: 0.5,
             shadowRadius: 2,
             elevation: 4,
@@ -212,7 +212,7 @@ export function getStyle(state:ColorSchemeName){
             justifyContent: "center",
             flexDirection: "row-reverse",
             shadowColor: 'rgb(0,0,0)',
-            shadowOffset: { width: 0, height: 2 },
+            shadowOffset: {width: 0, height: 2},
             shadowOpacity: 0.5,
             shadowRadius: 2,
             elevation: 4,
@@ -230,7 +230,7 @@ export function getStyle(state:ColorSchemeName){
             justifyContent: "center",
             flexDirection: "row-reverse",
             shadowColor: 'rgb(0,0,0)',
-            shadowOffset: { width: 0, height: 2 },
+            shadowOffset: {width: 0, height: 2},
             shadowOpacity: 0.5,
             shadowRadius: 2,
             elevation: 4,
@@ -271,7 +271,7 @@ export function getStyle(state:ColorSchemeName){
             flexDirection: 'row',
             flexWrap: 'wrap',
         },
-        link:{
+        link: {
             color: highlight,
             textDecorationLine: 'underline'
         },
