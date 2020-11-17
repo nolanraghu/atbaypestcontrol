@@ -24,7 +24,7 @@ export const allProducts = [
         image: require("../assets/images/honey_bee.png"), //TODO: Add the cockroach
         name: "Temprid FX",
         description: "Temprid FX works for cockroaches. Apply it once!",
-        equipment: null,
+        equipment: [],
         price: 19.99
     },
     {
@@ -32,7 +32,7 @@ export const allProducts = [
         image: require("../assets/images/honey_bee.png"), //TODO: Add the cockroach
         name: "Catchmaster 1000i Insect Monitors",
         description: "Catchmaster 1000i Insect Monitors works for Cockroaches Apply it once!",
-        equipment: null,
+        equipment: [],
         price: 14.99
     },
     {
@@ -40,7 +40,7 @@ export const allProducts = [
         image: require("../assets/images/honey_bee.png"), //TODO: Add the cockroach
         name: "Maxforce FC MAGNUM",
         description: "Maxforce FC MAGNUM works for cockroaches. Just apply it once!",
-        equipment: null,
+        equipment: [],
         price: 19.99
     },
     {
@@ -48,7 +48,7 @@ export const allProducts = [
         image: require("../assets/images/honey_bee.png"), //TODO: Add the cockroach
         name: "Gentrol Point Source",
         description: "Gentrol Point Source works for cockroaches. Apply it once!",
-        equipment: null,
+        equipment: [],
         price: 20.00
     },
     {
@@ -72,7 +72,7 @@ export const allProducts = [
         image: require("../assets/images/honey_bee.png"), //TODO: Add the cockroach
         name: "Mosquito Beater",
         description: "Mosquito Beater works for spiders... jk mosquitoes. Apply as needed!",
-        equipment: null,
+        equipment: [],
         price: 23.99
     }
 ];

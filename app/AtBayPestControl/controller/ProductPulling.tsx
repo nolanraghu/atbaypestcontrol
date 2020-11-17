@@ -1,15 +1,15 @@
 import * as React from 'react';
-import {allProducts} from '../assets/Data/allProducts.ts';
+import {allProducts} from '../assets/Data/allProducts';
 
 //this is kinda fakey right now because idk about the db
 
 export function getProductInfo(pid: String) {
     let k ={
         id: "0",
-        equipments: [-1],
         image: require('../assets/images/error.jpg'),
         name: "ErrorName",
         description: "ErrorDetails",
+        equipment: ["0"],
         price: 0
     };
     switch(pid){
