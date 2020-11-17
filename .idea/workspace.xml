@@ -39,6 +39,7 @@
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/images/product5.jpeg" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/images/splash1 (2).png" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/controller/BugPulling.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/controller/EquipmentPulling.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/controller/ProductPulling.tsx" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/design notes" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/navigation/BugsTabNavigator.tsx" afterDir="false" />
@@ -73,8 +74,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="TypeScript File" />
         <option value="TypeScript JSX File" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
@@ -141,7 +142,11 @@
       <workItem from="1604618114470" duration="6835000" />
 =======
       <workItem from="1604618114470" duration="2926000" />
+<<<<<<< Updated upstream
       <workItem from="1604975702910" duration="915000" />
+>>>>>>> Stashed changes
+=======
+      <workItem from="1605488010531" duration="6066000" />
 >>>>>>> Stashed changes
     </task>
     <task id="LOCAL-00001" summary="First Commit. Renaming screens/tabs to fit our needs.">
