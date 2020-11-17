@@ -62,7 +62,7 @@ export function getStyle(state:ColorSchemeName) {
     return StyleSheet.create({
         screen: {
             height: '100%',
-            backgroundColor: background
+            backgroundColor: background,
         },
         container: {
             padding: '2.5%',

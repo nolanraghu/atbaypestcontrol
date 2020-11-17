@@ -52,8 +52,8 @@
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/components/Payment.tsx" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/components/Separator.tsx" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/components/ShippingLocations.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/controller/BugPulling.tsx" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/controller/EquipmentPulling.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/controller/InfestationPulling.tsx" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/controller/ProductPulling.tsx" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/design notes" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/navigation/BugsTabNavigator.tsx" afterDir="false" />
@@ -154,7 +154,7 @@
       <workItem from="1604615900795" duration="2107000" />
       <workItem from="1604618041520" duration="69000" />
       <workItem from="1604618114470" duration="2926000" />
-      <workItem from="1605488010531" duration="8210000" />
+      <workItem from="1605488010531" duration="13335000" />
     </task>
     <task id="LOCAL-00001" summary="First Commit. Renaming screens/tabs to fit our needs.">
       <created>1602888296289</created>

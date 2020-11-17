@@ -7,18 +7,46 @@
 
 
 import Product from "./Product";
+import {getInfestationInfo} from "../../controller/InfestationPulling";
+
+interface InfestationProps {
+    id: string,
+    image: NodeRequire,
+    name: string,
+    description: string,
+    products: Array<string>,
+    price: number
+}
+
 
 export default class Infestation {
     // We should use id's so we can find them in the database, everything else should be accessed from the database
     // using accessor functions, probably. Just in case we need it for local changes or something, I've included other
     // examples
-    private id: number
+    private id: string
+    private image: NodeRequire
+    private name: string
+    private description: string
+    private products: Array<Product>
+    private price: number
     product1 = new Product(0);
     product2 = new Product(2);
-    constructor(id:number){
+    constructor(id:string){
         //TODO: ideally we probably don't need the id in the constructor? Depends on how we
         // implement it in Data.ts I suppose
         this.id = id;
+        let pData = getInfestationInfo(this.id);
+        this.image = pData.image;
+        this.name = pData.name;
+        this.description = pData.description;
+        let counter = 0;
+        this.products = [];
+        for(let x in pData.products){
+        }
+        this.price = pData.price;
+
+
+
     }
     getID = () => {
         return this.id;

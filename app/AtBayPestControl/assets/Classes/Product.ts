@@ -2,27 +2,32 @@
 // instructions, etc.
 
 import Equipment from "./Equipment";
+import {getEquipmentInfo} from "../../controller/EquipmentPulling";
 
 interface ProductProps {
-    id: number,
-    equipmentIds: Array<number>,
+    id: string,
     image: NodeRequire,
-    productName: string,
-    productDetails: string,
+    name: string,
+    description: string,
+    equipment: Array<string>,
+    price: number,
 }
 
 
+
+
 export default class Product{
-    id: number
+    id: string
     equipment: Array<Equipment>
     image: NodeRequire
-    productName: string
-    productDetails: string
+    name: string
+    description: string
+    price: number
     constructor(props: ProductProps){
         this.id = props.id;
-        this.equipment = []
-        for(var id in props.equipmentIds){
-            //this.equipmentIds.push(getEquipmentbyId(props.id))
+        this.equipment = [];
+        for(var id in props.equipment){
+            this.equipment.push(getEquipmentInfo(props.id))
         };
         this.image = props.image;
         this.productName = props.productName;

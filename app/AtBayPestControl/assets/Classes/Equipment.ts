@@ -3,7 +3,7 @@
 
 
 interface EquipmentProps {
-    id: number,
+    id: string,
     image: NodeRequire,
     name: string,
     description: string,

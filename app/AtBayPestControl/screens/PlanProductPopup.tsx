@@ -26,7 +26,7 @@ export default function PlanProductPopup({route, navigation}:any){
             </View>
             <ScrollView>
                 <View style={styles.container}>
-                    <CaptionImage source={prodInfo.image} text={prodInfo.shortDescription}/>
+                    <CaptionImage source={prodInfo.image} text={prodInfo.description}/>
                 </View>
             </ScrollView>
         </View>
