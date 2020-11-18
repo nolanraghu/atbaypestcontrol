@@ -9,16 +9,6 @@
 import Product from "./Product";
 import {getInfestationInfo} from "../../controller/InfestationPulling";
 
-interface InfestationProps {
-    id: number,
-    image: NodeRequire,
-    name: string,
-    description: string,
-    products: Array<string>,
-    price: number
-}
-
-
 export default class Infestation {
     // We should use id's so we can find them in the database, everything else should be accessed from the database
     // using accessor functions, probably. Just in case we need it for local changes or something, I've included other
@@ -28,7 +18,8 @@ export default class Infestation {
     private readonly name: string
     private readonly description: string
     private readonly products: Array<Product>
-    private readonly price: number
+    private readonly upfrontPrice: number
+    private readonly monthlyPrice: number
     constructor(id:number){
         //TODO: ideally we probably don't need the id in the constructor? Depends on how we
         // implement it in Data.ts I suppose
@@ -41,9 +32,8 @@ export default class Infestation {
         for(let x in pData.products){
             this.products.push(new Product(Number(x)));
         }
-        this.price = pData.price;
-
-
+        this.upfrontPrice = pData.upfrontPrice;
+        this.monthlyPrice = pData.monthlyPrice;
 
     }
     getID = () => {
@@ -73,15 +63,27 @@ export default class Infestation {
         //TODO
         return this.products
     }
-    getPrice = ():{monthly: number, upFront: number} => {
+
+    getUpfrontPrice = () => {
         // Note: the monthly price does not include the equipment, but should include any one time products. I
         // think it's best if the client sets these prices, which will be put in the database, but make sure when they
         // do they know that the equipment price is going to be added to the upfront price, so it will be actually
         // higher when the customer pays. This is so if the customer already has the equipment for another plan, they
         // don't end up getting charged for it again.
         //TODO
-        return {monthly:11.99, upFront:5}
+        return this.upfrontPrice
     }
+
+    getMonthlyPrice = () => {
+        // Note: the monthly price does not include the equipment, but should include any one time products. I
+        // think it's best if the client sets these prices, which will be put in the database, but make sure when they
+        // do they know that the equipment price is going to be added to the upfront price, so it will be actually
+        // higher when the customer pays. This is so if the customer already has the equipment for another plan, they
+        // don't end up getting charged for it again.
+        //TODO
+        return this.monthlyPrice
+    }
+
     getRequiredPlanTime = ():number => {
         //Note: in months
         return 0;
