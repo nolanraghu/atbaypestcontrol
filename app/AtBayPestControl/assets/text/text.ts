@@ -19,6 +19,12 @@ export function tab3label(){
 }
 
 //Potentially general use text
+export function costText(price:number){
+    return "Price: $" + price;
+}
+export function confirmPayment(){
+    return "Payment Information:"
+}
     // Different ways to make caption images for various situations
 export function captionProductDescription(product:Product){
     return product.getProductName() + ':\n' + product.getProductDetails();
@@ -38,15 +44,12 @@ export function captionProductAndReqEquipment(product:Product){
     equipmentText = "\nYou will need the " + equipmentText + " to apply this product."
     return product.getProductName() + ':\n' + product.getProductDetails() + equipmentText;
 }
-export function captionProductWithLink(product:Product, linkFunction:any, buyingEarly:boolean){
-    let text = buyingEarly? dontOrderEarly(): orderEarly()
+export function captionProductWithLink(product:Product, linkFunction:any){
+    let text = orderEarly();
     return [linkFunction('Click here'), text + product.getProductDetails()];
 }
 function orderEarly(){
     return " to purchase more today instead of receiving it on your normal scheduled date.\n"
-}
-function dontOrderEarly(){
-    return " if you don't want to order this early.\n"
 }
 export function captionEquipmentDescription(equipment:Equipment){
     return equipment.getEquipmentName() + ':\n' + equipment.getEquipmentDescription();
@@ -86,17 +89,17 @@ export function equipmentDescription(equipment:Equipment,
     // the link will not display correctly if it is below the picture, because it wrapped around, but this is
     // unlikely to be a problem, so I didn't think it was worth it to fix
     if (owned) {
-        equipmentText.push(linkFunction(lostEquipment()));
+        equipmentText.push(linkFunction("Click here" + lostEquipment()));
     } else if (onceOwned){
-        equipmentText.push(linkFunction(foundEquipment()));
+        equipmentText.push(linkFunction("Click here" + foundEquipment()));
     }
 
     // This is the description of the equipment
     equipmentText.push(equipment.getEquipmentDescription());
     return equipmentText;
 }
-export function justEquipmentDescription(equipment:Equipment, addPurchasing:boolean, link:any){
-    let text = addPurchasing? lostEquipment(): foundEquipment();
+export function justEquipmentDescription(equipment:Equipment, link:any){
+    let text = lostEquipment();
     return [
         equipment.getEquipmentName() + ":\n",
         link('Click here'),
@@ -222,9 +225,6 @@ export function confirmButton(deleting: boolean, isChangingPlan: boolean){
         return "Purchase";
     }
 }
-export function confirmPayment(){
-    return "Payment Information:"
-}
 export function confirmationNotes(plan:Plan, isChangingPlan:boolean, highlight:any){
     let price = plan.getNewPrice();
     let currentMonthly = plan.getCurrentPrice();
@@ -342,11 +342,22 @@ export function planBriefDescription(plan:Plan){
 export function equipmentListTitle(){
     return "To use this product, you will need:";
 }
-export function purchaseButton(){
-    return "Purchase";
+    //Confirm Purchase Text
+export function confirmTitle(){
+    return "Confirm Purchase"
 }
-export function costText(price:number){
-    return "Price: $" + price;
+export function confirmPurchaseButton(){
+    return "Purchase"
+}
+export function confirmationNotesItems(cost:number, isProduct:boolean, highlight:any, product: any){
+    let endText = isProduct?
+        ". You will still receive your " + product.getProductName() + " on your normal delivery date, in addition to " +
+        "the extra one that will be sent out today.":
+        "."
+    return ["Your card will be charged ", highlight("$" + cost), endText]
+}
+export function purchaseListTitle(){
+    return "You will receive the following item:"
 }
 
 //Profile Screen Text
