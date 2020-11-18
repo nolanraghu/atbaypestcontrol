@@ -40,7 +40,7 @@ export default class Product{
 
         this.price = pData.price;
     }
-    getProductImage = () => {
+    getProductImage = ():any => {
         return this.image;
     }
 
@@ -54,5 +54,13 @@ export default class Product{
 
     equipmentList = () => {
         return this.equipment;
+    }
+
+    getID = () => {
+        return this.id;
+    }
+
+    getPrice = () => {
+        return this.price;
     }
 }
