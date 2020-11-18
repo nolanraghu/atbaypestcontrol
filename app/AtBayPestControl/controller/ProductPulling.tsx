@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {allProducts} from '../assets/Data/allProducts.ts';
+import {allProducts} from '../assets/Data/allProducts';
 
 //this is kinda fakey right now because idk about the db
 
@@ -7,10 +7,10 @@ export function getProductInfo(pid: number) {
     let k ={
 <<<<<<< Updated upstream
         id: "0",
-        equipments: [-1],
         image: require('../assets/images/error.jpg'),
         name: "ErrorName",
         description: "ErrorDetails",
+<<<<<<< HEAD
 =======
         id: -1,
         image: require('../assets/images/error.jpg'),
@@ -18,6 +18,9 @@ export function getProductInfo(pid: number) {
         description: "ErrorDetails",
         equipment: [-1],
 >>>>>>> Stashed changes
+=======
+        equipment: ["0"],
+>>>>>>> master
         price: 0
     };
     switch(pid){

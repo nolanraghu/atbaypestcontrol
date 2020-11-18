@@ -51,6 +51,8 @@ export default function BugInfoPopup({route, navigation}: any) {
     //False if the user is not allowed to remove the infestation from their plan
     const canRemove = user.getPlan().isRemovable(infestation)
 
+    const price = infestation.getPrice();
+
     const products:Product[] = infestation.getProducts()
 
     // These will make a comprehensive list of any equipment that would be needed for this infestation.
@@ -208,7 +210,7 @@ export default function BugInfoPopup({route, navigation}: any) {
             </ScrollView>
             <View style={styles.header}>
                 <Text style={styles.fullText}>
-                    {priceText(infestation.getPrice(), equipmentPrice, adding, purchasing)}
+                    {priceText(price.monthly, price.upFront, equipmentPrice, adding, purchasing)}
                 </Text>
             </View>
         </View>

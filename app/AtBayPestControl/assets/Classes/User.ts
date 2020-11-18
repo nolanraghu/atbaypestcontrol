@@ -39,6 +39,13 @@ export default class User {
     }
     addHasEquipment = (equipment:Equipment) => {
         // This ONLY adds the equipment to the list of equipment the user has
-        //TODO
+        // TODO
+    }
+    makePayment = (price:number) => {
+        // TODO: but not related to the database
+    }
+    setMonthlyPayments = (price:number, nextDate:Date) => {
+        // Note: the date of nextDate should be <= 28
+        // TODO: but not related to the database
     }
 }

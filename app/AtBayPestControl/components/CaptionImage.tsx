@@ -12,6 +12,8 @@ export default function CaptionImage({source, text = 'information'}: CaptionImag
     const [topText, setTopText] = useState(text); //This is just so we know what is being displayed
     const [topHeight, setTopHeight] = useState(-1); // -1 means auto, but it messes up if you type 'auto'
     const [bottomText, setBottomText] = useState('');
+    // This is so if there's nothing in the bottom text box, we don't get a huge margin underneath it
+    const [hasBottom, setHasBottom] = useState(false)
 
     //  When we layout the text, it will split the text into top and bottom, and if
     // it needs to be split, it will show that
@@ -36,6 +38,11 @@ export default function CaptionImage({source, text = 'information'}: CaptionImag
             setTopText(top);
             setBottomText(bottom);
         }
+        if(bottom === ""){
+            setHasBottom(false);
+        } else {
+            setHasBottom(true);
+        }
     }
 
     //This function is because it won't let the state represent numbers and strings
@@ -47,11 +54,19 @@ export default function CaptionImage({source, text = 'information'}: CaptionImag
         }
     }
 
+    function renderBottomText(hasBottom:boolean){
+        if(hasBottom){
+            return <Text style={styles.caption2}>{bottomText}</Text>
+        } else {
+            return;
+        }
+    }
+
     return(
         <View style={styles.section}>
             <Image source={source}  style={styles.image}/>
             <Text style={[styles.caption1, {height: getHeight(topHeight)}]} onTextLayout={_onTextLayout}>{text}</Text>
-            <Text style={styles.caption2}>{bottomText}</Text>
+            {renderBottomText(hasBottom)}
         </View>
     )
 }
