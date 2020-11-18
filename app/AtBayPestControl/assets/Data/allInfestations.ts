@@ -7,7 +7,8 @@ export const allInfestations = [
         name: "Base Plan",
         description: "Base Plan description",
         products: [0, 1],
-        price: 4.99
+        upfrontPrice: 4.99,
+        monthlyPrice: 12.99,
     },
     {
         id: 1,
@@ -15,7 +16,8 @@ export const allInfestations = [
         name: "Cockroach",
         description: "Cockroach description",
         products: [2, 3, 4, 5],
-        price: 5.99
+        upfrontPrice: 5.99,
+        monthlyPrice: 12.99,
     },
     {
         id: 2,
@@ -23,7 +25,8 @@ export const allInfestations = [
         name: "Spiders",
         description: "Spiders description",
         products: [6],
-        price: 6.99
+        upfrontPrice: 6.99,
+        monthlyPrice: 12.99,
     },
     {
         id: 3,
@@ -31,6 +34,7 @@ export const allInfestations = [
         name: "Mosquitoes",
         description: "Mosquitos description",
         products: [7, 9],
-        price: 5.99
+        upfrontPrice: 5.99,
+        monthlyPrice: 12.99,
     }
 ];
