@@ -10,7 +10,8 @@ export default class Equipment {
     private readonly name: string;
     private readonly description: string;
     private readonly price: number;
-    constructor(id:number){
+
+    constructor(id: number){
         this.id = id;
         let pData = getEquipmentInfo(this.id);
         this.image = pData.image;

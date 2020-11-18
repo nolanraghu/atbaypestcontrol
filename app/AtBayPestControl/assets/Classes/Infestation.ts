@@ -10,7 +10,7 @@ import Product from "./Product";
 import {getInfestationInfo} from "../../controller/InfestationPulling";
 
 interface InfestationProps {
-    id: string,
+    id: number,
     image: NodeRequire,
     name: string,
     description: string,
@@ -39,7 +39,7 @@ export default class Infestation {
         this.description = pData.description;
         this.products = [];
         for(let x in pData.products){
-            this.products.push(new Product(x));
+            this.products.push(new Product(Number(x)));
         }
         this.price = pData.price;
 
