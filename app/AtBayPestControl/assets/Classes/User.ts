@@ -6,6 +6,8 @@ import Plan from "./Plan";
 import Equipment from "./Equipment";
 
 export default class User {
+    //TODO: Add all of the personal information here and have it be used by Profile tab
+
     // If this is 0, that should mean they haven't made an account yet
     private id: number
     constructor(id:number = 0){
@@ -22,6 +24,8 @@ export default class User {
         //TODO
         return true;
     }
+
+    //getPendingEquipment
     hadEquipment = (equipment:Equipment) => {
         // This returns true if the user once had the equipment, but it has been removed
         //TODO
