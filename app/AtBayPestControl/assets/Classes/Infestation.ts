@@ -98,6 +98,9 @@ export default class Infestation {
 
             case "Mosquitoes":
                 return "6 Months";
+
+            default:
+                return "This plan has experienced an error :)"
         }
     }
 }
