@@ -23,6 +23,7 @@ export default class Product{
     private readonly description: string
     private readonly equipment: Array<Equipment>
     private readonly price: number
+    private readonly timeline: string
 
     constructor(id: number){
         this.id = id;
@@ -30,13 +31,13 @@ export default class Product{
         this.image = pData.image;
         this.name = pData.name;
         this.description = pData.description;
-
+        this.timeline = pData.timeline
         let counter = 0;
         this.equipment = [];
         for(let x in pData.equipment){
            this.equipment.push(new Equipment(Number(x)))
             counter += 1;
-        };
+        }
 
         this.price = pData.price;
     }
@@ -52,7 +53,11 @@ export default class Product{
         return this.description;
     }
 
-    equipmentList = () => {
+    getEquipmentList = () => {
         return this.equipment;
+    }
+
+    getTimeline = () => {
+        return this.timeline;
     }
 }

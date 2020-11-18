@@ -84,8 +84,20 @@ export default class Infestation {
         return this.monthlyPrice
     }
 
-    getRequiredPlanTime = ():number => {
+    getRequiredPlanTime = ():string => {
         //Note: in months
-        return 0;
+        switch(this.name){
+            case "Base Plan":
+                return "6 Months";
+
+            case "Cockroach":
+                return "Single Application";
+
+            case "Spiders":
+                return "As Needed";
+
+            case "Mosquitoes":
+                return "6 Months";
+        }
     }
 }

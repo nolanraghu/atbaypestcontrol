@@ -32,7 +32,7 @@ export const allInfestations = [
         id: 3,
         image: require("../images/beetle.png"), //TODO: Add the mosquito
         name: "Mosquitoes",
-        description: "Mosquitos description",
+        description: "Mosquitoes description",
         products: [7, 9],
         upfrontPrice: 5.99,
         monthlyPrice: 12.99,
