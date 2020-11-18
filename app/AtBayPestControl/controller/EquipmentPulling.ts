@@ -4,22 +4,22 @@ import {allEquipment} from '../assets/Data/allEquipment';
 //this is kinda fakey right now because idk about the db
 
 
-export function getEquipmentInfo(bId: String) {
+export function getEquipmentInfo(bId: number) {
     let k ={
-        id: "0",
+        id: -1,
         image: require("../assets/images/error.jpg"),
         name: "ErrorName",
         description: "ErrorDescription",
         price: 0
     };
     switch(bId){
-        case "e1":
+        case 0:
             k = allEquipment[0];
             break;
-        case "e2":
+        case 1:
             k = allEquipment[1];
             break;
-        case "e3":
+        case 2:
             k = allEquipment[2];
             break;
     }

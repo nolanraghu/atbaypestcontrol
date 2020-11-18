@@ -7,6 +7,7 @@ import BugsTabNavigator from "../navigation/BugsTabNavigator"
 import PlanTabNavigator from "./PlanTabNavigator";
 import ProfileTabNavigator from "./ProfileTabNavigator";
 import {tintColor} from "../assets/Stylesheets/Styles";
+import {tab1label, tab2label, tab3label} from "../assets/text/text";
 
 const BottomTab = createMaterialTopTabNavigator();
 
@@ -33,7 +34,7 @@ export default function BottomTabNavigator() {
         component={BugsTabNavigator}
         options={{
             tabBarIcon: renderIcon("ios-bug"),
-            tabBarLabel: "Packages"
+            tabBarLabel: tab1label()
         }}
       />
       <BottomTab.Screen
@@ -41,7 +42,7 @@ export default function BottomTabNavigator() {
         component={PlanTabNavigator}
         options={{
             tabBarIcon: renderIcon('ios-paper'),
-            tabBarLabel: "Your Plan"
+            tabBarLabel: tab2label()
         }}
       />
       <BottomTab.Screen
@@ -49,7 +50,7 @@ export default function BottomTabNavigator() {
           component={ProfileTabNavigator}
           options={{
               tabBarIcon: renderIcon('ios-person'),
-              tabBarLabel: "Profile"
+              tabBarLabel: tab3label()
           }}
               />
     </BottomTab.Navigator>
