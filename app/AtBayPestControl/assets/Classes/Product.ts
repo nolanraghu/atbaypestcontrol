@@ -8,23 +8,23 @@ import {getProductInfo} from "../../controller/ProductPulling";
 
 // This bitch unsued
 interface ProductProps {
-    id: string,
+    id: number,
     image: NodeRequire,
     name: string,
     description: string,
-    equipment: Array<string>,
+    equipment: Array<Equipment>,
     price: number,
 }
 
 export default class Product{
-    private readonly id: string
+    private readonly id: number
     private readonly image: NodeRequire
     private readonly name: string
     private readonly description: string
     private readonly equipment: Array<Equipment>
     private readonly price: number
 
-    constructor(id:string){
+    constructor(id:number){
         this.id = id;
         let pData = getProductInfo(this.id);
         this.image = pData.image;

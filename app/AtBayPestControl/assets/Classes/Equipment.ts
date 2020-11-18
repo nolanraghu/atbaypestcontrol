@@ -5,12 +5,12 @@ import {getEquipmentInfo} from "../../controller/EquipmentPulling";
 
 
 export default class Equipment {
-    private readonly id: string;
+    private readonly id: number;
     private readonly image: NodeRequire;
     private readonly name: string;
     private readonly description: string;
     private readonly price: number;
-    constructor(id:string){
+    constructor(id:number){
         this.id = id;
         let pData = getEquipmentInfo(this.id);
         this.image = pData.image;
