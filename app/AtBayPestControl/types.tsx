@@ -18,6 +18,7 @@ export type BugsTabParamList = {
 export type PlanTabParamList = {
   PlanTabScreen: undefined;
   PlanProductPopup: undefined;
+  ConfirmPurchasePopup: undefined;
 };
 
 export type ProfileTabParamList = {

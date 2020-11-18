@@ -1,6 +1,7 @@
 import Infestation from "../Classes/Infestation";
 import User from "../Classes/User";
 import Product from "../Classes/Product";
+import Equipment from "../Classes/Equipment";
 
 
 
@@ -66,7 +67,13 @@ export function getBugByID(id: string):Infestation{
 }
 
 export function getProductByID(id: number):Product{
+    //TODO
     return (new Product(id))
+}
+
+export function getEquipmentByID(id:number):Equipment{
+    //TODO
+    return (new Equipment(id))
 }
 
 export function getPreventionPlan():Infestation{
