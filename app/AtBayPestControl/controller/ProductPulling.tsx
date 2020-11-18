@@ -5,22 +5,11 @@ import {allProducts} from '../assets/Data/allProducts';
 
 export function getProductInfo(pid: number) {
     let k ={
-<<<<<<< Updated upstream
-        id: "0",
-        image: require('../assets/images/error.jpg'),
-        name: "ErrorName",
-        description: "ErrorDetails",
-<<<<<<< HEAD
-=======
         id: -1,
         image: require('../assets/images/error.jpg'),
         name: "ErrorName",
         description: "ErrorDetails",
         equipment: [-1],
->>>>>>> Stashed changes
-=======
-        equipment: ["0"],
->>>>>>> master
         price: 0
     };
     switch(pid){

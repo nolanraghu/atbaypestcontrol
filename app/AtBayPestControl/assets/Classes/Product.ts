@@ -8,7 +8,7 @@ import {getProductInfo} from "../../controller/ProductPulling";
 
 // This bitch unsued
 interface ProductProps {
-    id: string,
+    id: number,
     image: NodeRequire,
     name: string,
     description: string,

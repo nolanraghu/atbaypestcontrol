@@ -23,26 +23,6 @@ export default class Infestation {
     // We should use id's so we can find them in the database, everything else should be accessed from the database
     // using accessor functions, probably. Just in case we need it for local changes or something, I've included other
     // examples
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-    private id: string
-    private image: NodeRequire
-    private name: string
-    private description: string
-    private products: Array<Product>
-    private price: number
-    product1 = new Product(0);
-    product2 = new Product(2);
-=======
-    private readonly id: string
-    private readonly image: NodeRequire
-    private readonly name: string
-    private readonly description: string
-    private readonly products: Array<Product>
-    private readonly price: number
->>>>>>> master
-    constructor(id:string){
-=======
     private readonly id: number
     private readonly image: NodeRequire
     private readonly name: string
@@ -50,7 +30,6 @@ export default class Infestation {
     private readonly products: Array<Product>
     private readonly price: number
     constructor(id:number){
->>>>>>> Stashed changes
         //TODO: ideally we probably don't need the id in the constructor? Depends on how we
         // implement it in Data.ts I suppose
         this.id = id;
@@ -71,7 +50,7 @@ export default class Infestation {
         return this.id;
     }
     isPreventionPlan = () => {
-        return this.id == "b1"
+        return this.id == 0
     }
     //Gets the image source for the bug
     getBugImage = () => {
