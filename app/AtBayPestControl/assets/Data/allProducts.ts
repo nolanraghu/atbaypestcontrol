@@ -64,7 +64,7 @@ export const allProducts = [
         image: require("../images/ant2.jpg"), //TODO: Add the cockroach
         name: "Talstar P",
         description: "Talstar P works for Mosquitoes. Apply it every 6 months!",
-        equipment: ["e3"],
+        equipment: [2],
         price: 18.99
     },
     {

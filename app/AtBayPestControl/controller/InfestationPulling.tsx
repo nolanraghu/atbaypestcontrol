@@ -10,24 +10,10 @@ export function getInfestationInfo(bId: number) {
         image: require("../assets/images/error.jpg"),
         name: "ErrorName",
         description: "Error",
-        products: ["0"],
+        products: [0],
         price: 0
     };
     switch(bId){
-<<<<<<< Updated upstream
-        case "b1":
-            k = allInfestations[0];
-            break;
-        case "b2":
-            k = allInfestations[1];
-            break;
-        case "b3":
-            k = allInfestations[2];
-            break;
-        case "b4":
-<<<<<<< HEAD
-            k = allInfestions[3]
-=======
         case 0:
             k = allInfestations[0];
             break;
@@ -39,10 +25,6 @@ export function getInfestationInfo(bId: number) {
             break;
         case 3:
             k = allInfestations[3]
->>>>>>> Stashed changes
-=======
-            k = allInfestations[3]
->>>>>>> master
             break;
     }
     return k;
