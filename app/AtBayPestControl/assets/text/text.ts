@@ -2,6 +2,7 @@ import Equipment from "../Classes/Equipment";
 import Product from "../Classes/Product";
 import Infestation from "../Classes/Infestation";
 import Plan from "../Classes/Plan";
+import {getPreventionPlan} from "../Data/Data";
 
 //Overarching app text
 export function appName(){
@@ -36,6 +37,16 @@ export function captionProductAndReqEquipment(product:Product){
     }
     equipmentText = "\nYou will need the " + equipmentText + " to apply this product."
     return product.getProductName() + ':\n' + product.getProductDetails() + equipmentText;
+}
+export function captionProductWithLink(product:Product, linkFunction:any, buyingEarly:boolean){
+    let text = buyingEarly? dontOrderEarly(): orderEarly()
+    return [linkFunction('Click here'), text + product.getProductDetails()];
+}
+function orderEarly(){
+    return " to purchase more today instead of receiving it on your normal scheduled date.\n"
+}
+function dontOrderEarly(){
+    return " if you don't want to order this early.\n"
 }
 export function captionEquipmentDescription(equipment:Equipment){
     return equipment.getEquipmentName() + ':\n' + equipment.getEquipmentDescription();
@@ -75,20 +86,28 @@ export function equipmentDescription(equipment:Equipment,
     // the link will not display correctly if it is below the picture, because it wrapped around, but this is
     // unlikely to be a problem, so I didn't think it was worth it to fix
     if (owned) {
-        equipmentText.push(linkFunction(lostProduct()));
+        equipmentText.push(linkFunction(lostEquipment()));
     } else if (onceOwned){
-        equipmentText.push(linkFunction(foundProduct()));
+        equipmentText.push(linkFunction(foundEquipment()));
     }
 
     // This is the description of the equipment
     equipmentText.push(equipment.getEquipmentDescription());
     return equipmentText;
 }
-function lostProduct(){
-    return "Click here if you no longer have this item and would like to purchase it again\n"
+export function justEquipmentDescription(equipment:Equipment, addPurchasing:boolean, link:any){
+    let text = addPurchasing? lostEquipment(): foundEquipment();
+    return [
+        equipment.getEquipmentName() + ":\n",
+        link('Click here'),
+        text + equipment.getEquipmentDescription()
+    ];
 }
-function foundProduct(){
-    return "Click here if you already have this product\n"
+function lostEquipment(){
+    return " if you no longer have this item and would like to purchase it again\n"
+}
+function foundEquipment(){
+    return " if you already have this item\n"
 }
 
 //Bugs Screen Text
@@ -281,6 +300,53 @@ export function newPriceTextFooter(plan:Plan){
 //Plan Screen Text
 export function noProductText(){
     return "Nothing here yet! Go to the packages page to start adding products to your plan!";
+}
+export function planTitle(){
+    return "Your Plan";
+}
+export function planBriefDescription(plan:Plan){
+    const bugslist = plan.getInfestations();
+    let infestationsText = '';
+    for(let i = bugslist.length - 1; i >= 0; i--){
+        if(i == bugslist.length - 1){
+            infestationsText = bugslist[i].getBugName();
+        } else if (i == bugslist.length - 2) {
+            infestationsText = bugslist[i].getBugName() + " and " + infestationsText;
+        } else {
+            infestationsText = bugslist[i].getBugName() + ", " + infestationsText;
+        }
+    }
+    if(bugslist.length == 1){
+        infestationsText = infestationsText + " infestation"
+    } else {
+        infestationsText = infestationsText + " infestations"
+    }
+
+    let text:string = "With this plan, you receive the following products."
+    if(plan.containsInfestation(getPreventionPlan())){
+        if (bugslist.length == 0){
+            return "You are currently on the prevention plan. " + text;
+        } else {
+            return "Your current plan includes the prevention plan and the " +
+                infestationsText + ". " + text;
+        }
+    } else {
+        if (bugslist.length == 0){
+            return "You are not currently signed up for a plan.";
+        } else {
+            return "Your current plan covers the " + infestationsText + ". " + text;
+        }
+    }
+}
+    //Plan Product Popup Text
+export function equipmentListTitle(){
+    return "To use this product, you will need:";
+}
+export function purchaseButton(){
+    return "Purchase";
+}
+export function costText(price:number){
+    return "Price: $" + price;
 }
 
 //Profile Screen Text

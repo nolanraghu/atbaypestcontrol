@@ -3,7 +3,7 @@ import {Button, ScrollView, useColorScheme, Text, View} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import {getStyle, buttonColor} from '../assets/Stylesheets/Styles'
 import BugPressable from "../components/BugPressable";
-import {getBugByID, getUser} from "../assets/Data/Data";
+import {getPreventionPlan, getUser} from "../assets/Data/Data";
 import {deleteChanges, newPriceText, updatePlan} from "../assets/text/text";
 
 export default function BugsTabScreen() {
@@ -17,7 +17,7 @@ export default function BugsTabScreen() {
     const plan = getUser().getPlan();
     // This might be a terrible way to do it, but this gets the bugs in order, from prevention plan,
     // to added infestations, to other infestations
-    let bugs = [getBugByID(0)].concat(
+    let bugs = [getPreventionPlan()].concat(
         plan.getInfestations().concat(
             plan.getOtherInfestations()))
 

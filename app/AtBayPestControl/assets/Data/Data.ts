@@ -1,5 +1,6 @@
 import Infestation from "../Classes/Infestation";
 import User from "../Classes/User";
+import Product from "../Classes/Product";
 
 
 
@@ -59,17 +60,22 @@ export function getBugsList(){
     return [bug1];
 }
 
-export function getBugByID(id: number){
+export function getBugByID(id: string):Infestation{
     //TODO
     return bug1;
 }
 
-export function getUser(){
+export function getProductByID(id: number):Product{
+    return (new Product(id))
+}
+
+export function getPreventionPlan():Infestation{
+    //TODO
+    return bug1;
+}
+
+export function getUser():User{
     //TODO
     return user;
 
-}
-
-export function requiredPlanTime(){
-    return "3 months";
 }
