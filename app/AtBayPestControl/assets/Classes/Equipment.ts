@@ -14,11 +14,21 @@ export default class Equipment {
     constructor(id: number){
         this.id = id;
         let pData = getEquipmentInfo(this.id);
-        this.image = pData.image;
+        this.image = eval(pData.image);
         this.name = pData.name;
         this.description = pData.description;
         this.price = pData.price;
       }
+
+  toJSON() {
+        return {
+            id: this.id,
+            image: this.image,
+            name: this.name,
+            description: this.description,
+            price: this.price
+        };
+    }
 
     getEquipmentImage = () => {
         //TODO

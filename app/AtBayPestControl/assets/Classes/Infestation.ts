@@ -20,22 +20,34 @@ export default class Infestation {
     private readonly products: Array<Product>
     private readonly upfrontPrice: number
     private readonly monthlyPrice: number
-    constructor(id:number){
+    constructor(id:number) {
         //TODO: ideally we probably don't need the id in the constructor? Depends on how we
         // implement it in Data.ts I suppose
         this.id = id;
         let pData = getInfestationInfo(this.id);
-        this.image = pData.image;
+        this.image = eval(pData.image);
         this.name = pData.name;
         this.description = pData.description;
         this.products = [];
-        for(let x in pData.products){
+        for (let x in pData.products) {
             this.products.push(new Product(Number(x)));
         }
         this.upfrontPrice = pData.upfrontPrice;
         this.monthlyPrice = pData.monthlyPrice;
-
     }
+
+    toJSON() {
+        return {
+            id: this.id,
+            image: this.image,
+            name: this.name,
+            description: this.description,
+            products: this.products,
+            upfrontPrice: this.upfrontPrice,
+            monthlyPrice: this.monthlyPrice
+        };
+    }
+
     getID = () => {
         return this.id;
     }

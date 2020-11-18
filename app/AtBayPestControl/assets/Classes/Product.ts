@@ -6,16 +6,6 @@ import {getEquipmentInfo} from "../../controller/EquipmentPulling";
 import {getInfestationInfo} from "../../controller/InfestationPulling";
 import {getProductInfo} from "../../controller/ProductPulling";
 
-// This bitch unsued
-interface ProductProps {
-    id: number,
-    image: NodeRequire,
-    name: string,
-    description: string,
-    equipment: Array<String>,
-    price: number,
-}
-
 export default class Product{
     private readonly id: number
     private readonly image: NodeRequire
@@ -28,7 +18,7 @@ export default class Product{
     constructor(id: number){
         this.id = id;
         let pData = getProductInfo(this.id);
-        this.image = pData.image;
+        this.image = eval(pData.image);
         this.name = pData.name;
         this.description = pData.description;
         this.timeline = pData.timeline
@@ -41,6 +31,19 @@ export default class Product{
 
         this.price = pData.price;
     }
+
+    toJSON () {
+        return {
+            id: this.id,
+            image: this.image,
+            name: this.image,
+            description: this.description,
+            timeline: this.timeline,
+            equipment: this.equipment,
+            price: this.price
+        };
+    }
+
     getProductImage = () => {
         return this.image;
     }
