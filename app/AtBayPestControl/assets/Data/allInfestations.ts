@@ -19,7 +19,7 @@ export const allInfestations = [
     },
     {
         id: 2,
-        image: require("..images/beetle.png"), //TODO: Add the spider
+        image: require("../images/beetle.png"), //TODO: Add the spider
         name: "Spiders",
         description: "Spiders description",
         products: [6],
@@ -27,7 +27,7 @@ export const allInfestations = [
     },
     {
         id: 3,
-        image: require("..images/beetle.png"), //TODO: Add the mosquito
+        image: require("../images/beetle.png"), //TODO: Add the mosquito
         name: "Mosquitoes",
         description: "Mosquitos description",
         products: [7, 9],
