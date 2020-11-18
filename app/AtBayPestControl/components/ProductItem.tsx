@@ -20,7 +20,7 @@ export default function ProductItem({product}: productProps) {
                 <Image source={product.getProductImage()}  style={styles.buttonImage}/>
             </View>
             <View style={styles.productTextBox}>
-                <Text style={styles.fullText}>{product.getProductDetails()}</Text>
+                <Text style={styles.fullText} numberOfLines={6}>{product.getProductDetails()}</Text>
             </View>
         </Pressable>
     );
