@@ -12,7 +12,7 @@ interface ProductProps {
     image: NodeRequire,
     name: string,
     description: string,
-    equipment: Array<Equipment>,
+    equipment: Array<String>,
     price: number,
 }
 
@@ -33,7 +33,7 @@ export default class Product{
 
         let counter = 0;
         this.equipment = [];
-        for(let x in pData.equipments){
+        for(let x in pData.equipment){
             this.equipment.push(new Equipment(x));
             counter += 1;
         };
