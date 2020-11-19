@@ -176,7 +176,7 @@ export default function BugInfoPopup({route, navigation}: any) {
             } else if(!adding) {
                 user.getPlan().removePendingInfestation(infestation)
             }
-            navigation.navigate('BugsTabScreen')
+            navigation.navigate('BugsTabScreen', {update:true})
         }
     }
 
