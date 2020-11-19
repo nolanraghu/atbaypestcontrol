@@ -20,19 +20,13 @@ export default class Equipment {
         this.price = pData.price;
       }
 
-  toJSON() {
-        return {
-            id: this.id,
-            image: this.image,
-            name: this.name,
-            description: this.description,
-            price: this.price
-        };
+  toString() {
+        return JSON.stringify(this);
     }
 
     getEquipmentImage = () => {
         //TODO
-        return require('../images/product3.jpg')
+        return this.image;
     }
     getEquipmentDescription = () => {
         //TODO
@@ -40,10 +34,10 @@ export default class Equipment {
     }
     getEquipmentName = () => {
         //TODO
-        return 'Sprayer'
+        return this.name;
     }
     getPrice = () => {
         //TODO
-        return 3.00
+        return this.price;
     }
 }
