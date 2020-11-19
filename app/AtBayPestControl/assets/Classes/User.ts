@@ -7,6 +7,7 @@ import Equipment from "./Equipment";
 import Product from "./Product";
 
 interface UserasJSON {
+    id: 0,
     userPlan: string;
     currentEquipment: Array <number>;
     removedEquipment: Array <number>;
@@ -15,24 +16,18 @@ export default class User {
     //TODO: Add all of the personal information here and have it be used by Profile tab
 
     // If this is 0, that should mean they haven't made an account yet
-    private id: number
+    private id: 0
     private userPlan: Plan
     private currentEquipment: Array<Equipment>
     private removedEquipment: Array<Equipment>
     constructor(id:number = 0){
-        this.id = id;
-        this.userPlan = new Plan
-
-        this.currentEquipment = [];
-        for (let x in this.currentEquipment) {
-            this.currentEquipment.push(new Equipment(Number(x)));
-        }
-
-        this.removedEquipment = [];
-        for (let x in this.removedEquipment) {
-            this.removedEquipment.push(new Equipment(Number(x)));
-        }
+            this.id = 0;
+            this.userPlan = new Plan();
+            this.currentEquipment = [];
+            this.removedEquipment = [];
     }
+
+
 
     private stringList = (arr: Array<Equipment>) => {
         let ids: Array<number> = [];
@@ -47,6 +42,7 @@ export default class User {
     toString = () => {
         return JSON.stringify(
             {
+                id: this.id,
                 userPlan: this.userPlan.toString(),
                 currentEquipment: this.stringList(this.currentEquipment),
                 removedEquipment: this.stringList(this.removedEquipment),
@@ -58,7 +54,7 @@ export default class User {
         let json = JSON.parse(jsonString) as UserasJSON;
 
         this.userPlan = new Plan().fromString(json.userPlan);
-
+        this.id = json.id;
         json.currentEquipment.forEach(
             (id) =>{
                 this.currentEquipment.push(new Equipment(id));
@@ -74,7 +70,10 @@ export default class User {
     }
 
     hasAccount = () => {
-        return this.id != 0
+        //I'm assuming this means something with signing up, so I'm just gonna return true
+        return true;
+
+        //return this.id != 0
     }
     getPlan = () => {
         return this.userPlan;
