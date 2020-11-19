@@ -138,6 +138,8 @@ export default class Plan {
             }
         );
         this.dueDate = json.dueDate;
+
+        return this;
     }
 
     containsInfestation = (bug:Infestation) => {

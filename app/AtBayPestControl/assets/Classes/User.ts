@@ -5,15 +5,15 @@
 import Plan from "./Plan";
 import Equipment from "./Equipment";
 import Product from "./Product";
-import Infestation from "./Infestation";
 
 interface UserasJSON {
-    userPlan: Plan;
+    userPlan: string;
     currentEquipment: Array <number>;
     removedEquipment: Array <number>;
 }
 export default class User {
     //TODO: Add all of the personal information here and have it be used by Profile tab
+
     // If this is 0, that should mean they haven't made an account yet
     private id: number
     private userPlan: Plan
@@ -47,7 +47,7 @@ export default class User {
     toString = () => {
         return JSON.stringify(
             {
-                userPlan: this.userPlan,
+                userPlan: this.userPlan.toString(),
                 currentEquipment: this.stringList(this.currentEquipment),
                 removedEquipment: this.stringList(this.removedEquipment),
             }
@@ -56,6 +56,9 @@ export default class User {
 
     fromString = (jsonString: string) => {
         let json = JSON.parse(jsonString) as UserasJSON;
+
+        this.userPlan = new Plan().fromString(json.userPlan);
+
         json.currentEquipment.forEach(
             (id) =>{
                 this.currentEquipment.push(new Equipment(id));
@@ -66,6 +69,8 @@ export default class User {
                 this.removedEquipment.push(new Equipment(id));
             }
         );
+
+        return this;
     }
 
     hasAccount = () => {
@@ -75,7 +80,6 @@ export default class User {
         return this.userPlan;
     }
     hasEquipment = (equipment:Equipment) => {
-        //TODO
         return this.currentEquipment.includes(equipment);
     }
 
@@ -109,7 +113,7 @@ export default class User {
 
         if (!curSet.has(equipment)) {
             this.addHasEquipment(equipment);
-            // TODO Add to upcoming purchases
+            // TODO this.userPlan.addPendingEquipment(equipment);
         }
 
     }
@@ -121,9 +125,10 @@ export default class User {
         if (!curSet.has(equipment)) {
             // Adds to current equipment
             curSet.add(equipment);
-            this.currentEquipment = [... curSet];
+            this.currentEquipment = [...curSet];
         }
     }
+
     makePayment = (price:number) => {
         // TODO: but not related to the database
         console.log("Pay $" + price )
