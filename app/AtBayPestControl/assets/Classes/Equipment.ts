@@ -20,10 +20,16 @@ export default class Equipment {
         this.price = pData.price;
       }
 
+
     getEquipmentImage = () => {
         //TODO
         return this.image;
     }
+
+    equals = (e: Equipment) => {
+        return e.getID() == this.getID();
+    }
+
     getEquipmentDescription = () => {
         //TODO
         return this.description

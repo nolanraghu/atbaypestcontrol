@@ -33,6 +33,10 @@ export default class Product{
         this.price = pData.price;
     }
 
+    equals = (e: Product) => {
+        return e.getID() == this.getID();
+    }
+
     getProductImage = () => {
         return this.image;
     }

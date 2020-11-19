@@ -2,6 +2,7 @@ import Infestation from "../Classes/Infestation";
 import User from "../Classes/User";
 import Product from "../Classes/Product";
 import Equipment from "../Classes/Equipment";
+import {loadUser} from "./Storage";
 
 
 
@@ -53,17 +54,16 @@ export const PLAN = "Current Plan"
 //Infestation pulls from Async
 //User from a database
 
-const bug1 = new Infestation(0);
-const user = new User()
+
 
 export function getBugsList(){
     //TODO
-    return [bug1];
+    return [new Infestation(0), new Infestation(1), new Infestation(2), new Infestation(3)];
 }
 
-export function getBugByID(id: string):Infestation{
+export function getBugByID(id: number):Infestation{
     //TODO
-    return bug1;
+    return new Infestation(id);
 }
 
 export function getProductByID(id: number):Product{
@@ -78,11 +78,17 @@ export function getEquipmentByID(id:number):Equipment{
 
 export function getPreventionPlan():Infestation{
     //TODO
-    return bug1;
+    return new Infestation(0);
 }
 
-export function getUser():User{
-    //TODO
-    return user;
+export function getUser(){
+    let RayJ= new User();
+    loadUser().then(
+        (user) => {
+            RayJ = user;
+            return RayJ;
+        }
+    );
+    return RayJ;
 
 }

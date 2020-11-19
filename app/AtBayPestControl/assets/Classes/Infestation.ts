@@ -40,6 +40,10 @@ export default class Infestation {
     getID = () => {
         return this.id;
     }
+
+    equals = (e: Infestation) => {
+        return e.getID() == this.getID();
+    }
     isPreventionPlan = () => {
         return this.id == 0
     }
