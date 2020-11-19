@@ -1,20 +1,9 @@
-// I thought the name Infestation was more accurate than Bug
-// This class contains all the information I learned about classes.
-// TODO: Decide how we want things to display when we aren't connected to the database. Should they still be able
-//  to access all the information as it was when they last connected, then if they try to make a change receive
-//  an error? That's what I think it should be? Which brings up my question about the database. Is the database at
-//  a url? Or is it stored in the www folder and then updates itself?
-
-
 import Product from "./Product";
 import {getInfestationInfo} from "../../controller/InfestationPulling";
 import image from '../images/index';
 import {getProductByID} from "../Data/Data";
 
 export default class Infestation {
-    // We should use id's so we can find them in the database, everything else should be accessed from the database
-    // using accessor functions, probably. Just in case we need it for local changes or something, I've included other
-    // examples
     private readonly id: number
     private readonly image: NodeRequire
     private readonly name: string
@@ -23,16 +12,14 @@ export default class Infestation {
     private readonly upfrontPrice: number
     private readonly monthlyPrice: number
     constructor(id:number) {
-        //TODO: ideally we probably don't need the id in the constructor? Depends on how we
-        // implement it in Data.ts I suppose
         this.id = id;
         let pData = getInfestationInfo(this.id);
         this.image = image.infestations[id];
         this.name = pData.name;
         this.description = pData.description;
         this.products = [];
-        for (let x in pData.products) {
-            this.products.push(getProductByID(Number(x)));
+        for (let x of pData.products) {
+            this.products.push(getProductByID(x));
         }
         this.upfrontPrice = pData.upfrontPrice;
         this.monthlyPrice = pData.monthlyPrice;

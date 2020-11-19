@@ -12,7 +12,7 @@ import Equipment from "./Equipment";
 import {getInfestationInfo} from "../../controller/InfestationPulling";
 import User from "./User";
 import {storeUser} from "../Data/Storage";
-import {getBugByID, save} from "../Data/Data";
+import {getBugByID, getBugsList, save} from "../Data/Data";
 
 interface PlanAsJsON {
     addingInfestations: Array<number>;
@@ -33,7 +33,7 @@ export default class Plan {
     constructor(){
         this.addingInfestations = [];
         this.removingInfestations = [];
-        this.currentInfestations = [getBugByID(1)];
+        this.currentInfestations = [getBugByID(0), getBugByID(1)];
         this.pendingEquipment = [];
         this.dueDate = -1;
     }
@@ -67,7 +67,7 @@ export default class Plan {
         let target: Product[] = [];
         arr.forEach(
             function (infestation){
-                target.concat(infestation.getProducts());
+                target = target.concat(infestation.getProducts());
             })
         return target;
     }
@@ -176,15 +176,17 @@ export default class Plan {
     }
     getPendingInfestations = ():Infestation[] => {
         // returns a list of the infestations that are pending, not including the prevention plan
-        return [new Infestation(1), new Infestation(2), new Infestation(3)].filter(
-            x => !this.addingInfestations.includes(x));}
+        return this.currentInfestations.filter((infestation) => {
+            return infestation.getID() != 0;
+        });
+    }
 
     getOtherInfestations = ():Infestation[] => {
         //This includes Pending Infestations and anything not currently on the plan, not including the prevention plan
 
         //Easily one of the sexiest implementations yet
-        return [new Infestation(1), new Infestation(2), new Infestation(3)].filter(
-            x => !this.getInfestations().includes(x));
+        return getBugsList().filter(
+            x => !(this.getInfestations().includes(x) || x.getID() == 0));
     }
     getProducts = ():Product[] => {
         return this.countProducts(this.currentInfestations);
@@ -211,7 +213,7 @@ export default class Plan {
         let removes = this.countPriceInfestation(this.removingInfestations);
         let additions = this.countPriceInfestation(this.addingInfestations);
         currents.monthly += additions.monthly - removes.monthly;
-        currents.upfront += additions.upfront - removes.upfront;
+        currents.upfront = additions.upfront;
         return currents;
     }
 
@@ -224,15 +226,16 @@ export default class Plan {
 
         this.addingInfestations = [];
         this.removingInfestations = [];
+        this.pendingEquipment = [];
         save();
     }
     addChangesToPlan = () => {
         //TODO: This should send all of this.pendingEquipment to the client (Ortho/Brandon)
         // and clear pending equipment
 
-        var curSet = new Set(this.currentInfestations);
-        var minusSet = new Set(this.removingInfestations);
-        var plusSet = new Set(this.addingInfestations);
+        let curSet = new Set(this.currentInfestations);
+        let minusSet = new Set(this.removingInfestations);
+        let plusSet = new Set(this.addingInfestations);
 
         for (let elem of minusSet){
             //Send removal orders to client
@@ -243,8 +246,8 @@ export default class Plan {
             curSet.add(elem);
         }
         this.currentInfestations = [...curSet];
-        this.addingInfestations = [...plusSet];
-        this.removingInfestations = [...minusSet];
+        this.addingInfestations = [];
+        this.removingInfestations = [];
         this.pendingEquipment = [];
         save();
 
