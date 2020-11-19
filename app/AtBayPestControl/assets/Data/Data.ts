@@ -1,5 +1,6 @@
 import Infestation from "../Classes/Infestation";
 import User from "../Classes/User";
+import Email from "../Classes/Email";
 
 
 
@@ -7,19 +8,13 @@ import User from "../Classes/User";
 
 export const EMAIL = [
     [
-        "1",
-        "personal",
-        "fake.person@gmail.com",
+        new Email("1", "fake.person1@gmail.com", "personal", true),
     ],
     [
-        "2",
-        "work",
-        "fake.person2@gmail.com",
+        new Email("2", "fake.person2@gmail.com", "work", false),
     ],
     [
-        "3",
-        "play",
-        "fake.person3@gmail.com",
+        new Email("3", "fake.person3@gmail.com", "play", false),
     ]
 ]
 

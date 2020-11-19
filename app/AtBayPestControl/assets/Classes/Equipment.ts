@@ -31,7 +31,6 @@ export default class Equipment {
     getEquipmentDescription = () => {
         //TODO
         return this.description
-
     }
     getEquipmentName = () => {
         //TODO

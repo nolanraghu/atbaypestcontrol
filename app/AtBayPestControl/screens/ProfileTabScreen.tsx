@@ -10,15 +10,18 @@ import {
     View
 } from 'react-native';
 import {getStyle} from '../assets/Stylesheets/Styles'
-import Email from '../components/Email'
-import Payment from '../components/Payment'
-import ShippingLocations from '../components/ShippingLocations';
+import Email from '../components/RenderEmail'
+import Payment from '../components/RenderPayment'
+import ShippingLocations from '../components/RenderShippingLocations';
 import Separator from '../components/Separator'
 import {EMAIL, LOC, PAY, PLAN} from "../assets/Data/Data";
 import { useNavigation } from '@react-navigation/native';
 import PlanTabScreen from "./PlanTabScreen";
+import {getUser} from "../assets/Data/Data";
 
 //TODO: make editable, have a situation for no user yet
+
+let User = getUser();
 
 export default function ProfileTabScreen() {
   const scheme = useColorScheme();
@@ -47,12 +50,13 @@ function onPressPlace () {
   console.log('place')
 }
 
-function renderHeader ({avatar = require('../assets/images/profile_picture.jpg'),
-                         avatarBackground = require('../assets/images/splash.png'),
-                         name = 'John Doe', city = 'New York', state = 'New York'}: RenderHProps) {
+function renderHeader ({avatar = User.getProfilePic(), avatarBackground = User.getBackgroundPic(),
+                         name = User.getUserName(), city = User.getDefaultAddress().city,
+                         state = User.getDefaultAddress().state}: RenderHProps) {
 
   const scheme = useColorScheme();
   let styles = getStyle(scheme);
+
   console.log(avatar, avatarBackground)
 
   return (

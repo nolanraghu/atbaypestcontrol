@@ -4,15 +4,41 @@
 
 import Plan from "./Plan";
 import Equipment from "./Equipment";
+import Email from "./Email"
+import Address from "./Address";
 
-export default class User {
+
+interface UserProps {
+    name: string,
+    emails: Array<Email>,
+    addresses: Array<Address>,
+    defaultAddress: Address,
+    profilePic: NodeRequire,
+    backgroundPic: NodeRequire
+}
+
+export default class User implements UserProps{
     // If this is 0, that should mean they haven't made an account yet
-    private id: number
-    constructor(id:number = 0){
+    private id: string
+    emails: Array<Email> = new Array<Email>();
+    addresses: Array<Address> = new Array<Address>();
+    defaultAddress: Address = new Address();
+    name: string = "";
+    profilePic: NodeRequire = require("../images/error.jpg");
+    backgroundPic: NodeRequire = require("../images/error.jpg");
+
+    constructor(id:string = "0", name: string, emails: Array<Email>, addresses: Array<Address>,
+                profilePic: NodeRequire, backGroundPic: NodeRequire){
         this.id = id;
+        this.name = name;
+        this.emails = emails;
+        this.addresses = addresses;
+        if (addresses.length != 0) this.defaultAddress = addresses[1];
+        this.profilePic = profilePic;
+        this.backgroundPic = backGroundPic;
     }
     hasAccount = () => {
-        return this.id != 0
+        return this.id != "0"
     }
     getPlan = () => {
         //TODO
@@ -48,4 +74,42 @@ export default class User {
         // Note: the date of nextDate should be <= 28
         // TODO: but not related to the database
     }
+
+    getUserName = () => {
+        return this.name;
+    }
+
+    getEmails = () => {
+        // returns default shipping address
+        return this.emails;
+    }
+
+    getAddresses = () => {
+        // returns default shipping address
+        return this.addresses;
+    }
+
+    getDefaultAddress = () => {
+        // returns default shipping address
+        return this.defaultAddress;
+    }
+
+    getProfilePic = () => {
+        // Returns the profile picture of the user
+        return this.profilePic;
+    }
+
+    getBackgroundPic = () => {
+        // returns default shipping address
+        return this.defaultAddress;
+    }
+
+    getEmailByID = () => {
+
+    }
+
+    getAddressByID = () => {
+
+    }
+
 }
