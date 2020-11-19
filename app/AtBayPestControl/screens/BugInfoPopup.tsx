@@ -167,14 +167,14 @@ export default function BugInfoPopup({route, navigation}: any) {
         //  to BugsTabScreen
         if(canRemove || adding || purchasing){
             if (adding) {
-                user.getPlan().addPendingAddition(infestation);
+                user.getPlan().addPendingInfestation(infestation);
             }
             if (newEquipment.size != 0){
                 newEquipment.forEach(( products, equipment) => {
                     user.addEquipment(equipment);
                 })
             } else if(!adding) {
-                user.getPlan().addPendingRemoval(infestation)
+                user.getPlan().removePendingInfestation(infestation)
             }
             navigation.navigate('BugsTabScreen')
         }
