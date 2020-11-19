@@ -10,6 +10,8 @@ import Infestation from "./Infestation";
 import Product from "./Product";
 import Equipment from "./Equipment";
 import {getInfestationInfo} from "../../controller/InfestationPulling";
+import User from "./User";
+import {storeUser} from "../Data/Storage";
 
 interface PlanAsJsON {
     addingInfestations: Array<number>;
@@ -20,6 +22,7 @@ interface PlanAsJsON {
 }
 
 export default class Plan {
+    private myUser: User;
     private addingInfestations: Array<Infestation>
     private removingInfestations: Array<Infestation>
     private currentInfestations: Array<Infestation>
@@ -27,7 +30,8 @@ export default class Plan {
     private dueDate: number;
 
 
-    constructor(){
+    constructor(user: User){
+        this.myUser = user;
         this.addingInfestations = [];
         this.removingInfestations = [];
         this.currentInfestations = [];
@@ -221,6 +225,7 @@ export default class Plan {
 
         this.addingInfestations = [];
         this.removingInfestations = [];
+        storeUser(this.myUser);
     }
     addChangesToPlan = () => {
         //TODO: This should send all of this.pendingEquipment to the client (Ortho/Brandon)
@@ -242,6 +247,8 @@ export default class Plan {
         this.addingInfestations = [...plusSet];
         this.removingInfestations = [...minusSet];
         this.pendingEquipment = [];
+        storeUser(this.myUser);
+
     }
     addPendingInfestation = (bug:Infestation) => {
         // Adds the infestation to the plan, but only pending. If it is already in the plan but pending removal,
@@ -258,6 +265,8 @@ export default class Plan {
             plusSet.add(bug);
             this.addingInfestations = [...plusSet];
         }
+        storeUser(this.myUser);
+
     }
 
 
@@ -296,18 +305,24 @@ export default class Plan {
 
 
         }
+        storeUser(this.myUser);
+
     }
 
     addPendingEquipment = (e: Equipment) =>{
         const eset = new Set(this.pendingEquipment);
         eset.add(e);
         this.pendingEquipment = [...eset];
+        storeUser(this.myUser);
+
     }
 
     removePendingEquipment = (e: Equipment) => {
         const eset = new Set(this.pendingEquipment);
         eset.delete(e);
         this.pendingEquipment = [...eset];
+        storeUser(this.myUser);
+
     }
 
     getDueDate = () => {
@@ -338,6 +353,7 @@ export default class Plan {
             month -= 12;
             year++;
         }
+        storeUser(this.myUser);
         return new Date(year, month, setDate);
     }
 }

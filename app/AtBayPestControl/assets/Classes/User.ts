@@ -5,6 +5,7 @@
 import Plan from "./Plan";
 import Equipment from "./Equipment";
 import Product from "./Product";
+import {storeUser} from "../Data/Storage";
 
 interface UserasJSON {
     id: 0,
@@ -22,7 +23,7 @@ export default class User {
     private removedEquipment: Array<Equipment>
     constructor(id:number = 0){
             this.id = 0;
-            this.userPlan = new Plan();
+            this.userPlan = new Plan(this);
             this.currentEquipment = [];
             this.removedEquipment = [];
     }
@@ -53,7 +54,7 @@ export default class User {
     fromString = (jsonString: string) => {
         let json = JSON.parse(jsonString) as UserasJSON;
 
-        this.userPlan = new Plan().fromString(json.userPlan);
+        this.userPlan = new Plan(this).fromString(json.userPlan);
         this.id = json.id;
         json.currentEquipment.forEach(
             (id) =>{
@@ -79,7 +80,9 @@ export default class User {
         return this.userPlan;
     }
     hasEquipment = (equipment:Equipment) => {
+
         return this.currentEquipment.includes(equipment);
+
     }
 
     //getPendingEquipment
@@ -103,6 +106,7 @@ export default class User {
             pastSet.add(equipment);
             this.removedEquipment = [... pastSet];
         }
+        storeUser(this);
     }
     addEquipment = (equipment:Equipment) => {
         // This adds the equipment to the list of equipment the user has, and also adds it to the upcoming
@@ -112,9 +116,9 @@ export default class User {
 
         if (!curSet.has(equipment)) {
             this.addHasEquipment(equipment);
-            // TODO this.userPlan.addPendingEquipment(equipment);
+            this.userPlan.addPendingEquipment(equipment);
         }
-
+        storeUser(this);
     }
     addHasEquipment = (equipment:Equipment) => {
         // This ONLY adds the equipment to the list of equipment the user has
@@ -126,6 +130,7 @@ export default class User {
             curSet.add(equipment);
             this.currentEquipment = [...curSet];
         }
+        storeUser(this);
     }
 
     makePayment = (price:number) => {
