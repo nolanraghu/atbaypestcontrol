@@ -32,10 +32,6 @@ export default class Product{
         this.price = pData.price;
     }
 
-    toString () {
-        return JSON.stringify(this);
-    }
-
     getProductImage = () => {
         return this.image;
     }

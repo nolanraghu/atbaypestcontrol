@@ -20,10 +20,6 @@ export default class Equipment {
         this.price = pData.price;
       }
 
-  toString() {
-        return JSON.stringify(this);
-    }
-
     getEquipmentImage = () => {
         //TODO
         return this.image;

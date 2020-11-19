@@ -36,10 +36,6 @@ export default class Infestation {
         this.monthlyPrice = pData.monthlyPrice;
     }
 
-    toString() {
-        return JSON.stringify(this);
-    }
-
     getID = () => {
         return this.id;
     }
