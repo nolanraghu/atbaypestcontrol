@@ -50,5 +50,13 @@ export default class Product{
 
     getTimeline = () => {
         return this.timeline;
+
+    getID = () => {
+        return this.id;
+    }
+
+    getPrice = () => {
+        return this.price;
+
     }
 }

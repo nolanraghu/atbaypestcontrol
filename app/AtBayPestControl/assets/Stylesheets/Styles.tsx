@@ -106,6 +106,20 @@ export function getStyle(state:ColorSchemeName) {
             shadowRadius: 2,
             elevation: 4,
         },
+        productTitleImage: {
+            flex: 1,
+            flexDirection: 'column',
+            backgroundColor: 'transparent',
+            margin: 12,
+            marginHorizontal: -10
+        },
+        productTextBox: {
+            flex: 2,
+            flexDirection:'column',
+            backgroundColor: 'transparent',
+            margin: 8,
+            marginLeft: 0
+        },
         fullButtonOn: {
             width: '39%',
             margin: '5.5%',

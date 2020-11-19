@@ -5,29 +5,85 @@ import {
     Text,
     View
 } from "react-native";
-
-import {getProductInfo} from "../controller/ProductPulling"
 import CaptionImage from "../components/CaptionImage";
 import {getStyle} from "../assets/Stylesheets/Styles";
-
-//TODO: Add button in header that allows you to repurchase the product before you would normally receive it. Add
-// the equipment views, and allow the user to repurchase lost equipment.
+import {getProductByID} from "../assets/Data/Data";
+import {
+    captionProductWithLink,
+    equipmentListTitle,
+    justEquipmentDescription,
+} from "../assets/text/text";
+import Equipment from "../assets/Classes/Equipment";
+import Product from "../assets/Classes/Product";
 
 export default function PlanProductPopup({route, navigation}:any){
     const {prodId} = route.params;
-    let prodInfo = getProductInfo(prodId);
+    let product:Product = getProductByID(prodId);
     const scheme = useColorScheme();
     let styles = getStyle(scheme);
+
+    const equipment:Equipment[] = product.equipmentList();
+
+    let keys = 0;
+
+    function link(text:string){
+        return (
+            <Text style={styles.link}
+                  onPress={()=>{
+                      navigation.navigate('ConfirmPurchasePopup', {
+                          itemID:prodId, type:'Product', price:product.getPrice()
+                      })
+                  }}
+                  key={keys++}>
+                {text}
+            </Text>
+        )
+    }
+
+    function renderEquipment (){
+        function equipmentLink(text:string, equipment:Equipment){
+            return (
+                <Text style={styles.link}
+                      onPress={()=>{
+                          navigation.navigate('ConfirmPurchasePopup', {
+                              itemID:equipment.getID(), type:'Equipment', price:equipment.getPrice()
+                          })
+                      }}
+                      key={keys++}>
+                    {text}
+                </Text>
+            )
+        }
+        if (equipment.length == 0){
+            return;
+        } else {
+            return ([
+                <Text style={styles.title} key={keys++}>{equipmentListTitle()}</Text>,
+                equipment.map((equipment:Equipment) => {
+                    return (
+                        <CaptionImage source={equipment.getEquipmentImage()}
+                                      text={
+                                          justEquipmentDescription(equipment,
+                                              (text:string) => {return equipmentLink(text, equipment)})
+                                      }
+                                      key={keys++}/>
+                    )
+                })
+            ])
+        }
+    }
 
     return(
         <View style={styles.screen}>
             <View style={styles.header}>
-                <Text style={styles.title}>{prodInfo.name}</Text>
+                <Text style={styles.title}>{product.getProductName()}</Text>
             </View>
             <ScrollView>
                 <View style={styles.container}>
-                    <CaptionImage source={prodInfo.image} text={prodInfo.description}/>
+                    <CaptionImage source={product.getProductImage()}
+                                  text={captionProductWithLink(product, link)}/>
                 </View>
+                {renderEquipment()}
             </ScrollView>
         </View>
     );

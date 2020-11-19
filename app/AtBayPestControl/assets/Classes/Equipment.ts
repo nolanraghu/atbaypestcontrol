@@ -36,4 +36,10 @@ export default class Equipment {
         //TODO
         return this.price;
     }
+    getID = () => {
+        return this.id;
+    }
+    isEqual = (equipment:Equipment) => {
+        return this.id == equipment.getID();
+    }
 }

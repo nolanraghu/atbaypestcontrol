@@ -43,7 +43,7 @@ export default class Infestation {
         return this.id == 0
     }
     //Gets the image source for the bug
-    getBugImage = () => {
+    getBugImage = ():any => {
         //TODO
         return this.image
     }
