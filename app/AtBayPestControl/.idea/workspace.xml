@@ -20,20 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f11504bf-41dd-4bca-92fa-bafd18444296" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/components/ProductItem.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/Classes/Equipment.ts" beforeDir="false" afterPath="$PROJECT_DIR$/assets/Classes/Equipment.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/Classes/Infestation.ts" beforeDir="false" afterPath="$PROJECT_DIR$/assets/Classes/Infestation.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/Classes/Plan.ts" beforeDir="false" afterPath="$PROJECT_DIR$/assets/Classes/Plan.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/Classes/Product.ts" beforeDir="false" afterPath="$PROJECT_DIR$/assets/Classes/Product.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/Data/Data.ts" beforeDir="false" afterPath="$PROJECT_DIR$/assets/Data/Data.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/Data/allInfestations.ts" beforeDir="false" afterPath="$PROJECT_DIR$/assets/Data/allInfestations.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/Stylesheets/Styles.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/Stylesheets/Styles.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/text/text.ts" beforeDir="false" afterPath="$PROJECT_DIR$/assets/text/text.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/BugPressable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/BugPressable.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens/BugsTabScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/screens/BugsTabScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens/PlanProductPopup.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/screens/PlanProductPopup.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens/PlanTabScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/screens/PlanTabScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/Classes/User.ts" beforeDir="false" afterPath="$PROJECT_DIR$/assets/Classes/User.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,6 +76,7 @@
       <workItem from="1605663953531" duration="4161000" />
       <workItem from="1605739341673" duration="4193000" />
       <workItem from="1605745509709" duration="225000" />
+      <workItem from="1605755572178" duration="2856000" />
     </task>
     <servers />
   </component>

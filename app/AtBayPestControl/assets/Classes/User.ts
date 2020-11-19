@@ -5,46 +5,128 @@
 import Plan from "./Plan";
 import Equipment from "./Equipment";
 import Product from "./Product";
+import Infestation from "./Infestation";
 
+interface UserasJSON {
+    userPlan: Plan;
+    currentEquipment: Array <number>;
+    removedEquipment: Array <number>;
+}
 export default class User {
     //TODO: Add all of the personal information here and have it be used by Profile tab
-
     // If this is 0, that should mean they haven't made an account yet
     private id: number
+    private userPlan: Plan
+    private currentEquipment: Array<Equipment>
+    private removedEquipment: Array<Equipment>
     constructor(id:number = 0){
         this.id = id;
+        this.userPlan = new Plan
+
+        this.currentEquipment = [];
+        for (let x in this.currentEquipment) {
+            this.currentEquipment.push(new Equipment(Number(x)));
+        }
+
+        this.removedEquipment = [];
+        for (let x in this.removedEquipment) {
+            this.removedEquipment.push(new Equipment(Number(x)));
+        }
     }
+
+    private stringList = (arr: Array<Equipment>) => {
+        let ids: Array<number> = [];
+        arr.forEach(
+            function (equipment){
+                ids.push(equipment.getID())
+            }
+        );
+        return ids;
+    }
+
+    toString = () => {
+        return JSON.stringify(
+            {
+                userPlan: this.userPlan,
+                currentEquipment: this.stringList(this.currentEquipment),
+                removedEquipment: this.stringList(this.removedEquipment),
+            }
+        );
+    }
+
+    fromString = (jsonString: string) => {
+        let json = JSON.parse(jsonString) as UserasJSON;
+        json.currentEquipment.forEach(
+            (id) =>{
+                this.currentEquipment.push(new Equipment(id));
+            }
+        );
+        json.removedEquipment.forEach(
+            (id) =>{
+                this.removedEquipment.push(new Equipment(id));
+            }
+        );
+    }
+
     hasAccount = () => {
         return this.id != 0
     }
     getPlan = () => {
-        //TODO
-        return new Plan(0)
+        return this.userPlan;
     }
     hasEquipment = (equipment:Equipment) => {
         //TODO
-        return true;
+        return this.currentEquipment.includes(equipment);
     }
 
     //getPendingEquipment
     hadEquipment = (equipment:Equipment) => {
-        // This returns true if the user once had the equipment, but it has been removed
-        //TODO
-        return false;
+        return this.removedEquipment.includes(equipment);
     }
     removeEquipment = (equipment:Equipment) => {
         // This removes the equipment from the list of equipment the user has, but adds it to a list of equipment
         // the user once owned
-        //TODO
+
+        const curSet = new Set(this.currentEquipment);
+        const pastSet = new Set(this.removedEquipment);
+
+        if (curSet.has(equipment)) {
+
+            // Removes from current equipment
+            curSet.delete(equipment);
+            this.currentEquipment = [... curSet];
+
+            // Adds to removed equipment
+            pastSet.add(equipment);
+            this.removedEquipment = [... pastSet];
+        }
     }
     addEquipment = (equipment:Equipment) => {
         // This adds the equipment to the list of equipment the user has, and also adds it to the upcoming
         // purchases in the plan
-        //TODO
+
+        const curSet = new Set(this.currentEquipment);
+
+        if (!curSet.has(equipment)) {
+
+            // Adds to current equipment
+            curSet.add(equipment);
+            this.currentEquipment = [... curSet];
+
+            // TODO Add to upcoming purchases
+        }
+
     }
     addHasEquipment = (equipment:Equipment) => {
         // This ONLY adds the equipment to the list of equipment the user has
-        // TODO
+
+        const curSet = new Set(this.currentEquipment);
+
+        if (!curSet.has(equipment)) {
+            // Adds to current equipment
+            curSet.add(equipment);
+            this.currentEquipment = [... curSet];
+        }
     }
     makePayment = (price:number) => {
         // TODO: but not related to the database
