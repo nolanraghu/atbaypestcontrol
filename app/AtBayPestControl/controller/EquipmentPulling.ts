@@ -7,7 +7,7 @@ import {allEquipment} from '../assets/Data/allEquipment';
 export function getEquipmentInfo(bId: number) {
     let k ={
         id: -1,
-        image: require("../assets/images/error.jpg"),
+        image: 'require("../assets/images/error.jpg")',
         name: "ErrorName",
         description: "ErrorDescription",
         price: 0

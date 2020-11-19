@@ -89,6 +89,7 @@
       <change beforePath="$PROJECT_DIR$/app/AtBayPestControl/screens/BugsTabScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/AtBayPestControl/screens/BugsTabScreen.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/AtBayPestControl/screens/PlanTabScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/AtBayPestControl/screens/PlanTabScreen.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/AtBayPestControl/screens/ProfileTabScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/AtBayPestControl/screens/ProfileTabScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/AtBayPestControl/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/AtBayPestControl/tsconfig.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/AtBayPestControl/types.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/AtBayPestControl/types.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/AtBayPestControl/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/app/AtBayPestControl/yarn.lock" afterDir="false" />
     </list>
@@ -168,7 +169,8 @@
       <workItem from="1605632182484" duration="3777000" />
       <workItem from="1605659049408" duration="422000" />
       <workItem from="1605659481707" duration="67000" />
-      <workItem from="1605659568652" duration="6892000" />
+      <workItem from="1605659568652" duration="7564000" />
+      <workItem from="1605735428850" duration="10528000" />
     </task>
     <task id="LOCAL-00001" summary="First Commit. Renaming screens/tabs to fit our needs.">
       <created>1602888296289</created>
@@ -230,6 +232,10 @@
     <option name="LAST_COMMIT_MESSAGE" value="fixed issue w/yarn start, cleaned up extra files" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="275" y="219" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1605741943485">
+      <screen x="0" y="23" width="1792" height="1026" />
+    </state>
+    <state x="275" y="219" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1792.1026@0.23.1792.1026" timestamp="1605741943485" />
     <state x="582" y="334" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1604121225554">
       <screen x="0" y="23" width="1792" height="1026" />
     </state>
