@@ -10,7 +10,7 @@ import Product from "./Product";
 import {getInfestationInfo} from "../../controller/InfestationPulling";
 
 interface InfestationProps {
-    id: string,
+    id: number,
     image: NodeRequire,
     name: string,
     description: string,
@@ -23,13 +23,13 @@ export default class Infestation {
     // We should use id's so we can find them in the database, everything else should be accessed from the database
     // using accessor functions, probably. Just in case we need it for local changes or something, I've included other
     // examples
-    private readonly id: string
+    private readonly id: number
     private readonly image: NodeRequire
     private readonly name: string
     private readonly description: string
     private readonly products: Array<Product>
     private readonly price: number
-    constructor(id:string){
+    constructor(id:number){
         //TODO: ideally we probably don't need the id in the constructor? Depends on how we
         // implement it in Data.ts I suppose
         this.id = id;
@@ -37,11 +37,9 @@ export default class Infestation {
         this.image = pData.image;
         this.name = pData.name;
         this.description = pData.description;
-        let counter = 0;
         this.products = [];
         for(let x in pData.products){
-            this.products.push(new Product(x));
-            counter += 1;
+            this.products.push(new Product(Number(x)));
         }
         this.price = pData.price;
 
@@ -52,10 +50,10 @@ export default class Infestation {
         return this.id;
     }
     isPreventionPlan = () => {
-        return this.id == "b1"
+        return this.id == 0
     }
     //Gets the image source for the bug
-    getBugImage = () => {
+    getBugImage = ():any => {
         //TODO
         return this.image
     }

@@ -6,6 +6,7 @@ import Plan from "./Plan";
 import Equipment from "./Equipment";
 import Email from "./Email"
 import Address from "./Address";
+import Product from "../Classes/Product";
 
 
 interface UserProps {
@@ -69,10 +70,17 @@ export default class User implements UserProps{
     }
     makePayment = (price:number) => {
         // TODO: but not related to the database
+        console.log("Pay $" + price )
     }
     setMonthlyPayments = (price:number, nextDate:Date) => {
         // Note: the date of nextDate should be <= 28
         // TODO: but not related to the database
+        console.log("Next Payment: $" + price + " on " + nextDate)
+    }
+    purchaseItems = (item:(Product|Equipment)[]) => {
+        // Sends the list of items that the user has purchased (separate from the plan) to the client
+        // TODO
+        console.log("Purchased")
     }
 
     getUserName = () => {

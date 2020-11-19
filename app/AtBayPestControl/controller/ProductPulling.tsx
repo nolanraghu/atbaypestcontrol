@@ -1,43 +1,43 @@
 import * as React from 'react';
-import {allProducts} from '../assets/Data/allProducts.ts';
+import {allProducts} from '../assets/Data/allProducts';
 
 //this is kinda fakey right now because idk about the db
 
-export function getProductInfo(pid: String) {
+export function getProductInfo(pid: number) {
     let k ={
-        id: "0",
-        equipments: [-1],
+        id: -1,
         image: require('../assets/images/error.jpg'),
         name: "ErrorName",
         description: "ErrorDetails",
+        equipment: [-1],
         price: 0
     };
     switch(pid){
-        case "p1":
+        case 0:
             k = allProducts[0];
             break;
-        case "p2":
+        case 1:
             k = allProducts[1];
             break;
-        case "p3":
+        case 2:
             k = allProducts[2];
             break;
-        case "p4":
+        case 3:
             k = allProducts[3];
             break;
-        case "p5":
+        case 4:
             k = allProducts[4];
             break;
-        case "p6":
+        case 5:
             k = allProducts[5];
             break;
-        case "p7":
+        case 6:
             k = allProducts[6];
             break;
-        case "p8":
+        case 7:
             k = allProducts[7];
             break;
-        case "p9":
+        case 8:
             k = allProducts[8];
             break;
     }

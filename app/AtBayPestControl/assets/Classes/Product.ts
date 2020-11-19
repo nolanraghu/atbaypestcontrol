@@ -3,49 +3,64 @@
 
 import Equipment from "./Equipment";
 import {getEquipmentInfo} from "../../controller/EquipmentPulling";
+import {getInfestationInfo} from "../../controller/InfestationPulling";
+import {getProductInfo} from "../../controller/ProductPulling";
 
+// This bitch unsued
 interface ProductProps {
-    id: string,
+    id: number,
     image: NodeRequire,
     name: string,
     description: string,
-    equipment: Array<string>,
+    equipment: Array<String>,
     price: number,
 }
 
-
-
-
 export default class Product{
-    id: string
-    equipment: Array<Equipment>
-    image: NodeRequire
-    name: string
-    description: string
-    price: number
-    constructor(props: ProductProps){
-        this.id = props.id;
+    private readonly id: number
+    private readonly image: NodeRequire
+    private readonly name: string
+    private readonly description: string
+    private readonly equipment: Array<Equipment>
+    private readonly price: number
+
+    constructor(id: number){
+        this.id = id;
+        let pData = getProductInfo(this.id);
+        this.image = pData.image;
+        this.name = pData.name;
+        this.description = pData.description;
+
+        let counter = 0;
         this.equipment = [];
-        for(var id in props.equipment){
-            this.equipment.push(getEquipmentInfo(props.id))
+        for(let x in pData.equipment){
+           this.equipment.push(new Equipment(Number(x)))
+            counter += 1;
         };
-        this.image = props.image;
-        this.productName = props.productName;
-        this.productDetails = props.productDetails;
+
+        this.price = pData.price;
     }
-    getProductImage = () => {
+    getProductImage = ():any => {
         return this.image;
     }
 
     getProductName = () => {
-        return this.productName;
+        return this.name;
     }
 
     getProductDetails = () => {
-        return this.productDetails;
+        return this.description;
     }
 
     equipmentList = () => {
         return this.equipment;
+    }
+
+    getID = () => {
+        return this.id;
+    }
+
+    getPrice = () => {
+        return this.price;
     }
 }

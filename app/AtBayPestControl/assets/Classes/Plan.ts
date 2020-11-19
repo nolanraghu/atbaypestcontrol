@@ -60,7 +60,7 @@ export default class Plan {
     }
     getProducts = ():Product[] => {
         //TODO
-        return []
+        return [new Product(0)]
     }
     getPendingProducts = ():Product[] => {
         // Returns a list of the products in the pending infestations
@@ -75,7 +75,7 @@ export default class Plan {
     getRemovingProducts = ():Product[] => {
         // Returns a list of the products on the infestations that are pending removal
         //TODO
-        return [new Product(1)]
+        return []
     }
     getCurrentPrice = ():number => {
         // Returns the current price of the plan
