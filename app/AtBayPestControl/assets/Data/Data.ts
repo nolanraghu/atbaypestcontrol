@@ -1,23 +1,16 @@
 import Infestation from "../Classes/Infestation";
 import User from "../Classes/User";
 import Email from "../Classes/Email";
-import Product from "../Classes/Product";
-import Equipment from "../Classes/Equipment";
+import Address from "../Classes/Address";
 
 
 
 //EXAMPLE FORMATS
 
 export const EMAIL = [
-    [
-        new Email("1", "fake.person1@gmail.com", "personal", true),
-    ],
-    [
-        new Email("2", "fake.person2@gmail.com", "work", false),
-    ],
-    [
-        new Email("3", "fake.person3@gmail.com", "play", false),
-    ]
+    new Email("1", "fake.person1@gmail.com", "personal", true),
+    new Email("2", "fake.person2@gmail.com", "work", false),
+    new Email("3", "fake.person3@gmail.com", "play", false),
 ]
 
 export const PAY = [
@@ -34,12 +27,8 @@ export const PAY = [
 ]
 
 export const LOC = [
-    [
-        ['1 Real Place', 'New York City', 'New York', '12345'],
-    ],
-    [
-        ['2 Real Place', 'Nashville', 'Tennessee', '678910'],
-    ]
+    new Address('1 Real Place', 'New York City', 'New York', '12345'),
+    new Address('2 Real Place', 'Nashville', 'Tennessee', '678910'),
 ]
 
 export const PLAN = "Current Plan"
@@ -49,35 +38,25 @@ export const PLAN = "Current Plan"
 //User from a database
 
 const bug1 = new Infestation(0);
-const user = new User()
+const user = new User("0","Joe Smith", EMAIL, LOC,
+    require("../images/profile_picture"), require("../images/splash"));
 
 export function getBugsList(){
     //TODO
     return [bug1];
 }
 
-export function getBugByID(id: string):Infestation{
+export function getBugByID(id: number){
     //TODO
     return bug1;
 }
 
-export function getProductByID(id: number):Product{
-    //TODO
-    return (new Product(id))
-}
-
-export function getEquipmentByID(id:number):Equipment{
-    //TODO
-    return (new Equipment(id))
-}
-
-export function getPreventionPlan():Infestation{
-    //TODO
-    return bug1;
-}
-
-export function getUser():User{
+export function getUser(){
     //TODO
     return user;
 
+}
+
+export function requiredPlanTime(){
+    return "3 months";
 }

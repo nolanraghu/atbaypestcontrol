@@ -1,23 +1,27 @@
 // This will be very simple, including probably a picture and a name, perhaps a description and instructions,
 // all straight from the database
 
-import {getEquipmentInfo} from "../../controller/EquipmentPulling";
 
+interface EquipmentProps {
+    id: string,
+    image: NodeRequire,
+    name: string,
+    description: string,
+    price: number
+}
 
 export default class Equipment {
-    private readonly id: number;
-    private readonly image: NodeRequire;
-    private readonly name: string;
-    private readonly description: string;
-    private readonly price: number;
-
-    constructor(id: number){
-        this.id = id;
-        let pData = getEquipmentInfo(this.id);
-        this.image = pData.image;
-        this.name = pData.name;
-        this.description = pData.description;
-        this.price = pData.price;
+    id: string;
+    image: NodeRequire;
+    name: string;
+    description: string;
+    price: number;
+    constructor(props: EquipmentProps){
+        this.id = props.id;
+        this.image = props.image;
+        this.name = props.name;
+        this.description = props.description;
+        this.price = props.price;
       }
 
     getEquipmentImage = () => {
@@ -35,11 +39,5 @@ export default class Equipment {
     getPrice = () => {
         //TODO
         return 3.00
-    }
-    getID = () => {
-        return this.id;
-    }
-    isEqual = (equipment:Equipment) => {
-        return this.id == equipment.getID();
     }
 }

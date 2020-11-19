@@ -111,14 +111,12 @@ function renderEmail () {
     console.log('email')
   }
 
-  let EmailArray = EMAIL.map(function([id, name, email], index) {
+  let EmailArray = User.getEmails().map(function(email, index) {
     return  <Email
-              key={id}
+              key={email.getType()}
               index={index}
-              name={name}
               email={email}
               onPressEmail={onPressEmail}
-
             />
   })
 
@@ -198,11 +196,11 @@ function renderLoc () {
   const scheme = useColorScheme();
   let styles = getStyle(scheme);
 
-  let LocationArray = LOC.map(function([location], index) {
+  let LocationArray = User.getAddresses().map(function(address, index) {
     return  <ShippingLocations
-        key={location[1]}
+        key={address.getAddress()}
         index={index}
-        location={location}
+        address={address}
         onPressPlace={onPressPlace}
     />
   })
