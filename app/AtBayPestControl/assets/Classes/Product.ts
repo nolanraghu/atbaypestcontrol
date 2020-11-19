@@ -5,6 +5,7 @@ import Equipment from "./Equipment";
 import {getEquipmentInfo} from "../../controller/EquipmentPulling";
 import {getInfestationInfo} from "../../controller/InfestationPulling";
 import {getProductInfo} from "../../controller/ProductPulling";
+import images from "../images";
 
 export default class Product{
     private readonly id: number
@@ -18,7 +19,7 @@ export default class Product{
     constructor(id: number){
         this.id = id;
         let pData = getProductInfo(this.id);
-        this.image = eval(pData.image);
+        this.image = images.product[id];
         this.name = pData.name;
         this.description = pData.description;
         this.timeline = pData.timeline
@@ -50,7 +51,7 @@ export default class Product{
 
     getTimeline = () => {
         return this.timeline;
-
+    }
     getID = () => {
         return this.id;
     }

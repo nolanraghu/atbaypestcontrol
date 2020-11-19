@@ -8,6 +8,7 @@
 
 import Product from "./Product";
 import {getInfestationInfo} from "../../controller/InfestationPulling";
+import image from '../images/index';
 
 export default class Infestation {
     // We should use id's so we can find them in the database, everything else should be accessed from the database
@@ -25,7 +26,7 @@ export default class Infestation {
         // implement it in Data.ts I suppose
         this.id = id;
         let pData = getInfestationInfo(this.id);
-        this.image = eval(pData.image);
+        this.image = image.infestations[id];
         this.name = pData.name;
         this.description = pData.description;
         this.products = [];

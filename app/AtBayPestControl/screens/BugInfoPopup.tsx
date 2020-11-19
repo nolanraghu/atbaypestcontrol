@@ -51,7 +51,7 @@ export default function BugInfoPopup({route, navigation}: any) {
     //False if the user is not allowed to remove the infestation from their plan
     const canRemove = user.getPlan().isRemovable(infestation)
 
-    const price = infestation.getPrice();
+    const price = {upfront: infestation.getUpfrontPrice(), monthly: infestation.getMonthlyPrice()};
 
     const products:Product[] = infestation.getProducts()
 
@@ -71,7 +71,7 @@ export default function BugInfoPopup({route, navigation}: any) {
             retVal = <Text style={styles.captionFade}>{noInfestationProductText()}</Text>
         } else {
             retVal = products.map(function(product){
-                let equipment = product.equipmentList();
+                let equipment = product.getEquipmentList();
 
                 // Makes lists of equipment that will be needed, along with the product(or products)
                 // that they are needed for, in a map
@@ -210,7 +210,7 @@ export default function BugInfoPopup({route, navigation}: any) {
             </ScrollView>
             <View style={styles.header}>
                 <Text style={styles.fullText}>
-                    {priceText(price.monthly, price.upFront, equipmentPrice, adding, purchasing)}
+                    {priceText(price.monthly, price.upfront, equipmentPrice, adding, purchasing)}
                 </Text>
             </View>
         </View>

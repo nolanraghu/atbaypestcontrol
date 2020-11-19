@@ -2,7 +2,7 @@
 // all straight from the database
 
 import {getEquipmentInfo} from "../../controller/EquipmentPulling";
-
+import Images from '../images/index';
 
 export default class Equipment {
     private readonly id: number;
@@ -14,7 +14,7 @@ export default class Equipment {
     constructor(id: number){
         this.id = id;
         let pData = getEquipmentInfo(this.id);
-        this.image = eval(pData.image);
+        this.image = Images.equipment[id];
         this.name = pData.name;
         this.description = pData.description;
         this.price = pData.price;
