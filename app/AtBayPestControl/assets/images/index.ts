@@ -23,7 +23,7 @@
         require('./beetle.png'),
         require('./cockroach.jpg'),
         require('./spider.jpg'),
-        require('mosquito.jpg'),
+        require('./mosquito.jpg'),
     ],
     equipment: [
         require('./spreader.jpg'),
