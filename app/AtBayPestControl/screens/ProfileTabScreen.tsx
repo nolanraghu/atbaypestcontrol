@@ -14,7 +14,7 @@ import Email from '../components/RenderEmail'
 import Payment from '../components/RenderPayment'
 import ShippingLocations from '../components/RenderShippingLocations';
 import Separator from '../components/Separator'
-import {EMAIL, LOC, PAY, PLAN} from "../assets/Data/Data";
+import {PLAN} from "../assets/Data/Data";
 import { useNavigation } from '@react-navigation/native';
 import PlanTabScreen from "./PlanTabScreen";
 import {getUser} from "../assets/Data/Data";
@@ -172,12 +172,11 @@ function renderPay () {
     console.log('edit')
   }
 
-  let PayArray = PAY.map(function([id, name, card], index) {
+  let PayArray = User.getPayments().map(function(payment, index) {
     return  <Payment
-        key={id}
+        key={payment.getCardNumber().substr(payment.getCardNumber().length-4)}
+        payment={payment}
         index={index}
-        name={name}
-        card={card}
         onPressEdit={onPressEdit}
         onPressPayment={onPressPayment}
 

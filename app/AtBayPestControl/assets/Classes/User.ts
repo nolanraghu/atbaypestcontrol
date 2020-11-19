@@ -6,12 +6,15 @@ import Plan from "./Plan";
 import Equipment from "./Equipment";
 import Email from "./Email"
 import Address from "./Address";
+import Product from "./Product";
+import Payment from "./Payment";
 
 
 interface UserProps {
     name: string,
     emails: Array<Email>,
     addresses: Array<Address>,
+    payments: Array<Payment>,
     defaultAddress: Address,
     profilePic: NodeRequire,
     backgroundPic: NodeRequire
@@ -22,17 +25,19 @@ export default class User implements UserProps{
     private id: string
     emails: Array<Email> = new Array<Email>();
     addresses: Array<Address> = new Array<Address>();
+    payments: Array<Payment> = new Array<Payment>();
     defaultAddress: Address = new Address();
     name: string = "";
     profilePic: NodeRequire = require("../images/error.jpg");
     backgroundPic: NodeRequire = require("../images/error.jpg");
 
     constructor(id:string = "0", name: string, emails: Array<Email>, addresses: Array<Address>,
-                profilePic: NodeRequire, backGroundPic: NodeRequire){
+                payments: Array<Payment>, profilePic: NodeRequire, backGroundPic: NodeRequire){
         this.id = id;
         this.name = name;
         this.emails = emails;
         this.addresses = addresses;
+        this.payments = payments;
         if (addresses.length != 0) this.defaultAddress = addresses[1];
         this.profilePic = profilePic;
         this.backgroundPic = backGroundPic;
@@ -75,6 +80,12 @@ export default class User implements UserProps{
         // TODO: but not related to the database
     }
 
+    purchaseItems = (item:(Product|Equipment)[]) => {
+        // Sends the list of items that the user has purchased (separate from the plan) to the client
+        // TODO
+        console.log("Purchased")
+    }
+
     getUserName = () => {
         return this.name;
     }
@@ -89,6 +100,11 @@ export default class User implements UserProps{
         return this.addresses;
     }
 
+    getPayments = () => {
+        // returns default the users addresses
+        return this.payments;
+    }
+
     getDefaultAddress = () => {
         // returns default shipping address
         return this.defaultAddress;
@@ -101,7 +117,7 @@ export default class User implements UserProps{
 
     getBackgroundPic = () => {
         // returns background picture the user has selected
-        return this.defaultAddress;
+        return this.backgroundPic;
     }
 
     getEmailByID = () => {
