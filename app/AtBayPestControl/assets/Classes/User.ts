@@ -108,11 +108,7 @@ export default class User {
         const curSet = new Set(this.currentEquipment);
 
         if (!curSet.has(equipment)) {
-
-            // Adds to current equipment
-            curSet.add(equipment);
-            this.currentEquipment = [... curSet];
-
+            this.addHasEquipment(equipment);
             // TODO Add to upcoming purchases
         }
 
