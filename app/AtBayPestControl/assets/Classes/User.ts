@@ -6,6 +6,7 @@ import Plan from "./Plan";
 import Equipment from "./Equipment";
 import Product from "./Product";
 import {storeUser} from "../Data/Storage";
+import {save} from "../Data/Data";
 
 interface UserasJSON {
     id: 0,
@@ -23,7 +24,7 @@ export default class User {
     private removedEquipment: Array<Equipment>
     constructor(id:number = 0){
             this.id = 0;
-            this.userPlan = new Plan(this);
+            this.userPlan = new Plan();
             this.currentEquipment = [];
             this.removedEquipment = [];
     }
@@ -54,7 +55,7 @@ export default class User {
     fromString = (jsonString: string) => {
         let json = JSON.parse(jsonString) as UserasJSON;
 
-        this.userPlan = new Plan(this).fromString(json.userPlan);
+        this.userPlan = new Plan().fromString(json.userPlan);
         this.id = json.id;
         json.currentEquipment.forEach(
             (id) =>{
@@ -106,7 +107,7 @@ export default class User {
             pastSet.add(equipment);
             this.removedEquipment = [... pastSet];
         }
-        storeUser(this);
+        save();
     }
     addEquipment = (equipment:Equipment) => {
         // This adds the equipment to the list of equipment the user has, and also adds it to the upcoming
@@ -118,7 +119,7 @@ export default class User {
             this.addHasEquipment(equipment);
             this.userPlan.addPendingEquipment(equipment);
         }
-        storeUser(this);
+        save();
     }
     addHasEquipment = (equipment:Equipment) => {
         // This ONLY adds the equipment to the list of equipment the user has
@@ -130,7 +131,7 @@ export default class User {
             curSet.add(equipment);
             this.currentEquipment = [...curSet];
         }
-        storeUser(this);
+        save();
     }
 
     makePayment = (price:number) => {

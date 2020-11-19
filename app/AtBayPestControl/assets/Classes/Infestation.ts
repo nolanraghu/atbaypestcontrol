@@ -9,6 +9,7 @@
 import Product from "./Product";
 import {getInfestationInfo} from "../../controller/InfestationPulling";
 import image from '../images/index';
+import {getProductByID} from "../Data/Data";
 
 export default class Infestation {
     // We should use id's so we can find them in the database, everything else should be accessed from the database
@@ -31,7 +32,7 @@ export default class Infestation {
         this.description = pData.description;
         this.products = [];
         for (let x in pData.products) {
-            this.products.push(new Product(Number(x)));
+            this.products.push(getProductByID(Number(x)));
         }
         this.upfrontPrice = pData.upfrontPrice;
         this.monthlyPrice = pData.monthlyPrice;

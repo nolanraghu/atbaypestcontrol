@@ -12,6 +12,7 @@ import Equipment from "./Equipment";
 import {getInfestationInfo} from "../../controller/InfestationPulling";
 import User from "./User";
 import {storeUser} from "../Data/Storage";
+import {getBugByID, save} from "../Data/Data";
 
 interface PlanAsJsON {
     addingInfestations: Array<number>;
@@ -22,7 +23,6 @@ interface PlanAsJsON {
 }
 
 export default class Plan {
-    private myUser: User;
     private addingInfestations: Array<Infestation>
     private removingInfestations: Array<Infestation>
     private currentInfestations: Array<Infestation>
@@ -30,11 +30,10 @@ export default class Plan {
     private dueDate: number;
 
 
-    constructor(user: User){
-        this.myUser = user;
+    constructor(){
         this.addingInfestations = [];
         this.removingInfestations = [];
-        this.currentInfestations = [];
+        this.currentInfestations = [getBugByID(1)];
         this.pendingEquipment = [];
         this.dueDate = -1;
     }
@@ -225,7 +224,7 @@ export default class Plan {
 
         this.addingInfestations = [];
         this.removingInfestations = [];
-        storeUser(this.myUser);
+        save();
     }
     addChangesToPlan = () => {
         //TODO: This should send all of this.pendingEquipment to the client (Ortho/Brandon)
@@ -247,7 +246,7 @@ export default class Plan {
         this.addingInfestations = [...plusSet];
         this.removingInfestations = [...minusSet];
         this.pendingEquipment = [];
-        storeUser(this.myUser);
+        save();
 
     }
     addPendingInfestation = (bug:Infestation) => {
@@ -265,7 +264,7 @@ export default class Plan {
             plusSet.add(bug);
             this.addingInfestations = [...plusSet];
         }
-        storeUser(this.myUser);
+        save();
 
     }
 
@@ -305,7 +304,7 @@ export default class Plan {
 
 
         }
-        storeUser(this.myUser);
+        save();
 
     }
 
@@ -313,7 +312,7 @@ export default class Plan {
         const eset = new Set(this.pendingEquipment);
         eset.add(e);
         this.pendingEquipment = [...eset];
-        storeUser(this.myUser);
+        save();
 
     }
 
@@ -321,7 +320,7 @@ export default class Plan {
         const eset = new Set(this.pendingEquipment);
         eset.delete(e);
         this.pendingEquipment = [...eset];
-        storeUser(this.myUser);
+        save();
 
     }
 
@@ -353,7 +352,7 @@ export default class Plan {
             month -= 12;
             year++;
         }
-        storeUser(this.myUser);
+        save();
         return new Date(year, month, setDate);
     }
 }

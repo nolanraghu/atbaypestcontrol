@@ -6,6 +6,7 @@ import {getEquipmentInfo} from "../../controller/EquipmentPulling";
 import {getInfestationInfo} from "../../controller/InfestationPulling";
 import {getProductInfo} from "../../controller/ProductPulling";
 import images from "../images";
+import {getEquipmentByID} from "../Data/Data";
 
 export default class Product{
     private readonly id: number
@@ -26,7 +27,7 @@ export default class Product{
         let counter = 0;
         this.equipment = [];
         for(let x in pData.equipment){
-           this.equipment.push(new Equipment(Number(x)))
+           this.equipment.push(getEquipmentByID(Number(x)))
             counter += 1;
         }
 
