@@ -60,10 +60,7 @@
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/images/spreader.jpg" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/components/BugPressable.tsx" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/components/CaptionImage.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/components/Email.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/components/Payment.tsx" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/components/Separator.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/components/ShippingLocations.tsx" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/controller/EquipmentPulling.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/controller/InfestationPulling.tsx" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/controller/ProductPulling.tsx" afterDir="false" />
@@ -173,7 +170,8 @@
       <workItem from="1605659481707" duration="67000" />
       <workItem from="1605659568652" duration="7564000" />
       <workItem from="1605735428850" duration="21873000" />
-      <workItem from="1605763393784" duration="4299000" />
+      <workItem from="1605763393784" duration="6823000" />
+      <workItem from="1605800495222" duration="4227000" />
     </task>
     <task id="LOCAL-00001" summary="First Commit. Renaming screens/tabs to fit our needs.">
       <created>1602888296289</created>

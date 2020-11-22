@@ -19,7 +19,6 @@ export const PLAN = "Current Plan"
 //Infestation pulls from Async
 //User from a database
 
-const bug1 = new Infestation(0);
 const equipment = [new Equipment(0), new Equipment(1), new Equipment(2)]
 const products = [new Product(0), new Product(1), new Product(2), new Product(3), new Product(4), new Product(5), new Product(6), new Product(7), new Product(8)]
 const infestations = [new Infestation(0), new Infestation(1), new Infestation(2), new Infestation(3)]

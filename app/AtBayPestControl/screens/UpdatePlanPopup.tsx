@@ -2,7 +2,8 @@ import * as React from 'react';
 import {Button, ScrollView, useColorScheme, Text, View} from "react-native";
 import {buttonColor, getStyle} from "../assets/Stylesheets/Styles";
 import Payment from "../components/RenderPayment";
-import {getUser, PAY} from "../assets/Data/Data";
+import {getUser} from "../assets/Data/Data";
+import {PAY} from "../assets/Data/allPayments";
 import {
     captionEquipmentDescription, captionProductAndReqEquipment,
     captionProductDescription, confirmationNotes,
@@ -46,9 +47,8 @@ export default function UpdatePlanPopup({route, navigation}:any) {
         return (
             <View style={{width: '100%'}} key={keys++}>
                 <Payment
-                    name={PAY[0][1]}
+                    payment={getUser().getPayments()[0]}
                     index={0}
-                    card={PAY[0][2]}
                     onPressEdit={onPressEdit}
                     onPressPayment={onPressPayment}/>
             </View>

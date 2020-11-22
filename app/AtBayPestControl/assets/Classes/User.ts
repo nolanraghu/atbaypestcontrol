@@ -10,6 +10,7 @@ import Product from "./Product";
 import {storeUser} from "../Data/Storage";
 import {save} from "../Data/Data";
 import Payment from "../Classes/Payment"
+import {PAY} from "../Data/allPayments"
 
 interface UserProps {
     name: string,
@@ -18,7 +19,11 @@ interface UserProps {
     payments: Array<Payment>,
     defaultAddress: Address,
     profilePic: NodeRequire,
-    backgroundPic: NodeRequire
+    backgroundPic: NodeRequire,
+    id: Number
+    userPlan: Plan
+    currentEquipment: Array<Equipment>
+    removedEquipment: Array<Equipment>,
 }
 
 interface UserasJSON {
@@ -26,30 +31,26 @@ interface UserasJSON {
     userPlan: string;
     currentEquipment: Array <number>;
     removedEquipment: Array <number>;
+
 }
 export default class User implements UserProps{
     //TODO: Add all of the personal information here and have it be used by Profile tab
-    
+
     // If this is 0, that should mean they haven't made an account yet
-    private id: string
     emails: Array<Email> = new Array<Email>();
-    addresses: Array<Address> = new Array<Address>();
-    payments: Array<Payment> = new Array<Payment>();
+    addresses: Array<Address> = new Array<Address>(new Address());
+    payments: Array<Payment> = new Array<Payment>(PAY[0], PAY[1]);
     defaultAddress: Address = new Address();
     name: string = "";
     profilePic: NodeRequire = require("../images/error.jpg");
     backgroundPic: NodeRequire = require("../images/error.jpg");
+    id: Number = 0;
+    userPlan = new Plan();
+    currentEquipment: Array<Equipment> = [];
+    removedEquipment: Array<Equipment> = [];
 
-    // If this is 0, that should mean they haven't made an account yet
-    private id: 0
-    private userPlan: Plan
-    private currentEquipment: Array<Equipment>
-    private removedEquipment: Array<Equipment>
     constructor(id:number = 0){
-            this.id = 0;
-            this.userPlan = new Plan();
-            this.currentEquipment = [];
-            this.removedEquipment = [];
+            console.log("The User constructor has been called!");
     }
 
     private stringList = (arr: Array<Equipment>) => {
@@ -218,7 +219,7 @@ export default class User implements UserProps{
         // profile page
     }
 
-    changeProfilPic = (img: string) => {
+    changeProfilePicture = (img: string) => {
         // function for updating the profile picture, to be used when edit buttons are implemented correctly in the
         // profile page
     }
