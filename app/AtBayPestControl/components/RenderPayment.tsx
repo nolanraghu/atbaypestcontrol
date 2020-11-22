@@ -2,12 +2,13 @@ import React from 'react'
 import {Text, TouchableOpacity, useColorScheme, View} from 'react-native'
 import { Icon } from 'react-native-elements'
 import {getStyle} from "../assets/Stylesheets/Styles";
+import Payment from "../assets/Classes/Payment";
 
-export default function renderItem ({card, index, name, onPressEdit, onPressPayment}: renderProps) {
+export default function renderItem ({payment, index, onPressEdit, onPressPayment}: renderProps) {
     const scheme = useColorScheme();
     let styles = getStyle(scheme);
 
-    card = card.replace(/\s/g, "")
+    let card = payment.getCardNumber().replace(/\s/g, "")
 
     return (
         <TouchableOpacity onPress={() => onPressPayment()}>
@@ -27,8 +28,8 @@ export default function renderItem ({card, index, name, onPressEdit, onPressPaym
                         <Text style={styles.payText}>{"xxxx-xxxx-xxxx-" + card.substr(card.length - 4,)}</Text>
                     </View>
                     <View style={styles.nameColumn}>
-                        {name.length !== 0 && (
-                            <Text style={styles.subText}>{name}</Text>
+                        {payment.getCardType().length !== 0 && (
+                            <Text style={styles.subText}>{payment.getCardType()}</Text>
                         )}
                     </View>
                 </View>
@@ -46,9 +47,8 @@ export default function renderItem ({card, index, name, onPressEdit, onPressPaym
 }
 
 interface renderProps {
-    card: string
+    payment: Payment
     index: number
-    name: string
     onPressEdit: () => void
     onPressPayment: () => void
 }

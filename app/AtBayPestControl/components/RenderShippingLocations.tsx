@@ -2,8 +2,9 @@ import React from 'react'
 import {StyleSheet, Text, TouchableOpacity, useColorScheme, View} from 'react-native'
 import { Icon } from 'react-native-elements'
 import {getStyle, buttonColor, getBackgroundColor} from '../assets/Stylesheets/Styles'
+import Address from "../assets/Classes/Address";
 
-export default function renderItem ({location, index, onPressPlace}: renderProps) {
+export default function renderItem ({address, index, onPressPlace}: renderProps) {
 
     const scheme = useColorScheme();
     let styles = getStyle(scheme);
@@ -23,11 +24,11 @@ export default function renderItem ({location, index, onPressPlace}: renderProps
                 </View>
                 <View style={styles.Row}>
                     <View style={styles.column}>
-                        <Text style={styles.Text}>{location[0] + ', ' + location[1]}</Text>
+                        <Text style={styles.Text}>{address.getAddress() + ', ' + address.getCity()}</Text>
                     </View>
                     <View style={styles.nameColumn}>
-                        {location[2].length !== 0 && (
-                            <Text style={styles.subText}>{location[2] + ', ' + location[3]}</Text>
+                        {address.getState().length !== 0 && (
+                            <Text style={styles.subText}>{address.getState() + ', ' + address.getZip()}</Text>
                         )}
                     </View>
                 </View>
@@ -37,7 +38,7 @@ export default function renderItem ({location, index, onPressPlace}: renderProps
 }
 
 interface renderProps {
-    location: string[]
+    address: Address
     index: number
     onPressPlace: () => void
 }

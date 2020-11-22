@@ -4,9 +4,22 @@
 
 import Plan from "./Plan";
 import Equipment from "./Equipment";
+import Email from "./Email"
+import Address from "./Address";
 import Product from "./Product";
 import {storeUser} from "../Data/Storage";
 import {save} from "../Data/Data";
+import Payment from "../Classes/Payment"
+
+interface UserProps {
+    name: string,
+    emails: Array<Email>,
+    addresses: Array<Address>,
+    payments: Array<Payment>,
+    defaultAddress: Address,
+    profilePic: NodeRequire,
+    backgroundPic: NodeRequire
+}
 
 interface UserasJSON {
     id: 0,
@@ -14,8 +27,18 @@ interface UserasJSON {
     currentEquipment: Array <number>;
     removedEquipment: Array <number>;
 }
-export default class User {
+export default class User implements UserProps{
     //TODO: Add all of the personal information here and have it be used by Profile tab
+    
+    // If this is 0, that should mean they haven't made an account yet
+    private id: string
+    emails: Array<Email> = new Array<Email>();
+    addresses: Array<Address> = new Array<Address>();
+    payments: Array<Payment> = new Array<Payment>();
+    defaultAddress: Address = new Address();
+    name: string = "";
+    profilePic: NodeRequire = require("../images/error.jpg");
+    backgroundPic: NodeRequire = require("../images/error.jpg");
 
     // If this is 0, that should mean they haven't made an account yet
     private id: 0
@@ -28,8 +51,6 @@ export default class User {
             this.currentEquipment = [];
             this.removedEquipment = [];
     }
-
-
 
     private stringList = (arr: Array<Equipment>) => {
         let ids: Array<number> = [];
@@ -136,16 +157,75 @@ export default class User {
 
     makePayment = (price:number) => {
         // TODO: but not related to the database
-        console.log("Pay $" + price )
     }
     setMonthlyPayments = (price:number, nextDate:Date) => {
         // Note: the date of nextDate should be <= 28
         // TODO: but not related to the database
-        console.log("Next Payment: $" + price + " on " + nextDate)
     }
+
     purchaseItems = (item:(Product|Equipment)[]) => {
         // Sends the list of items that the user has purchased (separate from the plan) to the client
         // TODO
         console.log("Purchased")
     }
+
+    getUserName = () => {
+        return this.name;
+    }
+
+    getEmails = () => {
+        // returns default the users emails
+        return this.emails;
+    }
+
+    getAddresses = () => {
+        // returns default the users addresses
+        return this.addresses;
+    }
+
+    getPayments = () => {
+        // returns default the users addresses
+        return this.payments;
+    }
+
+    getDefaultAddress = () => {
+        // returns default shipping address
+        return this.defaultAddress;
+    }
+
+    getProfilePic = () => {
+        // Returns the profile picture of the user
+        return this.profilePic;
+    }
+
+    getBackgroundPic = () => {
+        // returns background picture the user has selected
+        return this.backgroundPic;
+    }
+
+    getEmailByID = () => {
+        // Get a specific Email by ID
+        // Will be useful for the edit function
+    }
+
+    getAddressByID = () => {
+        // Get a specific address by ID
+        // Will be useful for the edit function
+    }
+
+    changeUserName = (name: string) => {
+        // function for updating username, to be used when edit buttons are implemented correctly in the
+        // profile page
+    }
+
+    changeProfilPic = (img: string) => {
+        // function for updating the profile picture, to be used when edit buttons are implemented correctly in the
+        // profile page
+    }
+
+    changeBackgroundPic = (img: string) => {
+        // function for updating background picture, to be used when edit buttons are implemented correctly in the
+        // profile page
+    }
+
 }

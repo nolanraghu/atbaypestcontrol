@@ -8,7 +8,7 @@ import {
     purchaseListTitle
 } from "../assets/text/text";
 import {getEquipmentByID, getProductByID, getUser, PAY} from "../assets/Data/Data";
-import Payment from "../components/Payment";
+import Payment from "../components/RenderPayment";
 import CaptionImage from "../components/CaptionImage";
 import Product from "../assets/Classes/Product";
 

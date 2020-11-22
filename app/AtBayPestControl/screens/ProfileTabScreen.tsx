@@ -10,15 +10,18 @@ import {
     View
 } from 'react-native';
 import {getStyle} from '../assets/Stylesheets/Styles'
-import Email from '../components/Email'
-import Payment from '../components/Payment'
-import ShippingLocations from '../components/ShippingLocations';
+import Email from '../components/RenderEmail'
+import Payment from '../components/RenderPayment'
+import ShippingLocations from '../components/RenderShippingLocations';
 import Separator from '../components/Separator'
-import {EMAIL, LOC, PAY, PLAN} from "../assets/Data/Data";
+import {PLAN} from "../assets/Data/Data";
 import { useNavigation } from '@react-navigation/native';
 import PlanTabScreen from "./PlanTabScreen";
+import {getUser} from "../assets/Data/Data";
 
 //TODO: make editable, have a situation for no user yet
+
+let User = getUser();
 
 export default function ProfileTabScreen() {
   const scheme = useColorScheme();
@@ -47,12 +50,13 @@ function onPressPlace () {
   console.log('place')
 }
 
-function renderHeader ({avatar = require('../assets/images/profile_picture.jpg'),
-                         avatarBackground = require('../assets/images/splash.png'),
-                         name = 'John Doe', city = 'New York', state = 'New York'}: RenderHProps) {
+function renderHeader ({avatar = User.getProfilePic(), avatarBackground = User.getBackgroundPic(),
+                         name = User.getUserName(), city = User.getDefaultAddress().city,
+                         state = User.getDefaultAddress().state}: RenderHProps) {
 
   const scheme = useColorScheme();
   let styles = getStyle(scheme);
+
   console.log(avatar, avatarBackground)
 
   return (
@@ -107,14 +111,12 @@ function renderEmail () {
     console.log('email')
   }
 
-  let EmailArray = EMAIL.map(function([id, name, email], index) {
+  let EmailArray = User.getEmails().map(function(email, index) {
     return  <Email
-              key={id}
+              key={email.getType()}
               index={index}
-              name={name}
               email={email}
               onPressEmail={onPressEmail}
-
             />
   })
 
@@ -170,12 +172,11 @@ function renderPay () {
     console.log('edit')
   }
 
-  let PayArray = PAY.map(function([id, name, card], index) {
+  let PayArray = User.getPayments().map(function(payment, index) {
     return  <Payment
-        key={id}
+        key={payment.getCardNumber().substr(payment.getCardNumber().length-4)}
+        payment={payment}
         index={index}
-        name={name}
-        card={card}
         onPressEdit={onPressEdit}
         onPressPayment={onPressPayment}
 
@@ -194,11 +195,11 @@ function renderLoc () {
   const scheme = useColorScheme();
   let styles = getStyle(scheme);
 
-  let LocationArray = LOC.map(function([location], index) {
+  let LocationArray = User.getAddresses().map(function(address, index) {
     return  <ShippingLocations
-        key={location[1]}
+        key={address.getAddress()}
         index={index}
-        location={location}
+        address={address}
         onPressPlace={onPressPlace}
     />
   })

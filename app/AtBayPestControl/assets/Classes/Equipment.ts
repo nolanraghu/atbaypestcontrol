@@ -18,7 +18,7 @@ export default class Equipment {
         this.name = pData.name;
         this.description = pData.description;
         this.price = pData.price;
-      }
+    }
 
 
     getEquipmentImage = () => {
