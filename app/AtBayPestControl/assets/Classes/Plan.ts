@@ -29,7 +29,6 @@ export default class Plan {
     private pendingEquipment: Array<Equipment>;
     private dueDate: number;
 
-
     constructor(){
         this.addingInfestations = [];
         this.removingInfestations = [];
@@ -39,16 +38,16 @@ export default class Plan {
     }
 
     private countPriceInfestation = (arr:Array<Infestation>) => {
-                const target = {upfront: 0, monthly: 0};
-                if (arr.length == 0) {
-                    return target;
-                } else {
-                    arr.forEach(function (infestation) {
-                        target.monthly += infestation.getMonthlyPrice();
-                        target.upfront += infestation.getUpfrontPrice();
-                    });
-                }
-                return target;
+        const target = {upfront: 0, monthly: 0};
+        if (arr.length == 0) {
+            return target;
+        } else {
+            arr.forEach(function (infestation) {
+                target.monthly += infestation.getMonthlyPrice();
+                target.upfront += infestation.getUpfrontPrice();
+            });
+        }
+        return target;
     }
 
     private countPriceEquipment = (arr: Array<Equipment>) => {
@@ -56,8 +55,8 @@ export default class Plan {
         if (arr.length == 0) {
             return target;
         } else {
-            arr.forEach(function (infestation) {
-                target += infestation.getPrice();
+            arr.forEach(function (eq) {
+                target += eq.getPrice();
             });
         }
         return target;
@@ -83,19 +82,21 @@ export default class Plan {
     }
 
     private checkEquipment = (arr: Array<Infestation>) => {
-        let target: Equipment[] = [];
-        this.currentInfestations.forEach(
+        let target:Set<Equipment> = new Set();
+        arr.forEach(
             function (infestation){
                 infestation.getProducts().forEach(
                     function (product){
                         let e = product.getEquipmentList();
-                        if(e.length > 0 && !target.includes(e[0])){
-                            target.push(e[0]);
-                        }
+                        e.forEach(
+                            function (equipment){
+                                target.add(equipment);
+                            }
+                        )
                     }
                 )
             });
-        return new Set(target);
+        return target;
     };
 
 
@@ -173,13 +174,12 @@ export default class Plan {
     }
     getInfestations = ():Infestation[] => {
         // Returns a list of infestations, not including the prevention plan
-        return this.currentInfestations.slice(1);
+        return this.currentInfestations.filter(bug => !bug.isPreventionPlan())
+
     }
     getPendingInfestations = ():Infestation[] => {
         // returns a list of the infestations that are pending, not including the prevention plan
-        return this.currentInfestations.filter((infestation) => {
-            return infestation.getID() != 0;
-        });
+        return this.addingInfestations.filter(bug => !bug.isPreventionPlan())
     }
 
     getOtherInfestations = ():Infestation[] => {
@@ -187,7 +187,7 @@ export default class Plan {
 
         //Easily one of the sexiest implementations yet
         return getBugsList().filter(
-            x => !(this.getInfestations().includes(x) || x.getID() == 0));
+            x => !(this.containsInfestation(x) || x.isPreventionPlan()));
     }
     getProducts = ():Product[] => {
         return this.countProducts(this.currentInfestations);
@@ -213,9 +213,10 @@ export default class Plan {
         let currents = this.countPriceInfestation(this.currentInfestations);
         let removes = this.countPriceInfestation(this.removingInfestations);
         let additions = this.countPriceInfestation(this.addingInfestations);
-        currents.monthly += additions.monthly - removes.monthly;
-        currents.upfront = additions.upfront;
-        return currents;
+        let newPrice:{monthly:number, upfront:number} = {monthly:0, upfront:0};
+        newPrice.monthly = currents.monthly + additions.monthly - removes.monthly;
+        newPrice.upfront = additions.upfront + this.countPriceEquipment(this.pendingEquipment);
+        return newPrice;
     }
 
 
@@ -231,8 +232,8 @@ export default class Plan {
         save();
     }
     addChangesToPlan = () => {
-        //TODO: This should send all of this.pendingEquipment to the client (Ortho/Brandon)
-        // and clear pending equipment
+        //TODO: This should send all of this.pendingEquipment to the client (Ortho/Brandon), as well as the
+        // changes to the plan
 
         let curSet = new Set(this.currentInfestations);
         let minusSet = new Set(this.removingInfestations);
@@ -287,29 +288,33 @@ export default class Plan {
         if(curSet.has(bug)){
             minusSet.add(bug);
             this.removingInfestations = [...minusSet];
-            this.currentInfestations = [...curSet];
         } else if (plusSet.has(bug)){
             plusSet.delete(bug);
             this.addingInfestations = [...plusSet];
+
+            let currNotRemovingInfestations:Infestation[] = this.currentInfestations.filter(
+                infestation => !this.isPendingRemoval(infestation)
+            )
+
             let bugEq = this.checkEquipment([bug]);
-            let curEq = this.checkEquipment(this.currentInfestations);
+            let curEq = this.checkEquipment(currNotRemovingInfestations);
             let pendEq = this.checkEquipment(this.addingInfestations);
-            let removeEq = this.checkEquipment(this.removingInfestations);
             let otherPendEq = new Set(this.pendingEquipment);
 
             for(let eqq of bugEq){
-                if(removeEq.has(eqq)){
-                    otherPendEq.delete(eqq);
-                } else if( !(curEq.has(eqq) || pendEq.has(eqq))){
+                let remove = true;
+                if(pendEq.has(eqq)){
+                    remove = false;
+                } else if(curEq.has(eqq)) {
+                    remove = false;
+                }
+                if(remove){
                     otherPendEq.delete(eqq);
                 }
             }
             this.pendingEquipment = [...otherPendEq];
-
-
         }
         save();
-
     }
 
     addPendingEquipment = (e: Equipment) =>{
