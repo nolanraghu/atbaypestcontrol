@@ -31,7 +31,7 @@ export function captionProductDescription(product:Product){
 }
 export function captionProductAndReqEquipment(product:Product){
     let equipmentText:string = '';
-    let equipment:Equipment[] = product.equipmentList();
+    let equipment:Equipment[] = product.getEquipmentList();
     for(let i = equipment.length - 1; i >= 0; i--){
         if(i == equipment.length - 1){
             equipmentText = equipment[i].getEquipmentName();
@@ -121,13 +121,13 @@ export function newPriceText(plan:Plan){
 
     if(changing){
         let text = "New Price: \n$" + price.monthly + ' per month';
-        if (price.upFront != 0) {
-            text = text + ', \nplus $' + price.upFront + ' for equipment'
+        if (price.upfront != 0) {
+            text = text + ', \nplus $' + price.upfront + ' for equipment'
         }
         return text;
     } else {
-        if (price.upFront != 0) {
-            let text = "New equipment: $" + price.upFront;
+        if (price.upfront != 0) {
+            let text = "New equipment: $" + price.upfront;
             if (plan.hasPendingChanges()){
                 text += "\nNo price change"
             }
@@ -228,7 +228,7 @@ export function confirmButton(deleting: boolean, isChangingPlan: boolean){
 export function confirmationNotes(plan:Plan, isChangingPlan:boolean, highlight:any){
     let price = plan.getNewPrice();
     let currentMonthly = plan.getCurrentPrice();
-    let todayCharge = price.upFront;
+    let todayCharge = price.upfront;
     let day = plan.getDueDate();
 
     let todayText:string;
@@ -291,8 +291,8 @@ export function newEquipmentConfirm(deleting: boolean){
 export function newPriceTextFooter(plan:Plan){
     let price = plan.getNewPrice();
     let text = "New monthly cost: $" + price.monthly + " per month";
-    if (price.upFront > 0){
-        text = text + ", plus a one time charge of $" + price.upFront;
+    if (price.upfront > 0){
+        text = text + ", plus a one time charge of $" + price.upfront;
     }
     return text;
 }

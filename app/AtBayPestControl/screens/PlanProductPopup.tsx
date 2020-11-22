@@ -22,7 +22,7 @@ export default function PlanProductPopup({route, navigation}:any){
     const scheme = useColorScheme();
     let styles = getStyle(scheme);
 
-    const equipment:Equipment[] = product.equipmentList();
+    const equipment:Equipment[] = product.getEquipmentList();
 
     let keys = 0;
 
