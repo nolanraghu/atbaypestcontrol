@@ -7,7 +7,8 @@ import {
     confirmTitle, costText,
     purchaseListTitle
 } from "../assets/text/text";
-import {getEquipmentByID, getProductByID, getUser, PAY} from "../assets/Data/Data";
+import {getEquipmentByID, getProductByID, getUser} from "../assets/Data/Data";
+import {PAY} from "../assets/Data/allPayments";
 import Payment from "../components/RenderPayment";
 import CaptionImage from "../components/CaptionImage";
 import Product from "../assets/Classes/Product";
@@ -42,9 +43,8 @@ export default function ConfirmPurchasePopup({route, navigation}:any){
         return (
             <View style={{width: '100%'}} key={keys++}>
                 <Payment
-                    name={PAY[0][1]}
+                    payment={getUser().getPayments()[0]}
                     index={0}
-                    card={PAY[0][2]}
                     onPressEdit={onPressEdit}
                     onPressPayment={onPressPayment}/>
             </View>
