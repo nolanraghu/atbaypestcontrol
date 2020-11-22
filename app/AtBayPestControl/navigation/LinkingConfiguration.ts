@@ -7,12 +7,6 @@ export default {
     screens: {
       Root: {
         screens: {
-          Login: {
-            screens: {
-              LoginScreen: 'Login',
-              RegisterScreen: 'Register',
-            }
-          },
           BugsTab: {
             screens: {
               BugsTabScreen: 'Bugs',
@@ -30,6 +24,8 @@ export default {
           ProfileTab: {
             screens: {
               ProfileTabScreen: 'Profile',
+              LoginScreen: 'Login',
+              RegisterScreen: 'Register',
             },
           },
         },

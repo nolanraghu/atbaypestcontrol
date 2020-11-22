@@ -12,7 +12,7 @@ export default function RegisterScreen () {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}></Text>
+            <Text style={styles.title}>hi</Text>
             <Input
                 placeholder={'User Name'}
                 errorMessage={'Please enter a user name'}
