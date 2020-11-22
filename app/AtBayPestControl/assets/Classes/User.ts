@@ -131,15 +131,18 @@ export default class User implements UserProps{
     }
 
     changeUserName = (name: string) => {
-
+        // function for updating username, to be used when edit buttons are implemented correctly in the
+        // profile page
     }
 
     changeProfilPic = (img: string) => {
-
+        // function for updating the profile picture, to be used when edit buttons are implemented correctly in the
+        // profile page
     }
 
     changeBackgroundPic = (img: string) => {
-
+        // function for updating background picture, to be used when edit buttons are implemented correctly in the
+        // profile page
     }
 
 }
