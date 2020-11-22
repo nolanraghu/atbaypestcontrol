@@ -56,7 +56,7 @@ export default function BugsTabScreen({route, navigation}: any) {
     let deleteLink = () => {
         if(changing){
             return (
-                <Text style={[styles.fullText, {marginTop: 10}, styles.link]}
+                <Text style={[styles.fullText, {marginTop: 10, marginBottom: 30}, styles.link]}
                       onPress={()=>{navigation.navigate('PlanUpdatePopupScreen', {deleting:true})}}>
                     {deleteChanges()}
                 </Text>

@@ -9,8 +9,6 @@ import {LOC} from "./allAddresses";
 import {PAY} from "./allPayments";
 import {loadUser, storeUser} from "./Storage";
 
-
-
 //EXAMPLE FORMATS
 
 export const PLAN = "Current Plan"
