@@ -3,14 +3,24 @@ import {getInfestationInfo} from "../../controller/InfestationPulling";
 import image from '../images/index';
 import {getProductByID} from "../Data/Data";
 
+interface InfestationasJSON {
+    id: number,
+    name: string,
+    image: string, // Is this still a string? Jinkies
+    description: string,
+    products: Array<number>,
+    upfrontPrice: number,
+    monthlyPrice: number
+}
+
 export default class Infestation {
-    private readonly id: number
-    private readonly image: NodeRequire
-    private readonly name: string
-    private readonly description: string
-    private readonly products: Array<Product>
-    private readonly upfrontPrice: number
-    private readonly monthlyPrice: number
+    private id: number
+    private image: NodeRequire
+    private name: string
+    private description: string
+    private products: Array<Product>
+    private upfrontPrice: number
+    private monthlyPrice: number
     constructor(id:number) {
         this.id = id;
         let pData = getInfestationInfo(this.id);
@@ -23,6 +33,43 @@ export default class Infestation {
         }
         this.upfrontPrice = pData.upfrontPrice;
         this.monthlyPrice = pData.monthlyPrice;
+    }
+
+    toString = () => {
+        let prodIDs: Array<number> = [];
+        this.products.forEach(
+            function (prod) {
+                prodIDs.push(prod.getID())
+            }
+        );
+        return JSON.stringify(
+            {
+                id: this.id,
+                image: this.id,
+                name: this.name,
+                description: this.description,
+                products: prodIDs,
+                upfrontPrice: this.upfrontPrice,
+                monthlyPrice: this.monthlyPrice
+            }
+        );
+    }
+
+    fromString = (jsonString: string) => {
+        let json = JSON.parse(jsonString) as InfestationasJSON;
+
+        this.id = json.id;
+        this.image = require(json.image); // TODO Fix this
+        this.name = json.name;
+        this.description = json.description;
+
+        json.products.forEach(
+            (id) => {
+                this.products.push(new Product(id));
+            }
+        );
+        this.upfrontPrice = json.upfrontPrice;
+        this.monthlyPrice = json.monthlyPrice;
     }
 
     getID = () => {

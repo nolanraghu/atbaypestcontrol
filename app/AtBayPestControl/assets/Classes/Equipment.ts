@@ -4,12 +4,20 @@
 import {getEquipmentInfo} from "../../controller/EquipmentPulling";
 import Images from '../images/index';
 
+interface EquipmentasJSON {
+    id: number,
+    image: string, // String?!?
+    name: string,
+    description: string,
+    price: number
+}
+
 export default class Equipment {
-    private readonly id: number;
-    private readonly image: NodeRequire;
-    private readonly name: string;
-    private readonly description: string;
-    private readonly price: number;
+    private id: number;
+    private image: NodeRequire;
+    private name: string;
+    private description: string;
+    private price: number;
 
     constructor(id: number){
         this.id = id;
@@ -20,6 +28,27 @@ export default class Equipment {
         this.price = pData.price;
     }
 
+    toString = () => {
+        return JSON.stringify(
+            {
+                id: this.id,
+                image: this.image,
+                name: this.name,
+                description: this.description,
+                price: this.price
+            }
+        );
+    }
+
+    fromString = (jsonString: string) => {
+        let json = JSON.parse(jsonString) as EquipmentasJSON;
+
+        this.id = json.id;
+        this.image = require(json.image); // TODO Fix this
+        this.name = json.name;
+        this.description = json.description;
+        this.price = json.id;
+    }
 
     getEquipmentImage = () => {
         //TODO

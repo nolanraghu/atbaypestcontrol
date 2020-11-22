@@ -1,6 +1,5 @@
 // This needs to include the frequency the product should be applied, any equipment needed, maybe price,
 // instructions, etc.
-// Last updated by Anuja on November 22, implemented toString and fromString
 
 import Equipment from "./Equipment";
 import {getEquipmentInfo} from "../../controller/EquipmentPulling";
@@ -10,13 +9,13 @@ import images from "../images";
 import {getEquipmentByID} from "../Data/Data";
 
 interface ProductasJSON {
-    id: number;
-    image: string;
-    name: string;
-    description: string;
-    equipment: Array<number>;
-    price: number;
-    timeline: string;
+    id: number,
+    image: string, // Still string? Yeetus
+    name: string,
+    description: string,
+    equipment: Array<number>,
+    price: number,
+    timeline: string,
 }
 
 export default class Product{
@@ -67,13 +66,18 @@ export default class Product{
 
     fromString = (jsonString: string) => {
         let json = JSON.parse(jsonString) as ProductasJSON;
-        this.id = json.id; //number
+        this.id = json.id;
+        this.image = require(json.image); // TODO Fix this
+        this.name = json.name;
+        this.description = json.description;
+
         json.equipment.forEach(
             (id) => {
                 this.equipment.push(new Equipment(id));
             }
         );
-        this.price = json.price; // number
+        this.price = json.price;
+        this.timeline = json.timeline;
     }
 
     equals = (e: Product) => {
