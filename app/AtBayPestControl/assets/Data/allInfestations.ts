@@ -29,7 +29,7 @@ export const allInfestations = [
         id: 3,
         name: "Mosquitoes",
         description: "Mosquitoes description",
-        products: [7, 9],
+        products: [7, 8],
         upfrontPrice: 10.99,
         monthlyPrice: 4.99,
     }
