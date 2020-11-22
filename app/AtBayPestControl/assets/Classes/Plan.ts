@@ -172,7 +172,8 @@ export default class Plan {
         }
     }
     getInfestations = ():Infestation[] => {
-        return this.currentInfestations.slice(1,);
+        // Returns a list of infestations, not including the prevention plan
+        return this.currentInfestations.slice(1);
     }
     getPendingInfestations = ():Infestation[] => {
         // returns a list of the infestations that are pending, not including the prevention plan
