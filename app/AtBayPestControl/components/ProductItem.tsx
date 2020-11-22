@@ -14,7 +14,7 @@ export default function ProductItem({product}: productProps) {
                    style={styles.product}
                    android_ripple= {{color: getBackgroundColor(scheme)}}>
             <View style={styles.productTitleImage }>
-                <Text style={[styles.fullText, {fontWeight: 'bold', marginBottom: 3}]}>
+                <Text style={[styles.fullText, {fontWeight: 'bold', marginBottom: 3, marginHorizontal: 10}]}>
                     {product.getProductName()}
                 </Text>
                 <Image source={product.getProductImage()}  style={styles.buttonImage}/>
