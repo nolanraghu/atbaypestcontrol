@@ -33,7 +33,7 @@ export default class Plan {
     constructor(){
         this.addingInfestations = [];
         this.removingInfestations = [];
-        this.currentInfestations = [getBugByID(0), getBugByID(1)];
+        this.currentInfestations = [];
         this.pendingEquipment = [];
         this.dueDate = -1;
     }
