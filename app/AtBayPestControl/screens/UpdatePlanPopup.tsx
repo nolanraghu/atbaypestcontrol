@@ -3,7 +3,6 @@ import {Button, ScrollView, useColorScheme, Text, View} from "react-native";
 import {buttonColor, getStyle} from "../assets/Stylesheets/Styles";
 import Payment from "../components/RenderPayment";
 import {getUser} from "../assets/Data/Data";
-import {PAY} from "../assets/Data/allPayments";
 import {
     captionEquipmentDescription, captionProductAndReqEquipment,
     captionProductDescription, confirmationNotes,
@@ -16,6 +15,8 @@ import {
 import Product from "../assets/Classes/Product";
 import CaptionImage from "../components/CaptionImage";
 import Equipment from "../assets/Classes/Equipment";
+import {useDispatch} from "react-redux";
+import {changePlan} from "../redux/action";
 
 export default function UpdatePlanPopup({route, navigation}:any) {
     const params = route.params;
@@ -27,6 +28,9 @@ export default function UpdatePlanPopup({route, navigation}:any) {
     }
     const scheme = useColorScheme();
     const styles = getStyle(scheme);
+
+    // Hook to use Redux
+    const dispatch = useDispatch()
 
     const user = getUser();
     const plan = user.getPlan();
@@ -67,7 +71,8 @@ export default function UpdatePlanPopup({route, navigation}:any) {
             }
             plan.addChangesToPlan();
         }
-        navigation.navigate('BugsTabScreen', {update:true});
+        dispatch(changePlan());
+        navigation.navigate('BugsTabScreen');
     }
 
     function newProducts(){

@@ -6,18 +6,15 @@ import BugPressable from "../components/BugPressable";
 import {getPreventionPlan, getUser} from "../assets/Data/Data";
 import {deleteChanges, newPriceText, updatePlan} from "../assets/text/text";
 import {useState} from "react";
+import {useSelector} from "react-redux";
+import {RootState} from "../redux/store";
 
 export default function BugsTabScreen({route, navigation}: any) {
     const scheme = useColorScheme();
     let styles = getStyle(scheme);
 
-    //For rerendering the screen, just send any parameter
-    const [i, update] = useState(0);
-    const [params, setParams] = useState(route.params);
-    if(params != undefined){
-        setParams(undefined);
-        update(1);
-    }
+    // Redux hook to make screen render when state pending changes
+    useSelector((state:RootState) => state.planPendingVersion)
 
     const plan = getUser().getPlan();
     // This might be a terrible way to do it, but this gets the bugs in order, from prevention plan,

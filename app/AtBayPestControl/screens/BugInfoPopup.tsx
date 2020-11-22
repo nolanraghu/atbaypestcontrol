@@ -21,6 +21,9 @@ import {
 import Equipment from "../assets/Classes/Equipment";
 import Product from "../assets/Classes/Product";
 import Infestation from "../assets/Classes/Infestation";
+import {useDispatch, useSelector} from "react-redux";
+import {changePending} from "../redux/action";
+import {RootState} from "../redux/store";
 
 //TODO: Test this screen a lot! Example cases: what if an infestation is pending and then you realize you are missing
 // some of the equipment? Or if you are removing an infestation, but you click on missing equipment? What happens when
@@ -31,11 +34,15 @@ export default function BugInfoPopup({route, navigation}: any) {
     const {infestationID} = route.params;
     const infestation:Infestation = getBugByID(infestationID)
 
+    // This uses redux, see files in Redux directory
+    const dispatch = useDispatch();
+    // Redux hook to make screen render when state pending changes
+    useSelector((state:RootState) => state.planPendingVersion);
+
     const user = getUser();
 
     // This is for making the screen re-render. If it isn't
     // working, set a View around productImages, and have its key={i}
-    const [i, update] = useState(0);
     const scheme = useColorScheme();
     let styles = getStyle(scheme);
 
@@ -144,7 +151,7 @@ export default function BugInfoPopup({route, navigation}: any) {
                               }
 
                               // This makes the screen re-render
-                              update(i + 1)
+                              dispatch(changePending())
                           }}
                           key={keys++}>{text}</Text>
                 )
@@ -176,7 +183,8 @@ export default function BugInfoPopup({route, navigation}: any) {
             } else if(!adding) {
                 user.getPlan().removePendingInfestation(infestation)
             }
-            navigation.navigate('BugsTabScreen', {update:true})
+            dispatch(changePending())
+            navigation.navigate('BugsTabScreen')
         }
     }
 

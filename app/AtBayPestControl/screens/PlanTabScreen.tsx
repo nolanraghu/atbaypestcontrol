@@ -5,10 +5,14 @@ import {noProductText, planBriefDescription, planTitle} from "../assets/text/tex
 import {getUser} from "../assets/Data/Data";
 import Product from "../assets/Classes/Product";
 import ProductItem from "../components/ProductItem";
+import {useSelector} from "react-redux";
+import {RootState} from "../redux/store";
 
 export default function PlanTabScreen() {
   const scheme = useColorScheme();
   const styles = getStyle(scheme);
+
+  const render = useSelector((state:RootState) => state.planVersion);
 
   const plan = getUser().getPlan();
   const products:Product[] = plan.getProducts();
