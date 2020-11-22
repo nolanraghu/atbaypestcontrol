@@ -43,7 +43,10 @@
         require('./mosquito.jpg'),
     ],
 
-
+    user: {
+        profile_picture: require('./profile_picture.jpg'),
+        background: require('./splash.png')
+    }
 
 }
 

@@ -7,6 +7,12 @@ export default {
     screens: {
       Root: {
         screens: {
+          Login: {
+            screens: {
+              LoginScreen: 'Login',
+              RegisterScreen: 'Register',
+            }
+          },
           BugsTab: {
             screens: {
               BugsTabScreen: 'Bugs',

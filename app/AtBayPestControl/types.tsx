@@ -9,6 +9,11 @@ export type BottomTabParamList = {
   ProfileTab: undefined;
 };
 
+export type LoginScreenParamList = {
+  LoginScreen: undefined;
+  RegisterScreen: undefined;
+}
+
 export type BugsTabParamList = {
   BugsTabScreen: undefined;
   BugInfoPopupScreen: undefined;
