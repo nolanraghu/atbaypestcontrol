@@ -19,7 +19,7 @@ export const allInfestations = [
     },
     {
         id: 2,
-        name: "Spiders",
+        name: "Spiders of bad",
         description: "Spiders description",
         products: [6],
         upfrontPrice: 6.99,

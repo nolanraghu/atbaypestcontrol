@@ -151,7 +151,11 @@ export function deleteChanges(){
 }
     //Bug Info Popup Text
 export function infestationName(infestation:Infestation){
-    return infestation.getBugName() + " Infestation";
+    if(infestation.isPreventionPlan()){
+        return infestation.getBugName();
+    } else {
+        return infestation.getBugName() + " Infestation";
+    }
 }
 export function changePlan(adding: boolean, purchasing: boolean){
     // This button adds or removes the infestation from the plan, or purchases the missing equipment

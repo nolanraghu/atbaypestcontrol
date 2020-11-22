@@ -76,7 +76,7 @@ export function getStyle(state:ColorSchemeName) {
             padding: '3%',
             alignItems: 'center',
             justifyContent: 'space-between',
-            flexWrap: 'wrap',
+            flexWrap: 'nowrap',
             flexDirection: 'row',
             backgroundColor: header,
             shadowColor: 'black',
@@ -89,7 +89,8 @@ export function getStyle(state:ColorSchemeName) {
             fontSize: 20,
             fontWeight: 'bold',
             margin: 10,
-            color: text
+            color: text,
+            flexShrink: 1
         },
         product: {
             width: '94%',

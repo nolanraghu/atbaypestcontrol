@@ -22,7 +22,7 @@ import Equipment from "../assets/Classes/Equipment";
 import Product from "../assets/Classes/Product";
 import Infestation from "../assets/Classes/Infestation";
 import {useDispatch, useSelector} from "react-redux";
-import {changePending} from "../redux/action";
+import {changePending, justEquipmentPending} from "../redux/action";
 import {RootState} from "../redux/store";
 
 //TODO: Test this screen a lot! Example cases: what if an infestation is pending and then you realize you are missing
@@ -37,7 +37,7 @@ export default function BugInfoPopup({route, navigation}: any) {
     // This uses redux, see files in Redux directory
     const dispatch = useDispatch();
     // Redux hook to make screen render when state pending changes
-    useSelector((state:RootState) => state.planPendingVersion);
+    useSelector((state:RootState) => state.equipmentVersion);
 
     const user = getUser();
 
@@ -47,8 +47,8 @@ export default function BugInfoPopup({route, navigation}: any) {
     let styles = getStyle(scheme);
 
     // True if the infestation can be added to the plan, false if it can be removed
-    const adding = !(user.getPlan().containsInfestation(infestation) ||
-        user.getPlan().isPendingInfestation(infestation))
+    const adding = user.getPlan().isPendingRemoval(infestation) ||
+        !(user.getPlan().containsInfestation(infestation)); //TODO: This is broken
 
     // The number of MISSING equipment for the infestation you will be purchasing
     const [numPurchasing, setPurchasing] = useState(0);
@@ -151,7 +151,7 @@ export default function BugInfoPopup({route, navigation}: any) {
                               }
 
                               // This makes the screen re-render
-                              dispatch(changePending())
+                              dispatch(justEquipmentPending())
                           }}
                           key={keys++}>{text}</Text>
                 )
@@ -199,8 +199,6 @@ export default function BugInfoPopup({route, navigation}: any) {
     return(
         <View style={styles.screen}>
             <View style={styles.header}>
-                {/*TODO: sometimes the title is too big and it pushes the button to the next line. I'd rather the
-                title go to the next line*/}
                 <Text style={styles.title}>{infestationName(infestation)}</Text>
                 <Button title={changePlan(adding, purchasing)}
                         color={getButtonColor()}

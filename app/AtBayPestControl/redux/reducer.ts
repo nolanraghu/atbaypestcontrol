@@ -1,8 +1,9 @@
-import {CHANGE_PLAN, CHANGE_PENDING} from "./action";
+import {CHANGE_PLAN, CHANGE_PENDING, EQUIPMENT_PENDING} from "./action";
 
 const initialState = {
     planVersion: 0,
-    planPendingVersion: 0
+    planPendingVersion: 0,
+    equipmentVersion: 0
 };
 
 const reducer = (state = initialState, action:any) => {
@@ -17,6 +18,12 @@ const reducer = (state = initialState, action:any) => {
             return {
                 ...state,
                 planPendingVersion: state.planPendingVersion + 1
+            };
+        case EQUIPMENT_PENDING:
+            return {
+                ...state,
+                planPendingVersion: state.planPendingVersion + 1,
+                equipmentVersion: state.equipmentVersion + 1
             };
         default:
             return state
