@@ -38,7 +38,7 @@ export default class Product{
         return e.getID() == this.getID();
     }
 
-    getProductImage = () => {
+    getProductImage = ():any => {
         return this.image;
     }
 
