@@ -7,6 +7,8 @@ import Equipment from "../Classes/Equipment";
 import {EMAIL} from "../Data/allEmails";
 import {LOC} from "./allAddresses";
 import {PAY} from "./allPayments";
+import {loadUser, storeUser} from "./Storage";
+
 
 
 //EXAMPLE FORMATS
@@ -18,40 +20,49 @@ export const PLAN = "Current Plan"
 //User from a database
 
 const bug1 = new Infestation(0);
-const user = new User("0","Joe Smith", EMAIL, LOC, PAY,
-    require("../images/profile_picture.jpg"), require("../images/splash.png"));
+const equipment = [new Equipment(0), new Equipment(1), new Equipment(2)]
+const products = [new Product(0), new Product(1), new Product(2), new Product(3), new Product(4), new Product(5), new Product(6), new Product(7), new Product(8)]
+const infestations = [new Infestation(0), new Infestation(1), new Infestation(2), new Infestation(3)]
+
+let user:User = new User();
+let instantiated = false;
 
 export function getBugsList(){
     //TODO
-    return [bug1];
+    return infestations;
 }
 
-export function getBugByID(id: number){
+export function getBugByID(id: number):Infestation{
     //TODO
-    return bug1;
+    return infestations[id];
 }
 
 export function getProductByID(id: number):Product{
     //TODO
-    return (new Product(id))
+    return products[id]
 }
 
 export function getEquipmentByID(id:number):Equipment{
     //TODO
-    return (new Equipment(id))
+    return equipment[id];
 }
 
 export function getPreventionPlan():Infestation{
     //TODO
-    return bug1;
+    return infestations[0];
 }
 
 export function getUser(){
-    //TODO
     return user;
-
 }
 
-export function requiredPlanTime(){
-    return "3 months";
+function instantiateUser(){
+    loadUser().then((hi)=>{
+        user = hi;
+    })
+    instantiated = true;
+}
+
+export function save(){
+    storeUser(user);
 }

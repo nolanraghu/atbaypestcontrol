@@ -5,16 +5,8 @@ import Equipment from "./Equipment";
 import {getEquipmentInfo} from "../../controller/EquipmentPulling";
 import {getInfestationInfo} from "../../controller/InfestationPulling";
 import {getProductInfo} from "../../controller/ProductPulling";
-
-// This bitch unsued
-interface ProductProps {
-    id: number,
-    image: NodeRequire,
-    name: string,
-    description: string,
-    equipment: Array<String>,
-    price: number,
-}
+import images from "../images";
+import {getEquipmentByID} from "../Data/Data";
 
 export default class Product{
     private readonly id: number
@@ -23,24 +15,30 @@ export default class Product{
     private readonly description: string
     private readonly equipment: Array<Equipment>
     private readonly price: number
+    private readonly timeline: string
 
     constructor(id: number){
         this.id = id;
         let pData = getProductInfo(this.id);
-        this.image = pData.image;
+        this.image = images.product[id];
         this.name = pData.name;
         this.description = pData.description;
-
+        this.timeline = pData.timeline
         let counter = 0;
         this.equipment = [];
         for(let x in pData.equipment){
-           this.equipment.push(new Equipment(Number(x)))
+           this.equipment.push(getEquipmentByID(Number(x)))
             counter += 1;
-        };
+        }
 
         this.price = pData.price;
     }
-    getProductImage = ():any => {
+
+    equals = (e: Product) => {
+        return e.getID() == this.getID();
+    }
+
+    getProductImage = () => {
         return this.image;
     }
 
@@ -52,15 +50,19 @@ export default class Product{
         return this.description;
     }
 
-    equipmentList = () => {
+    getEquipmentList = () => {
         return this.equipment;
     }
 
+    getTimeline = () => {
+        return this.timeline;
+    }
     getID = () => {
         return this.id;
     }
 
     getPrice = () => {
         return this.price;
+
     }
 }

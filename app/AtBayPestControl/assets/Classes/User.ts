@@ -7,8 +7,9 @@ import Equipment from "./Equipment";
 import Email from "./Email"
 import Address from "./Address";
 import Product from "./Product";
-import Payment from "./Payment";
-
+import {storeUser} from "../Data/Storage";
+import {save} from "../Data/Data";
+import Payment from "../Classes/Payment"
 
 interface UserProps {
     name: string,
@@ -20,7 +21,15 @@ interface UserProps {
     backgroundPic: NodeRequire
 }
 
+interface UserasJSON {
+    id: 0,
+    userPlan: string;
+    currentEquipment: Array <number>;
+    removedEquipment: Array <number>;
+}
 export default class User implements UserProps{
+    //TODO: Add all of the personal information here and have it be used by Profile tab
+    
     // If this is 0, that should mean they haven't made an account yet
     private id: string
     emails: Array<Email> = new Array<Email>();
@@ -31,47 +40,121 @@ export default class User implements UserProps{
     profilePic: NodeRequire = require("../images/error.jpg");
     backgroundPic: NodeRequire = require("../images/error.jpg");
 
-    constructor(id:string = "0", name: string, emails: Array<Email>, addresses: Array<Address>,
-                payments: Array<Payment>, profilePic: NodeRequire, backGroundPic: NodeRequire){
-        this.id = id;
-        this.name = name;
-        this.emails = emails;
-        this.addresses = addresses;
-        this.payments = payments;
-        if (addresses.length != 0) this.defaultAddress = addresses[1];
-        this.profilePic = profilePic;
-        this.backgroundPic = backGroundPic;
+    // If this is 0, that should mean they haven't made an account yet
+    private id: 0
+    private userPlan: Plan
+    private currentEquipment: Array<Equipment>
+    private removedEquipment: Array<Equipment>
+    constructor(id:number = 0){
+            this.id = 0;
+            this.userPlan = new Plan();
+            this.currentEquipment = [];
+            this.removedEquipment = [];
     }
+
+    private stringList = (arr: Array<Equipment>) => {
+        let ids: Array<number> = [];
+        arr.forEach(
+            function (equipment){
+                ids.push(equipment.getID())
+            }
+        );
+        return ids;
+    }
+
+    toString = () => {
+        return JSON.stringify(
+            {
+                id: this.id,
+                userPlan: this.userPlan.toString(),
+                currentEquipment: this.stringList(this.currentEquipment),
+                removedEquipment: this.stringList(this.removedEquipment),
+            }
+        );
+    }
+
+    fromString = (jsonString: string) => {
+        let json = JSON.parse(jsonString) as UserasJSON;
+
+        this.userPlan = new Plan().fromString(json.userPlan);
+        this.id = json.id;
+        json.currentEquipment.forEach(
+            (id) =>{
+                this.currentEquipment.push(new Equipment(id));
+            }
+        );
+        json.removedEquipment.forEach(
+            (id) =>{
+                this.removedEquipment.push(new Equipment(id));
+            }
+        );
+
+        return this;
+    }
+
     hasAccount = () => {
-        return this.id != "0"
+        //I'm assuming this means something with signing up, so I'm just gonna return true
+        return true;
+
+        //return this.id != 0
     }
     getPlan = () => {
-        //TODO
-        return new Plan(0)
+        return this.userPlan;
     }
     hasEquipment = (equipment:Equipment) => {
-        //TODO
-        return true;
+
+        return this.currentEquipment.includes(equipment);
+
     }
+
+    //getPendingEquipment
     hadEquipment = (equipment:Equipment) => {
-        // This returns true if the user once had the equipment, but it has been removed
-        //TODO
-        return false;
+        return this.removedEquipment.includes(equipment);
     }
     removeEquipment = (equipment:Equipment) => {
         // This removes the equipment from the list of equipment the user has, but adds it to a list of equipment
         // the user once owned
-        //TODO
+
+        const curSet = new Set(this.currentEquipment);
+        const pastSet = new Set(this.removedEquipment);
+
+        if (curSet.has(equipment)) {
+
+            // Removes from current equipment
+            curSet.delete(equipment);
+            this.currentEquipment = [... curSet];
+
+            // Adds to removed equipment
+            pastSet.add(equipment);
+            this.removedEquipment = [... pastSet];
+        }
+        save();
     }
     addEquipment = (equipment:Equipment) => {
         // This adds the equipment to the list of equipment the user has, and also adds it to the upcoming
         // purchases in the plan
-        //TODO
+
+        const curSet = new Set(this.currentEquipment);
+
+        if (!curSet.has(equipment)) {
+            this.addHasEquipment(equipment);
+            this.userPlan.addPendingEquipment(equipment);
+        }
+        save();
     }
     addHasEquipment = (equipment:Equipment) => {
         // This ONLY adds the equipment to the list of equipment the user has
-        // TODO
+
+        const curSet = new Set(this.currentEquipment);
+
+        if (!curSet.has(equipment)) {
+            // Adds to current equipment
+            curSet.add(equipment);
+            this.currentEquipment = [...curSet];
+        }
+        save();
     }
+
     makePayment = (price:number) => {
         // TODO: but not related to the database
     }

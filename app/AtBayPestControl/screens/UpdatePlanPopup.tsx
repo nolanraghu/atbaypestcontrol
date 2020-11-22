@@ -60,14 +60,14 @@ export default function UpdatePlanPopup({route, navigation}:any) {
             plan.removePendingChanges();
         } else {
 
-            user.makePayment(plan.getNewPrice().upFront);
+            user.makePayment(plan.getNewPrice().upfront);
             if(isChangingPlan){
                 let nextDate = plan.setDueDate(plan.getDueDate());
                 user.setMonthlyPayments(plan.getNewPrice().monthly, nextDate);
             }
             plan.addChangesToPlan();
         }
-        navigation.navigate('BugsTabScreen');
+        navigation.navigate('BugsTabScreen', {update:true});
     }
 
     function newProducts(){

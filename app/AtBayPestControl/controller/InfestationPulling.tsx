@@ -7,11 +7,11 @@ import {allInfestations} from '../assets/Data/allInfestations';
 export function getInfestationInfo(bId: number) {
     let k ={
         id: -1,
-        image: require("../assets/images/error.jpg"),
         name: "ErrorName",
         description: "Error",
         products: [0],
-        price: 0
+        upfrontPrice: 0,
+        monthlyPrice: 0
     };
     switch(bId){
         case 0:

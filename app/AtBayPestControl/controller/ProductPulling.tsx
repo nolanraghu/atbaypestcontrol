@@ -6,11 +6,11 @@ import {allProducts} from '../assets/Data/allProducts';
 export function getProductInfo(pid: number) {
     let k ={
         id: -1,
-        image: require('../assets/images/error.jpg'),
         name: "ErrorName",
         description: "ErrorDetails",
         equipment: [-1],
-        price: 0
+        price: 0,
+        timeline: "As Needed"
     };
     switch(pid){
         case 0:

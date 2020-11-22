@@ -2,7 +2,7 @@
 // all straight from the database
 
 import {getEquipmentInfo} from "../../controller/EquipmentPulling";
-
+import Images from '../images/index';
 
 export default class Equipment {
     private readonly id: number;
@@ -14,27 +14,33 @@ export default class Equipment {
     constructor(id: number){
         this.id = id;
         let pData = getEquipmentInfo(this.id);
-        this.image = pData.image;
+        this.image = Images.equipment[id];
         this.name = pData.name;
         this.description = pData.description;
         this.price = pData.price;
     }
 
+
     getEquipmentImage = () => {
         //TODO
-        return require('../images/product3.jpg')
+        return this.image;
     }
+
+    equals = (e: Equipment) => {
+        return e.getID() == this.getID();
+    }
+
     getEquipmentDescription = () => {
         //TODO
         return this.description
     }
     getEquipmentName = () => {
         //TODO
-        return 'Sprayer'
+        return this.name;
     }
     getPrice = () => {
         //TODO
-        return 3.00
+        return this.price;
     }
     getID = () => {
         return this.id;
