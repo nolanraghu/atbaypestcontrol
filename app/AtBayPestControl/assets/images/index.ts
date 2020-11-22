@@ -16,7 +16,7 @@
         error: require('./error.jpg')
 
     },
-
+     error: require('./error.jpg'),
 
      //The following are implicitly indexed by ID
     infestations: [

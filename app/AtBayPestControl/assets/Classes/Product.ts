@@ -7,31 +7,33 @@ import {getInfestationInfo} from "../../controller/InfestationPulling";
 import {getProductInfo} from "../../controller/ProductPulling";
 import images from "../images";
 import {getEquipmentByID} from "../Data/Data";
+import {NUMBER_OF_PRODUCTS} from "../Data/UsefulConstants";
 
 export default class Product{
-    private readonly id: number
-    private readonly image: NodeRequire
-    private readonly name: string
-    private readonly description: string
-    private readonly equipment: Array<Equipment>
-    private readonly price: number
-    private readonly timeline: string
+    private readonly id: number = -1
+    private readonly image: NodeRequire = images.error
+    private readonly name: string = "Error"
+    private readonly description: string = "Error"
+    private readonly equipment: Array<number> = []
+    private readonly price: number = -1
+    private readonly timeline: string = "Error"
+    static singles: Array<Product> = new Array<Product>(NUMBER_OF_PRODUCTS)
 
     constructor(id: number){
-        this.id = id;
-        let pData = getProductInfo(this.id);
-        this.image = images.product[id];
-        this.name = pData.name;
-        this.description = pData.description;
-        this.timeline = pData.timeline
-        let counter = 0;
-        this.equipment = [];
-        for(let x in pData.equipment){
-           this.equipment.push(getEquipmentByID(Number(x)))
-            counter += 1;
+        if(typeof Product.singles[id] === 'undefined') {
+            this.id = id;
+            let pData = getProductInfo(this.id);
+            this.image = images.product[id];
+            this.name = pData.name;
+            this.description = pData.description;
+            this.timeline = pData.timeline
+            this.equipment = [];
+            for (let x in pData.equipment) {
+                this.equipment.push(Number(x));
+            }
+            Product.singles[id] = this;
         }
-
-        this.price = pData.price;
+        return Product.singles[id];
     }
 
     equals = (e: Product) => {
