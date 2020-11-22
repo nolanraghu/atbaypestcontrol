@@ -110,29 +110,30 @@ export default class User implements UserProps{
     }
     hasEquipment = (equipment:Equipment) => {
 
-        return this.currentEquipment.includes(equipment);
+        return this.currentEquipment.includes(equipment.getID());
 
     }
 
     //getPendingEquipment
     hadEquipment = (equipment:Equipment) => {
-        return this.removedEquipment.includes(equipment);
+        return this.removedEquipment.includes(equipment.getID());
     }
     removeEquipment = (equipment:Equipment) => {
         // This removes the equipment from the list of equipment the user has, but adds it to a list of equipment
         // the user once owned
 
+        const mID = equipment.getID();
         const curSet = new Set(this.currentEquipment);
         const pastSet = new Set(this.removedEquipment);
 
-        if (curSet.has(equipment)) {
+        if (curSet.has(mID)) {
 
             // Removes from current equipment
-            curSet.delete(equipment);
+            curSet.delete(mID);
             this.currentEquipment = [... curSet];
 
             // Adds to removed equipment
-            pastSet.add(equipment);
+            pastSet.add(mID);
             this.removedEquipment = [... pastSet];
         }
         save();
@@ -143,7 +144,7 @@ export default class User implements UserProps{
 
         const curSet = new Set(this.currentEquipment);
 
-        if (!curSet.has(equipment)) {
+        if (!curSet.has(equipment.getID())) {
             this.addHasEquipment(equipment);
             this.userPlan.addPendingEquipment(equipment);
         }
@@ -154,9 +155,9 @@ export default class User implements UserProps{
 
         const curSet = new Set(this.currentEquipment);
 
-        if (!curSet.has(equipment)) {
+        if (!curSet.has(equipment.getID())) {
             // Adds to current equipment
-            curSet.add(equipment);
+            curSet.add(equipment.getID());
             this.currentEquipment = [...curSet];
         }
         save();
