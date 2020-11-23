@@ -15,6 +15,7 @@ import images from "../images/index"
 
 interface UserProps {
     name: string,
+    password: string,
     emails: Array<Email>,
     addresses: Array<Address>,
     payments: Array<Payment>,
@@ -43,6 +44,7 @@ export default class User implements UserProps{
     payments: Array<Payment> = new Array<Payment>(PAY[0], PAY[1]);
     defaultAddress: Address = new Address();
     name: string = "";
+    password: string = "";
     profilePic: NodeRequire = images.user.profile_picture;
     backgroundPic: NodeRequire = images.user.background;
     id: Number = 0;
@@ -175,6 +177,10 @@ export default class User implements UserProps{
         return this.name;
     }
 
+    getPassword = () => {
+        return this.password;
+    }
+
     getEmails = () => {
         // returns default the users emails
         return this.emails;
@@ -218,6 +224,13 @@ export default class User implements UserProps{
     changeUserName = (name: string) => {
         // function for updating username, to be used when edit buttons are implemented correctly in the
         // profile page
+        this.name = name;
+    }
+
+    changePassword = (password: string) => {
+        // function for updating username, to be used when edit buttons are implemented correctly in the
+        // profile page
+        this.password = password;
     }
 
     changeProfilePicture = (img: string) => {

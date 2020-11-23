@@ -437,5 +437,37 @@ export function getStyle(state:ColorSchemeName) {
             flex: 2,
             justifyContent: 'flex-start',
         },
+        loginContainer: {
+            flex: 1,
+            padding: '2.5%',
+            alignItems: 'center',
+            alignContent: 'center',
+            justifyContent: 'center',
+            flexWrap: 'wrap',
+            flexDirection: 'row',
+            backgroundColor: background
+        },
+        loginText: {
+            fontSize: 40,
+            fontWeight: 'bold',
+            alignItems: 'flex-start',
+            color: highlight,
+            flexShrink: 1,
+        },
+        loginHeadContainer: {
+            margin: 20,
+            alignItems: 'flex-start',
+            alignContent: 'flex-start',
+            justifyContent: 'flex-start',
+            flexDirection: 'column',
+            backgroundColor: background,
+            width: '100%',
+        },
+        inputText: {
+            justifyContent: "flex-start",
+            alignContent: "flex-start",
+            color: text,
+            fontSize: 20
+        }
     });
 }
