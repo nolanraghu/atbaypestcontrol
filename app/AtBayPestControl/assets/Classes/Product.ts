@@ -1,33 +1,32 @@
 // This needs to include the frequency the product should be applied, any equipment needed, maybe price,
 // instructions, etc.
-// Last updated by Anuja on November 22, implemented toString and fromString
 
 import Equipment from "./Equipment";
 import {getEquipmentInfo} from "../../controller/EquipmentPulling";
 import {getInfestationInfo} from "../../controller/InfestationPulling";
 import {getProductInfo} from "../../controller/ProductPulling";
-import images from "../images";
+import image from "../images";
 import {getEquipmentByID} from "../Data/Data";
 import {NUMBER_OF_PRODUCTS} from "../Data/UsefulConstants";
 
 interface ProductasJSON {
-    id: number;
-    image: string;
-    name: string;
-    description: string;
-    equipment: Array<number>;
-    price: number;
-    timeline: string;
+    id: number,
+    image: string,
+    name: string,
+    description: string,
+    equipment: Array<number>,
+    price: number,
+    timeline: string,
 }
 
 export default class Product{
-    private readonly id: number = -1
-    private readonly image: NodeRequire = images.error
-    private readonly name: string = "Error"
-    private readonly description: string = "Error"
-    private readonly equipment: Array<number> = []
-    private readonly price: number = -1
-    private readonly timeline: string = "Error"
+    private id: number = -1
+    private image: NodeRequire = image.error
+    private name: string = "Error"
+    private description: string = "Error"
+    private equipment: Array<number> = []
+    private price: number = -1
+    private timeline: string = "Error"
     static singles: Array<Product> = new Array<Product>(NUMBER_OF_PRODUCTS)
 
 
@@ -35,7 +34,7 @@ export default class Product{
         if(typeof Product.singles[id] === 'undefined') {
             this.id = id;
             let pData = getProductInfo(this.id);
-            this.image = images.product[id];
+            this.image = image.product[id];
             this.name = pData.name;
             this.description = pData.description;
             this.timeline = pData.timeline
@@ -52,7 +51,7 @@ export default class Product{
         let eqIDs: Array<number> = [];
         this.equipment.forEach(
             function (eq){
-                eqIDs.push(eq.getID())
+                eqIDs.push(eq)
             }
         );
         return JSON.stringify(
@@ -70,13 +69,18 @@ export default class Product{
 
     fromString = (jsonString: string) => {
         let json = JSON.parse(jsonString) as ProductasJSON;
-        this.id = json.id; //number
+        this.id = json.id;
+        this.image = image.product[this.id]; // TODO Fix this
+        this.name = json.name;
+        this.description = json.description;
+
         json.equipment.forEach(
             (id) => {
-                this.equipment.push(new Equipment(id));
+                this.equipment.push(id);
             }
         );
-        this.price = json.price; // number
+        this.price = json.price;
+        this.timeline = json.timeline;
     }
 
     equals = (e: Product) => {
