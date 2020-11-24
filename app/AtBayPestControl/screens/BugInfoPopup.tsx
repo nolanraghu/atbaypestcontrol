@@ -24,6 +24,7 @@ import Infestation from "../assets/Classes/Infestation";
 import {useDispatch, useSelector} from "react-redux";
 import {changePending, justEquipmentPending} from "../redux/action";
 import {RootState} from "../redux/store";
+import {makeArray} from "../assets/Classes/ClassHelpers";
 
 //TODO: Test this screen a lot! Example cases: what if an infestation is pending and then you realize you are missing
 // some of the equipment? Or if you are removing an infestation, but you click on missing equipment? What happens when
@@ -60,7 +61,7 @@ export default function BugInfoPopup({route, navigation}: any) {
 
     const price = {upfront: infestation.getUpfrontPrice(), monthly: infestation.getMonthlyPrice()};
 
-    const products:Product[] = infestation.getProducts()
+    const products:Product[] = makeArray(infestation.getProducts(), 'product');
 
     // These will make a comprehensive list of any equipment that would be needed for this infestation.
     let newEquipment:Map<Equipment,Product[]|any> = new Map<Equipment, Product[]>()
@@ -78,7 +79,7 @@ export default function BugInfoPopup({route, navigation}: any) {
             retVal = <Text style={styles.captionFade}>{noInfestationProductText()}</Text>
         } else {
             retVal = products.map(function(product){
-                let equipment = product.getEquipmentList();
+                let equipment = makeArray(product.getEquipmentList(), 'equipment');
 
                 // Makes lists of equipment that will be needed, along with the product(or products)
                 // that they are needed for, in a map
