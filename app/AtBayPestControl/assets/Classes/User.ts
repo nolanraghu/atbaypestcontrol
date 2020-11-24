@@ -80,22 +80,28 @@ export default class User implements UserProps{
         );
     }
 
+    //In theory: we don't need all this set stuff
+    //But in practice, we keep on getting duplicates and this is an easy way to check against that
     fromString = (jsonString: string) => {
         let json = JSON.parse(jsonString) as UserasJSON;
 
         this.userPlan = new Plan().fromString(json.userPlan);
         this.id = json.id;
+        let curEq = new Set(this.currentEquipment);
+        let remEq = new Set(this.removedEquipment);
+
         json.currentEquipment.forEach(
             (id) =>{
-                this.currentEquipment.push(id);
+                curEq.add(id);
             }
         );
         json.removedEquipment.forEach(
             (id) =>{
-                this.removedEquipment.push(id);
+                remEq.add(id);
             }
         );
-
+        this.removedEquipment = [...remEq];
+        this.currentEquipment = [...curEq];
         return this;
     }
 
@@ -142,12 +148,8 @@ export default class User implements UserProps{
         // This adds the equipment to the list of equipment the user has, and also adds it to the upcoming
         // purchases in the plan
 
-        const curSet = new Set(this.currentEquipment);
-
-        if (!curSet.has(equipment.getID())) {
-            this.addHasEquipment(equipment);
-            this.userPlan.addPendingEquipment(equipment);
-        }
+        this.addHasEquipment(equipment);
+        this.userPlan.addPendingEquipment(equipment);
         save();
     }
     addHasEquipment = (equipment:Equipment) => {
@@ -155,11 +157,9 @@ export default class User implements UserProps{
 
         const curSet = new Set(this.currentEquipment);
 
-        if (!curSet.has(equipment.getID())) {
             // Adds to current equipment
-            curSet.add(equipment.getID());
-            this.currentEquipment = [...curSet];
-        }
+        curSet.add(equipment.getID());
+        this.currentEquipment = [...curSet];
         save();
     }
 

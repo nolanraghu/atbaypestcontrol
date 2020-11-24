@@ -9,6 +9,7 @@ import {LOC} from "./allAddresses";
 import {PAY} from "./allPayments";
 import {loadUser, storeUser} from "./Storage";
 import {getInfestationInfo} from "../../controller/InfestationPulling";
+import {NUMBER_OF_INFESTATIONS} from "./UsefulConstants";
 
 //EXAMPLE FORMATS
 
@@ -19,12 +20,16 @@ export const PLAN = "Current Plan"
 //User from a database
 
 
-let user:User = new User();
 let instantiated = false;
 
+
 export function getBugsList(){
-    //TODO
-    return Infestation.singles;
+    let arr = [];
+    for(let x = 0; x<NUMBER_OF_INFESTATIONS; ++x){
+        arr.push(getBugByID(x));
+    }
+    console.log(arr);
+    return arr;
 }
 
 export function getBugByID(id: number):Infestation{
@@ -65,9 +70,11 @@ function instantiateUser(){
     loadUser().then((hi)=>{
         User.theUser = hi;
     })
+    console.log("The user instantiated from Async at "+User.theUser.toString());
     instantiated = true;
 }
 
 export function save(){
-    storeUser(user);
+    console.log("The user saved t0 Async at "+User.theUser.toString());
+    storeUser(User.theUser).then(r => r);
 }

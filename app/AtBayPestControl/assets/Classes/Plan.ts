@@ -121,28 +121,39 @@ export default class Plan {
         );
     }
 
+    //In theory: we don't need all this set stuff
+    //But in practice, we keep on getting duplicates and this is an easy way to check against that
     fromString = (jsonString: string) => {
         let json = JSON.parse(jsonString) as PlanAsJsON;
+        let addSet = new Set(this.addingInfestations);
+        let minusSet = new Set(this.addingInfestations);
+        let curSet = new Set(this.currentInfestations);
+        let pendEquip = new Set(this.pendingEquipment);
         json.addingInfestations.forEach(
             (id) =>{
-                this.addingInfestations.push(id);
+                addSet.add(id);
             }
         );
         json.removingInfestations.forEach(
             (id) =>{
-                this.removingInfestations.push(id);
+                minusSet.add(id);
             }
         );
         json.currentInfestations.forEach(
             (id) =>{
-                this.currentInfestations.push(id);
+                curSet.add(id);
             }
         );
         json.pendingEquipment.forEach(
             (id) =>{
-                this.pendingEquipment.push(id);
+                pendEquip.add(id);
             }
         );
+        this.pendingEquipment = [...pendEquip];
+        this.addingInfestations = [...addSet];
+        this.removingInfestations = [...minusSet];
+        this.currentInfestations = [...curSet];
+
         this.dueDate = json.dueDate;
 
         return this;

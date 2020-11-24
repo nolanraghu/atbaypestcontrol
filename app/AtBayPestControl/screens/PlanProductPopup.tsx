@@ -24,6 +24,7 @@ export default function PlanProductPopup({route, navigation}:any){
     let styles = getStyle(scheme);
 
     const equipment:Equipment[] = makeArray(product.getEquipmentList(), 'equipment');
+    console.assert(equipment[0] instanceof Object);
 
     let keys = 0;
 
