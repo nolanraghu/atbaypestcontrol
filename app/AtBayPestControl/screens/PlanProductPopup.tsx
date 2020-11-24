@@ -24,7 +24,6 @@ export default function PlanProductPopup({route, navigation}:any){
     let styles = getStyle(scheme);
 
     const equipment:Equipment[] = makeArray(product.getEquipmentList(), 'equipment');
-    console.assert(equipment[0] instanceof Object);
 
     let keys = 0;
 
@@ -33,7 +32,7 @@ export default function PlanProductPopup({route, navigation}:any){
             <Text style={styles.link}
                   onPress={()=>{
                       navigation.navigate('ConfirmPurchasePopup', {
-                          itemID:prodId, type:'Product', price:product.getPrice()
+                          itemID:prodId, type:'Product'
                       })
                   }}
                   key={keys++}>
@@ -48,7 +47,7 @@ export default function PlanProductPopup({route, navigation}:any){
                 <Text style={styles.link}
                       onPress={()=>{
                           navigation.navigate('ConfirmPurchasePopup', {
-                              itemID:equipment.getID(), type:'Equipment', price:equipment.getPrice()
+                              itemID:equipment.getID(), type:'Equipment'
                           })
                       }}
                       key={keys++}>

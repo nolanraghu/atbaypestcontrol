@@ -8,21 +8,23 @@ import {
     purchaseListTitle
 } from "../assets/text/text";
 import {getEquipmentByID, getProductByID, getUser} from "../assets/Data/Data";
-import {PAY} from "../assets/Data/allPayments";
 import Payment from "../components/RenderPayment";
 import CaptionImage from "../components/CaptionImage";
 import Product from "../assets/Classes/Product";
 
 export default function ConfirmPurchasePopup({route, navigation}:any){
-    const {itemID:itemID, type:type, price:price} = route.params;
+    const {itemID:itemID, type:type} = route.params;
     // I know this is bad style but I didn't want to make a whole class that product and equipment inherit...
+    let price:number;
     let item:any;
     let isProduct = false;
     if(type === 'Product'){
         item = getProductByID(itemID);
+        price = item.getPrice();
         isProduct = true;
     } else {
         item = getEquipmentByID(itemID);
+        price = item.getPrice();
     }
 
     const scheme = useColorScheme();

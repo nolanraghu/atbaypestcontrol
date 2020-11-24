@@ -1,7 +1,7 @@
 import React from 'react'
-import {StyleSheet, Text, TouchableOpacity, useColorScheme, View} from 'react-native'
+import {Text, TouchableOpacity, useColorScheme, View} from 'react-native'
 import { Icon } from 'react-native-elements'
-import {getStyle, buttonColor, getBackgroundColor} from '../assets/Stylesheets/Styles'
+import {getStyle} from '../assets/Stylesheets/Styles'
 import Address from "../assets/Classes/Address";
 
 export default function renderItem ({address, index, onPressPlace}: renderProps) {

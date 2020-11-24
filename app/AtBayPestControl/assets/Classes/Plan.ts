@@ -267,6 +267,11 @@ export default class Plan {
         this.addingInfestations = [];
         this.removingInfestations = [];
         this.pendingEquipment = [];
+
+        if(this.currentInfestations == []){
+            this.dueDate = -1;
+        }
+
         save();
 
     }
