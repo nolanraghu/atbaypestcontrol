@@ -77,5 +77,5 @@ function instantiateUser(){
 
 export function save(){
     console.log("The user saved to Async at "+User.theUser.toString());
-    storeUser(User.theUser).then(r => r);
+    storeUser(User.theUser).then(r => r,  (reason) =>{throw Error(reason)});
 }
