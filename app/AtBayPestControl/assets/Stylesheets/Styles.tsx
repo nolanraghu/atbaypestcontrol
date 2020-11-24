@@ -455,10 +455,9 @@ export function getStyle(state:ColorSchemeName) {
             flexShrink: 1,
         },
         loginHeadContainer: {
-            margin: 20,
-            alignItems: 'flex-start',
-            alignContent: 'flex-start',
-            justifyContent: 'flex-start',
+            alignItems: 'center',
+            alignContent: 'center',
+            justifyContent: 'center',
             flexDirection: 'column',
             backgroundColor: background,
             width: '100%',
@@ -468,6 +467,21 @@ export function getStyle(state:ColorSchemeName) {
             alignContent: "flex-start",
             color: text,
             fontSize: 20
-        }
+        },
+        hyperLink: {
+            color: '#E91E63',
+            textDecorationLine: 'underline',
+        },
+        wordRow: {
+            marginVertical: 20,
+            flexDirection: 'row',
+            alignContent: "center",
+            justifyContent: "center",
+            width: '100%'
+        },
+        textArray: {
+            marginVertical: 20,
+            width: '100%'
+        },
     });
 }

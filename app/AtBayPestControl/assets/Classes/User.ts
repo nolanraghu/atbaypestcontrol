@@ -243,4 +243,16 @@ export default class User implements UserProps{
         // profile page
     }
 
+    addEmail = (email: Email) => {
+        this.getEmails().concat(email);
+    }
+
+    addAddress = (address: Address) => {
+        this.getAddresses().concat(address)
+    }
+
+    addPayment = (payment: Payment) => {
+        this.getPayments().concat(payment)
+    }
+
 }

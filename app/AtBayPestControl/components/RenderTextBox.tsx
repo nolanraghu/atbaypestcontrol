@@ -2,25 +2,31 @@ import React from 'react'
 import {Text, useColorScheme, View} from 'react-native'
 import {Input} from "react-native-elements";
 import {getStyle} from '../assets/Stylesheets/Styles'
+import {getUser} from "../assets/Data/Data";
 
-export default function renderItem ({name, placeHolder, errorMessage, index}: renderProps) {
+export default function renderText ({placeHolder, errorMessage, type, onSubmitEditing}: renderProps) {
 
     const scheme = useColorScheme();
     let styles = getStyle(scheme);
 
     return (
         <Input
-            placeholder= {placeHolder}
-            errorMessage= {errorMessage}
-            label={name}
-            containerStyle={styles.container}
+            placeholder={placeHolder}
+            inputStyle={styles.inputText}
+            errorMessage={errorMessage}
+            renderErrorMessage={false}
+            errorStyle={{color: 'red'}}
+            onSubmitEditing={(val) =>
+                onSubmitEditing(val.nativeEvent.text)}
+            textContentType={type}
         />
     )
 }
 
 interface renderProps {
-    name: string
     placeHolder: string
     errorMessage: string
-    index: number
+    type: 'username' | 'password' | 'addressCity' | 'addressState' | 'streetAddressLine1' | 'streetAddressLine2' |
+        'postalCode' | 'emailAddress'
+    onSubmitEditing: (text: string) => void
 }

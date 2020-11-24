@@ -1,20 +1,35 @@
 import React from 'react'
-import {Text, TextInput, useColorScheme, View} from 'react-native'
+import {Button, Text, TextInput, TouchableOpacity, useColorScheme, View} from 'react-native'
 import {getStyle} from '../assets/Stylesheets/Styles'
 import {Input} from "react-native-elements";
 import {getUser} from "../assets/Data/Data";
-import {useState} from 'react'
-import Separator from "../components/Separator";
+import {loginText} from '../assets/Data/allTextLogin'
+import InputBox from "../components/RenderTextBox";
+import { useNavigation } from '@react-navigation/native';
 
 export default function LoginScreen () {
 
     const scheme = useColorScheme();
     let styles = getStyle(scheme);
+    const navigation = useNavigation();
     let User = getUser();
-    const [userName, changeUserName] = useState('');
 
     function handleButtonPress (val: string) {
         User.changePassword(val);
+    }
+
+    let InputArray = loginText.map(function(Text, index) {
+        return  <InputBox
+                    key={index}
+                    errorMessage={Text.getErrorMessage()}
+                    type={Text.getType()}
+                    placeHolder={Text.getPlaceHolder()}
+                    onSubmitEditing={Text.onSubmit}
+                />
+    })
+
+    function onPressText () {
+        navigation.navigate('RegisterScreen')
     }
 
     return (
@@ -24,27 +39,16 @@ export default function LoginScreen () {
                 <Text style={styles.subText}>Please enter your login information</Text>
             </View>
             <View style={styles.loginHeadContainer}>
-                <Input
-                    placeholder={'User Name'}
-                    inputStyle={styles.inputText}
-                    errorMessage={'This field should not be empty'}
-                    renderErrorMessage={true}
-                    errorStyle={{color: 'red'}}
-                    onSubmitEditing={(val) =>
-                        User.changeUserName(val.nativeEvent.text)}
-                    textContentType={'username'}
-                />
-                <Input
-                    placeholder={'Password'}
-                    inputStyle={styles.inputText}
-                    errorMessage={'This field should not be empty'}
-                    secureTextEntry={true}
-                    renderErrorMessage={true}
-                    errorStyle={{color: 'red'}}
-                    onSubmitEditing={(val) =>
-                        User.changePassword(val.nativeEvent.text)}
-                    textContentType={'password'}
-                />
+                <View style={styles.textArray}>
+                    {InputArray}
+                </View>
+                <TouchableOpacity>
+                    <Button  title={'Submit'} onPress={onPressText}/>
+                </TouchableOpacity>
+                <View style={styles.wordRow}>
+                    <Text style={styles.subText}>Don't have an account? </Text>
+                    <Text style={styles.hyperLink} onPress={onPressText}>Register here</Text>
+                </View>
             </View>
         </View>
     )
