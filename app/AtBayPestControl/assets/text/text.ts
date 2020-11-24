@@ -20,7 +20,7 @@ export function tab3label(){
 
 //Potentially general use text
 export function costText(price:number){
-    return "Price: $" + price;
+    return "Price: $" + price.toFixed(2);
 }
 export function confirmPayment(){
     return "Payment Information:"
@@ -120,14 +120,14 @@ export function newPriceText(plan:Plan){
     let changing = price.monthly != plan.getCurrentPrice();
 
     if(changing){
-        let text = "New Price: \n$" + price.monthly + ' per month';
+        let text = "New Price: \n$" + price.monthly.toFixed(2) + ' per month';
         if (price.upfront != 0) {
-            text = text + ', \nplus $' + price.upfront + ' for equipment'
+            text = text + ', \nplus $' + price.upfront.toFixed(2) + ' for equipment'
         }
         return text;
     } else {
         if (price.upfront != 0) {
-            let text = "New equipment: $" + price.upfront;
+            let text = "New equipment: $" + price.upfront.toFixed(2);
             if (plan.hasPendingChanges()){
                 text += "\nNo price change"
             }
@@ -199,14 +199,14 @@ export function priceText(monthlyPrice:number,
                           purchasing: boolean){
     let text:string = '';
     if (adding) {
-        text = "Price to add: A one time charge of $" + upFrontPrice +
-            ', then ' + (monthlyPrice + equipmentPrice) + ' per month';
+        text = "Price to add: A one time charge of $" + (upFrontPrice + equipmentPrice).toFixed(2) +
+            ', then $' + monthlyPrice.toFixed(2) + ' per month';
         return text;
 
     } else if (purchasing) {
-        return "Cost: $" + equipmentPrice;
+        return "Cost: $" + equipmentPrice.toFixed(2);
     } else {
-        return "Price difference if removed: $" + monthlyPrice + ' per month';
+        return "Price difference if removed: $" + monthlyPrice.toFixed(2) + ' per month';
     }
 
 }
@@ -244,15 +244,15 @@ export function confirmationNotes(plan:Plan, isChangingPlan:boolean, highlight:a
 
     let changeText:string;
     if (currentMonthly != 0){
-        changeText = ', instead of $' + currentMonthly;
+        changeText = ', instead of $' + currentMonthly.toFixed(2);
     } else {
         changeText = '';
     }
 
-    let notesText = [highlight(todayText + "$" + todayCharge + '.')];
+    let notesText = [highlight(todayText + "$" + todayCharge.toFixed(2) + '.')];
     if (isChangingPlan){
         notesText = notesText.concat([" Then, your card will automatically be billed ",
-            highlight("$" + price.monthly + " on the " + dateText(day) + " of each month"),
+            highlight("$" + price.monthly.toFixed(2) + " on the " + dateText(day) + " of each month"),
             changeText + ". You will receive an email reminder before that day each month. If you need " +
             "a new product before it is scheduled to ship, you can purchase it from the \'"
             + tab2label() + "\' tab."]);
@@ -294,9 +294,9 @@ export function newEquipmentConfirm(deleting: boolean){
 }
 export function newPriceTextFooter(plan:Plan){
     let price = plan.getNewPrice();
-    let text = "New monthly cost: $" + price.monthly + " per month";
+    let text = "New monthly cost: $" + price.monthly.toFixed(2) + " per month";
     if (price.upfront > 0){
-        text = text + ", plus a one time charge of $" + price.upfront;
+        text = text + ", plus a one time charge of $" + price.upfront.toFixed(2);
     }
     return text;
 }
@@ -358,28 +358,10 @@ export function confirmationNotesItems(cost:number, isProduct:boolean, highlight
         ". You will still receive your " + product.getProductName() + " on your normal delivery date, in addition to " +
         "the extra one that will be sent out today.":
         "."
-    return ["Your card will be charged ", highlight("$" + cost), endText]
+    return ["Your card will be charged ", highlight("$" + cost.toFixed(2)), endText]
 }
 export function purchaseListTitle(){
     return "You will receive the following item:"
 }
 
 //Profile Screen Text
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

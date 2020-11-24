@@ -2,6 +2,8 @@ import Product from "./Product";
 import {getInfestationInfo} from "../../controller/InfestationPulling";
 import image from '../images/index';
 import {getProductByID} from "../Data/Data";
+import Equipment from "./Equipment";
+import {NUMBER_OF_INFESTATIONS} from "../Data/UsefulConstants";
 
 interface InfestationasJSON {
     id: number,
@@ -14,25 +16,30 @@ interface InfestationasJSON {
 }
 
 export default class Infestation {
-    private id: number
-    private image: NodeRequire
-    private name: string
-    private description: string
-    private products: Array<Product>
-    private upfrontPrice: number
-    private monthlyPrice: number
+    private readonly id: number = -1;
+    private readonly image: NodeRequire =image.error;
+    private readonly name: string = "Error"
+    private readonly description: string = "Error"
+    private readonly products: Array<number> = []
+    private readonly upfrontPrice: number = -1
+    private readonly monthlyPrice: number = -1
+    static singles: Array<Infestation> = new Array<Infestation>(NUMBER_OF_INFESTATIONS);
     constructor(id:number) {
-        this.id = id;
-        let pData = getInfestationInfo(this.id);
-        this.image = image.infestations[id];
-        this.name = pData.name;
-        this.description = pData.description;
-        this.products = [];
-        for (let x of pData.products) {
-            this.products.push(getProductByID(x));
+        if(typeof Infestation.singles[id] === 'undefined') {
+            this.id = id;
+            let pData = getInfestationInfo(this.id);
+            this.image = image.infestations[id];
+            this.name = pData.name;
+            this.description = pData.description;
+            this.products = [];
+            for (let x of pData.products) {
+                this.products.push(x);
+            }
+            this.upfrontPrice = pData.upfrontPrice;
+            this.monthlyPrice = pData.monthlyPrice;
+            Infestation.singles[id] = this;
         }
-        this.upfrontPrice = pData.upfrontPrice;
-        this.monthlyPrice = pData.monthlyPrice;
+        return Infestation.singles[id];
     }
 
     toString = () => {
