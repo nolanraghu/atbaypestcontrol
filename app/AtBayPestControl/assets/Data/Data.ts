@@ -25,16 +25,13 @@ let instantiated = false;
 
 export function getBugsList(){
     let arr = [];
-    if(!(Infestation.singles.length === NUMBER_OF_INFESTATIONS)){
-        for (let x = 0; x < NUMBER_OF_INFESTATIONS; ++x) {
+    for (let x = 0; x < NUMBER_OF_INFESTATIONS; ++x) {
             arr.push(getBugByID(x));
-        }
-    } else {
-        return Infestation.singles;
     }
     console.log(arr);
     return arr;
 }
+
 
 export function getBugByID(id: number):Infestation{
     //TODO
