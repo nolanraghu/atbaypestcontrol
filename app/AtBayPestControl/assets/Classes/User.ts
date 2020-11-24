@@ -59,11 +59,11 @@ export default class User implements UserProps{
             return User.theUser;
     }
 
-    private stringList = (arr: Array<Equipment>) => {
+    private stringList = (arr: Array<number>) => {
         let ids: Array<number> = [];
         arr.forEach(
-            function (equipment){
-                ids.push(equipment.getID())
+            function (eq){
+                ids.push(eq)
             }
         );
         return ids;
@@ -87,12 +87,12 @@ export default class User implements UserProps{
         this.id = json.id;
         json.currentEquipment.forEach(
             (id) =>{
-                this.currentEquipment.push(new Equipment(id));
+                this.currentEquipment.push(id);
             }
         );
         json.removedEquipment.forEach(
             (id) =>{
-                this.removedEquipment.push(new Equipment(id));
+                this.removedEquipment.push(id);
             }
         );
 
@@ -211,19 +211,16 @@ export default class User implements UserProps{
         return this.backgroundPic;
     }
 
-    getEmailByID = () => {
-        // Get a specific Email by ID
-        // Will be useful for the edit function
+    getEmailByID = (emailID: number) => {
+        return this.emails[emailID];
     }
 
-    getAddressByID = () => {
-        // Get a specific address by ID
-        // Will be useful for the edit function
+    getAddressByID = (addressID: number) => {
+        return this.addresses[addressID];
     }
 
-    changeUserName = (name: string) => {
-        // function for updating username, to be used when edit buttons are implemented correctly in the
-        // profile page
+    changeUserName = (newNamename: string) => {
+        this.name = name;
     }
 
     changeProfilePicture = (img: string) => {

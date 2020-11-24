@@ -5,17 +5,25 @@ import {getProductByID} from "../Data/Data";
 import Equipment from "./Equipment";
 import {NUMBER_OF_INFESTATIONS} from "../Data/UsefulConstants";
 
+interface InfestationasJSON {
+    id: number,
+    name: string,
+    image: string, // Is this still a string? Jinkies
+    description: string,
+    products: Array<number>,
+    upfrontPrice: number,
+    monthlyPrice: number
+}
+
 export default class Infestation {
-    private readonly id: number = -1;
-    private readonly image: NodeRequire =image.error;
-    private readonly name: string = "Error"
-    private readonly description: string = "Error"
-    private readonly products: Array<number> = []
-    private readonly upfrontPrice: number = -1
-    private readonly monthlyPrice: number = -1
+    private id: number = -1;
+    private image: NodeRequire =image.error;
+    private name: string = "Error"
+    private description: string = "Error"
+    private products: Array<number> = []
+    private upfrontPrice: number = -1
+    private monthlyPrice: number = -1
     static singles: Array<Infestation> = new Array<Infestation>(NUMBER_OF_INFESTATIONS);
-
-
     constructor(id:number) {
         if(typeof Infestation.singles[id] === 'undefined') {
             this.id = id;
@@ -32,6 +40,43 @@ export default class Infestation {
             Infestation.singles[id] = this;
         }
         return Infestation.singles[id];
+    }
+
+    toString = () => {
+        let prodIDs: Array<number> = [];
+        this.products.forEach(
+            function (prod) {
+                prodIDs.push(prod)
+            }
+        );
+        return JSON.stringify(
+            {
+                id: this.id,
+                image: this.id,
+                name: this.name,
+                description: this.description,
+                products: prodIDs,
+                upfrontPrice: this.upfrontPrice,
+                monthlyPrice: this.monthlyPrice
+            }
+        );
+    }
+
+    fromString = (jsonString: string) => {
+        let json = JSON.parse(jsonString) as InfestationasJSON;
+
+        this.id = json.id;
+        this.image = image.infestations[this.id]; // TODO Fix this
+        this.name = json.name;
+        this.description = json.description;
+
+        json.products.forEach(
+            (id) => {
+                this.products.push(id);
+            }
+        );
+        this.upfrontPrice = json.upfrontPrice;
+        this.monthlyPrice = json.monthlyPrice;
     }
 
     getID = () => {

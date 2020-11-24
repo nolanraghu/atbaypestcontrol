@@ -49,7 +49,7 @@ export default function BugInfoPopup({route, navigation}: any) {
 
     // True if the infestation can be added to the plan, false if it can be removed
     const adding = user.getPlan().isPendingRemoval(infestation) ||
-        !(user.getPlan().containsInfestation(infestation)); //TODO: This is broken
+        !(user.getPlan().containsInfestation(infestation));
 
     // The number of MISSING equipment for the infestation you will be purchasing
     const [numPurchasing, setPurchasing] = useState(0);
