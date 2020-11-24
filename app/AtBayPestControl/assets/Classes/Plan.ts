@@ -107,14 +107,14 @@ export default class Plan {
         let ids: Array<number> = [];
         this.pendingEquipment.forEach(
             function (infestation){
-                ids.push(infestation.getID())
+                ids.push(infestation)
             }
         );
         return JSON.stringify(
             {
-                addingInfestations: this.stringList(this.addingInfestations),
-                removingInfestations: this.stringList(this.removingInfestations),
-                currentInfestations: this.stringList(this.currentInfestations),
+                addingInfestations: this.stringList(makeArray(this.addingInfestations, 'infestation')),
+                removingInfestations: this.stringList(makeArray(this.removingInfestations, 'infestation')),
+                currentInfestations: this.stringList(makeArray(this.currentInfestations, 'infestation')),
                 pendingEquipment: ids,
                 dueDate: this.dueDate,
             }
@@ -125,22 +125,22 @@ export default class Plan {
         let json = JSON.parse(jsonString) as PlanAsJsON;
         json.addingInfestations.forEach(
             (id) =>{
-                this.addingInfestations.push(new Infestation(id));
+                this.addingInfestations.push(id);
             }
         );
         json.removingInfestations.forEach(
             (id) =>{
-                this.removingInfestations.push(new Infestation(id));
+                this.removingInfestations.push(id);
             }
         );
         json.currentInfestations.forEach(
             (id) =>{
-                this.currentInfestations.push(new Infestation(id));
+                this.currentInfestations.push(id);
             }
         );
         json.pendingEquipment.forEach(
             (id) =>{
-                this.pendingEquipment.push(new Equipment(id));
+                this.pendingEquipment.push(id);
             }
         );
         this.dueDate = json.dueDate;
