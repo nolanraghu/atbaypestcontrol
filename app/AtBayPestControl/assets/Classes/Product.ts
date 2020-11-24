@@ -1,12 +1,8 @@
 // This needs to include the frequency the product should be applied, any equipment needed, maybe price,
 // instructions, etc.
 
-import Equipment from "./Equipment";
-import {getEquipmentInfo} from "../../controller/EquipmentPulling";
-import {getInfestationInfo} from "../../controller/InfestationPulling";
 import {getProductInfo} from "../../controller/ProductPulling";
 import image from "../images";
-import {getEquipmentByID} from "../Data/Data";
 import {NUMBER_OF_PRODUCTS} from "../Data/UsefulConstants";
 
 interface ProductasJSON {

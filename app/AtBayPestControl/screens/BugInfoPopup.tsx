@@ -48,13 +48,12 @@ export default function BugInfoPopup({route, navigation}: any) {
     let styles = getStyle(scheme);
 
     // True if the infestation can be added to the plan, false if it can be removed
-    const adding = user.getPlan().isPendingRemoval(infestation) ||
-        !(user.getPlan().containsInfestation(infestation));
+    const adding = !((user.getPlan().containsInfestation(infestation) &&
+        !(user.getPlan().isPendingRemoval(infestation))) ||
+        user.getPlan().isPendingInfestation(infestation));
 
-    // The number of MISSING equipment for the infestation you will be purchasing
-    const [numPurchasing, setPurchasing] = useState(0);
     // True if you will be purchasing MISSING equipment (equipment once owned)
-    const purchasing = numPurchasing != 0;
+    const [purchasing, setPurchasing] = useState(false);
 
     //False if the user is not allowed to remove the infestation from their plan
     const canRemove = user.getPlan().isRemovable(infestation)
@@ -79,7 +78,7 @@ export default function BugInfoPopup({route, navigation}: any) {
             retVal = <Text style={styles.captionFade}>{noInfestationProductText()}</Text>
         } else {
             retVal = products.map(function(product){
-                let equipment = makeArray(product.getEquipmentList(), 'equipment');
+                let equipment:Equipment[] = makeArray(product.getEquipmentList(), 'equipment');
 
                 // Makes lists of equipment that will be needed, along with the product(or products)
                 // that they are needed for, in a map
@@ -92,6 +91,9 @@ export default function BugInfoPopup({route, navigation}: any) {
                                 ownedEquipment.set(item, [product]);
                             }
                         } else {
+                            if (user.hadEquipment(item) && !purchasing){
+                                setPurchasing(true);
+                            }
                             if (newEquipment.has(item)){
                                 newEquipment.get(item).push(product);
                             } else {
@@ -140,17 +142,12 @@ export default function BugInfoPopup({route, navigation}: any) {
                 return(
                     <Text style={styles.link}
                           onPress={()=>{
-                              if (onceOwned){
+                              if (!owned && onceOwned){
                                   user.addHasEquipment(equipment);
-                                  setPurchasing(numPurchasing - 1);
+                                  setPurchasing(false);
                               } else {
                                   user.removeEquipment(equipment);
-
-                                  // Now we'll be purchasing equipment, which will change the text if we are not
-                                  // adding to the plan
-                                  setPurchasing(numPurchasing + 1);
                               }
-
                               // This makes the screen re-render
                               dispatch(justEquipmentPending())
                           }}

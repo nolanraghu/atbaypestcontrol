@@ -7,7 +7,6 @@ import Equipment from "./Equipment";
 import Email from "./Email"
 import Address from "./Address";
 import Product from "./Product";
-import {storeUser} from "../Data/Storage";
 import {save} from "../Data/Data";
 import Payment from "../Classes/Payment"
 import {PAY} from "../Data/allPayments"
@@ -156,9 +155,13 @@ export default class User implements UserProps{
         // This ONLY adds the equipment to the list of equipment the user has
 
         const curSet = new Set(this.currentEquipment);
+        const pastSet = new Set(this.removedEquipment)
 
             // Adds to current equipment
         curSet.add(equipment.getID());
+        if(pastSet.has(equipment.getID())){
+            pastSet.delete(equipment.getID());
+        }
         this.currentEquipment = [...curSet];
         save();
     }

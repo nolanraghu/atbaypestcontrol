@@ -139,7 +139,7 @@ export default function UpdatePlanPopup({route, navigation}:any) {
     }
 
     function footer(){
-        if(deleting){
+        if(deleting || !isChangingPlan){
             return;
         } else {
             return (

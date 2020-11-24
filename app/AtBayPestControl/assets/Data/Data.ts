@@ -1,14 +1,8 @@
 import Infestation from "../Classes/Infestation";
 import User from "../Classes/User";
-import Email from "../Classes/Email";
-import Address from "../Classes/Address";
 import Product from "../Classes/Product";
 import Equipment from "../Classes/Equipment";
-import {EMAIL} from "../Data/allEmails";
-import {LOC} from "./allAddresses";
-import {PAY} from "./allPayments";
 import {loadUser, storeUser} from "./Storage";
-import {getInfestationInfo} from "../../controller/InfestationPulling";
 import {NUMBER_OF_INFESTATIONS} from "./UsefulConstants";
 
 //EXAMPLE FORMATS
@@ -71,7 +65,7 @@ function instantiateUser(){
     loadUser().then((hi)=>{
         User.theUser = hi;
     })
-    console.log("The user instantiated from Async at "+User.theUser.toString());
+    console.log("The user instantiated from Async at "+ User.theUser.toString());
     instantiated = true;
 }
 
