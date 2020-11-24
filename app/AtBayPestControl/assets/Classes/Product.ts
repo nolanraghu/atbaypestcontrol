@@ -20,7 +20,7 @@ export default class Product{
     private image: NodeRequire = image.error
     private name: string = "Error"
     private description: string = "Error"
-    private equipment: Array<number> = []
+    private readonly equipment: Array<number> = []
     private price: number = -1
     private timeline: string = "Error"
     static singles: Array<Product> = new Array<Product>(NUMBER_OF_PRODUCTS)
@@ -67,7 +67,7 @@ export default class Product{
     fromString = (jsonString: string) => {
         let json = JSON.parse(jsonString) as ProductasJSON;
         this.id = json.id;
-        this.image = image.product[this.id]; // TODO Fix this
+        this.image = image.product[this.id];
         this.name = json.name;
         this.description = json.description;
 

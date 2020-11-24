@@ -57,7 +57,6 @@ export default class Equipment {
     }
 
     getEquipmentImage = () => {
-        //TODO
         return this.image;
     }
 
@@ -66,15 +65,12 @@ export default class Equipment {
     }
 
     getEquipmentDescription = () => {
-        //TODO
         return this.description
     }
     getEquipmentName = () => {
-        //TODO
         return this.name;
     }
     getPrice = () => {
-        //TODO
         return this.price;
     }
     getID = () => {
