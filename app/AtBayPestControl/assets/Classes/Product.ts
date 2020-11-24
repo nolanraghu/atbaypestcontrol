@@ -33,10 +33,11 @@ export default class Product{
             this.image = image.product[id];
             this.name = pData.name;
             this.description = pData.description;
-            this.timeline = pData.timeline
+            this.timeline = pData.timeline;
+            this.price = pData.price;
             this.equipment = [];
-            for (let x in pData.equipment) {
-                this.equipment.push(Number(x));
+            for (let x of pData.equipment) {
+                this.equipment.push(x);
             }
             Product.singles[id] = this;
         }
