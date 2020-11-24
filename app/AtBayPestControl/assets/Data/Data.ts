@@ -57,12 +57,13 @@ export function getPreventionPlan():Infestation{
 }
 
 export function getUser(){
+    instantiateUser();
     return User.theUser? User.theUser: new User();
 }
 
 function instantiateUser(){
     loadUser().then((hi)=>{
-        user = hi;
+        User.theUser = hi;
     })
     instantiated = true;
 }
