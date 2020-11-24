@@ -2,7 +2,7 @@
 // all straight from the database
 
 import {getEquipmentInfo} from "../../controller/EquipmentPulling";
-import Images from '../images/index';
+import image from '../images/index';
 import {NUMBER_OF_EQUIPMENT} from "../Data/UsefulConstants";
 
 interface EquipmentasJSON {
@@ -14,18 +14,18 @@ interface EquipmentasJSON {
 }
 
 export default class Equipment {
-    private readonly id: number = -1
-    private readonly image: NodeRequire = Images.error;
-    private readonly name: string = "Error";
-    private readonly description: string = "Error";
-    private readonly price: number = -1;
+    private id: number = -1
+    private image: NodeRequire = image.error;
+    private name: string = "Error";
+    private description: string = "Error";
+    private price: number = -1;
     static singles: Array<Equipment> = new Array<Equipment>(NUMBER_OF_EQUIPMENT);
 
     constructor(id: number){
         if(typeof Equipment.singles[id] === "undefined") {
             this.id = id;
             let pData = getEquipmentInfo(this.id);
-            this.image = Images.equipment[id];
+            this.image = image.equipment[id];
             this.name = pData.name;
             this.description = pData.description;
             this.price = pData.price;
@@ -50,7 +50,7 @@ export default class Equipment {
         let json = JSON.parse(jsonString) as EquipmentasJSON;
 
         this.id = json.id;
-        this.image = require(json.image); // TODO Fix this
+        this.image = image.equipment[this.id];
         this.name = json.name;
         this.description = json.description;
         this.price = json.id;
