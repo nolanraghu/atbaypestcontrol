@@ -8,6 +8,7 @@ import {EMAIL} from "../Data/allEmails";
 import {LOC} from "./allAddresses";
 import {PAY} from "./allPayments";
 import {loadUser, storeUser} from "./Storage";
+import {getInfestationInfo} from "../../controller/InfestationPulling";
 
 //EXAMPLE FORMATS
 
@@ -17,40 +18,46 @@ export const PLAN = "Current Plan"
 //Infestation pulls from Async
 //User from a database
 
-const equipment = [new Equipment(0), new Equipment(1), new Equipment(2)]
-const products = [new Product(0), new Product(1), new Product(2), new Product(3), new Product(4), new Product(5), new Product(6), new Product(7), new Product(8)]
-const infestations = [new Infestation(0), new Infestation(1), new Infestation(2), new Infestation(3)]
 
 let user:User = new User();
 let instantiated = false;
 
 export function getBugsList(){
     //TODO
-    return infestations;
+    return Infestation.singles;
 }
 
 export function getBugByID(id: number):Infestation{
     //TODO
-    return infestations[id];
+    if(typeof Infestation.singles[id] === 'undefined'){
+        new Infestation(id);
+    }
+    return Infestation.singles[id];
 }
 
 export function getProductByID(id: number):Product{
     //TODO
-    return products[id]
+    if(typeof Product.singles[id] === 'undefined'){
+        new Product(id);
+    }
+    return Product.singles[id]
 }
 
 export function getEquipmentByID(id:number):Equipment{
     //TODO
-    return equipment[id];
+    if(typeof Equipment.singles[id] === 'undefined'){
+        new Equipment(id);
+    }
+    return Equipment.singles[id];
 }
 
 export function getPreventionPlan():Infestation{
     //TODO
-    return infestations[0];
+    return getBugByID(0);
 }
 
 export function getUser(){
-    return user;
+    return User.theUser? User.theUser: new User();
 }
 
 function instantiateUser(){
