@@ -13,10 +13,12 @@
         cockroach: require('./cockroach.jpg'),
         mosquito: require('./mosquito.jpg'),
         spider: require('./spider.jpg'),
-        error: require('./error.jpg')
+        error: require('./error.jpg'),
+        raid: require('./1831477.webp'),
+
 
     },
-
+     error: require('./error.jpg'),
 
      //The following are implicitly indexed by ID
     infestations: [
@@ -42,6 +44,15 @@
         require('./mosquito.jpg'),
         require('./mosquito.jpg'),
     ],
+     user: {
+        profile_picture : require('./profile_picture.jpg'),
+
+     },
+     splash: {
+        splash1: require('./splash.png'),
+         splash2: require('./splash1 (2).png'),
+
+     }
 
 
 

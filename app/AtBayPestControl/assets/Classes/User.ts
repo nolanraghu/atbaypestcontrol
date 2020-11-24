@@ -11,6 +11,7 @@ import {storeUser} from "../Data/Storage";
 import {save} from "../Data/Data";
 import Payment from "../Classes/Payment"
 import {PAY} from "../Data/allPayments"
+import images from "../images";
 
 interface UserProps {
     name: string,
@@ -22,8 +23,8 @@ interface UserProps {
     backgroundPic: NodeRequire,
     id: Number
     userPlan: Plan
-    currentEquipment: Array<Equipment>
-    removedEquipment: Array<Equipment>,
+    currentEquipment: Array<number>
+    removedEquipment: Array<number>,
 }
 
 interface UserasJSON {
@@ -42,15 +43,20 @@ export default class User implements UserProps{
     payments: Array<Payment> = new Array<Payment>(PAY[0], PAY[1]);
     defaultAddress: Address = new Address();
     name: string = "";
-    profilePic: NodeRequire = require("../images/error.jpg");
-    backgroundPic: NodeRequire = require("../images/error.jpg");
+    profilePic: NodeRequire = images.error;
+    backgroundPic: NodeRequire = images.error;
     id: Number = 0;
     userPlan = new Plan();
-    currentEquipment: Array<Equipment> = [];
-    removedEquipment: Array<Equipment> = [];
+    currentEquipment: Array<number> = [];
+    removedEquipment: Array<number> = [];
+    static theUser: User
 
     constructor(id:number = 0){
-            console.log("The User constructor has been called!");
+            if(!User.theUser) {
+                User.theUser = this;
+                console.log("The User constructor has been called!");
+            }
+            return User.theUser;
     }
 
     private stringList = (arr: Array<Equipment>) => {
@@ -104,29 +110,30 @@ export default class User implements UserProps{
     }
     hasEquipment = (equipment:Equipment) => {
 
-        return this.currentEquipment.includes(equipment);
+        return this.currentEquipment.includes(equipment.getID());
 
     }
 
     //getPendingEquipment
     hadEquipment = (equipment:Equipment) => {
-        return this.removedEquipment.includes(equipment);
+        return this.removedEquipment.includes(equipment.getID());
     }
     removeEquipment = (equipment:Equipment) => {
         // This removes the equipment from the list of equipment the user has, but adds it to a list of equipment
         // the user once owned
 
+        const mID = equipment.getID();
         const curSet = new Set(this.currentEquipment);
         const pastSet = new Set(this.removedEquipment);
 
-        if (curSet.has(equipment)) {
+        if (curSet.has(mID)) {
 
             // Removes from current equipment
-            curSet.delete(equipment);
+            curSet.delete(mID);
             this.currentEquipment = [... curSet];
 
             // Adds to removed equipment
-            pastSet.add(equipment);
+            pastSet.add(mID);
             this.removedEquipment = [... pastSet];
         }
         save();
@@ -137,7 +144,7 @@ export default class User implements UserProps{
 
         const curSet = new Set(this.currentEquipment);
 
-        if (!curSet.has(equipment)) {
+        if (!curSet.has(equipment.getID())) {
             this.addHasEquipment(equipment);
             this.userPlan.addPendingEquipment(equipment);
         }
@@ -148,9 +155,9 @@ export default class User implements UserProps{
 
         const curSet = new Set(this.currentEquipment);
 
-        if (!curSet.has(equipment)) {
+        if (!curSet.has(equipment.getID())) {
             // Adds to current equipment
-            curSet.add(equipment);
+            curSet.add(equipment.getID());
             this.currentEquipment = [...curSet];
         }
         save();
