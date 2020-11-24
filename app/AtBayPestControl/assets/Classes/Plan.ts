@@ -9,7 +9,7 @@
 import Infestation from "./Infestation";
 import Product from "./Product";
 import Equipment from "./Equipment";
-import {getBugByID, getBugsList, getEquipmentByID, getProductByID, save} from "../Data/Data";
+import {getBugsList, getEquipmentByID, getProductByID, save} from "../Data/Data";
 import {makeArray} from "./ClassHelpers";
 
 interface PlanAsJsON {

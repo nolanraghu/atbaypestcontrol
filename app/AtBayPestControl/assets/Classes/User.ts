@@ -7,7 +7,6 @@ import Equipment from "./Equipment";
 import Email from "./Email"
 import Address from "./Address";
 import Product from "./Product";
-import {storeUser} from "../Data/Storage";
 import {save} from "../Data/Data";
 import Payment from "../Classes/Payment"
 import {PAY} from "../Data/allPayments"
