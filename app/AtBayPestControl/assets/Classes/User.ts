@@ -155,9 +155,13 @@ export default class User implements UserProps{
         // This ONLY adds the equipment to the list of equipment the user has
 
         const curSet = new Set(this.currentEquipment);
+        const pastSet = new Set(this.removedEquipment)
 
             // Adds to current equipment
         curSet.add(equipment.getID());
+        if(pastSet.has(equipment.getID())){
+            pastSet.delete(equipment.getID());
+        }
         this.currentEquipment = [...curSet];
         save();
     }
