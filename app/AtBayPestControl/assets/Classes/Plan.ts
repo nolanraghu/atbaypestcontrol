@@ -9,9 +9,6 @@
 import Infestation from "./Infestation";
 import Product from "./Product";
 import Equipment from "./Equipment";
-import {getInfestationInfo} from "../../controller/InfestationPulling";
-import User from "./User";
-import {storeUser} from "../Data/Storage";
 import {getBugByID, getBugsList, getEquipmentByID, getProductByID, save} from "../Data/Data";
 import {makeArray} from "./ClassHelpers";
 
@@ -28,7 +25,7 @@ export default class Plan {
     private removingInfestations: Array<number> = []
     private currentInfestations: Array<number> = []
     private pendingEquipment: Array<number> = []
-    private dueDate: number =-1
+    private dueDate: number = -1;
     static thePlan: Plan;
 
     constructor(){
@@ -186,13 +183,15 @@ export default class Plan {
         }
     }
     getInfestations = ():Infestation[] => {
-        return makeArray(this.currentInfestations.slice(1,), "infestation");
+        return makeArray(this.currentInfestations, "infestation").filter((infestation:Infestation) => {
+            return !infestation.isPreventionPlan();
+        });
     }
     getPendingInfestations = ():Infestation[] => {
         // returns a list of the infestations that are pending, not including the prevention plan
-        return makeArray(this.currentInfestations.filter((infestation) => {
-            return infestation != 0;
-        }), "infestation");
+        return makeArray(this.addingInfestations, "infestation").filter((infestation:Infestation) => {
+            return !infestation.isPreventionPlan();
+        });
 
 
     }
@@ -229,9 +228,10 @@ export default class Plan {
         let currents = this.countPriceInfestation(makeArray(this.currentInfestations, 'infestation'));
         let removes = this.countPriceInfestation(makeArray(this.removingInfestations, 'infestation'));
         let additions = this.countPriceInfestation(makeArray(this.addingInfestations, 'infestation'));
+        let equipment = this.countPriceEquipment(makeArray(this.pendingEquipment, 'equipment'));
         let newPrice:{monthly:number, upfront:number} = {monthly:0, upfront:0};
-        newPrice.monthly += additions.monthly - removes.monthly+currents.monthly;
-        newPrice.upfront = additions.upfront+this.countPriceEquipment(makeArray(this.pendingEquipment, 'equipment'));
+        newPrice.monthly += additions.monthly - removes.monthly + currents.monthly;
+        newPrice.upfront = additions.upfront + equipment;
         return newPrice;
     }
 
@@ -309,15 +309,16 @@ export default class Plan {
             plusSet.delete(bug.getID());
             this.addingInfestations = [...plusSet];
 
-            let currNotRemovingInfestations:Infestation[] = makeArray(this.currentInfestations.filter(
-                infestation => !this.isPendingRemoval(getBugByID(infestation))
-            ), 'infestation');
+            let currNotRemovingInfestations:Infestation[] =
+                makeArray(this.currentInfestations, 'infestation').filter(
+                infestation => !this.isPendingRemoval(infestation)
+            );
 
             let bugEq = this.checkEquipment([bug]);
 
-            let curEq = this.checkEquipment(makeArray(this.currentInfestations, 'infestation'));
+            let curEq = this.checkEquipment(currNotRemovingInfestations);
             let pendEq = this.checkEquipment(makeArray(this.addingInfestations, 'infestation'));
-            let otherPendEq = new Set(makeArray(this.pendingEquipment, 'infestation'));
+            let otherPendEq = new Set(makeArray(this.pendingEquipment, 'equipment'));
             for(let eqq of bugEq){
                 let remove = true;
                 if(pendEq.has(eqq)){
