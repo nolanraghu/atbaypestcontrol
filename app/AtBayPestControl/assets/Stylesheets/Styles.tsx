@@ -450,6 +450,7 @@ export function getStyle(state:ColorSchemeName) {
             alignItems: 'flex-start',
             color: highlight,
             flexShrink: 1,
+            margin: '5%'
         },
         loginHeadContainer: {
             alignItems: 'center',
