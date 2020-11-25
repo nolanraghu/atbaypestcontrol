@@ -10,7 +10,7 @@ import Product from "./Product";
 import {save} from "../Data/Data";
 import Payment from "../Classes/Payment"
 import {PAY} from "../Data/allPayments"
-import images from "../images/index"
+import image from "../images";
 
 interface UserProps {
     name: string,
@@ -44,8 +44,8 @@ export default class User implements UserProps{
     defaultAddress: Address = new Address();
     name: string = "";
     password: string = "";
-    profilePic: NodeRequire = images.user.profile_picture;
-    backgroundPic: NodeRequire = images.user.background;
+    profilePic: NodeRequire = image.user.profile_picture;
+    backgroundPic: NodeRequire = image.user.background;
     id: Number = 0;
     userPlan = new Plan();
     currentEquipment: Array<number> = [];
