@@ -12,7 +12,7 @@ export default function PlanTabScreen() {
   const scheme = useColorScheme();
   const styles = getStyle(scheme);
 
-  const render = useSelector((state:RootState) => state.planVersion);
+  useSelector((state:RootState) => state.planVersion);
 
   const plan = getUser().getPlan();
   const products:Product[] = plan.getProducts();
