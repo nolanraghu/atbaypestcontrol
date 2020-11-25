@@ -188,7 +188,6 @@ export function getStyle(state:ColorSchemeName) {
         preventionButtonOff: {
             width: '89%',
             margin: '5.5%',
-            marginBottom: '9%',
             aspectRatio: 3,
             backgroundColor: button,
             borderRadius: 20,
@@ -203,7 +202,6 @@ export function getStyle(state:ColorSchemeName) {
         preventionButtonOn: {
             width: '89%',
             margin: '5.5%',
-            marginBottom: '9%',
             aspectRatio: 3,
             backgroundColor: button,
             borderRadius: 20,
@@ -220,7 +218,6 @@ export function getStyle(state:ColorSchemeName) {
         preventionButtonPending: {
             width: '89%',
             margin: '5.5%',
-            marginBottom: '9%',
             aspectRatio: 3,
             backgroundColor: button,
             borderRadius: 20,

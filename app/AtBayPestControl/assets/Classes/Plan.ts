@@ -123,7 +123,7 @@ export default class Plan {
     fromString = (jsonString: string) => {
         let json = JSON.parse(jsonString) as PlanAsJsON;
         let addSet = new Set(this.addingInfestations);
-        let minusSet = new Set(this.addingInfestations);
+        let minusSet = new Set(this.removingInfestations);
         let curSet = new Set(this.currentInfestations);
         let pendEquip = new Set(this.pendingEquipment);
         json.addingInfestations.forEach(
@@ -230,7 +230,7 @@ export default class Plan {
         let additions = this.countPriceInfestation(makeArray(this.addingInfestations, 'infestation'));
         let equipment = this.countPriceEquipment(makeArray(this.pendingEquipment, 'equipment'));
         let newPrice:{monthly:number, upfront:number} = {monthly:0, upfront:0};
-        newPrice.monthly += additions.monthly - removes.monthly + currents.monthly;
+        newPrice.monthly = additions.monthly - removes.monthly + currents.monthly;
         newPrice.upfront = additions.upfront + equipment;
         return newPrice;
     }
