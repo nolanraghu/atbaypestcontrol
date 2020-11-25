@@ -66,24 +66,4 @@ export default class Address implements addressProps{
         return this.zip;
     }
 
-    updateAddress = (address: string) => {
-        this.address = address;
-    }
-
-    updateCity = (city: string) => {
-        this.city = city;
-    }
-
-    updateState = (state: string) => {
-        this.state = state;
-    }
-
-    updateZip = (zip: string) => {
-        this.zip = zip;
-    }
-
-    updateAddressLine2 = (line2: string) => {
-        this.address.concat(', ' + line2)
-    }
-
 }

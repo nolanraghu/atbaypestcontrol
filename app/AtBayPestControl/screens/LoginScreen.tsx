@@ -36,14 +36,14 @@ export default function LoginScreen () {
         <View style={styles.loginContainer}>
             <View style={styles.loginHeadContainer}>
                 <Text style={styles.loginText}>Login</Text>
-                <Text style={styles.subText}>Please enter your login information below</Text>
+                <Text style={styles.subText}>Please enter your login information</Text>
             </View>
             <View style={styles.loginHeadContainer}>
                 <View style={styles.textArray}>
                     {InputArray}
                 </View>
-                <TouchableOpacity style={styles.logRegButton}>
-                    <Button  title={'Login'} onPress={onPressText} color={'green'}/>
+                <TouchableOpacity>
+                    <Button  title={'Submit'} onPress={onPressText}/>
                 </TouchableOpacity>
                 <View style={styles.wordRow}>
                     <Text style={styles.subText}>Don't have an account? </Text>

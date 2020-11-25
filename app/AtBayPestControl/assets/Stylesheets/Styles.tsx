@@ -469,7 +469,7 @@ export function getStyle(state:ColorSchemeName) {
             fontSize: 20
         },
         hyperLink: {
-            color: highlight,
+            color: '#E91E63',
             textDecorationLine: 'underline',
         },
         wordRow: {
@@ -483,11 +483,5 @@ export function getStyle(state:ColorSchemeName) {
             marginVertical: 20,
             width: '100%'
         },
-        logRegButton: {
-            width: '100%',
-            alignContent: 'center',
-            alignItems: 'center',
-            justifyContent: 'center'
-        }
     });
 }

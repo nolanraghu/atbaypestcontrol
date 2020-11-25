@@ -60,16 +60,4 @@ export default class Email implements EmailProps{
         return this.defaultE;
     }
 
-    updateEmail = (email: string) => {
-        this.email = email;
-    }
-
-    updateType = (type: string) => {
-        this.type = type
-    }
-
-    updateDefaultE = (defaultE: boolean) => {
-        this.defaultE = defaultE
-    }
-
 }

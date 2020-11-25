@@ -302,4 +302,16 @@
     <state x="661" y="441" width="670" height="672" key="search.everywhere.popup/0.23.1792.1026@0.23.1792.1026" timestamp="1606068086268" />
     <state x="661" y="444" width="670" height="676" key="search.everywhere.popup/0.23.1792.1033@0.23.1792.1033" timestamp="1603157958240" />
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/app/AtBayPestControl/assets/Data/allTextLogin.tsx</url>
+          <line>5</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
 </project>
