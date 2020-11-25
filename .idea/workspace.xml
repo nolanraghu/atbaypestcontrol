@@ -21,17 +21,24 @@
   <component name="ChangeListManager">
     <list default="true" id="a7ddd241-6d14-413e-a90c-d44a72595648" name="Default Changelist" comment="fixed issue w/yarn start, cleaned up extra files">
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/.expo-shared/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/Classes/Address.tsx" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/Classes/ClassHelpers.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/Classes/Email.tsx" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/Classes/Equipment.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/Classes/Infestation.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/Classes/Payment.tsx" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/Classes/Plan.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/Classes/Product.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/Classes/User.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/Data/Data.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/Data/Storage.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/Data/UsefulConstants.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/Data/allAddresses.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/Data/allEmails.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/Data/allEquipment.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/Data/allInfestations.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/Data/allPayments.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/Data/allProducts.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/Notes on data controlling.md" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/Stylesheets/Styles.tsx" afterDir="false" />
@@ -62,18 +69,23 @@
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/images/spreader.jpg" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/components/BugPressable.tsx" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/components/CaptionImage.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/components/ProductItem.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/components/RenderEmail.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/components/RenderPayment.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/components/RenderShippingLocations.tsx" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/components/Separator.tsx" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/controller/EquipmentPulling.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/controller/InfestationPulling.tsx" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/controller/ProductPulling.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/design notes" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/navigation/BugsTabNavigator.tsx" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/navigation/PlanTabNavigator.tsx" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/navigation/ProfileTabNavigator.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/package-lock.json" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/package.json" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/profile/CurrentPlan.tsx" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/profile/profile.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/redux/action.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/redux/reducer.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/redux/store.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/screens/BugInfoPopup.tsx" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/screens/ConfirmPurchasePopup.tsx" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/screens/PlanProductPopup.tsx" afterDir="false" />
@@ -104,13 +116,13 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="TypeScript File" />
         <option value="TypeScript JSX File" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/app/AtBayPestControl" />
   </component>
   <component name="ProjectId" id="1iyg1HRAc0Q3o3JPDrMBhZjTu7Q" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -178,7 +190,8 @@
       <workItem from="1605800495222" duration="6717000" />
       <workItem from="1606065576287" duration="8154000" />
       <workItem from="1606243248240" duration="3218000" />
-      <workItem from="1606246718501" duration="2036000" />
+      <workItem from="1606246718501" duration="2803000" />
+      <workItem from="1606253934840" duration="4154000" />
     </task>
     <task id="LOCAL-00001" summary="First Commit. Renaming screens/tabs to fit our needs.">
       <created>1602888296289</created>
@@ -252,12 +265,8 @@
       <screen x="0" y="23" width="1792" height="1033" />
     </state>
     <state x="730" y="261" key="#com.intellij.ide.util.MemberChooser/0.23.1792.1033@0.23.1792.1033" timestamp="1604619596708" />
-    <state x="465" y="211" key="FileChooserDialogImpl" timestamp="1606242703793">
-      <screen x="0" y="0" width="1368" height="912" />
-    </state>
-    <state x="465" y="211" key="FileChooserDialogImpl/0.0.1368.912@0.0.1368.912" timestamp="1606242703793" />
-    <state width="1771" height="274" key="GridCell.Tab.0.bottom" timestamp="1603982707390">
-      <screen x="0" y="23" width="1792" height="1028" />
+    <state width="1448" height="279" key="GridCell.Tab.0.bottom" timestamp="1606159570164">
+      <screen x="0" y="23" width="1792" height="1026" />
     </state>
     <state width="1448" height="279" key="GridCell.Tab.0.bottom/0.23.1792.1026@0.23.1792.1026" timestamp="1606159570164" />
     <state width="1771" height="274" key="GridCell.Tab.0.bottom/0.23.1792.1028@0.23.1792.1028" timestamp="1603982707390" />
@@ -301,17 +310,5 @@
     </state>
     <state x="661" y="441" width="670" height="672" key="search.everywhere.popup/0.23.1792.1026@0.23.1792.1026" timestamp="1606068086268" />
     <state x="661" y="444" width="670" height="676" key="search.everywhere.popup/0.23.1792.1033@0.23.1792.1033" timestamp="1603157958240" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/app/AtBayPestControl/assets/Data/allTextLogin.tsx</url>
-          <line>5</line>
-          <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
