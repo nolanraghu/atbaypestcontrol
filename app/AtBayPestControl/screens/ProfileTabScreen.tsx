@@ -134,7 +134,7 @@ function renderPlan () {
   let styles = getStyle(scheme);
 
   function onPressPlan () {
-    navigation.navigate('LoginScreen')
+    navigation.navigate('PlanTabScreen')
   }
 
   return (
