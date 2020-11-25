@@ -27,7 +27,6 @@ export function getBugsList(){
 }
 
 export function getBugByID(id: number):Infestation{
-    //TODO
     if(typeof Infestation.singles[id] === 'undefined'){
         new Infestation(id);
     }
@@ -35,7 +34,6 @@ export function getBugByID(id: number):Infestation{
 }
 
 export function getProductByID(id: number):Product{
-    //TODO
     if(typeof Product.singles[id] === 'undefined'){
         new Product(id);
     }
@@ -43,7 +41,6 @@ export function getProductByID(id: number):Product{
 }
 
 export function getEquipmentByID(id:number):Equipment{
-    //TODO
     if(typeof Equipment.singles[id] === 'undefined'){
         new Equipment(id);
     }
@@ -51,7 +48,6 @@ export function getEquipmentByID(id:number):Equipment{
 }
 
 export function getPreventionPlan():Infestation{
-    //TODO
     return getBugByID(0);
 }
 

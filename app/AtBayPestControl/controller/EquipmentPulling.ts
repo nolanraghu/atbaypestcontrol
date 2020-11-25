@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {allEquipment} from '../assets/Data/allEquipment';
 
 //this is kinda fakey right now because idk about the db

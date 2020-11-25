@@ -167,9 +167,6 @@ export default function BugInfoPopup({route, navigation}: any) {
 
     function pressButton(){
         // The button should do nothing if you cannot remove, add to plan, or purchase equipment
-        // TODO: if the main BugsTab screen doesn't update after this button is pushed (once the classes are working),
-        //  it needs to be refreshed from here somehow, probably by passing a prop to navigate or adding [i, update]
-        //  to BugsTabScreen
         if(canRemove || adding || purchasing){
             if (adding) {
                 user.getPlan().addPendingInfestation(infestation);
