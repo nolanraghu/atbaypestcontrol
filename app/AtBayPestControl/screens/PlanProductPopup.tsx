@@ -15,6 +15,7 @@ import {
 } from "../assets/text/text";
 import Equipment from "../assets/Classes/Equipment";
 import Product from "../assets/Classes/Product";
+import {makeArray} from "../assets/Classes/ClassHelpers";
 
 export default function PlanProductPopup({route, navigation}:any){
     const {prodId} = route.params;
@@ -22,7 +23,7 @@ export default function PlanProductPopup({route, navigation}:any){
     const scheme = useColorScheme();
     let styles = getStyle(scheme);
 
-    const equipment:Equipment[] = product.getEquipmentList();
+    const equipment:Equipment[] = makeArray(product.getEquipmentList(), 'equipment');
 
     let keys = 0;
 
@@ -31,7 +32,7 @@ export default function PlanProductPopup({route, navigation}:any){
             <Text style={styles.link}
                   onPress={()=>{
                       navigation.navigate('ConfirmPurchasePopup', {
-                          itemID:prodId, type:'Product', price:product.getPrice()
+                          itemID:prodId, type:'Product'
                       })
                   }}
                   key={keys++}>
@@ -46,7 +47,7 @@ export default function PlanProductPopup({route, navigation}:any){
                 <Text style={styles.link}
                       onPress={()=>{
                           navigation.navigate('ConfirmPurchasePopup', {
-                              itemID:equipment.getID(), type:'Equipment', price:equipment.getPrice()
+                              itemID:equipment.getID(), type:'Equipment'
                           })
                       }}
                       key={keys++}>

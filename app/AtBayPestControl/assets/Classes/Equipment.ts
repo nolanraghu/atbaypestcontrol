@@ -2,27 +2,61 @@
 // all straight from the database
 
 import {getEquipmentInfo} from "../../controller/EquipmentPulling";
-import Images from '../images/index';
+import image from '../images/index';
+import {NUMBER_OF_EQUIPMENT} from "../Data/UsefulConstants";
+
+interface EquipmentasJSON {
+    id: number,
+    image: string, // String?!?
+    name: string,
+    description: string,
+    price: number
+}
 
 export default class Equipment {
-    private readonly id: number;
-    private readonly image: NodeRequire;
-    private readonly name: string;
-    private readonly description: string;
-    private readonly price: number;
+    private id: number = -1
+    private image: NodeRequire = image.error;
+    private name: string = "Error";
+    private description: string = "Error";
+    private price: number = -1;
+    static singles: Array<Equipment> = new Array<Equipment>(NUMBER_OF_EQUIPMENT);
 
     constructor(id: number){
-        this.id = id;
-        let pData = getEquipmentInfo(this.id);
-        this.image = Images.equipment[id];
-        this.name = pData.name;
-        this.description = pData.description;
-        this.price = pData.price;
+        if(typeof Equipment.singles[id] === "undefined") {
+            this.id = id;
+            let pData = getEquipmentInfo(this.id);
+            this.image = image.equipment[id];
+            this.name = pData.name;
+            this.description = pData.description;
+            this.price = pData.price;
+            Equipment.singles[id] = this;
+        }
+        return Equipment.singles[id];
     }
 
+    toString = () => {
+        return JSON.stringify(
+            {
+                id: this.id,
+                image: this.image,
+                name: this.name,
+                description: this.description,
+                price: this.price
+            }
+        );
+    }
+
+    fromString = (jsonString: string) => {
+        let json = JSON.parse(jsonString) as EquipmentasJSON;
+
+        this.id = json.id;
+        this.image = image.equipment[this.id];
+        this.name = json.name;
+        this.description = json.description;
+        this.price = json.id;
+    }
 
     getEquipmentImage = () => {
-        //TODO
         return this.image;
     }
 
@@ -31,15 +65,12 @@ export default class Equipment {
     }
 
     getEquipmentDescription = () => {
-        //TODO
         return this.description
     }
     getEquipmentName = () => {
-        //TODO
         return this.name;
     }
     getPrice = () => {
-        //TODO
         return this.price;
     }
     getID = () => {

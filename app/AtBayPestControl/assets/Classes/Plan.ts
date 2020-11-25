@@ -9,10 +9,8 @@
 import Infestation from "./Infestation";
 import Product from "./Product";
 import Equipment from "./Equipment";
-import {getInfestationInfo} from "../../controller/InfestationPulling";
-import User from "./User";
-import {storeUser} from "../Data/Storage";
-import {getBugByID, getBugsList, save} from "../Data/Data";
+import {getBugsList, getEquipmentByID, getProductByID, save} from "../Data/Data";
+import {makeArray} from "./ClassHelpers";
 
 interface PlanAsJsON {
     addingInfestations: Array<number>;
@@ -23,32 +21,31 @@ interface PlanAsJsON {
 }
 
 export default class Plan {
-    private addingInfestations: Array<Infestation>
-    private removingInfestations: Array<Infestation>
-    private currentInfestations: Array<Infestation>
-    private pendingEquipment: Array<Equipment>;
-    private dueDate: number;
-
+    private addingInfestations: Array<number> = []
+    private removingInfestations: Array<number> = []
+    private currentInfestations: Array<number> = []
+    private pendingEquipment: Array<number> = []
+    private dueDate: number = -1;
+    static thePlan: Plan;
 
     constructor(){
-        this.addingInfestations = [];
-        this.removingInfestations = [];
-        this.currentInfestations = [];
-        this.pendingEquipment = [];
-        this.dueDate = -1;
+        if(!Plan.thePlan) {
+            Plan.thePlan = this;
+        }
+        return Plan.thePlan;
     }
 
     private countPriceInfestation = (arr:Array<Infestation>) => {
-                const target = {upfront: 0, monthly: 0};
-                if (arr.length == 0) {
-                    return target;
-                } else {
-                    arr.forEach(function (infestation) {
-                        target.monthly += infestation.getMonthlyPrice();
-                        target.upfront += infestation.getUpfrontPrice();
-                    });
-                }
-                return target;
+        const target = {upfront: 0, monthly: 0};
+        if (arr.length == 0) {
+            return target;
+        } else {
+            arr.forEach(function (infestation) {
+                target.monthly += infestation.getMonthlyPrice();
+                target.upfront += infestation.getUpfrontPrice();
+            });
+        }
+        return target;
     }
 
     private countPriceEquipment = (arr: Array<Equipment>) => {
@@ -56,8 +53,8 @@ export default class Plan {
         if (arr.length == 0) {
             return target;
         } else {
-            arr.forEach(function (infestation) {
-                target += infestation.getPrice();
+            arr.forEach(function (eq) {
+                target += eq.getPrice();
             });
         }
         return target;
@@ -67,7 +64,7 @@ export default class Plan {
         let target: Product[] = [];
         arr.forEach(
             function (infestation){
-                target = target.concat(infestation.getProducts());
+                target = target.concat(makeArray(infestation.getProducts(), "product"));
             })
         return target;
     }
@@ -83,19 +80,22 @@ export default class Plan {
     }
 
     private checkEquipment = (arr: Array<Infestation>) => {
-        let target: Equipment[] = [];
-        this.currentInfestations.forEach(
+
+        let target:Set<Equipment> = new Set();
+        arr.forEach(
             function (infestation){
                 infestation.getProducts().forEach(
                     function (product){
-                        let e = product.getEquipmentList();
-                        if(e.length > 0 && !target.includes(e[0])){
-                            target.push(e[0]);
-                        }
+                        let e = getProductByID(product).getEquipmentList();
+                        e.forEach(
+                            function (equipment){
+                                target.add(getEquipmentByID(equipment));
+                            }
+                        )
                     }
                 )
             });
-        return new Set(target);
+        return target;
     };
 
 
@@ -104,55 +104,66 @@ export default class Plan {
         let ids: Array<number> = [];
         this.pendingEquipment.forEach(
             function (infestation){
-                ids.push(infestation.getID())
+                ids.push(infestation)
             }
         );
         return JSON.stringify(
             {
-                addingInfestations: this.stringList(this.addingInfestations),
-                removingInfestations: this.stringList(this.removingInfestations),
-                currentInfestations: this.stringList(this.currentInfestations),
+                addingInfestations: this.stringList(makeArray(this.addingInfestations, 'infestation')),
+                removingInfestations: this.stringList(makeArray(this.removingInfestations, 'infestation')),
+                currentInfestations: this.stringList(makeArray(this.currentInfestations, 'infestation')),
                 pendingEquipment: ids,
                 dueDate: this.dueDate,
             }
         );
     }
 
+    //In theory: we don't need all this set stuff
+    //But in practice, we keep on getting duplicates and this is an easy way to check against that
     fromString = (jsonString: string) => {
         let json = JSON.parse(jsonString) as PlanAsJsON;
+        let addSet = new Set(this.addingInfestations);
+        let minusSet = new Set(this.addingInfestations);
+        let curSet = new Set(this.currentInfestations);
+        let pendEquip = new Set(this.pendingEquipment);
         json.addingInfestations.forEach(
             (id) =>{
-                this.addingInfestations.push(new Infestation(id));
+                addSet.add(id);
             }
         );
         json.removingInfestations.forEach(
             (id) =>{
-                this.removingInfestations.push(new Infestation(id));
+                minusSet.add(id);
             }
         );
         json.currentInfestations.forEach(
             (id) =>{
-                this.currentInfestations.push(new Infestation(id));
+                curSet.add(id);
             }
         );
         json.pendingEquipment.forEach(
             (id) =>{
-                this.pendingEquipment.push(new Equipment(id));
+                pendEquip.add(id);
             }
         );
+        this.pendingEquipment = [...pendEquip];
+        this.addingInfestations = [...addSet];
+        this.removingInfestations = [...minusSet];
+        this.currentInfestations = [...curSet];
+
         this.dueDate = json.dueDate;
 
         return this;
     }
 
     containsInfestation = (bug:Infestation) => {
-        return this.currentInfestations.includes(bug);
+        return this.currentInfestations.includes(bug.getID());
     }
     isPendingInfestation = (bug:Infestation) => {
-        return this.addingInfestations.includes(bug);
+        return this.addingInfestations.includes(bug.getID());
     }
     isPendingRemoval = (bug:Infestation) => {
-        return this.removingInfestations.includes(bug);
+        return this.removingInfestations.includes(bug.getID());
     }
     isRemovable = (bug:Infestation) => {
         // False if this infestation cannot be removed (ex. if you have to pay for at least three months
@@ -172,49 +183,56 @@ export default class Plan {
         }
     }
     getInfestations = ():Infestation[] => {
-        return this.currentInfestations.slice(1,);
+        return makeArray(this.currentInfestations, "infestation").filter((infestation:Infestation) => {
+            return !infestation.isPreventionPlan();
+        });
     }
     getPendingInfestations = ():Infestation[] => {
         // returns a list of the infestations that are pending, not including the prevention plan
-        return this.currentInfestations.filter((infestation) => {
-            return infestation.getID() != 0;
+        return makeArray(this.addingInfestations, "infestation").filter((infestation:Infestation) => {
+            return !infestation.isPreventionPlan();
         });
+
+
     }
+
 
     getOtherInfestations = ():Infestation[] => {
         //This includes Pending Infestations and anything not currently on the plan, not including the prevention plan
 
         //Easily one of the sexiest implementations yet
         return getBugsList().filter(
-            x => !(this.getInfestations().includes(x) || x.getID() == 0));
+            x => !(this.containsInfestation(x) || x.isPreventionPlan()));
     }
     getProducts = ():Product[] => {
-        return this.countProducts(this.currentInfestations);
+        return this.countProducts(makeArray(this.currentInfestations, 'infestation'));
     }
     getPendingProducts = ():Product[] => {
-        return this.countProducts(this.addingInfestations);
+        return this.countProducts(makeArray(this.addingInfestations, 'infestation'));
     }
     getPendingEquipment = ():Equipment[] => {
-        return this.pendingEquipment;
+        return makeArray(this.pendingEquipment, 'equipment');
     }
     getRemovingProducts = ():Product[] => {
-        return this.countProducts(this.removingInfestations);
+        return this.countProducts(makeArray(this.removingInfestations, 'infestation'));
     }
     getCurrentPrice = ():number => {
         // Returns the current price of the plan
-        return this.countPriceInfestation(this.currentInfestations).monthly;
+        return this.countPriceInfestation(makeArray(this.currentInfestations, 'infestation')).monthly;
     }
     getNewPrice = ():{monthly: number, upfront: number} => {
         // Returns the new price of the plan, with the pending additions and deletions, as well as any upfront costs
         // which would come from new equipment. Remember that the upfront cost is just the sum of the pending upfront
         // costs plus the pending equipment cost, while the monthly is the sum of the pending and existing packages'
         // monthly price, minus the ones being removed
-        let currents = this.countPriceInfestation(this.currentInfestations);
-        let removes = this.countPriceInfestation(this.removingInfestations);
-        let additions = this.countPriceInfestation(this.addingInfestations);
-        currents.monthly += additions.monthly - removes.monthly;
-        currents.upfront = additions.upfront;
-        return currents;
+        let currents = this.countPriceInfestation(makeArray(this.currentInfestations, 'infestation'));
+        let removes = this.countPriceInfestation(makeArray(this.removingInfestations, 'infestation'));
+        let additions = this.countPriceInfestation(makeArray(this.addingInfestations, 'infestation'));
+        let equipment = this.countPriceEquipment(makeArray(this.pendingEquipment, 'equipment'));
+        let newPrice:{monthly:number, upfront:number} = {monthly:0, upfront:0};
+        newPrice.monthly += additions.monthly - removes.monthly + currents.monthly;
+        newPrice.upfront = additions.upfront + equipment;
+        return newPrice;
     }
 
 
@@ -222,7 +240,7 @@ export default class Plan {
         return this.removingInfestations.length > 0 || this.addingInfestations.length > 0;
     }
     removePendingChanges = () => {
-        // Removes anthing pending on the plan and sets it back to what it was before, including equipment
+        // Removes anything pending on the plan and sets it back to what it was before, including equipment
 
         this.addingInfestations = [];
         this.removingInfestations = [];
@@ -230,8 +248,8 @@ export default class Plan {
         save();
     }
     addChangesToPlan = () => {
-        //TODO: This should send all of this.pendingEquipment to the client (Ortho/Brandon)
-        // and clear pending equipment
+        //TODO: This should send all of this.pendingEquipment to the client (Ortho/Brandon), as well as the
+        // changes to the plan
 
         let curSet = new Set(this.currentInfestations);
         let minusSet = new Set(this.removingInfestations);
@@ -249,6 +267,11 @@ export default class Plan {
         this.addingInfestations = [];
         this.removingInfestations = [];
         this.pendingEquipment = [];
+
+        if(this.currentInfestations == []){
+            this.dueDate = -1;
+        }
+
         save();
 
     }
@@ -259,12 +282,12 @@ export default class Plan {
 
         const minusSet = new Set(this.removingInfestations);
         const plusSet = new Set(this.addingInfestations);
-        if(minusSet.has(bug)){
-            minusSet.delete(bug);
+        if(minusSet.has(bug.getID())){
+            minusSet.delete(bug.getID());
             this.removingInfestations = [...minusSet];
 
         } else {
-            plusSet.add(bug);
+            plusSet.add(bug.getID());
             this.addingInfestations = [...plusSet];
         }
         save();
@@ -283,37 +306,43 @@ export default class Plan {
         const minusSet = new Set(this.removingInfestations);
         const plusSet = new Set(this.addingInfestations);
 
-        if(curSet.has(bug)){
-            minusSet.add(bug);
+        if(curSet.has(bug.getID())){
+            minusSet.add(bug.getID());
             this.removingInfestations = [...minusSet];
             this.currentInfestations = [...curSet];
-        } else if (plusSet.has(bug)){
-            plusSet.delete(bug);
+        } else if (plusSet.has(bug.getID())){
+            plusSet.delete(bug.getID());
             this.addingInfestations = [...plusSet];
-            let bugEq = this.checkEquipment([bug]);
-            let curEq = this.checkEquipment(this.currentInfestations);
-            let pendEq = this.checkEquipment(this.addingInfestations);
-            let removeEq = this.checkEquipment(this.removingInfestations);
-            let otherPendEq = new Set(this.pendingEquipment);
 
+            let currNotRemovingInfestations:Infestation[] =
+                makeArray(this.currentInfestations, 'infestation').filter(
+                infestation => !this.isPendingRemoval(infestation)
+            );
+
+            let bugEq = this.checkEquipment([bug]);
+
+            let curEq = this.checkEquipment(currNotRemovingInfestations);
+            let pendEq = this.checkEquipment(makeArray(this.addingInfestations, 'infestation'));
+            let otherPendEq = new Set(makeArray(this.pendingEquipment, 'equipment'));
             for(let eqq of bugEq){
-                if(removeEq.has(eqq)){
-                    otherPendEq.delete(eqq);
-                } else if( !(curEq.has(eqq) || pendEq.has(eqq))){
+                let remove = true;
+                if(pendEq.has(eqq)){
+                    remove = false;
+                } else if(curEq.has(eqq)) {
+                    remove = false;
+                }
+                if(remove){
                     otherPendEq.delete(eqq);
                 }
             }
             this.pendingEquipment = [...otherPendEq];
-
-
         }
         save();
-
     }
 
     addPendingEquipment = (e: Equipment) =>{
         const eset = new Set(this.pendingEquipment);
-        eset.add(e);
+        eset.add(e.getID());
         this.pendingEquipment = [...eset];
         save();
 
@@ -321,7 +350,7 @@ export default class Plan {
 
     removePendingEquipment = (e: Equipment) => {
         const eset = new Set(this.pendingEquipment);
-        eset.delete(e);
+        eset.delete(e.getID());
         this.pendingEquipment = [...eset];
         save();
 
