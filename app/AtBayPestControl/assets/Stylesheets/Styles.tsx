@@ -469,7 +469,7 @@ export function getStyle(state:ColorSchemeName) {
             fontSize: 20
         },
         hyperLink: {
-            color: '#E91E63',
+            color: highlight,
             textDecorationLine: 'underline',
         },
         wordRow: {
