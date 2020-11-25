@@ -52,7 +52,7 @@ export default function BottomTabNavigator() {
               tabBarIcon: renderIcon('ios-person'),
               tabBarLabel: tab3label()
           }}
-              />
+      />
     </BottomTab.Navigator>
   );
 }

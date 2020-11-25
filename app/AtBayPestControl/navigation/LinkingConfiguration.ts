@@ -23,6 +23,8 @@ export default {
           ProfileTab: {
             screens: {
               ProfileTabScreen: 'Profile',
+              LoginScreen: 'Login',
+              RegisterScreen: 'Register',
             },
           },
         },
