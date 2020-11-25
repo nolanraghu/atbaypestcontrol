@@ -11,7 +11,7 @@ export default function renderItem ({address, index, onPressPlace}: renderProps)
 
     return (
         <TouchableOpacity onPress={() => onPressPlace()}>
-            <View style={[styles.container]}>
+            <View style={styles.container}>
                 <View style={styles.iconRow}>
                     {index === 0 && (
                         <Icon

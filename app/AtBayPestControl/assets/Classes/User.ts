@@ -10,10 +10,11 @@ import Product from "./Product";
 import {save} from "../Data/Data";
 import Payment from "../Classes/Payment"
 import {PAY} from "../Data/allPayments"
-import images from "../images";
+import image from "../images";
 
 interface UserProps {
     name: string,
+    password: string,
     emails: Array<Email>,
     addresses: Array<Address>,
     payments: Array<Payment>,
@@ -42,8 +43,9 @@ export default class User implements UserProps{
     payments: Array<Payment> = new Array<Payment>(PAY[0], PAY[1]);
     defaultAddress: Address = new Address();
     name: string = "";
-    profilePic: NodeRequire = images.error;
-    backgroundPic: NodeRequire = images.error;
+    password: string = "";
+    profilePic: NodeRequire = image.user.profile_picture;
+    backgroundPic: NodeRequire = image.user.background;
     id: Number = 0;
     userPlan = new Plan();
     currentEquipment: Array<number> = [];
@@ -184,6 +186,10 @@ export default class User implements UserProps{
         return this.name;
     }
 
+    getPassword = () => {
+        return this.password;
+    }
+
     getEmails = () => {
         // returns default the users emails
         return this.emails;
@@ -222,8 +228,16 @@ export default class User implements UserProps{
         return this.addresses[addressID];
     }
 
-    changeUserName = (newNamename: string) => {
+    changeUserName = (name: string) => {
+        // function for updating username, to be used when edit buttons are implemented correctly in the
+        // profile page
         this.name = name;
+    }
+
+    changePassword = (password: string) => {
+        // function for updating username, to be used when edit buttons are implemented correctly in the
+        // profile page
+        this.password = password;
     }
 
     changeProfilePicture = (img: string) => {
@@ -234,6 +248,18 @@ export default class User implements UserProps{
     changeBackgroundPic = (img: string) => {
         // function for updating background picture, to be used when edit buttons are implemented correctly in the
         // profile page
+    }
+
+    addEmail = (email: Email) => {
+        this.getEmails().concat(email);
+    }
+
+    addAddress = (address: Address) => {
+        this.getAddresses().concat(address)
+    }
+
+    addPayment = (payment: Payment) => {
+        this.getPayments().concat(payment)
     }
 
 }
