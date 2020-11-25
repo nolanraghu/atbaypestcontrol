@@ -10,7 +10,7 @@ import Product from "./Product";
 import {save} from "../Data/Data";
 import Payment from "../Classes/Payment"
 import {PAY} from "../Data/allPayments"
-import image from "../images";
+import images from "../images/index"
 
 interface UserProps {
     name: string,
@@ -38,18 +38,19 @@ export default class User implements UserProps{
     //TODO: Add all of the personal information here and have it be used by Profile tab
 
     // If this is 0, that should mean they haven't made an account yet
-    emails: Array<Email> = new Array<Email>();
+    emails: Array<Email> = new Array<Email>(new Email());
     addresses: Array<Address> = new Array<Address>(new Address());
     payments: Array<Payment> = new Array<Payment>(PAY[0], PAY[1]);
     defaultAddress: Address = new Address();
     name: string = "";
     password: string = "";
-    profilePic: NodeRequire = image.user.profile_picture;
-    backgroundPic: NodeRequire = image.user.background;
+    profilePic: NodeRequire = images.user.profile_picture;
+    backgroundPic: NodeRequire = images.user.background;
     id: Number = 0;
     userPlan = new Plan();
     currentEquipment: Array<number> = [];
     removedEquipment: Array<number> = [];
+    private loggedIn: boolean = false;
     static theUser: User
 
     constructor(id:number = 0){
@@ -106,11 +107,16 @@ export default class User implements UserProps{
         return this;
     }
 
-    hasAccount = () => {
+    isLoggedIn = () => {
         //I'm assuming this means something with signing up, so I'm just gonna return true
-        return true;
+        return this.loggedIn;
+    }
 
-        //return this.id != 0
+    logIn = () => {
+        this.loggedIn = true;
+    }
+    logOut = () => {
+        this.loggedIn = false;
     }
     getPlan = () => {
         return this.userPlan;

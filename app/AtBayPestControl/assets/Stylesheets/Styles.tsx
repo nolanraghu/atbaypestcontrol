@@ -188,7 +188,6 @@ export function getStyle(state:ColorSchemeName) {
         preventionButtonOff: {
             width: '89%',
             margin: '5.5%',
-            marginBottom: '9%',
             aspectRatio: 3,
             backgroundColor: button,
             borderRadius: 20,
@@ -203,7 +202,6 @@ export function getStyle(state:ColorSchemeName) {
         preventionButtonOn: {
             width: '89%',
             margin: '5.5%',
-            marginBottom: '9%',
             aspectRatio: 3,
             backgroundColor: button,
             borderRadius: 20,
@@ -220,7 +218,6 @@ export function getStyle(state:ColorSchemeName) {
         preventionButtonPending: {
             width: '89%',
             margin: '5.5%',
-            marginBottom: '9%',
             aspectRatio: 3,
             backgroundColor: button,
             borderRadius: 20,
@@ -453,6 +450,7 @@ export function getStyle(state:ColorSchemeName) {
             alignItems: 'flex-start',
             color: highlight,
             flexShrink: 1,
+            margin: '5%'
         },
         loginHeadContainer: {
             alignItems: 'center',
@@ -469,7 +467,7 @@ export function getStyle(state:ColorSchemeName) {
             fontSize: 20
         },
         hyperLink: {
-            color: '#E91E63',
+            color: highlight,
             textDecorationLine: 'underline',
         },
         wordRow: {
