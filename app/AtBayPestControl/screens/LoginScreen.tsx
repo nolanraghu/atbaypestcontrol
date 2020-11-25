@@ -5,13 +5,22 @@ import {Input} from "react-native-elements";
 import {getUser} from "../assets/Data/Data";
 import {loginText} from '../assets/Data/allTextLogin'
 import InputBox from "../components/RenderTextBox";
-import { useNavigation } from '@react-navigation/native';
+import {StackActions} from "react-navigation";
+import {useDispatch} from "react-redux";
+import {LOG_IN, logIn} from "../redux/action";
 
-export default function LoginScreen () {
+export default function LoginScreen ({route, navigation}: any) {
+    const params = route.params;
+    let goingBack = false;
+    if(params != undefined){
+        //I think this is the only way to make an optional screen parameter
+        goingBack = params.goingBack;
+    }
+
+    const dispatch = useDispatch();
 
     const scheme = useColorScheme();
     let styles = getStyle(scheme);
-    const navigation = useNavigation();
     let User = getUser();
 
     function handleButtonPress (val: string) {
@@ -29,7 +38,15 @@ export default function LoginScreen () {
     })
 
     function onPressText () {
-        navigation.navigate('RegisterScreen')
+        navigation.navigate('RegisterScreen', {goingBack: goingBack})
+    }
+
+    function onPressButton () {
+        getUser().logIn();
+        if(goingBack){
+            navigation.goBack();
+        }
+        dispatch(logIn())
     }
 
     return (
@@ -43,7 +60,7 @@ export default function LoginScreen () {
                     {InputArray}
                 </View>
                 <TouchableOpacity>
-                    <Button  title={'Submit'} onPress={onPressText}/>
+                    <Button  title={'Submit'} onPress={onPressButton}/>
                 </TouchableOpacity>
                 <View style={styles.wordRow}>
                     <Text style={styles.subText}>Don't have an account? </Text>

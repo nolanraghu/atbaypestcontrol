@@ -50,6 +50,7 @@ export default class User implements UserProps{
     userPlan = new Plan();
     currentEquipment: Array<number> = [];
     removedEquipment: Array<number> = [];
+    private loggedIn: boolean = false;
     static theUser: User
 
     constructor(id:number = 0){
@@ -106,11 +107,16 @@ export default class User implements UserProps{
         return this;
     }
 
-    hasAccount = () => {
+    isLoggedIn = () => {
         //I'm assuming this means something with signing up, so I'm just gonna return true
-        return true;
+        return this.loggedIn;
+    }
 
-        //return this.id != 0
+    logIn = () => {
+        this.loggedIn = true;
+    }
+    logOut = () => {
+        this.loggedIn = false;
     }
     getPlan = () => {
         return this.userPlan;
