@@ -34,30 +34,7 @@ export default class Equipment {
         return Equipment.singles[id];
     }
 
-    toString = () => {
-        return JSON.stringify(
-            {
-                id: this.id,
-                image: this.image,
-                name: this.name,
-                description: this.description,
-                price: this.price
-            }
-        );
-    }
-
-    fromString = (jsonString: string) => {
-        let json = JSON.parse(jsonString) as EquipmentasJSON;
-
-        this.id = json.id;
-        this.image = require(json.image); // TODO Fix this
-        this.name = json.name;
-        this.description = json.description;
-        this.price = json.id;
-    }
-
     getEquipmentImage = () => {
-        //TODO
         return this.image;
     }
 
@@ -66,15 +43,12 @@ export default class Equipment {
     }
 
     getEquipmentDescription = () => {
-        //TODO
         return this.description
     }
     getEquipmentName = () => {
-        //TODO
         return this.name;
     }
     getPrice = () => {
-        //TODO
         return this.price;
     }
     getID = () => {

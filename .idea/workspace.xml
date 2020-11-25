@@ -104,13 +104,13 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="TypeScript JSX File" />
         <option value="TypeScript File" />
+        <option value="TypeScript JSX File" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/app/AtBayPestControl" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1iyg1HRAc0Q3o3JPDrMBhZjTu7Q" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -176,7 +176,9 @@
       <workItem from="1605735428850" duration="21873000" />
       <workItem from="1605763393784" duration="6823000" />
       <workItem from="1605800495222" duration="6717000" />
-      <workItem from="1606065576287" duration="6393000" />
+      <workItem from="1606065576287" duration="8154000" />
+      <workItem from="1606243248240" duration="3218000" />
+      <workItem from="1606246718501" duration="2036000" />
     </task>
     <task id="LOCAL-00001" summary="First Commit. Renaming screens/tabs to fit our needs.">
       <created>1602888296289</created>
@@ -250,25 +252,29 @@
       <screen x="0" y="23" width="1792" height="1033" />
     </state>
     <state x="730" y="261" key="#com.intellij.ide.util.MemberChooser/0.23.1792.1033@0.23.1792.1033" timestamp="1604619596708" />
-    <state width="1448" height="279" key="GridCell.Tab.0.bottom" timestamp="1606065867742">
-      <screen x="0" y="23" width="1792" height="1026" />
+    <state x="465" y="211" key="FileChooserDialogImpl" timestamp="1606242703793">
+      <screen x="0" y="0" width="1368" height="912" />
     </state>
-    <state width="1448" height="279" key="GridCell.Tab.0.bottom/0.23.1792.1026@0.23.1792.1026" timestamp="1606065867742" />
+    <state x="465" y="211" key="FileChooserDialogImpl/0.0.1368.912@0.0.1368.912" timestamp="1606242703793" />
+    <state width="1771" height="274" key="GridCell.Tab.0.bottom" timestamp="1603982707390">
+      <screen x="0" y="23" width="1792" height="1028" />
+    </state>
+    <state width="1448" height="279" key="GridCell.Tab.0.bottom/0.23.1792.1026@0.23.1792.1026" timestamp="1606159570164" />
     <state width="1771" height="274" key="GridCell.Tab.0.bottom/0.23.1792.1028@0.23.1792.1028" timestamp="1603982707390" />
-    <state width="1448" height="279" key="GridCell.Tab.0.center" timestamp="1606065867741">
+    <state width="1448" height="279" key="GridCell.Tab.0.center" timestamp="1606159570163">
       <screen x="0" y="23" width="1792" height="1026" />
     </state>
-    <state width="1448" height="279" key="GridCell.Tab.0.center/0.23.1792.1026@0.23.1792.1026" timestamp="1606065867741" />
+    <state width="1448" height="279" key="GridCell.Tab.0.center/0.23.1792.1026@0.23.1792.1026" timestamp="1606159570163" />
     <state width="1771" height="274" key="GridCell.Tab.0.center/0.23.1792.1028@0.23.1792.1028" timestamp="1603982707390" />
-    <state width="1448" height="279" key="GridCell.Tab.0.left" timestamp="1606065867741">
+    <state width="1448" height="279" key="GridCell.Tab.0.left" timestamp="1606159570162">
       <screen x="0" y="23" width="1792" height="1026" />
     </state>
-    <state width="1448" height="279" key="GridCell.Tab.0.left/0.23.1792.1026@0.23.1792.1026" timestamp="1606065867741" />
+    <state width="1448" height="279" key="GridCell.Tab.0.left/0.23.1792.1026@0.23.1792.1026" timestamp="1606159570162" />
     <state width="1771" height="274" key="GridCell.Tab.0.left/0.23.1792.1028@0.23.1792.1028" timestamp="1603982707389" />
-    <state width="1448" height="279" key="GridCell.Tab.0.right" timestamp="1606065867742">
+    <state width="1448" height="279" key="GridCell.Tab.0.right" timestamp="1606159570163">
       <screen x="0" y="23" width="1792" height="1026" />
     </state>
-    <state width="1448" height="279" key="GridCell.Tab.0.right/0.23.1792.1026@0.23.1792.1026" timestamp="1606065867742" />
+    <state width="1448" height="279" key="GridCell.Tab.0.right/0.23.1792.1026@0.23.1792.1026" timestamp="1606159570163" />
     <state width="1771" height="274" key="GridCell.Tab.0.right/0.23.1792.1028@0.23.1792.1028" timestamp="1603982707390" />
     <state x="734" y="414" key="VCS.EditChangelistDialog" timestamp="1603076356758">
       <screen x="0" y="23" width="1792" height="1030" />
@@ -295,5 +301,17 @@
     </state>
     <state x="661" y="441" width="670" height="672" key="search.everywhere.popup/0.23.1792.1026@0.23.1792.1026" timestamp="1606068086268" />
     <state x="661" y="444" width="670" height="676" key="search.everywhere.popup/0.23.1792.1033@0.23.1792.1033" timestamp="1603157958240" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/app/AtBayPestControl/assets/Data/allTextLogin.tsx</url>
+          <line>5</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

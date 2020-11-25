@@ -1,7 +1,7 @@
 import React from 'react'
-import {StyleSheet, Text, TouchableOpacity, useColorScheme, View} from 'react-native'
+import {Text, TouchableOpacity, useColorScheme, View} from 'react-native'
 import { Icon } from 'react-native-elements'
-import {getStyle, buttonColor, getBackgroundColor} from '../assets/Stylesheets/Styles'
+import {getStyle} from '../assets/Stylesheets/Styles'
 import Email from "../assets/Classes/Email";
 
 export default function renderItem ({email, index, onPressEmail}: renderProps) {

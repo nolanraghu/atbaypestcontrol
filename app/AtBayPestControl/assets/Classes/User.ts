@@ -7,14 +7,14 @@ import Equipment from "./Equipment";
 import Email from "./Email"
 import Address from "./Address";
 import Product from "./Product";
-import {storeUser} from "../Data/Storage";
 import {save} from "../Data/Data";
 import Payment from "../Classes/Payment"
 import {PAY} from "../Data/allPayments"
-import images from "../images";
+import image from "../images";
 
 interface UserProps {
     name: string,
+    password: string,
     emails: Array<Email>,
     addresses: Array<Address>,
     payments: Array<Payment>,
@@ -43,8 +43,9 @@ export default class User implements UserProps{
     payments: Array<Payment> = new Array<Payment>(PAY[0], PAY[1]);
     defaultAddress: Address = new Address();
     name: string = "";
-    profilePic: NodeRequire = images.error;
-    backgroundPic: NodeRequire = images.error;
+    password: string = "";
+    profilePic: NodeRequire = image.user.profile_picture;
+    backgroundPic: NodeRequire = image.user.background;
     id: Number = 0;
     userPlan = new Plan();
     currentEquipment: Array<number> = [];
@@ -59,11 +60,11 @@ export default class User implements UserProps{
             return User.theUser;
     }
 
-    private stringList = (arr: Array<Equipment>) => {
+    private stringList = (arr: Array<number>) => {
         let ids: Array<number> = [];
         arr.forEach(
-            function (equipment){
-                ids.push(equipment.getID())
+            function (eq){
+                ids.push(eq)
             }
         );
         return ids;
@@ -80,22 +81,28 @@ export default class User implements UserProps{
         );
     }
 
+    //In theory: we don't need all this set stuff
+    //But in practice, we keep on getting duplicates and this is an easy way to check against that
     fromString = (jsonString: string) => {
         let json = JSON.parse(jsonString) as UserasJSON;
 
         this.userPlan = new Plan().fromString(json.userPlan);
         this.id = json.id;
+        let curEq = new Set(this.currentEquipment);
+        let remEq = new Set(this.removedEquipment);
+
         json.currentEquipment.forEach(
             (id) =>{
-                this.currentEquipment.push(new Equipment(id));
+                curEq.add(id);
             }
         );
         json.removedEquipment.forEach(
             (id) =>{
-                this.removedEquipment.push(new Equipment(id));
+                remEq.add(id);
             }
         );
-
+        this.removedEquipment = [...remEq];
+        this.currentEquipment = [...curEq];
         return this;
     }
 
@@ -142,24 +149,22 @@ export default class User implements UserProps{
         // This adds the equipment to the list of equipment the user has, and also adds it to the upcoming
         // purchases in the plan
 
-        const curSet = new Set(this.currentEquipment);
-
-        if (!curSet.has(equipment.getID())) {
-            this.addHasEquipment(equipment);
-            this.userPlan.addPendingEquipment(equipment);
-        }
+        this.addHasEquipment(equipment);
+        this.userPlan.addPendingEquipment(equipment);
         save();
     }
     addHasEquipment = (equipment:Equipment) => {
         // This ONLY adds the equipment to the list of equipment the user has
 
         const curSet = new Set(this.currentEquipment);
+        const pastSet = new Set(this.removedEquipment)
 
-        if (!curSet.has(equipment.getID())) {
             // Adds to current equipment
-            curSet.add(equipment.getID());
-            this.currentEquipment = [...curSet];
+        curSet.add(equipment.getID());
+        if(pastSet.has(equipment.getID())){
+            pastSet.delete(equipment.getID());
         }
+        this.currentEquipment = [...curSet];
         save();
     }
 
@@ -179,6 +184,10 @@ export default class User implements UserProps{
 
     getUserName = () => {
         return this.name;
+    }
+
+    getPassword = () => {
+        return this.password;
     }
 
     getEmails = () => {
@@ -211,19 +220,24 @@ export default class User implements UserProps{
         return this.backgroundPic;
     }
 
-    getEmailByID = () => {
-        // Get a specific Email by ID
-        // Will be useful for the edit function
+    getEmailByID = (emailID: number) => {
+        return this.emails[emailID];
     }
 
-    getAddressByID = () => {
-        // Get a specific address by ID
-        // Will be useful for the edit function
+    getAddressByID = (addressID: number) => {
+        return this.addresses[addressID];
     }
 
     changeUserName = (name: string) => {
         // function for updating username, to be used when edit buttons are implemented correctly in the
         // profile page
+        this.name = name;
+    }
+
+    changePassword = (password: string) => {
+        // function for updating username, to be used when edit buttons are implemented correctly in the
+        // profile page
+        this.password = password;
     }
 
     changeProfilePicture = (img: string) => {
@@ -234,6 +248,18 @@ export default class User implements UserProps{
     changeBackgroundPic = (img: string) => {
         // function for updating background picture, to be used when edit buttons are implemented correctly in the
         // profile page
+    }
+
+    addEmail = (email: Email) => {
+        this.getEmails().concat(email);
+    }
+
+    addAddress = (address: Address) => {
+        this.getAddresses().concat(address)
+    }
+
+    addPayment = (payment: Payment) => {
+        this.getPayments().concat(payment)
     }
 
 }

@@ -3,6 +3,7 @@ import Product from "../Classes/Product";
 import Infestation from "../Classes/Infestation";
 import Plan from "../Classes/Plan";
 import {getPreventionPlan} from "../Data/Data";
+import {makeArray} from "../Classes/ClassHelpers";
 
 //Overarching app text
 export function appName(){
@@ -31,7 +32,7 @@ export function captionProductDescription(product:Product){
 }
 export function captionProductAndReqEquipment(product:Product){
     let equipmentText:string = '';
-    let equipment:Equipment[] = product.getEquipmentList();
+    let equipment:Equipment[] = makeArray(product.getEquipmentList(), 'e');
     for(let i = equipment.length - 1; i >= 0; i--){
         if(i == equipment.length - 1){
             equipmentText = equipment[i].getEquipmentName();

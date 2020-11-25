@@ -12,7 +12,7 @@ export default function renderItem ({payment, index, onPressEdit, onPressPayment
 
     return (
         <TouchableOpacity onPress={() => onPressPayment()}>
-            <View style={[styles.container]}>
+            <View style={styles.container}>
                 <View style={styles.iconRow}>
                     {index === 0 && (
                         <Icon
