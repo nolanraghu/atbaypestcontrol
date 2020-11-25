@@ -39,7 +39,7 @@ export default class User implements UserProps{
     //TODO: Add all of the personal information here and have it be used by Profile tab
 
     // If this is 0, that should mean they haven't made an account yet
-    emails: Array<Email> = new Array<Email>();
+    emails: Array<Email> = new Array<Email>(new Email());
     addresses: Array<Address> = new Array<Address>(new Address());
     payments: Array<Payment> = new Array<Payment>(PAY[0], PAY[1]);
     defaultAddress: Address = new Address();

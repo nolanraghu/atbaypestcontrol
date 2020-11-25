@@ -22,4 +22,12 @@ export default class Payment implements PayProps{
     getCardType = () => {
         return this.type;
     }
+
+    updateNumber = (cardNumber: string) => {
+        this.cardNumber = cardNumber
+    }
+
+    updateType = (type: string) => {
+        this.type = type
+    }
 }
