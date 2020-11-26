@@ -42,8 +42,8 @@ export default function LoginScreen () {
                 <View style={styles.textArray}>
                     {InputArray}
                 </View>
-                <TouchableOpacity>
-                    <Button  title={'Submit'} onPress={onPressText}/>
+                <TouchableOpacity style={styles.submitButton}>
+                    <Button  title={'Submit'} onPress={onPressText} color={'green'}/>
                 </TouchableOpacity>
                 <View style={styles.wordRow}>
                     <Text style={styles.subText}>Don't have an account? </Text>

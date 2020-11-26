@@ -296,9 +296,10 @@
     </state>
     <state x="1161" y="23" width="631" height="1031" key="dock-window-1/0.0.1792.1120@0.0.1792.1120" timestamp="1604618110087" />
     <state x="276" y="59" width="1218" height="874" key="dock-window-1/0.23.1792.1031@0.23.1792.1031" timestamp="1604618880663" />
-    <state x="661" y="441" width="670" height="672" key="search.everywhere.popup" timestamp="1606068086268">
-      <screen x="0" y="23" width="1792" height="1026" />
+    <state x="506" y="373" width="672" height="598" key="search.everywhere.popup" timestamp="1606359894886">
+      <screen x="0" y="0" width="1368" height="912" />
     </state>
+    <state x="506" y="373" width="672" height="598" key="search.everywhere.popup/0.0.1368.912@0.0.1368.912" timestamp="1606359894886" />
     <state x="661" y="441" width="670" height="672" key="search.everywhere.popup/0.23.1792.1026@0.23.1792.1026" timestamp="1606068086268" />
     <state x="661" y="444" width="670" height="676" key="search.everywhere.popup/0.23.1792.1033@0.23.1792.1033" timestamp="1603157958240" />
   </component>

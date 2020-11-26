@@ -262,4 +262,42 @@ export default class User implements UserProps{
         this.getPayments().concat(payment)
     }
 
+    validateUser = () => {
+
+    }
+
+    validateEmail = (index: number) => {
+        if (this.getEmails()[index].getEmail().length != 0 && this.getEmails()[index].getEmail().includes('@')
+            && this.getEmails()[index].getEmail().includes('.')) return false;
+        else return true;
+    }
+
+    validatePayment = (index: number) => {
+    }
+
+    validateAddress = (index: number) => {
+        if (this.getAddresses()[index].getAddress().length != 0) return false
+        else return true
+    }
+
+    validateCity = (index: number) => {
+        if (this.getAddresses()[index].getCity().length != 0) return false
+        else return true
+    }
+
+    validateState = (index: number) => {
+        if (this.getAddresses()[index].getState().length != 0) return false
+        else return true
+    }
+
+    validateZip = (index: number) => {
+        if (this.getAddresses()[index].getZip().length != 0) return false
+        else return true
+    }
+
+    validatePassword = () => {
+        if (this.getPassword().length != 0) return false
+        else return true
+    }
+
 }
