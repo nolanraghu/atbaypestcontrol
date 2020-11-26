@@ -34,6 +34,14 @@ export default function BugsTabScreen() {
         plan.hasPendingChanges() ||
         plan.getNewPrice().upfront != 0
 
+    let pushButton = () => {
+        if(getUser().isLoggedIn()){
+            navigation.navigate('PlanUpdatePopupScreen');
+        } else {
+            navigation.navigate('LoginScreen', {goingBack: true});
+        }
+    }
+
     let getHeader = () => {
       if(changing){
           return (
@@ -43,7 +51,7 @@ export default function BugsTabScreen() {
                   </Text>
                   <Button title= {updatePlan(plan.hasPendingChanges())}
                           color= {buttonColor}
-                          onPress={()=> navigation.navigate('PlanUpdatePopupScreen')}/>
+                          onPress={pushButton}/>
               </View>
           )
       } else {
