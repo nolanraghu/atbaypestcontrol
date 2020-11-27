@@ -437,5 +437,65 @@ export function getStyle(state:ColorSchemeName) {
             flex: 2,
             justifyContent: 'flex-start',
         },
+<<<<<<< Updated upstream
+=======
+        loginContainer: {
+            flex: 1,
+            padding: '2.5%',
+            alignItems: 'center',
+            alignContent: 'center',
+            justifyContent: 'center',
+            flexWrap: 'wrap',
+            flexDirection: 'row',
+            backgroundColor: background
+        },
+        loginText: {
+            fontSize: 40,
+            fontWeight: 'bold',
+            alignItems: 'flex-start',
+            color: highlight,
+            flexShrink: 1,
+            margin: '5%'
+        },
+        loginHeadContainer: {
+            alignItems: 'center',
+            alignContent: 'center',
+            justifyContent: 'center',
+            flexDirection: 'column',
+            backgroundColor: background,
+            width: '100%',
+        },
+        inputText: {
+            justifyContent: "flex-start",
+            alignContent: "flex-start",
+            color: text,
+            fontSize: 20
+        },
+        hyperLink: {
+            color: highlight,
+            textDecorationLine: 'underline',
+        },
+        wordRow: {
+            marginVertical: 20,
+            flexDirection: 'row',
+            alignContent: "center",
+            justifyContent: "center",
+            width: '100%'
+        },
+        textArray: {
+            marginVertical: 20,
+            width: '100%'
+        },
+        deleteProfile: {
+            backgroundColor: background,
+            flex: 1,
+            paddingTop: 30,
+            justifyContent: "center",
+            flexDirection: "column",
+            borderWidth: 3,
+            borderColor: highlightRemoving,
+            borderStyle: 'solid'
+        },
+>>>>>>> Stashed changes
     });
 }

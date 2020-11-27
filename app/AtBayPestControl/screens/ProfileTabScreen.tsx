@@ -6,8 +6,8 @@ import {
   ImageBackground,
   Image,
   TouchableOpacity,
-    Text,
-    View
+  Text,
+  View, Pressable
 } from 'react-native';
 import {getStyle} from '../assets/Stylesheets/Styles'
 import Email from '../components/RenderEmail'
@@ -18,6 +18,7 @@ import {PLAN} from "../assets/Data/Data";
 import { useNavigation } from '@react-navigation/native';
 import PlanTabScreen from "./PlanTabScreen";
 import {getUser} from "../assets/Data/Data";
+import {deleteProfile} from "../assets/text/text";
 
 //TODO: make editable, have a situation for no user yet
 
@@ -207,6 +208,25 @@ function renderLoc () {
   return (
       <View style={styles.emailContainer}>
         {LocationArray}
+      </View>
+  )
+}
+
+function renderDeleteButton () {
+  const scheme = useColorScheme();
+  let styles = getStyle(scheme);
+  let myRed = styles.deleteProfile.borderColor;
+
+  let deleteButton =
+      <Pressable>
+        <Text style ={[styles.Text, {color: myRed}]}>
+          {deleteProfile()}
+        </Text>
+      </Pressable>;
+
+  return (
+      <View style={styles.deleteProfile}>
+        {deleteButton}
       </View>
   )
 }
