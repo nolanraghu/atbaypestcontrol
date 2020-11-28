@@ -378,3 +378,6 @@ export function purchaseListTitle(){
 }
 
 //Profile Screen Text
+export function deleteProfile(){
+    return 'Delete Profile'
+};

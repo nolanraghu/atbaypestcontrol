@@ -10,7 +10,9 @@ import Product from "./Product";
 import {save} from "../Data/Data";
 import Payment from "../Classes/Payment"
 import {PAY} from "../Data/allPayments"
-import images from "../images/index"
+import images from "../images";
+import {storeUser} from "../Data/Storage";
+
 
 interface UserProps {
     name: string,
@@ -107,7 +109,25 @@ export default class User implements UserProps{
         return this;
     }
 
-    isLoggedIn = () => {
+    delete = () => {
+        console.log("User deleted called");
+        this.emails = new Array<Email>();
+        this.addresses = new Array<Address>(new Address());
+        this.payments= new Array<Payment>(PAY[0], PAY[1]);
+        this.defaultAddress = new Address();
+        this.name ="";
+        this.profilePic = images.error;
+        this.backgroundPic = images.error;
+        this.id= 0;
+        this.userPlan.delete();
+        this.currentEquipment = [];
+        this.removedEquipment = [];
+        User.theUser = this;
+        save();
+        //TODO: Delete from database
+    }
+
+    hasAccount = () => {
         //I'm assuming this means something with signing up, so I'm just gonna return true
         return this.loggedIn;
     }

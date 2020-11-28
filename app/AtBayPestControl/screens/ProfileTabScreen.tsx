@@ -6,8 +6,8 @@ import {
   ImageBackground,
   Image,
   TouchableOpacity,
-    Text,
-    View
+  Text,
+  View, Pressable
 } from 'react-native';
 import {getStyle} from '../assets/Stylesheets/Styles'
 import Email from '../components/RenderEmail'
@@ -19,6 +19,7 @@ import { useNavigation } from '@react-navigation/native';
 import PlanTabScreen from "./PlanTabScreen";
 import LoginScreen from "./LoginScreen";
 import {getUser} from "../assets/Data/Data";
+import {deleteProfile} from "../assets/text/text";
 
 //TODO: make editable, have a situation for no user yet
 
@@ -37,6 +38,7 @@ export default function ProfileTabScreen() {
             {renderPlan()}
             {renderLoc()}
             {renderPay()}
+            {renderDeleteButton()}
           </Card>
         </View>
       </ScrollView>
@@ -216,5 +218,26 @@ function renderLoc () {
         </View>
     )
   } else return
+}
+
+function renderDeleteButton () {
+  const scheme = useColorScheme();
+  let styles = getStyle(scheme);
+  let myRed = styles.deleteProfile.borderColor;
+
+  let deleteButton =
+      <Pressable onPress={() => getUser().delete()}>
+        <Text style ={[styles.Text, {color: myRed, fontWeight:"bold"}]}>
+          {deleteProfile()}
+        </Text>
+      </Pressable>;
+
+  return (
+      <View style={{paddingHorizontal: 30, paddingVertical: 20}}>
+        <View style={styles.deleteProfile}>
+          {deleteButton}
+        </View>
+      </View>
+  )
 }
 

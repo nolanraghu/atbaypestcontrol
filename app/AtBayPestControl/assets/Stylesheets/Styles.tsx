@@ -481,5 +481,21 @@ export function getStyle(state:ColorSchemeName) {
             marginVertical: 20,
             width: '100%'
         },
+        deleteProfile: {
+            backgroundColor: background,
+            flex: 1,
+            paddingTop: 20,
+            paddingRight: 20,
+            paddingLeft: 20,
+            paddingBottom: 20,
+            justifyContent: "center",
+            flexDirection: "row",
+            borderColor: highlightRemoving,
+            /*
+            borderWidth: 3,
+            borderStyle: 'solid',
+            borderRadius: 10,
+            */
+        },
     });
 }
