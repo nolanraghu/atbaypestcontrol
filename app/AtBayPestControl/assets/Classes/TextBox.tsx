@@ -4,24 +4,24 @@ let User = getUser()
 
 interface textProps {
     placeHolder: string
-    errorMessage: string
+    errorMessage: () => string
     type: 'username' | 'password' | 'addressCity' | 'addressState' | 'streetAddressLine1' | 'streetAddressLine2' |
         'postalCode' | 'emailAddress'
     onSubmit: (text: string) => void
 }
 
-export default class textBox implements textProps{
+export default class textBox implements textProps {
     placeHolder: string = '';
-    errorMessage: string = '';
+    errorMessage: () => string = User.validatePassword;
     type: 'username' | 'password' | 'addressCity' | 'addressState' | 'streetAddressLine1' | 'streetAddressLine2' |
         'postalCode' | 'emailAddress' = 'username';
     onSubmit: (text: string) => void = User.getBackgroundPic;
 
-    constructor (placeHolder: string, errorMessage: string, type: 'username' | 'password' | 'addressCity' | 'addressState' | 'streetAddressLine1' | 'streetAddressLine2' |
+    constructor(placeHolder: string, errorMessage: () => string, type: 'username' | 'password' | 'addressCity' | 'addressState' | 'streetAddressLine1' | 'streetAddressLine2' |
         'postalCode' | 'emailAddress' = 'username', onSubmit: (text: string) => void) {
         this.placeHolder = placeHolder;
         this.errorMessage = errorMessage;
-        this.type = type
+        this.type = type;
         this.onSubmit = onSubmit;
     }
 
@@ -37,7 +37,7 @@ export default class textBox implements textProps{
         return this.type
     }
 
-    getOnSubmit = () =>{
+    getOnSubmit = () => {
         return this.onSubmit
     }
 }

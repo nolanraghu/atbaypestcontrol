@@ -6,9 +6,11 @@ import {loginText} from "../assets/Data/allTextLogin";
 import InputBox from "../components/RenderTextBox";
 import {registerText} from "../assets/Data/allTextRegister";
 import {useNavigation} from "@react-navigation/native"
+import {getUser} from "../assets/Data/Data";
 
 export default function RegisterScreen () {
 
+    let User = getUser()
     const navigation = useNavigation()
     const scheme = useColorScheme();
     let styles = getStyle(scheme);
@@ -22,6 +24,11 @@ export default function RegisterScreen () {
             onSubmitEditing={Text.onSubmit}
         />
     })
+
+    function onPressButton () {
+        if (User.validateUser()) navigation.navigate('RegisterScreen');
+        else navigation.navigate('ProfileTabScreen');
+    }
 
     function onPressText () {
         navigation.navigate('LoginScreen')
@@ -38,7 +45,7 @@ export default function RegisterScreen () {
                     {InputArray}
                 </View>
                 <TouchableOpacity style={styles.submitButton}>
-                    <Button title={'Register'} onPress={onPressText} color={'green'}/>
+                    <Button title={'Register'} onPress={onPressButton} color={'green'}/>
                 </TouchableOpacity>
                 <View style={styles.wordRow}>
                     <Text style={styles.subText}>Already have an account? </Text>

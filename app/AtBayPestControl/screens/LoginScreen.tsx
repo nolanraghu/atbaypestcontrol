@@ -14,10 +14,6 @@ export default function LoginScreen () {
     const navigation = useNavigation();
     let User = getUser();
 
-    function handleButtonPress (val: string) {
-        User.changePassword(val);
-    }
-
     let InputArray = loginText.map(function(Text, index) {
         return  <InputBox
                     key={index}
@@ -27,6 +23,13 @@ export default function LoginScreen () {
                     onSubmitEditing={Text.onSubmit}
                 />
     })
+
+    function onPressButton () {
+        console.debug(User.validateUser(), User.validateAddress(), User.validatePassword(), User.validateCity(),
+            User.validateZip(), User.validateEmail())
+        if (User.validateUser()) navigation.navigate('LoginScreen');
+        else navigation.navigate('ProfileTabScreen');
+    }
 
     function onPressText () {
         navigation.navigate('RegisterScreen')
@@ -43,7 +46,7 @@ export default function LoginScreen () {
                     {InputArray}
                 </View>
                 <TouchableOpacity style={styles.submitButton}>
-                    <Button  title={'Submit'} onPress={onPressText} color={'green'}/>
+                    <Button  title={'Submit'} onPress={onPressButton} color={'green'}/>
                 </TouchableOpacity>
                 <View style={styles.wordRow}>
                     <Text style={styles.subText}>Don't have an account? </Text>

@@ -263,41 +263,46 @@ export default class User implements UserProps{
     }
 
     validateUser = () => {
-
+        return this.validateAddress() == '' || this.validateCity() == '' || this.validateEmail() == ''
+            || this.validatePassword() == '' || this.validateState() == '' || this.validateZip() == ''
     }
 
-    validateEmail = (index: number) => {
+    validateEmail = () => {
+        let index = this.getEmails().length - 1
         if (this.getEmails()[index].getEmail().length != 0 && this.getEmails()[index].getEmail().includes('@')
-            && this.getEmails()[index].getEmail().includes('.')) return false;
-        else return true;
+            && this.getEmails()[index].getEmail().includes('.')) return '';
+        else return 'Please enter a valid email';
     }
 
     validatePayment = (index: number) => {
     }
 
-    validateAddress = (index: number) => {
-        if (this.getAddresses()[index].getAddress().length != 0) return false
-        else return true
+    validateAddress = () => {
+        let index = this.getAddresses().length - 1
+        if (this.getAddresses()[index].getAddress().length != 0) return ''
+        else return 'Please enter a valid address'
     }
 
-    validateCity = (index: number) => {
-        if (this.getAddresses()[index].getCity().length != 0) return false
-        else return true
+    validateCity = () => {
+        let index = this.getAddresses().length - 1
+        if (this.getAddresses()[index].getCity().length != 0) return ''
+        else return 'Please enter a valid address'
     }
 
-    validateState = (index: number) => {
-        if (this.getAddresses()[index].getState().length != 0) return false
-        else return true
+    validateState = () => {
+        let index = this.getAddresses().length - 1
+        if (this.getAddresses()[index].getState().length != 0) return ''
+        else return 'Please enter a valid state'
     }
 
-    validateZip = (index: number) => {
-        if (this.getAddresses()[index].getZip().length != 0) return false
-        else return true
+    validateZip = () => {
+        let index = this.getAddresses().length - 1
+        if (this.getAddresses()[index].getZip().length != 0) return ''
+        else return 'Please enter a valid zip code'
     }
 
     validatePassword = () => {
-        if (this.getPassword().length != 0) return false
-        else return true
+        if (this.getPassword().length > 5 && this.getPassword().length <= 20) return ''
+        else return 'Password must be at least 5 characters long'
     }
-
 }
