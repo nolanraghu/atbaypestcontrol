@@ -19,6 +19,8 @@ import { useNavigation } from '@react-navigation/native';
 import PlanTabScreen from "./PlanTabScreen";
 import {getUser} from "../assets/Data/Data";
 import {deleteProfile} from "../assets/text/text";
+import { changePlan} from "../redux/action";
+import {useDispatch} from "react-redux";
 
 //TODO: make editable, have a situation for no user yet
 
@@ -216,10 +218,11 @@ function renderLoc () {
 function renderDeleteButton () {
   const scheme = useColorScheme();
   let styles = getStyle(scheme);
+  const dispatch = useDispatch();
   let myRed = styles.deleteProfile.borderColor;
 
   let deleteButton =
-      <Pressable onPress={() => getUser().delete()}>
+      <Pressable onPress={() => {getUser().delete(); dispatch(changePlan())}}>
         <Text style ={[styles.Text, {color: myRed, fontWeight:"bold"}]}>
           {deleteProfile()}
         </Text>
