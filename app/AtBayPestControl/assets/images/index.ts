@@ -45,16 +45,15 @@
         require('./mosquito.jpg'),
     ],
      user: {
-        profile_picture : require('./profile_picture.jpg'),
+         profile_picture: require('./profile_picture.jpg'),
+         background: require('./splash.png')
 
      },
      splash: {
         splash1: require('./splash.png'),
          splash2: require('./splash1 (2).png'),
 
-     }
-
-
+     },
 
 }
 

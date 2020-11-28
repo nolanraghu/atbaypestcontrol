@@ -13,8 +13,10 @@ import {PAY} from "../Data/allPayments"
 import images from "../images";
 import {storeUser} from "../Data/Storage";
 
+
 interface UserProps {
     name: string,
+    password: string,
     emails: Array<Email>,
     addresses: Array<Address>,
     payments: Array<Payment>,
@@ -38,17 +40,19 @@ export default class User implements UserProps{
     //TODO: Add all of the personal information here and have it be used by Profile tab
 
     // If this is 0, that should mean they haven't made an account yet
-    emails: Array<Email> = new Array<Email>();
+    emails: Array<Email> = new Array<Email>(new Email());
     addresses: Array<Address> = new Array<Address>(new Address());
     payments: Array<Payment> = new Array<Payment>(PAY[0], PAY[1]);
     defaultAddress: Address = new Address();
     name: string = "";
-    profilePic: NodeRequire = images.error;
-    backgroundPic: NodeRequire = images.error;
+    password: string = "";
+    profilePic: NodeRequire = images.user.profile_picture;
+    backgroundPic: NodeRequire = images.user.background;
     id: Number = 0;
     userPlan = new Plan();
     currentEquipment: Array<number> = [];
     removedEquipment: Array<number> = [];
+    private loggedIn: boolean = false;
     static theUser: User
 
     constructor(id:number = 0){
@@ -125,9 +129,14 @@ export default class User implements UserProps{
 
     hasAccount = () => {
         //I'm assuming this means something with signing up, so I'm just gonna return true
-        return true;
+        return this.loggedIn;
+    }
 
-        //return this.id != 0
+    logIn = () => {
+        this.loggedIn = true;
+    }
+    logOut = () => {
+        this.loggedIn = false;
     }
     getPlan = () => {
         return this.userPlan;
@@ -203,6 +212,10 @@ export default class User implements UserProps{
         return this.name;
     }
 
+    getPassword = () => {
+        return this.password;
+    }
+
     getEmails = () => {
         // returns default the users emails
         return this.emails;
@@ -241,8 +254,16 @@ export default class User implements UserProps{
         return this.addresses[addressID];
     }
 
-    changeUserName = (newNamename: string) => {
+    changeUserName = (name: string) => {
+        // function for updating username, to be used when edit buttons are implemented correctly in the
+        // profile page
         this.name = name;
+    }
+
+    changePassword = (password: string) => {
+        // function for updating username, to be used when edit buttons are implemented correctly in the
+        // profile page
+        this.password = password;
     }
 
     changeProfilePicture = (img: string) => {
@@ -253,6 +274,18 @@ export default class User implements UserProps{
     changeBackgroundPic = (img: string) => {
         // function for updating background picture, to be used when edit buttons are implemented correctly in the
         // profile page
+    }
+
+    addEmail = (email: Email) => {
+        this.getEmails().concat(email);
+    }
+
+    addAddress = (address: Address) => {
+        this.getAddresses().concat(address)
+    }
+
+    addPayment = (payment: Payment) => {
+        this.getPayments().concat(payment)
     }
 
 }

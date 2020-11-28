@@ -1,7 +1,7 @@
 import React from 'react'
-import {StyleSheet, Text, TouchableOpacity, useColorScheme, View} from 'react-native'
+import {Text, TouchableOpacity, useColorScheme, View} from 'react-native'
 import { Icon } from 'react-native-elements'
-import {getStyle, buttonColor, getBackgroundColor} from '../assets/Stylesheets/Styles'
+import {getStyle} from '../assets/Stylesheets/Styles'
 import Address from "../assets/Classes/Address";
 
 export default function renderItem ({address, index, onPressPlace}: renderProps) {
@@ -11,7 +11,7 @@ export default function renderItem ({address, index, onPressPlace}: renderProps)
 
     return (
         <TouchableOpacity onPress={() => onPressPlace()}>
-            <View style={[styles.container]}>
+            <View style={styles.container}>
                 <View style={styles.iconRow}>
                     {index === 0 && (
                         <Icon

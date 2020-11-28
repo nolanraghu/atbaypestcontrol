@@ -1,17 +1,18 @@
 import * as React from 'react';
 import {Button, ScrollView, useColorScheme, Text, View} from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 import {getStyle, buttonColor} from '../assets/Stylesheets/Styles'
 import BugPressable from "../components/BugPressable";
 import {getPreventionPlan, getUser} from "../assets/Data/Data";
 import {deleteChanges, newPriceText, updatePlan} from "../assets/text/text";
-import {useState} from "react";
 import {useSelector} from "react-redux";
 import {RootState} from "../redux/store";
+import {useNavigation} from "@react-navigation/native";
 
-export default function BugsTabScreen({route, navigation}: any) {
+export default function BugsTabScreen() {
     const scheme = useColorScheme();
     let styles = getStyle(scheme);
+
+    const navigation = useNavigation();
 
     // Redux hook to make screen render when state pending changes
     useSelector((state:RootState) => state.planPendingVersion)
@@ -33,6 +34,14 @@ export default function BugsTabScreen({route, navigation}: any) {
         plan.hasPendingChanges() ||
         plan.getNewPrice().upfront != 0
 
+    let pushButton = () => {
+        if(getUser().isLoggedIn()){
+            navigation.navigate('PlanUpdatePopupScreen');
+        } else {
+            navigation.navigate('LoginScreen', {goingBack: true});
+        }
+    }
+
     let getHeader = () => {
       if(changing){
           return (
@@ -42,7 +51,7 @@ export default function BugsTabScreen({route, navigation}: any) {
                   </Text>
                   <Button title= {updatePlan(plan.hasPendingChanges())}
                           color= {buttonColor}
-                          onPress={()=> navigation.navigate('PlanUpdatePopupScreen')}/>
+                          onPress={pushButton}/>
               </View>
           )
       } else {
@@ -74,11 +83,4 @@ export default function BugsTabScreen({route, navigation}: any) {
           </ScrollView>
       </View>
   );
-}
-
-
-//This is where all the parameters for the BugPressable go
-interface BugPressProps {
-  bId: string,
-  isPreventionButton?: boolean
 }

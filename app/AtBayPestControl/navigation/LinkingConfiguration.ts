@@ -1,5 +1,4 @@
 import * as Linking from 'expo-linking';
-import PlanProductPopup from "../screens/PlanProductPopup";
 
 export default {
   prefixes: [Linking.makeUrl('/')],
@@ -24,6 +23,8 @@ export default {
           ProfileTab: {
             screens: {
               ProfileTabScreen: 'Profile',
+              LoginScreen: 'Login',
+              RegisterScreen: 'Register',
             },
           },
         },

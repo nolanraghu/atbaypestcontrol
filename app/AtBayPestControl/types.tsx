@@ -23,6 +23,8 @@ export type PlanTabParamList = {
 
 export type ProfileTabParamList = {
   ProfileTabScreen: undefined;
+  LoginScreen: undefined;
+  RegisterScreen: undefined;
 };
 
 export type BugInfoPopupParamList = {

@@ -30,6 +30,8 @@ import {makeArray} from "../assets/Classes/ClassHelpers";
 // some of the equipment? Or if you are removing an infestation, but you click on missing equipment? What happens when
 // the products are changed and someone who already owns that infestation with changed details goes back into the app?
 
+//TODO: The logic is wrong. If you add something to where it is pending in your plan, then take it out
+// without purchasing, it shows that you already have the equipment...
 
 export default function BugInfoPopup({route, navigation}: any) {
     const {infestationID} = route.params;
@@ -167,9 +169,6 @@ export default function BugInfoPopup({route, navigation}: any) {
 
     function pressButton(){
         // The button should do nothing if you cannot remove, add to plan, or purchase equipment
-        // TODO: if the main BugsTab screen doesn't update after this button is pushed (once the classes are working),
-        //  it needs to be refreshed from here somehow, probably by passing a prop to navigate or adding [i, update]
-        //  to BugsTabScreen
         if(canRemove || adding || purchasing){
             if (adding) {
                 user.getPlan().addPendingInfestation(infestation);

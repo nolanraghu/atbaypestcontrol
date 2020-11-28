@@ -17,6 +17,7 @@ import Separator from '../components/Separator'
 import {PLAN} from "../assets/Data/Data";
 import { useNavigation } from '@react-navigation/native';
 import PlanTabScreen from "./PlanTabScreen";
+import LoginScreen from "./LoginScreen";
 import {getUser} from "../assets/Data/Data";
 import {deleteProfile} from "../assets/text/text";
 import { changePlan} from "../redux/action";
@@ -36,11 +37,8 @@ export default function ProfileTabScreen() {
           <Card containerStyle={styles.cardContainer}>
             {renderHeader({})}
             {renderEmail()}
-            {Separator()}
             {renderPlan()}
-            {Separator()}
             {renderLoc()}
-            {Separator()}
             {renderPay()}
             {renderDeleteButton()}
           </Card>
@@ -64,7 +62,7 @@ function renderHeader ({avatar = User.getProfilePic(), avatarBackground = User.g
   console.log(avatar, avatarBackground)
 
   return (
-      <View style={styles.headerContainer}>
+      <View>
         <ImageBackground
             style={styles.headerBackgroundImage}
             blurRadius={10}
@@ -124,12 +122,14 @@ function renderEmail () {
             />
   })
 
-
-  return (
-      <View style={styles.emailContainer}>
-        {EmailArray}
-      </View>
-  )
+  if (User.getEmails().length != 0) {
+    return (
+        <View style={styles.emailContainer}>
+          {EmailArray}
+          {Separator()}
+        </View>
+    )
+  } else return
 }
 
 function renderPlan () {
@@ -138,7 +138,7 @@ function renderPlan () {
   let styles = getStyle(scheme);
 
   function onPressPlan () {
-    navigation.navigate("PlanTabScreen")
+    navigation.navigate('PlanTabScreen')
   }
 
   return (
@@ -155,10 +155,11 @@ function renderPlan () {
               />
             </View>
             <View style={styles.Row}>
-              <Text style={styles.Text}>{PLAN}</Text>
+              <Text style={styles.Text}>{"Go to Current Plan"}</Text>
             </View>
           </View>
         </TouchableOpacity>
+        {Separator()}
       </View>
   )
 }
@@ -187,11 +188,14 @@ function renderPay () {
     />
   })
 
-  return (
-      <View style={styles.emailContainer}>
-        {PayArray}
-      </View>
-  )
+  if (User.getPayments().length != 0) {
+    return (
+        <View style={styles.emailContainer}>
+          {PayArray}
+          {Separator()}
+        </View>
+    )
+  } else return
 }
 
 function renderLoc () {
@@ -208,11 +212,14 @@ function renderLoc () {
     />
   })
 
-  return (
-      <View style={styles.emailContainer}>
-        {LocationArray}
-      </View>
-  )
+  if (User.getAddresses().length != 0){
+    return (
+        <View style={styles.emailContainer}>
+          {LocationArray}
+          {Separator()}
+        </View>
+    )
+  } else return
 }
 
 function renderDeleteButton () {

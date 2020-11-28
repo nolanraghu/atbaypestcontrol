@@ -1,7 +1,5 @@
 // Infestation Objects Stored Here
 
-import {allEquipment} from "./allEquipment";
-
 export const allProducts = [
     {
         id: 0,
