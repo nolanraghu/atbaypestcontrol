@@ -40,6 +40,7 @@ export default function ProfileTabScreen() {
             {renderLoc()}
             {Separator()}
             {renderPay()}
+            {renderDeleteButton()}
           </Card>
         </View>
       </ScrollView>
@@ -218,15 +219,17 @@ function renderDeleteButton () {
   let myRed = styles.deleteProfile.borderColor;
 
   let deleteButton =
-      <Pressable>
-        <Text style ={[styles.Text, {color: myRed}]}>
+      <Pressable onPress={() => getUser().delete()}>
+        <Text style ={[styles.Text, {color: myRed, fontWeight:"bold"}]}>
           {deleteProfile()}
         </Text>
       </Pressable>;
 
   return (
-      <View style={styles.deleteProfile}>
-        {deleteButton}
+      <View style={{paddingHorizontal: 30, paddingVertical: 20}}>
+        <View style={styles.deleteProfile}>
+          {deleteButton}
+        </View>
       </View>
   )
 }

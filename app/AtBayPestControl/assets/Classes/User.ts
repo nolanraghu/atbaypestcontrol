@@ -11,6 +11,7 @@ import {save} from "../Data/Data";
 import Payment from "../Classes/Payment"
 import {PAY} from "../Data/allPayments"
 import images from "../images";
+import {storeUser} from "../Data/Storage";
 
 interface UserProps {
     name: string,
@@ -102,6 +103,24 @@ export default class User implements UserProps{
         this.removedEquipment = [...remEq];
         this.currentEquipment = [...curEq];
         return this;
+    }
+
+    delete = () => {
+        console.log("User deleted called");
+        this.emails = new Array<Email>();
+        this.addresses = new Array<Address>(new Address());
+        this.payments= new Array<Payment>(PAY[0], PAY[1]);
+        this.defaultAddress = new Address();
+        this.name ="";
+        this.profilePic = images.error;
+        this.backgroundPic = images.error;
+        this.id= 0;
+        this.userPlan.delete();
+        this.currentEquipment = [];
+        this.removedEquipment = [];
+        User.theUser = this;
+        save();
+        //TODO: Delete from database
     }
 
     hasAccount = () => {

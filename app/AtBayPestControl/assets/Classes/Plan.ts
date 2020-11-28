@@ -156,6 +156,14 @@ export default class Plan {
         return this;
     }
 
+    delete = () => {
+        this.addingInfestations = []
+        this.removingInfestations = []
+        this.currentInfestations = []
+        this.pendingEquipment = []
+        this.dueDate = -1;
+    }
+
     containsInfestation = (bug:Infestation) => {
         return this.currentInfestations.includes(bug.getID());
     }

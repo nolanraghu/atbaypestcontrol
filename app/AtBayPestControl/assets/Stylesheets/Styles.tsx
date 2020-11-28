@@ -437,8 +437,6 @@ export function getStyle(state:ColorSchemeName) {
             flex: 2,
             justifyContent: 'flex-start',
         },
-<<<<<<< Updated upstream
-=======
         loginContainer: {
             flex: 1,
             padding: '2.5%',
@@ -489,13 +487,18 @@ export function getStyle(state:ColorSchemeName) {
         deleteProfile: {
             backgroundColor: background,
             flex: 1,
-            paddingTop: 30,
+            paddingTop: 20,
+            paddingRight: 20,
+            paddingLeft: 20,
+            paddingBottom: 20,
             justifyContent: "center",
-            flexDirection: "column",
-            borderWidth: 3,
+            flexDirection: "row",
             borderColor: highlightRemoving,
-            borderStyle: 'solid'
+            /*
+            borderWidth: 3,
+            borderStyle: 'solid',
+            borderRadius: 10,
+            */
         },
->>>>>>> Stashed changes
     });
 }
