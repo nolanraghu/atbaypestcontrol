@@ -29,9 +29,8 @@
     ],
     equipment: [
         require('./spreader.jpg'),
-        require('./sprayer.jpg'),
-        require('./cobwebDuster.jpeg'),
         require('./sprayer2.jpg'),
+        require('./cobwebDuster.jpg'),
     ],
     product: [
         require('./product1.jpg'),

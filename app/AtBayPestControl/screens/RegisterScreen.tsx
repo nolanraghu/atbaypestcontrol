@@ -5,15 +5,22 @@ import {Input} from "react-native-elements";
 import {loginText} from "../assets/Data/allTextLogin";
 import InputBox from "../components/RenderTextBox";
 import {registerText} from "../assets/Data/allTextRegister";
-import {useNavigation} from "@react-navigation/native"
 import {getUser} from "../assets/Data/Data";
+import {logIn} from "../redux/action";
+import {useDispatch} from "react-redux";
 
-export default function RegisterScreen () {
-
-    let User = getUser()
-    const navigation = useNavigation()
+export default function RegisterScreen({ route, navigation }: any) {
+    let User = getUser();
+    const params = route.params;
+    let goingBack = false;
+    if(params != undefined){
+        //I think this is the only way to make an optional screen parameter
+        goingBack = params.goingBack;
+    }
     const scheme = useColorScheme();
     let styles = getStyle(scheme);
+
+    const dispatch = useDispatch();
 
     let InputArray = registerText.map(function(Text, index) {
         return  <InputBox
@@ -25,13 +32,17 @@ export default function RegisterScreen () {
         />
     })
 
-    function onPressButton () {
-        if (User.validateUser()) navigation.navigate('RegisterScreen');
-        else navigation.navigate('ProfileTabScreen');
+    function onPressText() {
+        navigation.navigate('LoginScreen')
     }
 
-    function onPressText () {
-        navigation.navigate('LoginScreen')
+    let register = () => {
+        getUser().logIn();
+        if(goingBack){
+            navigation.pop();
+            navigation.goBack();
+        }
+        dispatch(logIn());
     }
 
     return (
@@ -45,7 +56,7 @@ export default function RegisterScreen () {
                     {InputArray}
                 </View>
                 <TouchableOpacity style={styles.submitButton}>
-                    <Button title={'Register'} onPress={onPressButton} color={'green'}/>
+                    <Button title={'Register'} onPress={register} color={'green'}/>
                 </TouchableOpacity>
                 <View style={styles.wordRow}>
                     <Text style={styles.subText}>Already have an account? </Text>

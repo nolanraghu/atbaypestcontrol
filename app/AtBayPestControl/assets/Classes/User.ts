@@ -10,7 +10,9 @@ import Product from "./Product";
 import {save} from "../Data/Data";
 import Payment from "../Classes/Payment"
 import {PAY} from "../Data/allPayments"
-import images from "../images/index"
+import images from "../images";
+import {storeUser} from "../Data/Storage";
+
 
 interface UserProps {
     name: string,
@@ -50,6 +52,7 @@ export default class User implements UserProps{
     userPlan = new Plan();
     currentEquipment: Array<number> = [];
     removedEquipment: Array<number> = [];
+    private loggedIn: boolean = false;
     static theUser: User
 
     constructor(id:number = 0){
@@ -106,11 +109,39 @@ export default class User implements UserProps{
         return this;
     }
 
+    delete = () => {
+        console.log("User.delete() called");
+        this.emails = new Array<Email>();
+        this.addresses = new Array<Address>(new Address());
+        this.payments= new Array<Payment>(PAY[0], PAY[1]);
+        this.defaultAddress = new Address();
+        this.name ="";
+        this.password="";
+        this.profilePic = images.error;
+        this.backgroundPic = images.error;
+        this.id= 0;
+        this.userPlan.delete();
+        this.currentEquipment = [];
+        this.removedEquipment = [];
+        this.loggedIn = false;
+        User.theUser = this;
+        save();
+        //TODO: Delete from online database
+    }
+
     hasAccount = () => {
         //I'm assuming this means something with signing up, so I'm just gonna return true
-        return true;
+        return this.loggedIn;
+    }
 
-        //return this.id != 0
+    logIn = () => {
+        this.loggedIn = true;
+    }
+    logOut = () => {
+        this.loggedIn = false;
+    }
+    isLoggedIn = () => {
+        return this.loggedIn;
     }
     getPlan = () => {
         return this.userPlan;
