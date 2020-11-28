@@ -32,6 +32,7 @@
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/Classes/Product.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/Classes/User.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/Data/Data.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/Data/ProductReferences" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/Data/Storage.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/Data/UsefulConstants.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/Data/allAddresses.ts" afterDir="false" />
@@ -64,7 +65,6 @@
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/images/profile_picture.jpg" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/images/spider.jpg" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/images/splash1 (2).png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/images/sprayer.jpg" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/images/sprayer2.jpg" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/images/spreader.jpg" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/components/BugPressable.tsx" afterDir="false" />
@@ -91,6 +91,7 @@
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/screens/ConfirmPurchasePopup.tsx" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/screens/PlanProductPopup.tsx" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/screens/UpdatePlanPopup.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/AtBayPestControl/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/AtBayPestControl/App.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/AtBayPestControl/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/AtBayPestControl/app.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/AtBayPestControl/assets/images/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/images/icon.png" afterDir="false" />
@@ -192,7 +193,7 @@
       <workItem from="1606243248240" duration="3218000" />
       <workItem from="1606246718501" duration="2803000" />
       <workItem from="1606253934840" duration="4154000" />
-      <workItem from="1606443183522" duration="8373000" />
+      <workItem from="1606443183522" duration="9537000" />
     </task>
     <task id="LOCAL-00001" summary="First Commit. Renaming screens/tabs to fit our needs.">
       <created>1602888296289</created>
@@ -258,10 +259,10 @@
       <screen x="0" y="23" width="1792" height="1026" />
     </state>
     <state x="275" y="219" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1792.1026@0.23.1792.1026" timestamp="1605741943485" />
-    <state x="582" y="334" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1604121225554">
+    <state x="582" y="334" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1606586153602">
       <screen x="0" y="23" width="1792" height="1026" />
     </state>
-    <state x="582" y="334" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1792.1026@0.23.1792.1026" timestamp="1604121225554" />
+    <state x="582" y="334" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1792.1026@0.23.1792.1026" timestamp="1606586153602" />
     <state x="730" y="261" key="#com.intellij.ide.util.MemberChooser" timestamp="1604619596708">
       <screen x="0" y="23" width="1792" height="1033" />
     </state>
