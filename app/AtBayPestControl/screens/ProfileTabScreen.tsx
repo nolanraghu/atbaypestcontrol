@@ -20,7 +20,7 @@ import PlanTabScreen from "./PlanTabScreen";
 import LoginScreen from "./LoginScreen";
 import {getUser} from "../assets/Data/Data";
 import {deleteProfile} from "../assets/text/text";
-import { changePlan} from "../redux/action";
+import {changePlan, LOG_OUT} from "../redux/action";
 import {useDispatch} from "react-redux";
 
 //TODO: make editable, have a situation for no user yet
@@ -229,7 +229,7 @@ function renderDeleteButton () {
   let myRed = styles.deleteProfile.borderColor;
 
   let deleteButton =
-      <Pressable onPress={() => {getUser().delete(); dispatch(changePlan())}}>
+      <Pressable onPress={() => {getUser().delete(); dispatch(changePlan()); dispatch(LOG_OUT)}}>
         <Text style ={[styles.Text, {color: myRed, fontWeight:"bold"}]}>
           {deleteProfile()}
         </Text>

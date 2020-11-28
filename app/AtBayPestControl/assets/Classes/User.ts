@@ -110,21 +110,23 @@ export default class User implements UserProps{
     }
 
     delete = () => {
-        console.log("User deleted called");
+        console.log("User.delete() called");
         this.emails = new Array<Email>();
         this.addresses = new Array<Address>(new Address());
         this.payments= new Array<Payment>(PAY[0], PAY[1]);
         this.defaultAddress = new Address();
         this.name ="";
+        this.password="";
         this.profilePic = images.error;
         this.backgroundPic = images.error;
         this.id= 0;
         this.userPlan.delete();
         this.currentEquipment = [];
         this.removedEquipment = [];
+        this.loggedIn = false;
         User.theUser = this;
         save();
-        //TODO: Delete from database
+        //TODO: Delete from online database
     }
 
     hasAccount = () => {
@@ -138,6 +140,11 @@ export default class User implements UserProps{
     logOut = () => {
         this.loggedIn = false;
     }
+
+    isLoggedIn = () => {
+        return this.loggedIn;
+    }
+
     getPlan = () => {
         return this.userPlan;
     }
