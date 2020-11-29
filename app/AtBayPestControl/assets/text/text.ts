@@ -378,3 +378,10 @@ export function purchaseListTitle(){
 }
 
 //Profile Screen Text
+export function deleteProfile(){
+    return 'Delete Profile'
+}
+export function contactUs(){return 'Contact Us!'}
+export function contactUsDescription(){
+    return 'Thank you for using Ortho products! Please direct technical difficulties to the team below'
+}

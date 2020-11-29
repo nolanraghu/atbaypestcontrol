@@ -342,8 +342,9 @@ export function getStyle(state:ColorSchemeName) {
             paddingTop: 30,
         },
         headerBackgroundImage: {
-            paddingBottom: 20,
-            paddingTop: 45,
+            paddingBottom: 30,
+            paddingTop: 10,
+            paddingHorizontal:10,
         },
         headerContainer: {},
         headerColumn: {
@@ -481,5 +482,22 @@ export function getStyle(state:ColorSchemeName) {
             marginVertical: 20,
             width: '100%'
         },
+        deleteProfile: {
+            backgroundColor: background,
+            flex: 1,
+            paddingTop: 20,
+            paddingRight: 20,
+            paddingLeft: 20,
+            paddingBottom: 20,
+            justifyContent: "center",
+            flexDirection: "row",
+            borderColor: highlightRemoving,
+            /*
+            borderWidth: 3,
+            borderStyle: 'solid',
+            borderRadius: 10,
+            */
+        },
+        contactUs: {width: 30, height: 30, alignSelf:"flex-end"}
     });
 }

@@ -6,8 +6,8 @@ import {
   ImageBackground,
   Image,
   TouchableOpacity,
-    Text,
-    View
+  Text,
+  View, Pressable
 } from 'react-native';
 import {getStyle} from '../assets/Stylesheets/Styles'
 import Email from '../components/RenderEmail'
@@ -19,6 +19,10 @@ import { useNavigation } from '@react-navigation/native';
 import PlanTabScreen from "./PlanTabScreen";
 import LoginScreen from "./LoginScreen";
 import {getUser} from "../assets/Data/Data";
+import {deleteProfile} from "../assets/text/text";
+import {changePlan, LOG_OUT, logOut} from "../redux/action";
+import {useDispatch} from "react-redux";
+import images from "../assets/images";
 
 //TODO: make editable, have a situation for no user yet
 
@@ -37,6 +41,7 @@ export default function ProfileTabScreen() {
             {renderPlan()}
             {renderLoc()}
             {renderPay()}
+            {renderDeleteButton()}
           </Card>
         </View>
       </ScrollView>
@@ -54,6 +59,7 @@ function renderHeader ({avatar = User.getProfilePic(), avatarBackground = User.g
 
   const scheme = useColorScheme();
   let styles = getStyle(scheme);
+  const navigation = useNavigation();
 
   console.log(avatar, avatarBackground)
 
@@ -64,6 +70,9 @@ function renderHeader ({avatar = User.getProfilePic(), avatarBackground = User.g
             blurRadius={10}
             source={avatarBackground}
         >
+          <Icon name='info' underlayColor={'transparent'} style={styles.contactUs}
+                onPress={()=>{navigation.navigate("ContactUsScreen")}}
+          />
           <View style={styles.headerColumn}>
             <Image
                 style={styles.userImage}
@@ -216,5 +225,27 @@ function renderLoc () {
         </View>
     )
   } else return
+}
+
+function renderDeleteButton () {
+  const scheme = useColorScheme();
+  let styles = getStyle(scheme);
+  const dispatch = useDispatch();
+  let myRed = styles.deleteProfile.borderColor;
+
+  let deleteButton =
+      <Pressable onPress={() => {getUser().delete(); dispatch(changePlan()); dispatch(logOut())}}>
+        <Text style ={[styles.Text, {color: myRed, fontWeight:"bold"}]}>
+          {deleteProfile()}
+        </Text>
+      </Pressable>;
+
+  return (
+      <View style={{paddingHorizontal: 30, paddingVertical: 20}}>
+        <View style={styles.deleteProfile}>
+          {deleteButton}
+        </View>
+      </View>
+  )
 }
 
