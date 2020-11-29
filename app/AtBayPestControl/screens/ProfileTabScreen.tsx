@@ -20,7 +20,7 @@ import PlanTabScreen from "./PlanTabScreen";
 import LoginScreen from "./LoginScreen";
 import {getUser} from "../assets/Data/Data";
 import {deleteProfile} from "../assets/text/text";
-import {changePlan, LOG_OUT} from "../redux/action";
+import {changePlan, LOG_OUT, logOut} from "../redux/action";
 import {useDispatch} from "react-redux";
 import images from "../assets/images";
 
@@ -234,7 +234,7 @@ function renderDeleteButton () {
   let myRed = styles.deleteProfile.borderColor;
 
   let deleteButton =
-      <Pressable onPress={() => {getUser().delete(); dispatch(changePlan()); dispatch(LOG_OUT)}}>
+      <Pressable onPress={() => {getUser().delete(); dispatch(changePlan()); dispatch(logOut())}}>
         <Text style ={[styles.Text, {color: myRed, fontWeight:"bold"}]}>
           {deleteProfile()}
         </Text>
