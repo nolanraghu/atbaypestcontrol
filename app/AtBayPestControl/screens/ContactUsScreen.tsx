@@ -19,16 +19,16 @@ import { useNavigation } from '@react-navigation/native';
 import PlanTabScreen from "./PlanTabScreen";
 import LoginScreen from "./LoginScreen";
 import {getUser} from "../assets/Data/Data";
-import {deleteProfile, planBriefDescription, planTitle} from "../assets/text/text";
+import {deleteProfile, noProductText, planBriefDescription, planTitle} from "../assets/text/text";
 import {changePlan, LOG_OUT} from "../redux/action";
 import {useDispatch} from "react-redux";
 import images from "../assets/images";
-import getColorScheme = Appearance.getColorScheme;
+import Contact from "../components/Contact";
 import {contactUs, contactUsDescription} from "../assets/text/text";
+import ProductItem from "../components/ProductItem";
 
 export default function ContactUsScreen ({route, params} :any) {
-    const styles = getStyle(getColorScheme());
-
+    const styles = getStyle(Appearance.getColorScheme());
     return(
         <View style={styles.screen}>
             <View style={[styles.header, {flexWrap: 'wrap'}]}>
@@ -41,9 +41,13 @@ export default function ContactUsScreen ({route, params} :any) {
             </View>
           <ScrollView>
                 <View style={styles.container}>
-                    {productsArray}
+                    {Contact(0)}
+                    {Contact(1)}
+                    {Contact(2)}
+                    {Contact(3)}
+                    {Contact(4)}
                 </View>
-            </ScrollView>
+          </ScrollView>
         </View>
 );
 

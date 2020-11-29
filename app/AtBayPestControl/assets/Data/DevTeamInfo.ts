@@ -1,29 +1,37 @@
+import {Team} from "expo-cli/build/appleApi";
 
- const TEAM = {
-    nolan:{
+const TEAM: Array<TeamProps>  = [
+    {
         name: "Nolan Raghu",
         gitHub: 'nolanraghu',
         email: 'nolan.raghu@vanderbilt.edu',
     },
-     anuja:{
+    {
         name: "Anuja Mehta",
          gitHub: 'anujamehta',
          email: 'anuja.mehta@vanderbilt.edu',
      },
-     kobin: {
+    {
         name: "Kobin Kempe",
          gitHub: "kobinkempe",
          email: 'kobin.g.kempe@vanderbilt.edu',
      },
-     kahero: {
+    {
         name:"Kahero Harriott",
          gitHub: "KaheroH",
          email: "kahero.t.harriott@vanderbilt.edu",
      },
-     brandon: {
+    {
         name: "Brandon Kimball",
+         gitHub: "",
          email: "brandon.kimball.thereal@gmail.com",
-     }
-}
+     },
+];
 
+interface TeamProps {
+    name: string,
+    gitHub: string,
+    email:string,
+
+ }
 export default TEAM

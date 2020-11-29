@@ -59,6 +59,7 @@ function renderHeader ({avatar = User.getProfilePic(), avatarBackground = User.g
 
   const scheme = useColorScheme();
   let styles = getStyle(scheme);
+  const navigation = useNavigation();
 
   console.log(avatar, avatarBackground)
 
@@ -70,7 +71,7 @@ function renderHeader ({avatar = User.getProfilePic(), avatarBackground = User.g
             source={avatarBackground}
         >
           <Icon name='info' underlayColor={'transparent'} style={styles.contactUs}
-                onPress={()=>{/*Navigate to Contact Us*/ }}
+                onPress={()=>{navigation.navigate("ContactUsScreen")}}
           />
           <View style={styles.headerColumn}>
             <Image
