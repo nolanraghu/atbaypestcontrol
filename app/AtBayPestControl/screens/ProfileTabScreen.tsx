@@ -22,6 +22,7 @@ import {getUser} from "../assets/Data/Data";
 import {deleteProfile} from "../assets/text/text";
 import {changePlan, LOG_OUT} from "../redux/action";
 import {useDispatch} from "react-redux";
+import images from "../assets/images";
 
 //TODO: make editable, have a situation for no user yet
 
@@ -68,6 +69,9 @@ function renderHeader ({avatar = User.getProfilePic(), avatarBackground = User.g
             blurRadius={10}
             source={avatarBackground}
         >
+          <Icon name='info' underlayColor={'transparent'} style={styles.contactUs}
+                onPress={()=>{/*Navigate to Contact Us*/ }}
+          />
           <View style={styles.headerColumn}>
             <Image
                 style={styles.userImage}

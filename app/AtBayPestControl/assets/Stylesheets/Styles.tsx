@@ -342,8 +342,9 @@ export function getStyle(state:ColorSchemeName) {
             paddingTop: 30,
         },
         headerBackgroundImage: {
-            paddingBottom: 20,
-            paddingTop: 45,
+            paddingBottom: 30,
+            paddingTop: 10,
+            paddingHorizontal:10,
         },
         headerContainer: {},
         headerColumn: {
@@ -497,5 +498,6 @@ export function getStyle(state:ColorSchemeName) {
             borderRadius: 10,
             */
         },
+        contactUs: {width: 30, height: 30, alignSelf:"flex-end"}
     });
 }
