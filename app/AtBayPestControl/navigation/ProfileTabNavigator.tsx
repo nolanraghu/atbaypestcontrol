@@ -20,11 +20,13 @@ export default function ProfileTabNavigator() {
                 name="ProfileTabScreen"
                 component={ProfileTabScreen}
                 options={{headerTitle: appName()}}
+                key={0}
             />,
             <ProfileTabStack.Screen
                 name='ContactUsScreen'
                 component={ContactUsScreen}
                 options={{headerTitle: appName()}}
+                key={1}
             />
             ]) :
         ([
