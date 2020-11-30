@@ -323,6 +323,7 @@ export default class User implements UserProps{
     }
 
     validatePayment = (index: number) => {
+
     }
 
     validateAddress = () => {

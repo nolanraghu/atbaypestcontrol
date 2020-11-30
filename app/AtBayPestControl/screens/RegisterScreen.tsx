@@ -1,6 +1,6 @@
 import React from 'react'
 import {Button, ScrollView, Text, TextInput, TouchableOpacity, useColorScheme, View} from 'react-native'
-import {getStyle} from '../assets/Stylesheets/Styles'
+import {buttonColor, getStyle} from '../assets/Stylesheets/Styles'
 import {Input} from "react-native-elements";
 import {loginText} from "../assets/Data/allTextLogin";
 import InputBox from "../components/RenderTextBox";
@@ -37,6 +37,7 @@ export default function RegisterScreen ({route, navigation}: any) {
         if (User.validateUser()) navigation.navigate('RegisterScreen');
         else navigation.navigate('ProfileTabScreen');
     }
+
     let register = () => {
         getUser().logIn();
         if(goingBack){
@@ -61,7 +62,7 @@ export default function RegisterScreen ({route, navigation}: any) {
                     {InputArray}
                 </View>
                 <TouchableOpacity style={styles.submitButton}>
-                    <Button title={'Register'} onPress={register} color={'green'}/>
+                    <Button title={'Register'} onPress={register} color={buttonColor}/>
                 </TouchableOpacity>
                 <View style={styles.wordRow}>
                     <Text style={styles.subText}>Already have an account? </Text>

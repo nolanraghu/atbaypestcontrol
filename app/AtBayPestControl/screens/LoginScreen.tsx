@@ -1,6 +1,6 @@
 import React from 'react'
 import {Button, Text, TextInput, TouchableOpacity, useColorScheme, View} from 'react-native'
-import {getStyle} from '../assets/Stylesheets/Styles'
+import {buttonColor, getStyle} from '../assets/Stylesheets/Styles'
 import {Input} from "react-native-elements";
 import {getUser} from "../assets/Data/Data";
 import {loginText} from '../assets/Data/allTextLogin'
@@ -33,12 +33,12 @@ export default function LoginScreen ({route, navigation}: any) {
                 />
     })
 
-    function onPressButton () {
-        console.debug(User.validateUser(), User.validateAddress(), User.validatePassword(), User.validateCity(),
-            User.validateZip(), User.validateEmail())
-        if (User.validateUser()) navigation.navigate('LoginScreen');
-        else navigation.navigate('ProfileTabScreen');
-    }
+    // function onPressButton () {
+    //     console.debug(User.validateUser(), User.validateAddress(), User.validatePassword(), User.validateCity(),
+    //         User.validateZip(), User.validateEmail())
+    //     if (User.validateUser()) navigation.navigate('LoginScreen');
+    //     else navigation.navigate('ProfileTabScreen');
+    // }
 
     function onPressText () {
         navigation.navigate('RegisterScreen', {goingBack: goingBack})
@@ -63,7 +63,7 @@ export default function LoginScreen ({route, navigation}: any) {
                     {InputArray}
                 </View>
                 <TouchableOpacity>
-                    <Button  title={'Submit'} onPress={onPressButton}/>
+                    <Button  title={'Submit'} onPress={onPressButton} color={buttonColor}/>
                 </TouchableOpacity>
                 <View style={styles.wordRow}>
                     <Text style={styles.subText}>Don't have an account? </Text>
