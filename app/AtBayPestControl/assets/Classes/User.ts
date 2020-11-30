@@ -12,6 +12,7 @@ import Payment from "../Classes/Payment"
 import {PAY} from "../Data/allPayments"
 import images from "../images";
 import {storeUser} from "../Data/Storage";
+import Infestation from "./Infestation";
 
 
 interface UserProps {
@@ -176,6 +177,18 @@ export default class User implements UserProps{
         }
         save();
     }
+    removeEquipmentNotReceived = (equipment:Equipment) => {
+        // This removes equipment that the user never actually received without adding it to the removed list,
+        // because it was deleted before it was purchased or shipped
+        const curSet = new Set(this.currentEquipment);
+
+        if (curSet.has(equipment.getID())){
+            curSet.delete(equipment.getID());
+        }
+
+        this.currentEquipment = [...curSet];
+        save();
+    }
     addEquipment = (equipment:Equipment) => {
         // This adds the equipment to the list of equipment the user has, and also adds it to the upcoming
         // purchases in the plan
@@ -192,11 +205,15 @@ export default class User implements UserProps{
 
             // Adds to current equipment
         curSet.add(equipment.getID());
-        if(pastSet.has(equipment.getID())){
-            pastSet.delete(equipment.getID());
-        }
         this.currentEquipment = [...curSet];
         save();
+    }
+
+    removeManyEquipment = (removingEquipment:Equipment[]) => {
+        // This removes multiple equipment that was never purchased
+        for (let equipment of removingEquipment){
+            this.removeEquipmentNotReceived(equipment);
+        }
     }
 
     makePayment = (price:number) => {
