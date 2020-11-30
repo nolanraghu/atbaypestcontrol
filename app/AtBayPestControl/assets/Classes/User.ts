@@ -310,4 +310,49 @@ export default class User implements UserProps{
         this.getPayments().concat(payment)
     }
 
+    validateUser = () => {
+        return this.validateAddress() == '' || this.validateCity() == '' || this.validateEmail() == ''
+            || this.validatePassword() == '' || this.validateState() == '' || this.validateZip() == ''
+    }
+
+    validateEmail = () => {
+        let index = this.getEmails().length - 1
+        if (this.getEmails()[index].getEmail().length != 0 && this.getEmails()[index].getEmail().includes('@')
+            && this.getEmails()[index].getEmail().includes('.')) return '';
+        else return 'Please enter a valid email';
+    }
+
+    validatePayment = (index: number) => {
+    }
+
+    validateAddress = () => {
+        let index = this.getAddresses().length - 1
+        if (this.getAddresses()[index].getAddress().length != 0) return ''
+        else return 'Please enter a valid address'
+    }
+
+    validateCity = () => {
+        let index = this.getAddresses().length - 1
+        if (this.getAddresses()[index].getCity().length != 0) return ''
+        else return 'Please enter a valid address'
+    }
+
+    validateState = () => {
+        let index = this.getAddresses().length - 1
+        if (this.getAddresses()[index].getState().length != 0) return ''
+        else return 'Please enter a valid state'
+    }
+
+    validateZip = () => {
+        let index = this.getAddresses().length - 1
+        if (this.getAddresses()[index].getZip().length != 0) return ''
+        else return 'Please enter a valid zip code'
+    }
+
+    validatePassword = () => {
+        if (this.getPassword().length > 5 && this.getPassword().length <= 20) return ''
+        else return 'Password must be at least 5 characters long'
+    }
+
+
 }
