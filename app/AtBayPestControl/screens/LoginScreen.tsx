@@ -34,15 +34,19 @@ export default function LoginScreen ({route, navigation}: any) {
     })
 
     function onPressText () {
+        User.changeUserName('')
+        User.changePassword('')
         navigation.navigate('RegisterScreen', {goingBack: goingBack})
     }
 
     function onPressButton () {
-        getUser().logIn();
-        if(goingBack){
-            navigation.goBack();
+        if (User.validateUser()) {
+            getUser().logIn();
+            if(goingBack){
+                navigation.goBack();
+            }
+            dispatch(logIn())
         }
-        dispatch(logIn())
     }
 
     return (

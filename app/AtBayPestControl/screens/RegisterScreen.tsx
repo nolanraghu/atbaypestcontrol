@@ -33,16 +33,20 @@ export default function RegisterScreen({ route, navigation }: any) {
     })
 
     function onPressText() {
+        User.changeUserName('')
+        User.changePassword('')
         navigation.navigate('LoginScreen')
     }
 
     let register = () => {
-        getUser().logIn();
-        if(goingBack){
-            navigation.pop();
-            navigation.goBack();
+        if (User.validateUser()) {
+            getUser().logIn();
+            if(goingBack){
+                navigation.pop();
+                navigation.goBack();
+            }
+            dispatch(logIn());
         }
-        dispatch(logIn());
     }
 
     return (
