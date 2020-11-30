@@ -1,8 +1,8 @@
 import React from 'react'
 import {Button, ScrollView, Text, TextInput, TouchableOpacity, useColorScheme, View} from 'react-native'
 import {getStyle} from '../assets/Stylesheets/Styles'
-import {Input} from "react-native-elements";
 import {loginText} from "../assets/Data/allTextLogin";
+import {Input} from "react-native-elements";
 import InputBox from "../components/RenderTextBox";
 import {registerText} from "../assets/Data/allTextRegister";
 import {getUser} from "../assets/Data/Data";
