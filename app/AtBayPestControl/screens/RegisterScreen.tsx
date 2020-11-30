@@ -17,6 +17,7 @@ export default function RegisterScreen({ route, navigation }: any) {
         //I think this is the only way to make an optional screen parameter
         goingBack = params.goingBack;
     }
+  
     const scheme = useColorScheme();
     let styles = getStyle(scheme);
 
