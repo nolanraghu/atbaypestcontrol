@@ -188,7 +188,6 @@ export function getStyle(state:ColorSchemeName) {
         preventionButtonOff: {
             width: '89%',
             margin: '5.5%',
-            marginBottom: '9%',
             aspectRatio: 3,
             backgroundColor: button,
             borderRadius: 20,
@@ -203,7 +202,6 @@ export function getStyle(state:ColorSchemeName) {
         preventionButtonOn: {
             width: '89%',
             margin: '5.5%',
-            marginBottom: '9%',
             aspectRatio: 3,
             backgroundColor: button,
             borderRadius: 20,
@@ -220,7 +218,6 @@ export function getStyle(state:ColorSchemeName) {
         preventionButtonPending: {
             width: '89%',
             margin: '5.5%',
-            marginBottom: '9%',
             aspectRatio: 3,
             backgroundColor: button,
             borderRadius: 20,
@@ -345,8 +342,9 @@ export function getStyle(state:ColorSchemeName) {
             paddingTop: 30,
         },
         headerBackgroundImage: {
-            paddingBottom: 20,
-            paddingTop: 45,
+            paddingBottom: 30,
+            paddingTop: 10,
+            paddingHorizontal:10,
         },
         headerContainer: {},
         headerColumn: {
@@ -453,6 +451,7 @@ export function getStyle(state:ColorSchemeName) {
             alignItems: 'flex-start',
             color: highlight,
             flexShrink: 1,
+            margin: '5%'
         },
         loginHeadContainer: {
             alignItems: 'center',
@@ -489,6 +488,23 @@ export function getStyle(state:ColorSchemeName) {
             alignContent: "center",
             alignItems: "center",
             color: highlight
-        }
+        },
+        deleteProfile: {
+            backgroundColor: background,
+            flex: 1,
+            paddingTop: 20,
+            paddingRight: 20,
+            paddingLeft: 20,
+            paddingBottom: 20,
+            justifyContent: "center",
+            flexDirection: "row",
+            borderColor: highlightRemoving,
+            /*
+            borderWidth: 3,
+            borderStyle: 'solid',
+            borderRadius: 10,
+            */
+        },
+        contactUs: {width: 30, height: 30, alignSelf:"flex-end"}
     });
 }

@@ -1,11 +1,11 @@
 import {createStackNavigator} from "@react-navigation/stack";
-import {LoginScreenParamList} from "../types";
+import {ProfileTabParamList} from "../types";
 import LoginScreen from "../screens/LoginScreen";
 import RegisterScreen from "../screens/RegisterScreen";
 import * as React from "react";
 import {appName} from "../assets/text/text";
 
-const LoginScreenStack = createStackNavigator<LoginScreenParamList>();
+const LoginScreenStack = createStackNavigator<ProfileTabParamList>();
 
 export default function LoginScreenNavigator() {
     return (

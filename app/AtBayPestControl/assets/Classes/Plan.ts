@@ -123,7 +123,7 @@ export default class Plan {
     fromString = (jsonString: string) => {
         let json = JSON.parse(jsonString) as PlanAsJsON;
         let addSet = new Set(this.addingInfestations);
-        let minusSet = new Set(this.addingInfestations);
+        let minusSet = new Set(this.removingInfestations);
         let curSet = new Set(this.currentInfestations);
         let pendEquip = new Set(this.pendingEquipment);
         json.addingInfestations.forEach(
@@ -154,6 +154,14 @@ export default class Plan {
         this.dueDate = json.dueDate;
 
         return this;
+    }
+
+    delete = () => {
+        this.addingInfestations = []
+        this.removingInfestations = []
+        this.currentInfestations = []
+        this.pendingEquipment = []
+        this.dueDate = -1;
     }
 
     containsInfestation = (bug:Infestation) => {
@@ -230,7 +238,7 @@ export default class Plan {
         let additions = this.countPriceInfestation(makeArray(this.addingInfestations, 'infestation'));
         let equipment = this.countPriceEquipment(makeArray(this.pendingEquipment, 'equipment'));
         let newPrice:{monthly:number, upfront:number} = {monthly:0, upfront:0};
-        newPrice.monthly += additions.monthly - removes.monthly + currents.monthly;
+        newPrice.monthly = additions.monthly - removes.monthly + currents.monthly;
         newPrice.upfront = additions.upfront + equipment;
         return newPrice;
     }
@@ -239,13 +247,18 @@ export default class Plan {
     hasPendingChanges = () => {
         return this.removingInfestations.length > 0 || this.addingInfestations.length > 0;
     }
-    removePendingChanges = () => {
+    removePendingChanges = ():Equipment[] => {
         // Removes anything pending on the plan and sets it back to what it was before, including equipment
+        // Returns the equipment that was going to be added, but then was not added.
+
+        let equipmentRemoved = this.pendingEquipment;
 
         this.addingInfestations = [];
         this.removingInfestations = [];
         this.pendingEquipment = [];
         save();
+
+        return equipmentRemoved.map(eID => getEquipmentByID(eID));
     }
     addChangesToPlan = () => {
         //TODO: This should send all of this.pendingEquipment to the client (Ortho/Brandon), as well as the
@@ -295,12 +308,13 @@ export default class Plan {
     }
 
 
-    removePendingInfestation = (bug:Infestation) => {
+    removePendingInfestation = (bug:Infestation):Equipment[] => {
         // Removes the infestation to the plan, but only pending. If it is not in the plan but pending,
         // removes from pending list. IMPORTANT: If it is removed from the pending list, it needs to also remove
         // the equipment from the pending equipment list, UNLESS it is needed for another infestation that is part of
         // the plan or Pending being added
 
+        let removedEquipment = new Set<Equipment>();
 
         const curSet = new Set(this.currentInfestations);
         const minusSet = new Set(this.removingInfestations);
@@ -332,12 +346,14 @@ export default class Plan {
                     remove = false;
                 }
                 if(remove){
+                    removedEquipment.add(eqq);
                     otherPendEq.delete(eqq);
                 }
             }
             this.pendingEquipment = [...otherPendEq];
         }
         save();
+        return [...removedEquipment]
     }
 
     addPendingEquipment = (e: Equipment) =>{

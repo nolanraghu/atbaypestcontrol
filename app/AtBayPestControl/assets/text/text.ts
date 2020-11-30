@@ -28,7 +28,9 @@ export function confirmPayment(){
 }
     // Different ways to make caption images for various situations
 export function captionProductDescription(product:Product){
-    return product.getProductName() + ':\n' + product.getProductDetails();
+    return product.getProductName() +
+        ':\n' + product.getProductDetails() +
+        productPrice(product);
 }
 export function captionProductAndReqEquipment(product:Product){
     let equipmentText:string = '';
@@ -42,18 +44,24 @@ export function captionProductAndReqEquipment(product:Product){
             equipmentText = equipment[i].getEquipmentName() + ", " + equipmentText;
         }
     }
-    equipmentText = "\nYou will need the " + equipmentText + " to apply this product."
-    return product.getProductName() + ':\n' + product.getProductDetails() + equipmentText;
+    if (equipmentText.length != 0){
+        equipmentText = "\nYou will need the " + equipmentText + " to apply this product."
+    }
+    return product.getProductName() + ':\n' + product.getProductDetails() + equipmentText + productPrice(product);
 }
 export function captionProductWithLink(product:Product, linkFunction:any){
     let text = orderEarly();
-    return [linkFunction('Click here'), text + product.getProductDetails()];
+    return [linkFunction('Click here'), text + product.getProductDetails() + productPrice(product)];
 }
 function orderEarly(){
     return " to purchase more today instead of receiving it on your normal scheduled date.\n"
 }
+function productPrice(product:Product){
+    return '\nThis item costs $' + product.getPrice().toFixed(2) +
+    ' to reorder if you need it before your regular shipment date.'
+}
 export function captionEquipmentDescription(equipment:Equipment){
-    return equipment.getEquipmentName() + ':\n' + equipment.getEquipmentDescription();
+    return equipment.getEquipmentName() + ':\n' + equipment.getEquipmentDescription() + equipmentPrice(equipment);
 }
 export function equipmentDescription(equipment:Equipment,
                                      products:Product[],
@@ -96,7 +104,7 @@ export function equipmentDescription(equipment:Equipment,
     }
 
     // This is the description of the equipment
-    equipmentText.push(equipment.getEquipmentDescription());
+    equipmentText.push(equipment.getEquipmentDescription() + equipmentPrice(equipment));
     return equipmentText;
 }
 export function justEquipmentDescription(equipment:Equipment, link:any){
@@ -104,7 +112,8 @@ export function justEquipmentDescription(equipment:Equipment, link:any){
     return [
         equipment.getEquipmentName() + ":\n",
         link('Click here'),
-        text + equipment.getEquipmentDescription()
+        text + equipment.getEquipmentDescription(),
+        equipmentPrice(equipment)
     ];
 }
 function lostEquipment(){
@@ -112,6 +121,9 @@ function lostEquipment(){
 }
 function foundEquipment(){
     return " if you already have this item\n"
+}
+function equipmentPrice(equipment:Equipment){
+    return '\nThis item costs $' + equipment.getPrice().toFixed(2) + "."
 }
 
 //Bugs Screen Text
@@ -121,9 +133,9 @@ export function newPriceText(plan:Plan){
     let changing = price.monthly != plan.getCurrentPrice();
 
     if(changing){
-        let text = "New Price: \n$" + price.monthly.toFixed(2) + ' per month';
+        let text = "New Price: $" + price.monthly.toFixed(2) + ' per month';
         if (price.upfront != 0) {
-            text = text + ', \nplus $' + price.upfront.toFixed(2) + ' for equipment'
+            text = text + ', plus $' + price.upfront.toFixed(2) + ' for equipment and fees'
         }
         return text;
     } else {
@@ -366,3 +378,10 @@ export function purchaseListTitle(){
 }
 
 //Profile Screen Text
+export function deleteProfile(){
+    return 'Delete Profile'
+}
+export function contactUs(){return 'Contact Us!'}
+export function contactUsDescription(){
+    return 'Thank you for using Ortho products! Please direct technical difficulties to the team below'
+}

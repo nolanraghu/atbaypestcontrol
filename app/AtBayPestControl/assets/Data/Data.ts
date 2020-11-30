@@ -19,12 +19,13 @@ let instantiated = false;
 
 export function getBugsList(){
     let arr = [];
-    for(let x = 0; x<NUMBER_OF_INFESTATIONS; ++x){
-        arr.push(getBugByID(x));
+    for (let x = 0; x < NUMBER_OF_INFESTATIONS; ++x) {
+            arr.push(getBugByID(x));
     }
     console.log(arr);
     return arr;
 }
+
 
 export function getBugByID(id: number):Infestation{
     if(typeof Infestation.singles[id] === 'undefined'){
@@ -65,6 +66,6 @@ function instantiateUser(){
 }
 
 export function save(){
-    console.log("The user saved t0 Async at "+ User.theUser.toString());
-    storeUser(User.theUser).then(r => r);
+    console.log("The user saved to Async at "+User.theUser.toString());
+    storeUser(User.theUser).then(r => r,  (reason) =>{throw Error(reason)});
 }
