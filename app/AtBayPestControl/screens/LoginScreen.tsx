@@ -23,10 +23,6 @@ export default function LoginScreen ({route, navigation}: any) {
     let styles = getStyle(scheme);
     let User = getUser();
 
-    function handleButtonPress (val: string) {
-        User.changePassword(val);
-    }
-
     let InputArray = loginText.map(function(Text, index) {
         return  <InputBox
                     key={index}
@@ -36,6 +32,13 @@ export default function LoginScreen ({route, navigation}: any) {
                     onSubmitEditing={Text.onSubmit}
                 />
     })
+
+    function onPressButton () {
+        console.debug(User.validateUser(), User.validateAddress(), User.validatePassword(), User.validateCity(),
+            User.validateZip(), User.validateEmail())
+        if (User.validateUser()) navigation.navigate('LoginScreen');
+        else navigation.navigate('ProfileTabScreen');
+    }
 
     function onPressText () {
         navigation.navigate('RegisterScreen', {goingBack: goingBack})
