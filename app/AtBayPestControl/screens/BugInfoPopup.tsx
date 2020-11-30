@@ -178,7 +178,7 @@ export default function BugInfoPopup({route, navigation}: any) {
                     user.addEquipment(equipment);
                 })
             } else if(!adding) {
-                user.getPlan().removePendingInfestation(infestation)
+                user.removeManyEquipment(user.getPlan().removePendingInfestation(infestation));
             }
             dispatch(changePending())
             navigation.navigate('BugsTabScreen')

@@ -8,19 +8,27 @@ import RegisterScreen from "../screens/RegisterScreen";
 import {getUser} from "../assets/Data/Data";
 import {useSelector} from "react-redux";
 import {RootState} from "../redux/store";
+import ContactUsScreen from "../screens/ContactUsScreen";
 
 const ProfileTabStack = createStackNavigator<ProfileTabParamList>();
 
 export default function ProfileTabNavigator() {
     let loggedIn = useSelector((state:RootState) => state.loggedIn);
     let stack = loggedIn?
-        (
+        ([
             <ProfileTabStack.Screen
                 name="ProfileTabScreen"
                 component={ProfileTabScreen}
                 options={{headerTitle: appName()}}
+                key={0}
+            />,
+            <ProfileTabStack.Screen
+                name='ContactUsScreen'
+                component={ContactUsScreen}
+                options={{headerTitle: appName()}}
+                key={1}
             />
-            ) :
+            ]) :
         ([
             <ProfileTabStack.Screen
                 name="LoginScreen"

@@ -20,8 +20,9 @@ import PlanTabScreen from "./PlanTabScreen";
 import LoginScreen from "./LoginScreen";
 import {getUser} from "../assets/Data/Data";
 import {deleteProfile} from "../assets/text/text";
-import {changePlan, LOG_OUT} from "../redux/action";
+import {changePlan, LOG_OUT, logOut} from "../redux/action";
 import {useDispatch} from "react-redux";
+import images from "../assets/images";
 
 //TODO: make editable, have a situation for no user yet
 
@@ -58,6 +59,7 @@ function renderHeader ({avatar = User.getProfilePic(), avatarBackground = User.g
 
   const scheme = useColorScheme();
   let styles = getStyle(scheme);
+  const navigation = useNavigation();
 
   console.log(avatar, avatarBackground)
 
@@ -68,6 +70,9 @@ function renderHeader ({avatar = User.getProfilePic(), avatarBackground = User.g
             blurRadius={10}
             source={avatarBackground}
         >
+          <Icon name='info' underlayColor={'transparent'} style={styles.contactUs}
+                onPress={()=>{navigation.navigate("ContactUsScreen")}}
+          />
           <View style={styles.headerColumn}>
             <Image
                 style={styles.userImage}
@@ -229,7 +234,7 @@ function renderDeleteButton () {
   let myRed = styles.deleteProfile.borderColor;
 
   let deleteButton =
-      <Pressable onPress={() => {getUser().delete(); dispatch(changePlan()); dispatch(LOG_OUT)}}>
+      <Pressable onPress={() => {getUser().delete(); dispatch(changePlan()); dispatch(logOut())}}>
         <Text style ={[styles.Text, {color: myRed, fontWeight:"bold"}]}>
           {deleteProfile()}
         </Text>
