@@ -36,6 +36,8 @@ export default class Payment implements PayProps{
         this.id = json.id;
         this.cardNumber = json.cardNumber;
         this.type = json.type;
+
+        return this;
     }
 
     getCardNumber = () => {
@@ -44,5 +46,9 @@ export default class Payment implements PayProps{
 
     getCardType = () => {
         return this.type;
+    }
+
+    getID = () => {
+        return this.id;
     }
 }

@@ -18,13 +18,13 @@ import Infestation from "./Infestation";
 interface UserProps {
     name: string,
     password: string,
-    emails: Array<Email>,
-    addresses: Array<Address>,
-    payments: Array<Payment>,
+    emails: Array<string>,
+    addresses: Array<string>,
+    payments: Array<string>,
     defaultAddress: Address,
     profilePic: NodeRequire,
     backgroundPic: NodeRequire,
-    id: Number
+    id: number
     userPlan: Plan
     currentEquipment: Array<number>
     removedEquipment: Array<number>,
@@ -33,23 +33,28 @@ interface UserProps {
 interface UserasJSON {
     id: 0,
     userPlan: string;
-    currentEquipment: Array <number>;
-    removedEquipment: Array <number>;
-
+    currentEquipment: Array <number>,
+    removedEquipment: Array <number>,
+    name: string,
+    password: string,
+    emails: Array<string>,
+    addresses: Array<string>,
+    payments: Array<string>,
+    defaultAddress: string
 }
 export default class User implements UserProps{
     //TODO: Add all of the personal information here and have it be used by Profile tab
 
     // If this is 0, that should mean they haven't made an account yet
-    emails: Array<Email> = new Array<Email>(new Email());
-    addresses: Array<Address> = new Array<Address>(new Address());
-    payments: Array<Payment> = new Array<Payment>(PAY[0], PAY[1]);
+    emails: Array<string> = [];
+    addresses: Array<string> = [];
+    payments: Array<string> = [];
     defaultAddress: Address = new Address();
     name: string = "";
     password: string = "";
     profilePic: NodeRequire = images.user.profile_picture;
     backgroundPic: NodeRequire = images.user.background;
-    id: Number = 0;
+    id: number = 0;
     userPlan = new Plan();
     currentEquipment: Array<number> = [];
     removedEquipment: Array<number> = [];
@@ -74,6 +79,17 @@ export default class User implements UserProps{
         return ids;
     }
 
+    private stringListStr = (arr: Array<string>) => {
+        let ids: Array<string> = [];
+        arr.forEach(
+            function (eq){
+                ids.push(eq)
+            }
+        );
+        return ids;
+    }
+
+
     toString = () => {
         return JSON.stringify(
             {
@@ -81,6 +97,12 @@ export default class User implements UserProps{
                 userPlan: this.userPlan.toString(),
                 currentEquipment: this.stringList(this.currentEquipment),
                 removedEquipment: this.stringList(this.removedEquipment),
+                emails: this.stringListStr(this.emails),
+                addresses: this.stringListStr(this.addresses),
+                payments: this.stringListStr(this.payments),
+                defaultAddress: this.defaultAddress.toString(),
+                name: this.name,
+                password: this.password
             }
         );
     }
@@ -91,9 +113,14 @@ export default class User implements UserProps{
         let json = JSON.parse(jsonString) as UserasJSON;
 
         this.userPlan = new Plan().fromString(json.userPlan);
+        this.defaultAddress = new Address().fromString(json.defaultAddress);
         this.id = json.id;
         let curEq = new Set(this.currentEquipment);
         let remEq = new Set(this.removedEquipment);
+        let setEmails = new Set(this.emails);
+        let setAddresses = new Set(this.addresses);
+        let setPayments = new Set(this.payments);
+
 
         json.currentEquipment.forEach(
             (id) =>{
@@ -105,16 +132,38 @@ export default class User implements UserProps{
                 remEq.add(id);
             }
         );
+
+        json.emails.forEach(
+            (id) =>{
+                setEmails.add(id);
+            }
+        );
+
+        json.addresses.forEach(
+            (id) =>{
+                setAddresses.add(id);
+            }
+        );
+
+        json.payments.forEach(
+            (id) =>{
+                setPayments.add(id);
+            }
+        );
+
         this.removedEquipment = [...remEq];
         this.currentEquipment = [...curEq];
+        this.emails = [...setEmails];
+        this.addresses = [...setAddresses];
+        this.payments = [...setPayments];
         return this;
     }
 
     delete = () => {
         console.log("User.delete() called");
-        this.emails = new Array<Email>();
-        this.addresses = new Array<Address>(new Address());
-        this.payments= new Array<Payment>(PAY[0], PAY[1]);
+        this.emails = []
+        this.addresses = []
+        this.payments= []
         this.defaultAddress = new Address();
         this.name ="";
         this.password="";
@@ -148,9 +197,7 @@ export default class User implements UserProps{
         return this.userPlan;
     }
     hasEquipment = (equipment:Equipment) => {
-
         return this.currentEquipment.includes(equipment.getID());
-
     }
 
     //getPendingEquipment
@@ -317,8 +364,8 @@ export default class User implements UserProps{
 
     validateEmail = () => {
         let index = this.getEmails().length - 1
-        if (this.getEmails()[index].getEmail().length != 0 && this.getEmails()[index].getEmail().includes('@')
-            && this.getEmails()[index].getEmail().includes('.')) return '';
+        if (this.getEmailByID(index).getEmail().length != 0 && this.getEmailByID(index).includes('@')
+            && this.getEmailByID(index).includes('.')) return '';
         else return 'Please enter a valid email';
     }
 
@@ -327,6 +374,7 @@ export default class User implements UserProps{
 
     validateAddress = () => {
         let index = this.getAddresses().length - 1
+        if (this.(index).getAddress().length != 0) return '';
         if (this.getAddresses()[index].getAddress().length != 0) return ''
         else return 'Please enter a valid address'
     }
@@ -353,6 +401,4 @@ export default class User implements UserProps{
         if (this.getPassword().length > 5 && this.getPassword().length <= 20) return ''
         else return 'Password must be at least 5 characters long'
     }
-
-
 }

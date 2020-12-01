@@ -21,6 +21,7 @@ export default class Address implements addressProps{
     state: string = "";
     zip: string = "";
 
+
     constructor(id: string = "0", address: string = "123 Fake st.",
                 city: string = "RealCity", state: string = "Realington", zip: string = "12345") {
         this.id = id;
@@ -48,6 +49,12 @@ export default class Address implements addressProps{
         this.address = json.address;
         this.city = json.city;
         this.zip = json.zip;
+
+        return this;
+    }
+
+    getID = () => {
+        return this.id;
     }
 
     getAddress = () => {

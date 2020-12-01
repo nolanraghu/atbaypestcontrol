@@ -46,6 +46,12 @@ export default class Email implements EmailProps{
         this.email = json.email;
         this.type = json.type;
         this.defaultE = json.defaultE;
+
+        return this;
+    }
+
+    getID = () => {
+        return this.id;
     }
 
     getEmail = () => {
