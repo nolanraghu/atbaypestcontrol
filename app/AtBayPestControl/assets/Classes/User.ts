@@ -121,7 +121,7 @@ export default class User implements UserProps{
         this.profilePic = images.error;
         this.backgroundPic = images.error;
         this.id= 0;
-        this.userPlan.delete();
+        this.userPlan = this.userPlan.delete();
         this.currentEquipment = [];
         this.removedEquipment = [];
         this.loggedIn = false;
@@ -311,8 +311,8 @@ export default class User implements UserProps{
     }
 
     validateUser = () => {
-        return this.validateAddress() == '' || this.validateCity() == '' || this.validateEmail() == ''
-            || this.validatePassword() == '' || this.validateState() == '' || this.validateZip() == ''
+        return this.validateAddress() == '' && this.validateCity() == '' && this.validateEmail() == ''
+            && this.validatePassword() == '' && this.validateState() == '' && this.validateZip() == ''
     }
 
     validateEmail = () => {
@@ -323,6 +323,7 @@ export default class User implements UserProps{
     }
 
     validatePayment = (index: number) => {
+
     }
 
     validateAddress = () => {

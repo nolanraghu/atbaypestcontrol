@@ -162,6 +162,8 @@ export default class Plan {
         this.currentInfestations = []
         this.pendingEquipment = []
         this.dueDate = -1;
+        Plan.thePlan = this;
+        return this;
     }
 
     containsInfestation = (bug:Infestation) => {
