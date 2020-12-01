@@ -9,7 +9,8 @@ interface InfestationasJSON {
     description: string,
     products: Array<number>,
     upfrontPrice: number,
-    monthlyPrice: number
+    monthlyPrice: number,
+    duration: number
 }
 
 export default class Infestation {
@@ -20,6 +21,7 @@ export default class Infestation {
     private readonly products: Array<number> = []
     private upfrontPrice: number = -1
     private monthlyPrice: number = -1
+    private duration: number = -1
     static singles: Array<Infestation> = new Array<Infestation>(NUMBER_OF_INFESTATIONS);
     constructor(id:number) {
         if(typeof Infestation.singles[id] === 'undefined') {
@@ -34,6 +36,7 @@ export default class Infestation {
             }
             this.upfrontPrice = pData.upfrontPrice;
             this.monthlyPrice = pData.monthlyPrice;
+            this.duration = pData.duration;
             Infestation.singles[id] = this;
         }
         return Infestation.singles[id];
@@ -54,7 +57,8 @@ export default class Infestation {
                 description: this.description,
                 products: prodIDs,
                 upfrontPrice: this.upfrontPrice,
-                monthlyPrice: this.monthlyPrice
+                monthlyPrice: this.monthlyPrice,
+                duration: this.duration
             }
         );
     }
@@ -74,6 +78,7 @@ export default class Infestation {
         );
         this.upfrontPrice = json.upfrontPrice;
         this.monthlyPrice = json.monthlyPrice;
+        this.duration = json.duration;
     }
 
     getID = () => {
@@ -135,5 +140,10 @@ export default class Infestation {
             default:
                 return "This plan has experienced an error :)"
         }
+    }
+
+    getDuration = ():number => {
+        // Note: returns time in days
+        return this.duration;
     }
 }
