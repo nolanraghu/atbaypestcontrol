@@ -15,7 +15,7 @@ interface InfestationasJSON {
 
 export default class Infestation {
     private id: number = -1;
-    private image: NodeRequire =image.error;
+    private image: NodeRequire = image.error;
     private name: string = "Error"
     private description: string = "Error"
     private readonly products: Array<number> = []

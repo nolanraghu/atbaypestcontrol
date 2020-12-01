@@ -9,7 +9,7 @@ export const allInfestations = [
         products: [0, 1],
         upfrontPrice: 4.99,
         monthlyPrice: 12.99,
-        duration: 180,
+        duration: 180
     },
     {
         id: 1,
@@ -18,7 +18,7 @@ export const allInfestations = [
         products: [2, 3, 4, 5],
         upfrontPrice: 5.99,
         monthlyPrice: 12.99,
-        duration: 1,
+        duration: 1
     },
     {
         id: 2,
@@ -27,7 +27,7 @@ export const allInfestations = [
         products: [6],
         upfrontPrice: 6.99,
         monthlyPrice: 0,
-        duration: 60,
+        duration: 60
     },
     {
         id: 3,
@@ -36,6 +36,6 @@ export const allInfestations = [
         products: [7, 8],
         upfrontPrice: 10.99,
         monthlyPrice: 4.99,
-        duration: 30,
+        duration: 30
     }
 ];
