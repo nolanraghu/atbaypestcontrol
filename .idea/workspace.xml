@@ -130,13 +130,13 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="TypeScript JSX File" />
         <option value="TypeScript File" />
+        <option value="TypeScript JSX File" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/app/AtBayPestControl" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1iyg1HRAc0Q3o3JPDrMBhZjTu7Q" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -210,7 +210,8 @@
       <workItem from="1606243248240" duration="3218000" />
       <workItem from="1606246718501" duration="2803000" />
       <workItem from="1606253934840" duration="4154000" />
-      <workItem from="1606443183522" duration="18689000" />
+      <workItem from="1606443183522" duration="9537000" />
+      <workItem from="1606592134067" duration="14240000" />
     </task>
     <task id="LOCAL-00001" summary="First Commit. Renaming screens/tabs to fit our needs.">
       <created>1602888296289</created>
@@ -334,5 +335,21 @@
     </state>
     <state x="661" y="441" width="670" height="672" key="search.everywhere.popup/0.23.1792.1026@0.23.1792.1026" timestamp="1606622655516" />
     <state x="661" y="444" width="670" height="676" key="search.everywhere.popup/0.23.1792.1033@0.23.1792.1033" timestamp="1603157958240" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/app/AtBayPestControl/assets/Data/allTextLogin.tsx</url>
+          <line>5</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/app/AtBayPestControl/screens/RegisterScreen.tsx</url>
+          <line>7</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

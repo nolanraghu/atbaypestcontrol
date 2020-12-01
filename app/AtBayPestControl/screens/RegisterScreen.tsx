@@ -3,13 +3,15 @@ import {Button, ScrollView, Text, TextInput, TouchableOpacity, useColorScheme, V
 import {buttonColor, getStyle} from '../assets/Stylesheets/Styles'
 import {Input} from "react-native-elements";
 import {loginText} from "../assets/Data/allTextLogin";
+import {Input} from "react-native-elements";
 import InputBox from "../components/RenderTextBox";
 import {registerText} from "../assets/Data/allTextRegister";
 import {getUser} from "../assets/Data/Data";
 import {logIn} from "../redux/action";
 import {useDispatch} from "react-redux";
 
-export default function RegisterScreen ({route, navigation}: any) {
+export default function RegisterScreen({ route, navigation }: any) {
+    let User = getUser();
     const params = route.params;
     let goingBack = false;
     if(params != undefined){
@@ -19,7 +21,6 @@ export default function RegisterScreen ({route, navigation}: any) {
 
     const [isSubmitted, submit] = useState(false);
   
-    let User = getUser()
     const scheme = useColorScheme();
     let styles = getStyle(scheme);
 
@@ -51,6 +52,8 @@ export default function RegisterScreen ({route, navigation}: any) {
     }
       
     function onPressText () {
+        User.changeUserName('')
+        User.changePassword('')
         navigation.navigate('LoginScreen')
     }
 

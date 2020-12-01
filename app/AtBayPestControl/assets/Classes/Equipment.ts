@@ -2,7 +2,7 @@
 // all straight from the database
 
 import {getEquipmentInfo} from "../../controller/EquipmentPulling";
-import image from '../images/index';
+import Images from '../images/index';
 import {NUMBER_OF_EQUIPMENT} from "../Data/UsefulConstants";
 
 interface EquipmentasJSON {
@@ -14,46 +14,24 @@ interface EquipmentasJSON {
 }
 
 export default class Equipment {
-    private id: number = -1
-    private image: NodeRequire = image.error;
-    private name: string = "Error";
-    private description: string = "Error";
-    private price: number = -1;
-    static singles: Array<Equipment> = new Array<Equipment>(NUMBER_OF_EQUIPMENT);
+    private readonly id: number = -1
+    private readonly image: NodeRequire = Images.error;
+    private readonly name: string = "Error";
+    private readonly description: string = "Error";
+    private readonly price: number = -1;
+    static singles: Array<Equipment> = new Array<Equipment>(NUMBER_OF_EQUIPMENT)
 
     constructor(id: number){
         if(typeof Equipment.singles[id] === "undefined") {
             this.id = id;
             let pData = getEquipmentInfo(this.id);
-            this.image = image.equipment[id];
+            this.image = Images.equipment[id];
             this.name = pData.name;
             this.description = pData.description;
             this.price = pData.price;
             Equipment.singles[id] = this;
         }
         return Equipment.singles[id];
-    }
-
-    toString = () => {
-        return JSON.stringify(
-            {
-                id: this.id,
-                image: this.image,
-                name: this.name,
-                description: this.description,
-                price: this.price
-            }
-        );
-    }
-
-    fromString = (jsonString: string) => {
-        let json = JSON.parse(jsonString) as EquipmentasJSON;
-
-        this.id = json.id;
-        this.image = image.equipment[this.id];
-        this.name = json.name;
-        this.description = json.description;
-        this.price = json.id;
     }
 
     getEquipmentImage = () => {

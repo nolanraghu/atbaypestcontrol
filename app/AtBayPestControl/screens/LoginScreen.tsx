@@ -36,14 +36,9 @@ export default function LoginScreen ({route, navigation}: any) {
                 />
     })
 
-    // function onPressButton () {
-    //     console.debug(User.validateUser(), User.validateAddress(), User.validatePassword(), User.validateCity(),
-    //         User.validateZip(), User.validateEmail())
-    //     if (User.validateUser()) navigation.navigate('LoginScreen');
-    //     else navigation.navigate('ProfileTabScreen');
-    // }
-
     function onPressText () {
+        User.changeUserName('')
+        User.changePassword('')
         navigation.navigate('RegisterScreen', {goingBack: goingBack})
     }
 

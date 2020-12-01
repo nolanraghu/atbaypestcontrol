@@ -354,4 +354,6 @@ export default class User implements UserProps{
         if (this.getPassword().length > 5 && this.getPassword().length <= 20) return ''
         else return 'Password must be at least 5 characters long'
     }
+
+
 }
