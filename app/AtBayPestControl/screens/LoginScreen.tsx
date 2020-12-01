@@ -43,7 +43,7 @@ export default function LoginScreen ({route, navigation}: any) {
     }
 
     function onPressButton () {
-        if (User.validateUser()) {
+        if (User.validatePassword() === '') {
             getUser().logIn();
             if(goingBack){
                 navigation.goBack();
