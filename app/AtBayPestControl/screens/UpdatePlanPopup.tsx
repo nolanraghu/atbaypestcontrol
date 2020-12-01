@@ -61,7 +61,7 @@ export default function UpdatePlanPopup({route, navigation}:any) {
 
     function pressButton(){
         if(deleting){
-            plan.removePendingChanges();
+            user.removeManyEquipment(plan.removePendingChanges());
         } else {
 
             user.makePayment(plan.getNewPrice().upfront);

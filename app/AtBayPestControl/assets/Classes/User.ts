@@ -10,7 +10,10 @@ import Product from "./Product";
 import {save} from "../Data/Data";
 import Payment from "../Classes/Payment"
 import {PAY} from "../Data/allPayments"
-import image from "../images";
+import images from "../images";
+import {storeUser} from "../Data/Storage";
+import Infestation from "./Infestation";
+
 
 interface UserProps {
     name: string,
@@ -38,18 +41,19 @@ export default class User implements UserProps{
     //TODO: Add all of the personal information here and have it be used by Profile tab
 
     // If this is 0, that should mean they haven't made an account yet
-    emails: Array<Email> = new Array<Email>();
+    emails: Array<Email> = new Array<Email>(new Email());
     addresses: Array<Address> = new Array<Address>(new Address());
     payments: Array<Payment> = new Array<Payment>(PAY[0], PAY[1]);
     defaultAddress: Address = new Address();
     name: string = "";
     password: string = "";
-    profilePic: NodeRequire = image.user.profile_picture;
-    backgroundPic: NodeRequire = image.user.background;
+    profilePic: NodeRequire = images.user.profile_picture;
+    backgroundPic: NodeRequire = images.user.background;
     id: Number = 0;
     userPlan = new Plan();
     currentEquipment: Array<number> = [];
     removedEquipment: Array<number> = [];
+    private loggedIn: boolean = false;
     static theUser: User
 
     constructor(id:number = 0){
@@ -106,11 +110,39 @@ export default class User implements UserProps{
         return this;
     }
 
+    delete = () => {
+        console.log("User.delete() called");
+        this.emails = new Array<Email>();
+        this.addresses = new Array<Address>(new Address());
+        this.payments= new Array<Payment>(PAY[0], PAY[1]);
+        this.defaultAddress = new Address();
+        this.name ="";
+        this.password="";
+        this.profilePic = images.error;
+        this.backgroundPic = images.error;
+        this.id= 0;
+        this.userPlan.delete();
+        this.currentEquipment = [];
+        this.removedEquipment = [];
+        this.loggedIn = false;
+        User.theUser = this;
+        save();
+        //TODO: Delete from online database
+    }
+
     hasAccount = () => {
         //I'm assuming this means something with signing up, so I'm just gonna return true
-        return true;
+        return this.loggedIn;
+    }
 
-        //return this.id != 0
+    logIn = () => {
+        this.loggedIn = true;
+    }
+    logOut = () => {
+        this.loggedIn = false;
+    }
+    isLoggedIn = () => {
+        return this.loggedIn;
     }
     getPlan = () => {
         return this.userPlan;
@@ -145,6 +177,18 @@ export default class User implements UserProps{
         }
         save();
     }
+    removeEquipmentNotReceived = (equipment:Equipment) => {
+        // This removes equipment that the user never actually received without adding it to the removed list,
+        // because it was deleted before it was purchased or shipped
+        const curSet = new Set(this.currentEquipment);
+
+        if (curSet.has(equipment.getID())){
+            curSet.delete(equipment.getID());
+        }
+
+        this.currentEquipment = [...curSet];
+        save();
+    }
     addEquipment = (equipment:Equipment) => {
         // This adds the equipment to the list of equipment the user has, and also adds it to the upcoming
         // purchases in the plan
@@ -161,11 +205,15 @@ export default class User implements UserProps{
 
             // Adds to current equipment
         curSet.add(equipment.getID());
-        if(pastSet.has(equipment.getID())){
-            pastSet.delete(equipment.getID());
-        }
         this.currentEquipment = [...curSet];
         save();
+    }
+
+    removeManyEquipment = (removingEquipment:Equipment[]) => {
+        // This removes multiple equipment that was never purchased
+        for (let equipment of removingEquipment){
+            this.removeEquipmentNotReceived(equipment);
+        }
     }
 
     makePayment = (price:number) => {
@@ -261,5 +309,50 @@ export default class User implements UserProps{
     addPayment = (payment: Payment) => {
         this.getPayments().concat(payment)
     }
+
+    validateUser = () => {
+        return this.validateAddress() == '' || this.validateCity() == '' || this.validateEmail() == ''
+            || this.validatePassword() == '' || this.validateState() == '' || this.validateZip() == ''
+    }
+
+    validateEmail = () => {
+        let index = this.getEmails().length - 1
+        if (this.getEmails()[index].getEmail().length != 0 && this.getEmails()[index].getEmail().includes('@')
+            && this.getEmails()[index].getEmail().includes('.')) return '';
+        else return 'Please enter a valid email';
+    }
+
+    validatePayment = (index: number) => {
+    }
+
+    validateAddress = () => {
+        let index = this.getAddresses().length - 1
+        if (this.getAddresses()[index].getAddress().length != 0) return ''
+        else return 'Please enter a valid address'
+    }
+
+    validateCity = () => {
+        let index = this.getAddresses().length - 1
+        if (this.getAddresses()[index].getCity().length != 0) return ''
+        else return 'Please enter a valid address'
+    }
+
+    validateState = () => {
+        let index = this.getAddresses().length - 1
+        if (this.getAddresses()[index].getState().length != 0) return ''
+        else return 'Please enter a valid state'
+    }
+
+    validateZip = () => {
+        let index = this.getAddresses().length - 1
+        if (this.getAddresses()[index].getZip().length != 0) return ''
+        else return 'Please enter a valid zip code'
+    }
+
+    validatePassword = () => {
+        if (this.getPassword().length > 5 && this.getPassword().length <= 20) return ''
+        else return 'Password must be at least 5 characters long'
+    }
+
 
 }

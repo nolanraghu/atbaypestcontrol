@@ -30,6 +30,8 @@ import {makeArray} from "../assets/Classes/ClassHelpers";
 // some of the equipment? Or if you are removing an infestation, but you click on missing equipment? What happens when
 // the products are changed and someone who already owns that infestation with changed details goes back into the app?
 
+//TODO: The logic is wrong. If you add something to where it is pending in your plan, then take it out
+// without purchasing, it shows that you already have the equipment...
 
 export default function BugInfoPopup({route, navigation}: any) {
     const {infestationID} = route.params;
@@ -176,7 +178,7 @@ export default function BugInfoPopup({route, navigation}: any) {
                     user.addEquipment(equipment);
                 })
             } else if(!adding) {
-                user.getPlan().removePendingInfestation(infestation)
+                user.removeManyEquipment(user.getPlan().removePendingInfestation(infestation));
             }
             dispatch(changePending())
             navigation.navigate('BugsTabScreen')

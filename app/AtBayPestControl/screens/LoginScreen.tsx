@@ -5,18 +5,23 @@ import {Input} from "react-native-elements";
 import {getUser} from "../assets/Data/Data";
 import {loginText} from '../assets/Data/allTextLogin'
 import InputBox from "../components/RenderTextBox";
-import { useNavigation } from '@react-navigation/native';
+import {StackActions} from "react-navigation";
+import {useDispatch} from "react-redux";
+import {LOG_IN, logIn} from "../redux/action";
 
-export default function LoginScreen () {
+export default function LoginScreen ({route, navigation}: any) {
+    const params = route.params;
+    let goingBack = false;
+    if(params != undefined){
+        //I think this is the only way to make an optional screen parameter
+        goingBack = params.goingBack;
+    }
+
+    const dispatch = useDispatch();
 
     const scheme = useColorScheme();
     let styles = getStyle(scheme);
-    const navigation = useNavigation();
     let User = getUser();
-
-    function handleButtonPress (val: string) {
-        User.changePassword(val);
-    }
 
     let InputArray = loginText.map(function(Text, index) {
         return  <InputBox
@@ -29,7 +34,19 @@ export default function LoginScreen () {
     })
 
     function onPressText () {
-        navigation.navigate('RegisterScreen')
+        User.changeUserName('')
+        User.changePassword('')
+        navigation.navigate('RegisterScreen', {goingBack: goingBack})
+    }
+
+    function onPressButton () {
+        if (User.validateUser()) {
+            getUser().logIn();
+            if(goingBack){
+                navigation.goBack();
+            }
+            dispatch(logIn())
+        }
     }
 
     return (
@@ -42,8 +59,8 @@ export default function LoginScreen () {
                 <View style={styles.textArray}>
                     {InputArray}
                 </View>
-                <TouchableOpacity>
-                    <Button  title={'Submit'} onPress={onPressText}/>
+                <TouchableOpacity style={styles.submitButton}>
+                    <Button  title={'Submit'} onPress={onPressButton} color={'green'}/>
                 </TouchableOpacity>
                 <View style={styles.wordRow}>
                     <Text style={styles.subText}>Don't have an account? </Text>
