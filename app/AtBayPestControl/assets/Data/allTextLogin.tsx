@@ -4,6 +4,8 @@ import {getUser} from "./Data";
 let User = getUser()
 
 export const loginText = [
-    new TextBox('Username/Email', 'This field should not be empty', 'username',User.changeUserName),
-    new TextBox('Password', 'This field should not be empty', 'password', User.changePassword)
+    new TextBox('Username/Email', User.validateEmail, 'username',
+        User.changeUserName),
+    new TextBox('Password', User.validatePassword, 'password',
+        User.changePassword)
 ]

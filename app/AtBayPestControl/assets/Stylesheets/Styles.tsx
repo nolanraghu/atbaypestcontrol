@@ -482,6 +482,13 @@ export function getStyle(state:ColorSchemeName) {
             marginVertical: 20,
             width: '100%'
         },
+        submitButton: {
+            width: '100%',
+            justifyContent: "center",
+            alignContent: "center",
+            alignItems: "center",
+            color: highlight
+        },
         deleteProfile: {
             backgroundColor: background,
             flex: 1,

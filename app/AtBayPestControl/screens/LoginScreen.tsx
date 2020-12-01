@@ -23,10 +23,6 @@ export default function LoginScreen ({route, navigation}: any) {
     let styles = getStyle(scheme);
     let User = getUser();
 
-    function handleButtonPress (val: string) {
-        User.changePassword(val);
-    }
-
     let InputArray = loginText.map(function(Text, index) {
         return  <InputBox
                     key={index}
@@ -38,15 +34,19 @@ export default function LoginScreen ({route, navigation}: any) {
     })
 
     function onPressText () {
+        User.changeUserName('')
+        User.changePassword('')
         navigation.navigate('RegisterScreen', {goingBack: goingBack})
     }
 
     function onPressButton () {
-        getUser().logIn();
-        if(goingBack){
-            navigation.goBack();
+        if (User.validateUser()) {
+            getUser().logIn();
+            if(goingBack){
+                navigation.goBack();
+            }
+            dispatch(logIn())
         }
-        dispatch(logIn())
     }
 
     return (
@@ -59,8 +59,8 @@ export default function LoginScreen ({route, navigation}: any) {
                 <View style={styles.textArray}>
                     {InputArray}
                 </View>
-                <TouchableOpacity>
-                    <Button  title={'Submit'} onPress={onPressButton}/>
+                <TouchableOpacity style={styles.submitButton}>
+                    <Button  title={'Submit'} onPress={onPressButton} color={'green'}/>
                 </TouchableOpacity>
                 <View style={styles.wordRow}>
                     <Text style={styles.subText}>Don't have an account? </Text>

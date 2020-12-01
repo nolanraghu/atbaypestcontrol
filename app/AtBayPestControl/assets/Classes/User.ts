@@ -12,6 +12,7 @@ import Payment from "../Classes/Payment"
 import {PAY} from "../Data/allPayments"
 import images from "../images";
 import {storeUser} from "../Data/Storage";
+import Infestation from "./Infestation";
 
 
 interface UserProps {
@@ -176,6 +177,18 @@ export default class User implements UserProps{
         }
         save();
     }
+    removeEquipmentNotReceived = (equipment:Equipment) => {
+        // This removes equipment that the user never actually received without adding it to the removed list,
+        // because it was deleted before it was purchased or shipped
+        const curSet = new Set(this.currentEquipment);
+
+        if (curSet.has(equipment.getID())){
+            curSet.delete(equipment.getID());
+        }
+
+        this.currentEquipment = [...curSet];
+        save();
+    }
     addEquipment = (equipment:Equipment) => {
         // This adds the equipment to the list of equipment the user has, and also adds it to the upcoming
         // purchases in the plan
@@ -192,11 +205,15 @@ export default class User implements UserProps{
 
             // Adds to current equipment
         curSet.add(equipment.getID());
-        if(pastSet.has(equipment.getID())){
-            pastSet.delete(equipment.getID());
-        }
         this.currentEquipment = [...curSet];
         save();
+    }
+
+    removeManyEquipment = (removingEquipment:Equipment[]) => {
+        // This removes multiple equipment that was never purchased
+        for (let equipment of removingEquipment){
+            this.removeEquipmentNotReceived(equipment);
+        }
     }
 
     makePayment = (price:number) => {
@@ -292,5 +309,50 @@ export default class User implements UserProps{
     addPayment = (payment: Payment) => {
         this.getPayments().concat(payment)
     }
+
+    validateUser = () => {
+        return this.validateAddress() == '' || this.validateCity() == '' || this.validateEmail() == ''
+            || this.validatePassword() == '' || this.validateState() == '' || this.validateZip() == ''
+    }
+
+    validateEmail = () => {
+        let index = this.getEmails().length - 1
+        if (this.getEmails()[index].getEmail().length != 0 && this.getEmails()[index].getEmail().includes('@')
+            && this.getEmails()[index].getEmail().includes('.')) return '';
+        else return 'Please enter a valid email';
+    }
+
+    validatePayment = (index: number) => {
+    }
+
+    validateAddress = () => {
+        let index = this.getAddresses().length - 1
+        if (this.getAddresses()[index].getAddress().length != 0) return ''
+        else return 'Please enter a valid address'
+    }
+
+    validateCity = () => {
+        let index = this.getAddresses().length - 1
+        if (this.getAddresses()[index].getCity().length != 0) return ''
+        else return 'Please enter a valid address'
+    }
+
+    validateState = () => {
+        let index = this.getAddresses().length - 1
+        if (this.getAddresses()[index].getState().length != 0) return ''
+        else return 'Please enter a valid state'
+    }
+
+    validateZip = () => {
+        let index = this.getAddresses().length - 1
+        if (this.getAddresses()[index].getZip().length != 0) return ''
+        else return 'Please enter a valid zip code'
+    }
+
+    validatePassword = () => {
+        if (this.getPassword().length > 5 && this.getPassword().length <= 20) return ''
+        else return 'Password must be at least 5 characters long'
+    }
+
 
 }
