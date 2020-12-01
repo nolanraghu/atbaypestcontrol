@@ -4,16 +4,24 @@ import {Input} from "react-native-elements";
 import {getStyle} from '../assets/Stylesheets/Styles'
 import {getUser} from "../assets/Data/Data";
 
-export default function renderText ({placeHolder, errorMessage, type, onSubmitEditing}: renderProps) {
+export default function renderText ({placeHolder, errorMessage, type, onSubmitEditing, submitted}: renderProps) {
 
     const scheme = useColorScheme();
     let styles = getStyle(scheme);
+
+    let showErrorMessage = () => {
+        if (submitted){
+            return errorMessage();
+        } else {
+            return '';
+        }
+    }
 
     return (
         <Input
             placeholder={placeHolder}
             inputStyle={styles.inputText}
-            errorMessage={errorMessage()}
+            errorMessage={showErrorMessage()}
             errorStyle={{color: 'red'}}
             secureTextEntry={type === 'password'}
             onSubmitEditing={(val) =>
@@ -30,4 +38,5 @@ interface renderProps {
     type: 'username' | 'password' | 'addressCity' | 'addressState' | 'streetAddressLine1' | 'streetAddressLine2' |
         'postalCode' | 'emailAddress'
     onSubmitEditing: (text: string) => void
+    submitted: boolean
 }

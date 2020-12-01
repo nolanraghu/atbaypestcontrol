@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {Button, Text, TextInput, TouchableOpacity, useColorScheme, View} from 'react-native'
 import {buttonColor, getStyle} from '../assets/Stylesheets/Styles'
 import {Input} from "react-native-elements";
@@ -17,6 +17,8 @@ export default function LoginScreen ({route, navigation}: any) {
         goingBack = params.goingBack;
     }
 
+    const [isSubmitted, submit] = useState(false);
+
     const dispatch = useDispatch();
 
     const scheme = useColorScheme();
@@ -30,6 +32,7 @@ export default function LoginScreen ({route, navigation}: any) {
                     type={Text.getType()}
                     placeHolder={Text.getPlaceHolder()}
                     onSubmitEditing={Text.onSubmit}
+                    submitted = {isSubmitted}
                 />
     })
 
@@ -45,11 +48,15 @@ export default function LoginScreen ({route, navigation}: any) {
     }
 
     function onPressButton () {
-        getUser().logIn();
-        if(goingBack){
-            navigation.goBack();
+        if (User.validateUser()) {
+            getUser().logIn();
+            if(goingBack){
+                navigation.goBack();
+            }
+            dispatch(logIn());
+        } else {
+            submit(true);
         }
-        dispatch(logIn())
     }
 
     return (

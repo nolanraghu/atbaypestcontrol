@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {Button, ScrollView, Text, TextInput, TouchableOpacity, useColorScheme, View} from 'react-native'
 import {buttonColor, getStyle} from '../assets/Stylesheets/Styles'
 import {Input} from "react-native-elements";
@@ -16,6 +16,8 @@ export default function RegisterScreen ({route, navigation}: any) {
         //I think this is the only way to make an optional screen parameter
         goingBack = params.goingBack;
     }
+
+    const [isSubmitted, submit] = useState(false);
   
     let User = getUser()
     const scheme = useColorScheme();
@@ -30,21 +32,22 @@ export default function RegisterScreen ({route, navigation}: any) {
             type={Text.getType()}
             placeHolder={Text.getPlaceHolder()}
             onSubmitEditing={Text.onSubmit}
+            submitted = {isSubmitted}
         />
     })
 
-    function onPressButton () {
-        if (User.validateUser()) navigation.navigate('RegisterScreen');
-        else navigation.navigate('ProfileTabScreen');
-    }
-
     let register = () => {
-        getUser().logIn();
-        if(goingBack){
-            navigation.pop();
-            navigation.goBack();
+        if (User.validateUser()) {
+            getUser().logIn();
+            if(goingBack){
+                navigation.pop();
+                navigation.goBack();
+            }
+            dispatch(logIn());
+        } else {
+            submit(true);
         }
-        dispatch(logIn());
+
     }
       
     function onPressText () {
