@@ -8,6 +8,7 @@ import InputBox from "../components/RenderTextBox";
 import {StackActions} from "react-navigation";
 import {useDispatch} from "react-redux";
 import {LOG_IN, logIn} from "../redux/action";
+import {getUserFromOnline} from "../assets/Data/Storage";
 
 export default function LoginScreen ({route, navigation}: any) {
     const params = route.params;
@@ -44,11 +45,18 @@ export default function LoginScreen ({route, navigation}: any) {
 
     function onPressButton () {
         if (User.validatePassword() === '') {
-            getUser().logIn();
-            if(goingBack){
-                navigation.goBack();
+            const onSuccess = () => {
+                getUser().logIn();
+                if(goingBack){
+                    navigation.goBack();
+                }
+                dispatch(logIn());
             }
-            dispatch(logIn());
+            getUserFromOnline('kobin',
+                'asdfghjk',
+                () => console.log('error'),
+                onSuccess,
+                () => console.log('incorrect username/password'));
         } else {
             submit(true);
         }

@@ -17,6 +17,7 @@ import CaptionImage from "../components/CaptionImage";
 import Equipment from "../assets/Classes/Equipment";
 import {useDispatch} from "react-redux";
 import {changePlan} from "../redux/action";
+import {updateUserOnline} from "../assets/Data/Storage";
 
 export default function UpdatePlanPopup({route, navigation}:any) {
     const params = route.params;
@@ -63,7 +64,6 @@ export default function UpdatePlanPopup({route, navigation}:any) {
         if(deleting){
             user.removeManyEquipment(plan.removePendingChanges());
         } else {
-
             user.makePayment(plan.getNewPrice().upfront);
             if(isChangingPlan){
                 let nextDate = plan.setDueDate(plan.getDueDate());
@@ -71,6 +71,7 @@ export default function UpdatePlanPopup({route, navigation}:any) {
             }
             plan.addChangesToPlan();
         }
+        updateUserOnline();
         dispatch(changePlan());
         navigation.navigate('BugsTabScreen');
     }

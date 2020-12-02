@@ -6,6 +6,7 @@ import {registerText} from "../assets/Data/allTextRegister";
 import {getUser} from "../assets/Data/Data";
 import {logIn} from "../redux/action";
 import {useDispatch} from "react-redux";
+import {addNewUser} from "../assets/Data/Storage";
 
 export default function RegisterScreen({ route, navigation }: any) {
     let User = getUser();
@@ -35,8 +36,8 @@ export default function RegisterScreen({ route, navigation }: any) {
     })
 
     let register = () => {
-        console.log(User.toString());
         if (User.validateUser()) {
+            addNewUser()
             User.logIn();
             if(goingBack){
                 navigation.pop();

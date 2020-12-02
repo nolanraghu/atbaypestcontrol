@@ -167,7 +167,7 @@ export function infestationName(infestation:Infestation){
     if(infestation.isPreventionPlan()){
         return infestation.getBugName();
     } else {
-        return infestation.getBugName() + " Infestation";
+        return infestation.getBugName();
     }
 }
 export function changePlan(adding: boolean, purchasing: boolean){
@@ -334,9 +334,9 @@ export function planBriefDescription(plan:Plan){
         }
     }
     if(bugslist.length == 1){
-        infestationsText = infestationsText + " infestation"
+        infestationsText = infestationsText
     } else {
-        infestationsText = infestationsText + " infestations"
+        infestationsText = infestationsText
     }
 
     let text:string = "With this plan, you receive the following products."
@@ -344,7 +344,7 @@ export function planBriefDescription(plan:Plan){
         if (bugslist.length == 0){
             return "You are currently on the prevention plan. " + text;
         } else {
-            return "Your current plan includes the prevention plan and the " +
+            return "Your current plan includes the general prevention plan and the " +
                 infestationsText + ". " + text;
         }
     } else {

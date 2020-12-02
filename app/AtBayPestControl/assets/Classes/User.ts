@@ -23,7 +23,7 @@ interface UserProps {
     payments: Array<Payment>,
     profilePic: NodeRequire,
     backgroundPic: NodeRequire,
-    id: number
+    id: string
     userPlan: Plan
     currentEquipment: Array<number>
     removedEquipment: Array<number>,
@@ -31,7 +31,7 @@ interface UserProps {
 }
 
 interface UserasJSON {
-    id: 0,
+    id: string,
     userPlan: string;
     currentEquipment: Array <number>,
     removedEquipment: Array <number>,
@@ -53,19 +53,19 @@ export default class User implements UserProps{
     password: string = "";
     profilePic: NodeRequire = images.user.profile_picture;
     backgroundPic: NodeRequire = images.user.background;
-    id: number = 0;
+    id: string = '0';
     userPlan = new Plan();
     currentEquipment: Array<number> = [];
     removedEquipment: Array<number> = [];
     loggedIn: boolean = false;
     static theUser: User
 
-    constructor(id:number = 0){
-            if(!User.theUser) {
-                User.theUser = this;
-                console.log("The User constructor has been called!");
-            }
-            return User.theUser;
+    constructor(){
+        if(!User.theUser) {
+            User.theUser = this;
+            console.log("The User constructor has been called!");
+        }
+        return User.theUser;
     }
 
     private stringList = (arr: Array<any>) => {
@@ -156,7 +156,7 @@ export default class User implements UserProps{
         this.payments= []
         this.name ="";
         this.password="";
-        this.id= 0;
+        this.id= '0';
         this.userPlan = this.userPlan.delete();
         this.currentEquipment = [];
         this.removedEquipment = [];
@@ -164,6 +164,13 @@ export default class User implements UserProps{
         User.theUser = this;
         save();
         //TODO: Delete from online database
+    }
+    getID = () => {
+        return this.id;
+    }
+    setID = (newID:string) => {
+        this.id = newID;
+        save();
     }
 
     hasAccount = () => {
