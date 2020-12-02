@@ -7,6 +7,8 @@ import {getUser} from "../assets/Data/Data";
 import {logIn} from "../redux/action";
 import {useDispatch} from "react-redux";
 import {addNewUser} from "../assets/Data/Storage";
+import {makeAlert} from "../components/errorMessage";
+import {usernameExists, userNotAddedError} from "../assets/text/text";
 
 export default function RegisterScreen({ route, navigation }: any) {
     let User = getUser();
@@ -37,13 +39,22 @@ export default function RegisterScreen({ route, navigation }: any) {
 
     let register = () => {
         if (User.validateUser()) {
-            addNewUser()
-            User.logIn();
-            if(goingBack){
-                navigation.pop();
-                navigation.goBack();
-            }
-            dispatch(logIn());
+            addNewUser(
+                ()=>{
+                    makeAlert(userNotAddedError())
+                },
+                ()=>{
+                    User.logIn();
+                    if(goingBack){
+                        navigation.pop();
+                        navigation.goBack();
+                    }
+                    dispatch(logIn());
+                },
+                ()=>{
+                    makeAlert(usernameExists());
+                }
+            )
         } else {
             submit(true);
         }

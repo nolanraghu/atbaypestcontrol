@@ -21,6 +21,12 @@ export function tab3label(){
 export function errorTitle(){
     return 'Error'
 }
+export function userNotAddedError(){
+    return 'Did not register user'
+}
+export function usernameExists(){
+    return 'Username already exists'
+}
 export function errorMessage(){
     return 'Your profile did not get updated'
 }
