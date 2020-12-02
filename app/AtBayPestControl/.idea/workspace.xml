@@ -14,16 +14,16 @@
       <path>
         <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
         <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="BRANCH:Kahero" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:Anuja-New" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f11504bf-41dd-4bca-92fa-bafd18444296" name="Default Changelist" comment="">
+    <list default="true" id="f11504bf-41dd-4bca-92fa-bafd18444296" name="Default Changelist" comment="basic database">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/Classes/Infestation.ts" beforeDir="false" afterPath="$PROJECT_DIR$/assets/Classes/Infestation.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/Data/allInfestations.ts" beforeDir="false" afterPath="$PROJECT_DIR$/assets/Data/allInfestations.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/InfestationPulling.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/controller/InfestationPulling.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/Data/Data.ts" beforeDir="false" afterPath="$PROJECT_DIR$/assets/Data/Data.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/redux/reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/redux/reducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/BugsTabScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/screens/BugsTabScreen.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,6 +79,7 @@
       <workItem from="1605739341673" duration="4193000" />
       <workItem from="1605745509709" duration="225000" />
       <workItem from="1605755572178" duration="3178000" />
+      <workItem from="1606882954363" duration="6325000" />
     </task>
     <servers />
   </component>
@@ -90,7 +91,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="Anuja-New" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -118,9 +131,14 @@
     </state>
     <state width="949" height="304" key="GridCell.Tab.0.right/0.0.1440.900/-264.-1080.1920.1080@-264.-1080.1920.1080" timestamp="1606235240629" />
     <state width="1419" height="245" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1605575889238" />
-    <state x="521" y="371" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1605586059948">
-      <screen x="0" y="23" width="1440" height="877" />
+    <state x="329" y="115" key="RollbackChangesDialog" timestamp="1606887802162">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state x="329" y="115" key="RollbackChangesDialog/0.0.1536.824@0.0.1536.824" timestamp="1606887802162" />
+    <state x="556" y="327" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1606884833756">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="556" y="327" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1606884833756" />
     <state x="521" y="371" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1440.877@0.23.1440.877" timestamp="1605586059948" />
     <state x="-1407" y="235" width="894" height="812" key="search.everywhere.popup" timestamp="1606883024957">
       <screen x="-1920" y="0" width="1920" height="1080" />

@@ -17,7 +17,7 @@ export const PLAN = "Current Plan"
 //User from a database
 
 
-let instantiated = false;
+export let instantiated = false;
 
 
 export function getBugsList(){
@@ -65,11 +65,14 @@ export function getUser(){
 }
 
 function instantiateUser(){
-    loadUser().then((hi)=>{
-        User.theUser = hi}, (hi) => { throw Error(hi)
-    });
-    console.log("The user instantiated from Async at "+ User.theUser.toString());
-    instantiated = true;
+    loadUser().then(
+        (hi)=>{
+        User.theUser = hi;
+        console.log("The user instantiated from Async at "+ User.theUser.toString());
+        instantiated = true;
+        }, 
+        (hi) => { throw Error(hi)}
+        );
 }
 
 export function save(){
