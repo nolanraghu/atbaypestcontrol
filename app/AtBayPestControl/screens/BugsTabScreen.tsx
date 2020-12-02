@@ -4,9 +4,10 @@ import {getStyle, buttonColor} from '../assets/Stylesheets/Styles'
 import BugPressable from "../components/BugPressable";
 import {getPreventionPlan, getUser} from "../assets/Data/Data";
 import {deleteChanges, newPriceText, updatePlan} from "../assets/text/text";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../redux/store";
 import {useNavigation} from "@react-navigation/native";
+import {logIn} from "../redux/action";
 
 export default function BugsTabScreen() {
     const scheme = useColorScheme();
@@ -16,6 +17,12 @@ export default function BugsTabScreen() {
 
     // Redux hook to make screen render when state pending changes
     useSelector((state:RootState) => state.planPendingVersion)
+
+    //This is arbitrarily here because idk where else it should be
+    let dispatch = useDispatch();
+    if(getUser().isLoggedIn()){
+        dispatch(logIn());
+    }
 
     const plan = getUser().getPlan();
     // This might be a terrible way to do it, but this gets the bugs in order, from prevention plan,

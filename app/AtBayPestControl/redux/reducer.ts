@@ -1,11 +1,10 @@
 import {CHANGE_PLAN, CHANGE_PENDING, EQUIPMENT_PENDING, LOG_IN, LOG_OUT} from "./action";
-import {getUser} from "../assets/Data/Data";
 
 const initialState = {
     planVersion: 0,
     planPendingVersion: 0,
     equipmentVersion: 0,
-    loggedIn: getUser().isLoggedIn()
+    loggedIn: false
 };
 
 const reducer = (state = initialState, action:any) => {
