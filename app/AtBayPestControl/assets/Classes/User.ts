@@ -404,11 +404,19 @@ export default class User implements UserProps{
         else return 'Password must be at least 5 characters long'
     }
 
-    getLatest = () => {
+    getLatestEmail = () => {
         if (this.emails.length === 0){
             return this.getEmailByID(0);
         } else {
             return this.getEmailByID(this.emails.length -1);
+        }
+    }
+
+    getLatestAddress = () => {
+        if (this.emails.length === 0){
+            return this.getAddressByID(0);
+        } else {
+            return this.getAddressByID(this.addresses.length -1);
         }
     }
 }
