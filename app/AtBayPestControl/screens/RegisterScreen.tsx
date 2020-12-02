@@ -1,8 +1,6 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {Button, ScrollView, Text, TextInput, TouchableOpacity, useColorScheme, View} from 'react-native'
-import {getStyle} from '../assets/Stylesheets/Styles'
-import {loginText} from "../assets/Data/allTextLogin";
-import {Input} from "react-native-elements";
+import {buttonColor, getStyle} from '../assets/Stylesheets/Styles'
 import InputBox from "../components/RenderTextBox";
 import {registerText} from "../assets/Data/allTextRegister";
 import {getUser} from "../assets/Data/Data";
@@ -17,6 +15,8 @@ export default function RegisterScreen({ route, navigation }: any) {
         //I think this is the only way to make an optional screen parameter
         goingBack = params.goingBack;
     }
+
+    const [isSubmitted, submit] = useState(false);
   
     const scheme = useColorScheme();
     let styles = getStyle(scheme);
@@ -30,14 +30,9 @@ export default function RegisterScreen({ route, navigation }: any) {
             type={Text.getType()}
             placeHolder={Text.getPlaceHolder()}
             onSubmitEditing={Text.onSubmit}
+            submitted = {isSubmitted}
         />
     })
-
-    function onPressText() {
-        User.changeUserName('')
-        User.changePassword('')
-        navigation.navigate('LoginScreen')
-    }
 
     let register = () => {
         if (User.validateUser()) {
@@ -47,7 +42,16 @@ export default function RegisterScreen({ route, navigation }: any) {
                 navigation.goBack();
             }
             dispatch(logIn());
+        } else {
+            submit(true);
         }
+
+    }
+      
+    function onPressText () {
+        User.changeUserName('')
+        User.changePassword('')
+        navigation.navigate('LoginScreen')
     }
 
     return (
@@ -61,7 +65,7 @@ export default function RegisterScreen({ route, navigation }: any) {
                     {InputArray}
                 </View>
                 <TouchableOpacity style={styles.submitButton}>
-                    <Button title={'Register'} onPress={register} color={'green'}/>
+                    <Button title={'Register'} onPress={register} color={buttonColor}/>
                 </TouchableOpacity>
                 <View style={styles.wordRow}>
                     <Text style={styles.subText}>Already have an account? </Text>

@@ -25,7 +25,6 @@ export function getBugsList(){
     for (let x = 0; x < NUMBER_OF_INFESTATIONS; ++x) {
             arr.push(getBugByID(x));
     }
-    console.log(arr);
     return arr;
 }
 
