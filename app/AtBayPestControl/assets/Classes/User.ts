@@ -21,7 +21,6 @@ interface UserProps {
     emails: Array<Email>,
     addresses: Array<Address>,
     payments: Array<Payment>,
-    defaultAddress: Address,
     profilePic: NodeRequire,
     backgroundPic: NodeRequire,
     id: number
@@ -41,7 +40,6 @@ interface UserasJSON {
     emails: Array<string>,
     addresses: Array<string>,
     payments: Array<string>,
-    defaultAddress: string,
     loggedIn: boolean
 }
 export default class User implements UserProps{
@@ -49,7 +47,6 @@ export default class User implements UserProps{
 
     // If this is 0, that should mean they haven't made an account yet
     emails: Array<Email> = [];
-    defaultAddress: Address = new Address();
     addresses: Array<Address> = [];
     payments: Array<Payment> = [new Payment()];
     name: string = "";
@@ -94,7 +91,6 @@ export default class User implements UserProps{
                 emails: this.stringList(this.emails),
                 addresses: this.stringList(this.addresses),
                 payments: this.stringList(this.payments),
-                defaultAddress: this.defaultAddress.toString(),
                 name: this.name,
                 password: this.password,
                 loggedIn: this.loggedIn
@@ -108,7 +104,6 @@ export default class User implements UserProps{
         let json = JSON.parse(jsonString) as UserasJSON;
 
         this.userPlan = new Plan().fromString(json.userPlan);
-        this.defaultAddress = new Address().fromString(json.defaultAddress);
         this.id = json.id;
         this.loggedIn = json.loggedIn;
         let curEq = new Set(this.currentEquipment);
@@ -159,11 +154,8 @@ export default class User implements UserProps{
         this.emails = []
         this.addresses = []
         this.payments= []
-        this.defaultAddress = new Address(0);
         this.name ="";
         this.password="";
-        this.profilePic = images.error;
-        this.backgroundPic = images.error;
         this.id= 0;
         this.userPlan = this.userPlan.delete();
         this.currentEquipment = [];
@@ -297,11 +289,6 @@ export default class User implements UserProps{
         return this.payments;
     }
 
-    getDefaultAddress = () => {
-        // returns default shipping address
-        return this.defaultAddress;
-    }
-
     getProfilePic = () => {
         // Returns the profile picture of the user
         return this.profilePic;
@@ -373,8 +360,6 @@ export default class User implements UserProps{
     }
 
     validateAddress = () => {
-        console.log("")
-        let index = this.getAddresses().length - 1
         if (this.getLatestAddress().getAddress().length != 0) return '';
         else return 'Please enter a valid address'
     }
@@ -385,19 +370,16 @@ export default class User implements UserProps{
 
 
     validateCity = () => {
-        let index = this.getAddresses().length - 1
         if (this.getLatestAddress().getCity().length != 0) return ''
         else return 'Please enter a valid address'
     }
 
     validateState = () => {
-        let index = this.getAddresses().length - 1
         if (this.getLatestAddress().getState().length != 0) return ''
         else return 'Please enter a valid state'
     }
 
     validateZip = () => {
-        let index = this.getAddresses().length - 1
         if (this.getLatestAddress().getZip().length != 0) return ''
         else return 'Please enter a valid zip code'
     }
@@ -417,6 +399,7 @@ export default class User implements UserProps{
     getLatestAddress = () => {
         if (this.addresses.length === 0){
             this.addresses.push(new Address());
+            console.log('new address made')
         }
         return this.addresses[this.addresses.length-1];
     }

@@ -2,7 +2,7 @@ import * as React from 'react';
 import {Button, ScrollView, useColorScheme, Text, View} from "react-native";
 import {buttonColor, getStyle} from "../assets/Stylesheets/Styles";
 import Payment from "../components/RenderPayment";
-import {getPaymentByID, getUser} from "../assets/Data/Data";
+import {getUser} from "../assets/Data/Data";
 import {
     captionEquipmentDescription, captionProductAndReqEquipment,
     captionProductDescription, confirmationNotes,
