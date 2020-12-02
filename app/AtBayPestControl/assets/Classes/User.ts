@@ -7,53 +7,60 @@ import Equipment from "./Equipment";
 import Email from "./Email"
 import Address from "./Address";
 import Product from "./Product";
-import {save} from "../Data/Data";
 import Payment from "../Classes/Payment"
 import {PAY} from "../Data/allPayments"
 import images from "../images";
 import {storeUser} from "../Data/Storage";
 import Infestation from "./Infestation";
+import {getEmailAddrByID, getAddrByID, getPaymentByID, save} from "../Data/Data";
 
 
 interface UserProps {
     name: string,
     password: string,
-    emails: Array<Email>,
-    addresses: Array<Address>,
-    payments: Array<Payment>,
+    emails: Array<number>,
+    addresses: Array<number>,
+    payments: Array<number>,
     defaultAddress: Address,
     profilePic: NodeRequire,
     backgroundPic: NodeRequire,
-    id: Number
+    id: number
     userPlan: Plan
     currentEquipment: Array<number>
     removedEquipment: Array<number>,
+    loggedIn: boolean
 }
 
 interface UserasJSON {
     id: 0,
     userPlan: string;
-    currentEquipment: Array <number>;
-    removedEquipment: Array <number>;
-
+    currentEquipment: Array <number>,
+    removedEquipment: Array <number>,
+    name: string,
+    password: string,
+    emails: Array<number>,
+    addresses: Array<number>,
+    payments: Array<number>,
+    defaultAddress: string,
+    loggedIn: boolean
 }
 export default class User implements UserProps{
     //TODO: Add all of the personal information here and have it be used by Profile tab
 
     // If this is 0, that should mean they haven't made an account yet
-    emails: Array<Email> = new Array<Email>(new Email());
-    addresses: Array<Address> = new Array<Address>(new Address());
-    payments: Array<Payment> = new Array<Payment>(PAY[0], PAY[1]);
+    emails: Array<number> = [];
+    addresses: Array<number> = [];
+    payments: Array<number> = [];
     defaultAddress: Address = new Address();
     name: string = "";
     password: string = "";
     profilePic: NodeRequire = images.user.profile_picture;
     backgroundPic: NodeRequire = images.user.background;
-    id: Number = 0;
+    id: number = 0;
     userPlan = new Plan();
     currentEquipment: Array<number> = [];
     removedEquipment: Array<number> = [];
-    private loggedIn: boolean = false;
+    loggedIn: boolean = false;
     static theUser: User
 
     constructor(id:number = 0){
@@ -81,6 +88,13 @@ export default class User implements UserProps{
                 userPlan: this.userPlan.toString(),
                 currentEquipment: this.stringList(this.currentEquipment),
                 removedEquipment: this.stringList(this.removedEquipment),
+                emails: this.stringList(this.emails),
+                addresses: this.stringList(this.addresses),
+                payments: this.stringList(this.payments),
+                defaultAddress: this.defaultAddress.toString(),
+                name: this.name,
+                password: this.password,
+                loggedIn: this.loggedIn
             }
         );
     }
@@ -91,9 +105,14 @@ export default class User implements UserProps{
         let json = JSON.parse(jsonString) as UserasJSON;
 
         this.userPlan = new Plan().fromString(json.userPlan);
+        this.defaultAddress = new Address().fromString(json.defaultAddress);
         this.id = json.id;
+        this.loggedIn = json.loggedIn;
         let curEq = new Set(this.currentEquipment);
         let remEq = new Set(this.removedEquipment);
+        let setEmails = new Set(this.emails);
+        let setAddresses = new Set(this.addresses);
+        let setPayments = new Set(this.payments);
 
         json.currentEquipment.forEach(
             (id) =>{
@@ -105,17 +124,39 @@ export default class User implements UserProps{
                 remEq.add(id);
             }
         );
+
+        json.emails.forEach(
+            (id) =>{
+                setEmails.add(id);
+            }
+        );
+
+        json.addresses.forEach(
+            (id) =>{
+                setAddresses.add(id);
+            }
+        );
+
+        json.payments.forEach(
+            (id) =>{
+                setPayments.add(id);
+            }
+        );
+
         this.removedEquipment = [...remEq];
         this.currentEquipment = [...curEq];
+        this.emails = [...setEmails];
+        this.addresses = [...setAddresses];
+        this.payments = [...setPayments];
         return this;
     }
 
     delete = () => {
         console.log("User.delete() called");
-        this.emails = new Array<Email>();
-        this.addresses = new Array<Address>(new Address());
-        this.payments= new Array<Payment>(PAY[0], PAY[1]);
-        this.defaultAddress = new Address();
+        this.emails = []
+        this.addresses = []
+        this.payments= []
+        this.defaultAddress = new Address(0);
         this.name ="";
         this.password="";
         this.profilePic = images.error;
@@ -140,6 +181,8 @@ export default class User implements UserProps{
     }
     logOut = () => {
         this.loggedIn = false;
+        save();
+
     }
     isLoggedIn = () => {
         return this.loggedIn;
@@ -148,9 +191,7 @@ export default class User implements UserProps{
         return this.userPlan;
     }
     hasEquipment = (equipment:Equipment) => {
-
         return this.currentEquipment.includes(equipment.getID());
-
     }
 
     //getPendingEquipment
@@ -269,11 +310,11 @@ export default class User implements UserProps{
     }
 
     getEmailByID = (emailID: number) => {
-        return this.emails[emailID];
+        return getEmailAddrByID(emailID);
     }
 
     getAddressByID = (addressID: number) => {
-        return this.addresses[addressID];
+        return getAddrByID(addressID);
     }
 
     changeUserName = (name: string) => {
@@ -299,54 +340,69 @@ export default class User implements UserProps{
     }
 
     addEmail = (email: Email) => {
-        this.getEmails().concat(email);
+        // Adds the email to the list of emails
+        const newEmailSet = new Set(this.emails);
+        newEmailSet.add(email.getID());
+        this.emails = [... newEmailSet];
+        save()
     }
 
     addAddress = (address: Address) => {
-        this.getAddresses().concat(address)
+        const newAddressSet = new Set(this.addresses);
+        newAddressSet.add(address.getID());
+        this.addresses = [... newAddressSet];
+        save();
     }
 
     addPayment = (payment: Payment) => {
-        this.getPayments().concat(payment)
+        const newPaymentSet = new Set(this.payments);
+        newPaymentSet.add(payment.getID());
+        this.payments = [... newPaymentSet];
+        save();
     }
 
     validateUser = () => {
         return this.validateAddress() == '' && this.validateCity() == '' && this.validateEmail() == ''
-            && this.validatePassword() == '' && this.validateState() == '' && this.validateZip() == ''
+            && this.validateAddress2() == '' && this.validatePassword() == '' && this.validateState() == '' && this.validateZip() == ''
     }
 
     validateEmail = () => {
-        let index = this.getEmails().length - 1
-        if (this.getEmails()[index].getEmail().length != 0 && this.getEmails()[index].getEmail().includes('@')
-            && this.getEmails()[index].getEmail().includes('.')) return '';
+        let index = this.getEmails().length - 1;
+        if (this.getLatestEmail().getEmail().length != 0 && this.getLatestEmail().getEmail().includes('@')
+            && this.getLatestEmail().getEmail().includes('.')) return '';
         else return 'Please enter a valid email';
     }
 
     validatePayment = (index: number) => {
-
     }
 
     validateAddress = () => {
+        console.log("")
         let index = this.getAddresses().length - 1
-        if (this.getAddresses()[index].getAddress().length != 0) return ''
+        if (this.getLatestAddress().getAddress().length != 0) return '';
         else return 'Please enter a valid address'
     }
 
+    validateAddress2 = () => {
+        return '';
+    }
+
+
     validateCity = () => {
         let index = this.getAddresses().length - 1
-        if (this.getAddresses()[index].getCity().length != 0) return ''
+        if (this.getLatestAddress().getCity().length != 0) return ''
         else return 'Please enter a valid address'
     }
 
     validateState = () => {
         let index = this.getAddresses().length - 1
-        if (this.getAddresses()[index].getState().length != 0) return ''
+        if (this.getLatestAddress().getState().length != 0) return ''
         else return 'Please enter a valid state'
     }
 
     validateZip = () => {
         let index = this.getAddresses().length - 1
-        if (this.getAddresses()[index].getZip().length != 0) return ''
+        if (this.getLatestAddress().getZip().length != 0) return ''
         else return 'Please enter a valid zip code'
     }
 
@@ -355,5 +411,19 @@ export default class User implements UserProps{
         else return 'Password must be at least 5 characters long'
     }
 
+    getLatestEmail = () => {
+        if (this.emails.length === 0){
+            return this.getEmailByID(0);
+        } else {
+            return this.getEmailByID(this.emails.length -1);
+        }
+    }
 
+    getLatestAddress = () => {
+        if (this.emails.length === 0){
+            return this.getAddressByID(0);
+        } else {
+            return this.getAddressByID(this.addresses.length -1);
+        }
+    }
 }

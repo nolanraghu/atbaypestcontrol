@@ -6,10 +6,14 @@ import useColorScheme from './hooks/useColorScheme';
 import Navigation from './navigation';
 import store from "./redux/store";
 import {Provider} from 'react-redux';
+import { LogBox } from 'react-native';
+
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
   const colorScheme = useColorScheme();
+  LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
+  LogBox.ignoreAllLogs();
 
   if (!isLoadingComplete) {
     return null;

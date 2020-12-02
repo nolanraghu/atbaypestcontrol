@@ -1,33 +1,41 @@
 interface addressProps {
-    id: string,
+    id: number,
     address: string,
+    address2: string,
     city: string,
     state: string,
     zip: string
 }
 
 interface AddressasJSON {
-    id: string,
+    id: number,
     address: string,
+    address2: string,
     city: string,
     state: string,
     zip: string
 }
 
 export default class Address implements addressProps{
-    id: string = "";
+    id: number = 0;
     address: string = "";
+    address2: string = "";
     city: string = "";
     state: string = "";
     zip: string = "";
+    static singles: Array<Address> = new Array<Address>();
 
-    constructor(id: string = "0", address: string = "123 Fake st.",
-                city: string = "RealCity", state: string = "Realington", zip: string = "12345") {
-        this.id = id;
-        this.address = address;
-        this.city = city;
-        this.state = state;
-        this.zip = zip;
+    constructor(id: number = 0, address: string = '', address2: string = '', city: string = '', state: string = '', zip:string = '') {
+        if (typeof Address.singles[id] === 'undefined') {
+            this.id = id;
+            this.address = address;
+            this.address2 = address2;
+            this.city = city;
+            this.state = state;
+            this.zip = zip;
+            Address.singles[id] = this;
+        }
+        return Address.singles[id];
     }
 
     toString = () => {
@@ -35,6 +43,7 @@ export default class Address implements addressProps{
             {
                 id: this.id,
                 address: this.address,
+                address2: this.address2,
                 city: this.city,
                 state: this.state,
                 zip: this.zip
@@ -46,12 +55,23 @@ export default class Address implements addressProps{
         let json = JSON.parse(jsonString) as AddressasJSON;
         this.id = json.id;
         this.address = json.address;
+        this.address2 = json.address2;
         this.city = json.city;
         this.zip = json.zip;
+
+        return this;
+    }
+
+    getID = () => {
+        return this.id;
     }
 
     getAddress = () => {
         return this.address;
+    }
+
+    getAddress2 = () => {
+        return this.address2;
     }
 
     getCity = () => {
@@ -71,7 +91,7 @@ export default class Address implements addressProps{
     }
 
     updateAddressLine2 = (line2:string) => {
-        this.address.concat(", " + line2)
+        this.address2 = line2;
     }
 
     updateCity = (city:string) => {
