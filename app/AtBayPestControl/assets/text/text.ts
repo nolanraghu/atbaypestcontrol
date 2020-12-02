@@ -18,6 +18,15 @@ export function tab2label(){
 export function tab3label(){
     return "Profile";
 }
+export function errorTitle(){
+    return 'Error'
+}
+export function errorMessage(){
+    return 'Your profile did not get updated'
+}
+export function errorDismiss(){
+    return 'OK'
+}
 
 //Potentially general use text
 export function costText(price:number){
