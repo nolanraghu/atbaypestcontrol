@@ -406,9 +406,9 @@ export default class User implements UserProps{
 
     getLatest = () => {
         if (this.emails.length === 0){
-            return 0;
+            return this.getEmailByID(0);
         } else {
-            return this.emails.length -1;
+            return this.getEmailByID(this.emails.length -1);
         }
     }
 }
