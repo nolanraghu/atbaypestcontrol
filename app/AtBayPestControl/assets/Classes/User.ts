@@ -12,15 +12,15 @@ import {PAY} from "../Data/allPayments"
 import images from "../images";
 import {storeUser} from "../Data/Storage";
 import Infestation from "./Infestation";
-import {getEmailAddrByID, getAddrByID, getPaymentByID, save} from "../Data/Data";
+import {save} from "../Data/Data";
 
 
 interface UserProps {
     name: string,
     password: string,
-    emails: Array<number>,
-    addresses: Array<number>,
-    payments: Array<number>,
+    emails: Array<Email>,
+    addresses: Array<Address>,
+    payments: Array<Payment>,
     defaultAddress: Address,
     profilePic: NodeRequire,
     backgroundPic: NodeRequire,
@@ -38,9 +38,9 @@ interface UserasJSON {
     removedEquipment: Array <number>,
     name: string,
     password: string,
-    emails: Array<number>,
-    addresses: Array<number>,
-    payments: Array<number>,
+    emails: Array<string>,
+    addresses: Array<string>,
+    payments: Array<string>,
     defaultAddress: string,
     loggedIn: boolean
 }
@@ -48,10 +48,10 @@ export default class User implements UserProps{
     //TODO: Add all of the personal information here and have it be used by Profile tab
 
     // If this is 0, that should mean they haven't made an account yet
-    emails: Array<number> = [];
-    addresses: Array<number> = [];
-    payments: Array<number> = [];
+    emails: Array<Email> = [];
     defaultAddress: Address = new Address();
+    addresses: Array<Address> = [];
+    payments: Array<Payment> = [];
     name: string = "";
     password: string = "";
     profilePic: NodeRequire = images.user.profile_picture;
@@ -71,26 +71,29 @@ export default class User implements UserProps{
             return User.theUser;
     }
 
-    private stringList = (arr: Array<number>) => {
-        let ids: Array<number> = [];
+    private stringList = (arr: Array<any>) => {
+        let ids: Array<string> = [];
         arr.forEach(
             function (eq){
-                ids.push(eq)
+                ids.push(eq.toString())
             }
         );
         return ids;
     }
+
+
+
 
     toString = () => {
         return JSON.stringify(
             {
                 id: this.id,
                 userPlan: this.userPlan.toString(),
-                currentEquipment: this.stringList(this.currentEquipment),
-                removedEquipment: this.stringList(this.removedEquipment),
+                currentEquipment: this.currentEquipment,
+                removedEquipment: this.removedEquipment,
                 emails: this.stringList(this.emails),
                 addresses: this.stringList(this.addresses),
-                payments: this.stringList(this.payments),
+                payments: this.stringList(this.addresses),
                 defaultAddress: this.defaultAddress.toString(),
                 name: this.name,
                 password: this.password,
@@ -127,19 +130,19 @@ export default class User implements UserProps{
 
         json.emails.forEach(
             (id) =>{
-                setEmails.add(id);
+                setEmails.add(new Email().fromString(id));
             }
         );
 
         json.addresses.forEach(
             (id) =>{
-                setAddresses.add(id);
+                setAddresses.add(new Address().fromString(id));
             }
         );
 
         json.payments.forEach(
             (id) =>{
-                setPayments.add(id);
+                setPayments.add(new Payment().fromString(id));
             }
         );
 
@@ -309,13 +312,6 @@ export default class User implements UserProps{
         return this.backgroundPic;
     }
 
-    getEmailByID = (emailID: number) => {
-        return getEmailAddrByID(emailID);
-    }
-
-    getAddressByID = (addressID: number) => {
-        return getAddrByID(addressID);
-    }
 
     changeUserName = (name: string) => {
         // function for updating username, to be used when edit buttons are implemented correctly in the
@@ -342,21 +338,21 @@ export default class User implements UserProps{
     addEmail = (email: Email) => {
         // Adds the email to the list of emails
         const newEmailSet = new Set(this.emails);
-        newEmailSet.add(email.getID());
+        newEmailSet.add(email);
         this.emails = [... newEmailSet];
         save()
     }
 
     addAddress = (address: Address) => {
         const newAddressSet = new Set(this.addresses);
-        newAddressSet.add(address.getID());
+        newAddressSet.add(address);
         this.addresses = [... newAddressSet];
         save();
     }
 
     addPayment = (payment: Payment) => {
         const newPaymentSet = new Set(this.payments);
-        newPaymentSet.add(payment.getID());
+        newPaymentSet.add(payment);
         this.payments = [... newPaymentSet];
         save();
     }
@@ -413,17 +409,15 @@ export default class User implements UserProps{
 
     getLatestEmail = () => {
         if (this.emails.length === 0){
-            return this.getEmailByID(0);
-        } else {
-            return this.getEmailByID(this.emails.length -1);
+            this.emails.push(new Email());
         }
+        return this.emails[this.emails.length-1];
     }
 
     getLatestAddress = () => {
-        if (this.emails.length === 0){
-            return this.getAddressByID(0);
-        } else {
-            return this.getAddressByID(this.addresses.length -1);
+        if (this.addresses.length === 0){
+            this.addresses.push(new Address());
         }
+        return this.addresses[this.addresses.length-1];
     }
 }

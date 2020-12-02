@@ -51,7 +51,7 @@ export default function UpdatePlanPopup({route, navigation}:any) {
         return (
             <View style={{width: '100%'}} key={keys++}>
                 <Payment
-                    payment={getPaymentByID(getUser().getPayments()[0])}
+                    payment={getUser().getPayments()[0]}
                     index={0}
                     onPressEdit={onPressEdit}
                     onPressPayment={onPressPayment}/>

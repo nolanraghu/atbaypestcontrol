@@ -20,17 +20,12 @@ export default class Email implements EmailProps{
     email: string = "";
     type: string = "";
     defaultE: boolean = false;
-    static singles: Array<Email> = new Array<Email>();
 
     constructor (id: number = 0, email: string = '', type: string ='', defaultE: boolean = false) {
-        if (typeof Email.singles[id] === 'undefined') {
             this.id = id;
             this.email = email;
             this.type = type;
             this.defaultE = defaultE;
-            Email.singles[id] = this;
-        }
-        return Email.singles[id];
     }
 
     toString = () => {

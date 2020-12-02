@@ -16,16 +16,11 @@ export default class Payment implements PayProps{
     id: number = 0;
     cardNumber: string = "";
     type: string = "";
-    static singles: Array<Payment> = new Array<Payment>();
 
-    constructor(id: number, cardnumber: string = '', type: string = '') {
-        if (typeof Payment.singles[id] === 'undefined') {
+    constructor(id: number = 0, cardnumber: string = '', type: string = '') {
             this.id = id;
             this.cardNumber = cardnumber;
             this.type = type;
-            Payment.singles[id] = this;
-        }
-        return Payment.singles[id];
     }
 
     toString = () => {

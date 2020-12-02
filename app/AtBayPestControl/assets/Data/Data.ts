@@ -50,26 +50,7 @@ export function getEquipmentByID(id:number):Equipment{
     return Equipment.singles[id];
 }
 
-export function getEmailAddrByID(id: number):Email {
-    if (typeof Email.singles[id] === 'undefined') {
-        new Email(id);
-    }
-    return Email.singles[id];
-}
 
-export function getAddrByID(id: number):Address {
-    if (typeof Address.singles[id] === 'undefined') {
-        new Address(id);
-    }
-    return Address.singles[id];
-}
-
-export function getPaymentByID(id: number):Payment {
-    if (typeof Payment.singles[id] === 'undefined') {
-        new Payment(id);
-    }
-    return Payment.singles[id];
-}
 
 export function getPreventionPlan():Infestation{
     return getBugByID(0);

@@ -115,6 +115,7 @@
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/screens/PlanProductPopup.tsx" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/screens/RegisterScreen.tsx" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/screens/UpdatePlanPopup.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/AtBayPestControl/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/app/AtBayPestControl/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/AtBayPestControl/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/AtBayPestControl/App.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/AtBayPestControl/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/AtBayPestControl/app.json" afterDir="false" />
@@ -227,7 +228,8 @@
       <workItem from="1606876767269" duration="11000" />
       <workItem from="1606876786566" duration="4427000" />
       <workItem from="1606883395106" duration="103000" />
-      <workItem from="1606883521528" duration="1203000" />
+      <workItem from="1606883521528" duration="2974000" />
+      <workItem from="1606886543347" duration="1396000" />
     </task>
     <task id="LOCAL-00001" summary="First Commit. Renaming screens/tabs to fit our needs.">
       <created>1602888296289</created>
