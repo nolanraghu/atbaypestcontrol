@@ -17,7 +17,7 @@ export default function RegisterScreen({ route, navigation }: any) {
     }
 
     const [isSubmitted, submit] = useState(false);
-  
+
     const scheme = useColorScheme();
     let styles = getStyle(scheme);
 
@@ -36,7 +36,7 @@ export default function RegisterScreen({ route, navigation }: any) {
 
     let register = () => {
         if (User.validateUser()) {
-            getUser().logIn();
+            User.logIn();
             if(goingBack){
                 navigation.pop();
                 navigation.goBack();
@@ -47,7 +47,7 @@ export default function RegisterScreen({ route, navigation }: any) {
         }
 
     }
-      
+
     function onPressText () {
         User.changeUserName('')
         User.changePassword('')

@@ -181,6 +181,8 @@ export default class User implements UserProps{
     }
     logOut = () => {
         this.loggedIn = false;
+        save();
+
     }
     isLoggedIn = () => {
         return this.loggedIn;
