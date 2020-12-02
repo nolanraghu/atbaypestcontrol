@@ -1,24 +1,29 @@
+import {NUMBER_OF_PRODUCTS} from "../Data/UsefulConstants";
+
 interface PayProps {
-    id: string,
+    id: number,
     cardNumber: string,
     type: string
 }
 
 interface PaymentasJSON {
-    id: string,
+    id: number,
     cardNumber: string,
     type: string
 }
 
 export default class Payment implements PayProps{
-    id: string = "";
+    id: number = 0;
     cardNumber: string = "";
     type: string = "";
+    static singles: Array<Payment> = new Array<Payment>();
 
-    constructor(id: string = "", cardNumber: string = "", type: string = "") {
-        this.id = id;
-        this.cardNumber = cardNumber;
-        this.type = type;
+    constructor(id: number, cardnumber: string = '', type: string = '') {
+        if (typeof Payment.singles[id] === 'undefined') {
+            this.id = id;
+            this.cardNumber = cardnumber;
+            this.type = type;
+        }
     }
 
     toString = () => {

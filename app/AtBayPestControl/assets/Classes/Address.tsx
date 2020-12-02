@@ -1,5 +1,5 @@
 interface addressProps {
-    id: string,
+    id: number,
     address: string,
     city: string,
     state: string,
@@ -7,7 +7,7 @@ interface addressProps {
 }
 
 interface AddressasJSON {
-    id: string,
+    id: number,
     address: string,
     city: string,
     state: string,
@@ -15,20 +15,23 @@ interface AddressasJSON {
 }
 
 export default class Address implements addressProps{
-    id: string = "";
+    id: number = 0;
     address: string = "";
     city: string = "";
     state: string = "";
     zip: string = "";
+    static singles: Array<Address> = new Array<Address>();
 
 
-    constructor(id: string = "0", address: string = "123 Fake st.",
-                city: string = "RealCity", state: string = "Realington", zip: string = "12345") {
-        this.id = id;
-        this.address = address;
-        this.city = city;
-        this.state = state;
-        this.zip = zip;
+    constructor(id: number = 0, address: string = '', city: string = '', state: string = '', zip:string = '') {
+        if (typeof Address.singles[id] === 'undefined') {
+            this.id = id;
+            this.address = address;
+            this.city = city;
+            this.state = state;
+            this.zip = zip;
+        }
+        return Address.singles[id];
     }
 
     toString = () => {

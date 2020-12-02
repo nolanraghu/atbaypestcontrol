@@ -2,6 +2,9 @@ import Infestation from "../Classes/Infestation";
 import User from "../Classes/User";
 import Product from "../Classes/Product";
 import Equipment from "../Classes/Equipment";
+import Email from "../Classes/Email";
+import Address from "../Classes/Address";
+import Payment from "../Classes/Payment";
 import {loadUser, storeUser} from "./Storage";
 import {NUMBER_OF_INFESTATIONS} from "./UsefulConstants";
 
@@ -46,6 +49,27 @@ export function getEquipmentByID(id:number):Equipment{
         new Equipment(id);
     }
     return Equipment.singles[id];
+}
+
+export function getEmailByID(id: number):Email {
+    if (typeof Email.singles[id] === 'undefined') {
+        new Email(id);
+    }
+    return Email.singles[id];
+}
+
+export function getAddressByID(id: number):Address {
+    if (typeof Address.singles[id] === 'undefined') {
+        new Address(id);
+    }
+    return Address.singles[id];
+}
+
+export function getPaymentByID(id: number):Payment {
+    if (typeof Payment.singles[id] === 'undefined') {
+        new Payment(id);
+    }
+    return Payment.singles[id];
 }
 
 export function getPreventionPlan():Infestation{

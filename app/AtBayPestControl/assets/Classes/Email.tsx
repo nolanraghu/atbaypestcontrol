@@ -1,14 +1,14 @@
 // Simple class to contain the Emails. The multiple emails of the user will be an array of these objects
 
 interface EmailProps {
-    id: string, // id
+    id: number, // id
     email: string, // the email
     type: string, // the type of email "personal", "work"
     defaultE: boolean // Whether this particular email is the default or not (may not be needed)
 }
 
 interface EmailasJSON {
-    id: string,
+    id: number,
     email: string,
     type: string,
     defaultE: boolean
@@ -16,16 +16,20 @@ interface EmailasJSON {
 
 export default class Email implements EmailProps{
 
-    id: string = "";
+    id: number = 0;
     email: string = "";
     type: string = "";
     defaultE: boolean = false;
+    static singles: Array<Email> = new Array<Email>();
 
-    constructor (id: string = "", email: string = "", type: string = "", defaultE: boolean = false) {
-        this.id = id;
-        this.email = email;
-        this.type = type;
-        this.defaultE = defaultE;
+    constructor (id: number = 0, email: string = '', type: string ='', defaultE: boolean = false) {
+        if (typeof Email.singles[id] === 'undefined') {
+            this.id = id;
+            this.email = email;
+            this.type = type;
+            this.defaultE = defaultE;
+        }
+        return Email.singles[id];
     }
 
     toString = () => {

@@ -13,14 +13,15 @@ import {PAY} from "../Data/allPayments"
 import images from "../images";
 import {storeUser} from "../Data/Storage";
 import Infestation from "./Infestation";
+import {getEmailByID, getAddressByID, getPaymentByID} from "../Data/Data";
 
 
 interface UserProps {
     name: string,
     password: string,
-    emails: Array<string>,
-    addresses: Array<string>,
-    payments: Array<string>,
+    emails: Array<number>,
+    addresses: Array<number>,
+    payments: Array<number>,
     defaultAddress: Address,
     profilePic: NodeRequire,
     backgroundPic: NodeRequire,
@@ -37,18 +38,18 @@ interface UserasJSON {
     removedEquipment: Array <number>,
     name: string,
     password: string,
-    emails: Array<string>,
-    addresses: Array<string>,
-    payments: Array<string>,
+    emails: Array<number>,
+    addresses: Array<number>,
+    payments: Array<number>,
     defaultAddress: string
 }
 export default class User implements UserProps{
     //TODO: Add all of the personal information here and have it be used by Profile tab
 
     // If this is 0, that should mean they haven't made an account yet
-    emails: Array<string> = [];
-    addresses: Array<string> = [];
-    payments: Array<string> = [];
+    emails: Array<number> = [];
+    addresses: Array<number> = [];
+    payments: Array<number> = [];
     defaultAddress: Address = new Address();
     name: string = "";
     password: string = "";
@@ -79,17 +80,6 @@ export default class User implements UserProps{
         return ids;
     }
 
-    private stringListStr = (arr: Array<string>) => {
-        let ids: Array<string> = [];
-        arr.forEach(
-            function (eq){
-                ids.push(eq)
-            }
-        );
-        return ids;
-    }
-
-
     toString = () => {
         return JSON.stringify(
             {
@@ -97,9 +87,9 @@ export default class User implements UserProps{
                 userPlan: this.userPlan.toString(),
                 currentEquipment: this.stringList(this.currentEquipment),
                 removedEquipment: this.stringList(this.removedEquipment),
-                emails: this.stringListStr(this.emails),
-                addresses: this.stringListStr(this.addresses),
-                payments: this.stringListStr(this.payments),
+                emails: this.stringList(this.emails),
+                addresses: this.stringList(this.addresses),
+                payments: this.stringList(this.payments),
                 defaultAddress: this.defaultAddress.toString(),
                 name: this.name,
                 password: this.password
@@ -120,7 +110,6 @@ export default class User implements UserProps{
         let setEmails = new Set(this.emails);
         let setAddresses = new Set(this.addresses);
         let setPayments = new Set(this.payments);
-
 
         json.currentEquipment.forEach(
             (id) =>{
@@ -164,7 +153,7 @@ export default class User implements UserProps{
         this.emails = []
         this.addresses = []
         this.payments= []
-        this.defaultAddress = new Address();
+        this.defaultAddress = new Address(0);
         this.name ="";
         this.password="";
         this.profilePic = images.error;
@@ -316,11 +305,11 @@ export default class User implements UserProps{
     }
 
     getEmailByID = (emailID: number) => {
-        return this.emails[emailID];
+        return getEmailByID(emailID);
     }
 
     getAddressByID = (addressID: number) => {
-        return this.addresses[addressID];
+        return getAddressByID(addressID);
     }
 
     changeUserName = (name: string) => {
@@ -346,15 +335,26 @@ export default class User implements UserProps{
     }
 
     addEmail = (email: Email) => {
-        this.getEmails().concat(email);
+        // Adds the email to the list of emails
+
+        const newEmailSet = new Set(this.emails);
+        newEmailSet.add(email.getID());
+        this.emails = [... newEmailSet];
+        save()
     }
 
     addAddress = (address: Address) => {
-        this.getAddresses().concat(address)
+        const newAddressSet = new Set(this.addresses);
+        newAddressSet.add(address.getID());
+        this.addresses = [... newAddressSet];
+        save();
     }
 
     addPayment = (payment: Payment) => {
-        this.getPayments().concat(payment)
+        const newPaymentSet = new Set(this.payments);
+        newPaymentSet.add(payment.getID());
+        this.payments = [... newPaymentSet];
+        save();
     }
 
     validateUser = () => {
@@ -363,9 +363,9 @@ export default class User implements UserProps{
     }
 
     validateEmail = () => {
-        let index = this.getEmails().length - 1
-        if (this.getEmailByID(index).getEmail().length != 0 && this.getEmailByID(index).includes('@')
-            && this.getEmailByID(index).includes('.')) return '';
+        let index = this.getEmails().length - 1;
+        if (this.getEmailByID(index).getEmail().length != 0 && this.getEmailByID(index).getEmail().includes('@')
+            && this.getEmailByID(index).getEmail().includes('.')) return '';
         else return 'Please enter a valid email';
     }
 
@@ -374,26 +374,25 @@ export default class User implements UserProps{
 
     validateAddress = () => {
         let index = this.getAddresses().length - 1
-        if (this.(index).getAddress().length != 0) return '';
-        if (this.getAddresses()[index].getAddress().length != 0) return ''
+        if (this.getAddressByID(index).getAddress.length != 0) return '';
         else return 'Please enter a valid address'
     }
 
     validateCity = () => {
         let index = this.getAddresses().length - 1
-        if (this.getAddresses()[index].getCity().length != 0) return ''
+        if (this.getAddressByID(index).getCity().length != 0) return ''
         else return 'Please enter a valid address'
     }
 
     validateState = () => {
         let index = this.getAddresses().length - 1
-        if (this.getAddresses()[index].getState().length != 0) return ''
+        if (this.getAddressByID(index).getState().length != 0) return ''
         else return 'Please enter a valid state'
     }
 
     validateZip = () => {
         let index = this.getAddresses().length - 1
-        if (this.getAddresses()[index].getZip().length != 0) return ''
+        if (this.getAddressByID(index).getZip().length != 0) return ''
         else return 'Please enter a valid zip code'
     }
 
