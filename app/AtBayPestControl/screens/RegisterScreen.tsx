@@ -35,6 +35,7 @@ export default function RegisterScreen({ route, navigation }: any) {
     })
 
     let register = () => {
+        console.log(User.toString());
         if (User.validateUser()) {
             User.logIn();
             if(goingBack){

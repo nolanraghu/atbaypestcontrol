@@ -54,8 +54,8 @@ function onPressPlace () {
 }
 
 function renderHeader ({avatar = User.getProfilePic(), avatarBackground = User.getBackgroundPic(),
-                         name = User.getUserName(), city = User.getDefaultAddress().city,
-                         state = User.getDefaultAddress().state}: RenderHProps) {
+                         name = User.getUserName(), city = User.getLatestAddress().city,
+                         state = User.getLatestAddress().state}: RenderHProps) {
 
   const scheme = useColorScheme();
   let styles = getStyle(scheme);
