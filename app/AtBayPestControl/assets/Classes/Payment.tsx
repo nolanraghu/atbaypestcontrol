@@ -23,7 +23,9 @@ export default class Payment implements PayProps{
             this.id = id;
             this.cardNumber = cardnumber;
             this.type = type;
+            Payment.singles[id] = this;
         }
+        return Payment.singles[id];
     }
 
     toString = () => {

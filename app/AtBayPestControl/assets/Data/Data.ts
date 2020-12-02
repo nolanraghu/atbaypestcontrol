@@ -50,14 +50,14 @@ export function getEquipmentByID(id:number):Equipment{
     return Equipment.singles[id];
 }
 
-export function getEmailByID(id: number):Email {
+export function getEmailAddrByID(id: number):Email {
     if (typeof Email.singles[id] === 'undefined') {
         new Email(id);
     }
     return Email.singles[id];
 }
 
-export function getAddressByID(id: number):Address {
+export function getAddrByID(id: number):Address {
     if (typeof Address.singles[id] === 'undefined') {
         new Address(id);
     }
@@ -82,8 +82,8 @@ export function getUser(){
 
 function instantiateUser(){
     loadUser().then((hi)=>{
-        User.theUser = hi;
-    })
+        User.theUser = hi}, (hi) => { throw Error(hi)
+    });
     console.log("The user instantiated from Async at "+ User.theUser.toString());
     instantiated = true;
 }

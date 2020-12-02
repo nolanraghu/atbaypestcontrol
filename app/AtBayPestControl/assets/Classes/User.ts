@@ -7,13 +7,12 @@ import Equipment from "./Equipment";
 import Email from "./Email"
 import Address from "./Address";
 import Product from "./Product";
-import {save} from "../Data/Data";
 import Payment from "../Classes/Payment"
 import {PAY} from "../Data/allPayments"
 import images from "../images";
 import {storeUser} from "../Data/Storage";
 import Infestation from "./Infestation";
-import {getEmailByID, getAddressByID, getPaymentByID} from "../Data/Data";
+import {getEmailAddrByID, getAddrByID, getPaymentByID, save} from "../Data/Data";
 
 
 interface UserProps {
@@ -29,6 +28,7 @@ interface UserProps {
     userPlan: Plan
     currentEquipment: Array<number>
     removedEquipment: Array<number>,
+    loggedIn: boolean
 }
 
 interface UserasJSON {
@@ -41,7 +41,8 @@ interface UserasJSON {
     emails: Array<number>,
     addresses: Array<number>,
     payments: Array<number>,
-    defaultAddress: string
+    defaultAddress: string,
+    loggedIn: boolean
 }
 export default class User implements UserProps{
     //TODO: Add all of the personal information here and have it be used by Profile tab
@@ -59,7 +60,7 @@ export default class User implements UserProps{
     userPlan = new Plan();
     currentEquipment: Array<number> = [];
     removedEquipment: Array<number> = [];
-    private loggedIn: boolean = false;
+    loggedIn: boolean = false;
     static theUser: User
 
     constructor(id:number = 0){
@@ -92,7 +93,8 @@ export default class User implements UserProps{
                 payments: this.stringList(this.payments),
                 defaultAddress: this.defaultAddress.toString(),
                 name: this.name,
-                password: this.password
+                password: this.password,
+                loggedIn: this.loggedIn
             }
         );
     }
@@ -105,6 +107,7 @@ export default class User implements UserProps{
         this.userPlan = new Plan().fromString(json.userPlan);
         this.defaultAddress = new Address().fromString(json.defaultAddress);
         this.id = json.id;
+        this.loggedIn = json.loggedIn;
         let curEq = new Set(this.currentEquipment);
         let remEq = new Set(this.removedEquipment);
         let setEmails = new Set(this.emails);
@@ -305,11 +308,11 @@ export default class User implements UserProps{
     }
 
     getEmailByID = (emailID: number) => {
-        return getEmailByID(emailID);
+        return getEmailAddrByID(emailID);
     }
 
     getAddressByID = (addressID: number) => {
-        return getAddressByID(addressID);
+        return getAddrByID(addressID);
     }
 
     changeUserName = (name: string) => {
@@ -336,7 +339,6 @@ export default class User implements UserProps{
 
     addEmail = (email: Email) => {
         // Adds the email to the list of emails
-
         const newEmailSet = new Set(this.emails);
         newEmailSet.add(email.getID());
         this.emails = [... newEmailSet];

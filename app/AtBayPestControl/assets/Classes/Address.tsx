@@ -30,6 +30,7 @@ export default class Address implements addressProps{
             this.city = city;
             this.state = state;
             this.zip = zip;
+            Address.singles[id] = this;
         }
         return Address.singles[id];
     }

@@ -28,6 +28,7 @@ export default class Email implements EmailProps{
             this.email = email;
             this.type = type;
             this.defaultE = defaultE;
+            Email.singles[id] = this;
         }
         return Email.singles[id];
     }
