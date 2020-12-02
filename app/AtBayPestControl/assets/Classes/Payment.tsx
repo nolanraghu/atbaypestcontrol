@@ -38,7 +38,6 @@ export default class Payment implements PayProps{
         this.id = json.id;
         this.cardNumber = json.cardNumber;
         this.type = json.type;
-
         return this;
     }
 

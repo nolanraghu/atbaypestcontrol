@@ -44,41 +44,7 @@ export default class Product{
         return Product.singles[id];
     }
 
-    toString = () => {
-        let eqIDs: Array<number> = [];
-        this.equipment.forEach(
-            function (eq){
-                eqIDs.push(eq)
-            }
-        );
-        return JSON.stringify(
-            {
-                id: this.id,
-                image: this.image,
-                name: this.name,
-                description: this.description,
-                equipment: eqIDs,
-                price: this.price,
-                timeline: this.timeline
-            }
-        );
-    }
 
-    fromString = (jsonString: string) => {
-        let json = JSON.parse(jsonString) as ProductasJSON;
-        this.id = json.id;
-        this.image = image.product[this.id];
-        this.name = json.name;
-        this.description = json.description;
-
-        json.equipment.forEach(
-            (id) => {
-                this.equipment.push(id);
-            }
-        );
-        this.price = json.price;
-        this.timeline = json.timeline;
-    }
 
     equals = (e: Product) => {
         return e.getID() == this.getID();
