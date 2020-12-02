@@ -51,7 +51,7 @@ export default class User implements UserProps{
     emails: Array<Email> = [];
     defaultAddress: Address = new Address();
     addresses: Array<Address> = [];
-    payments: Array<Payment> = [];
+    payments: Array<Payment> = [new Payment()];
     name: string = "";
     password: string = "";
     profilePic: NodeRequire = images.user.profile_picture;
@@ -93,7 +93,7 @@ export default class User implements UserProps{
                 removedEquipment: this.removedEquipment,
                 emails: this.stringList(this.emails),
                 addresses: this.stringList(this.addresses),
-                payments: this.stringList(this.addresses),
+                payments: this.stringList(this.payments),
                 defaultAddress: this.defaultAddress.toString(),
                 name: this.name,
                 password: this.password,

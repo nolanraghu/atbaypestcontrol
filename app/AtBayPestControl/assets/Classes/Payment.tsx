@@ -42,11 +42,11 @@ export default class Payment implements PayProps{
     }
 
     getCardNumber = (): string => {
-        return this.cardNumber === ''? "FakeCardNumber123":this.cardNumber ;
+        return this.cardNumber ;
     }
 
     getCardType = () => {
-        return this.type === ''? "Undefined Type": this.type ;
+        return this.type ;
     }
 
     getID = () => {
