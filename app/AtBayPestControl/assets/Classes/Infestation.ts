@@ -42,45 +42,6 @@ export default class Infestation {
         return Infestation.singles[id];
     }
 
-    toString = () => {
-        let prodIDs: Array<number> = [];
-        this.products.forEach(
-            function (prod) {
-                prodIDs.push(prod)
-            }
-        );
-        return JSON.stringify(
-            {
-                id: this.id,
-                image: this.id,
-                name: this.name,
-                description: this.description,
-                products: prodIDs,
-                upfrontPrice: this.upfrontPrice,
-                monthlyPrice: this.monthlyPrice,
-                duration: this.duration
-            }
-        );
-    }
-
-    fromString = (jsonString: string) => {
-        let json = JSON.parse(jsonString) as InfestationasJSON;
-
-        this.id = json.id;
-        this.image = image.infestations[this.id];
-        this.name = json.name;
-        this.description = json.description;
-
-        json.products.forEach(
-            (id) => {
-                this.products.push(id);
-            }
-        );
-        this.upfrontPrice = json.upfrontPrice;
-        this.monthlyPrice = json.monthlyPrice;
-        this.duration = json.duration;
-    }
-
     getID = () => {
         return this.id;
     }

@@ -8,7 +8,7 @@ export default function renderItem ({payment, index, onPressEdit, onPressPayment
     const scheme = useColorScheme();
     let styles = getStyle(scheme);
 
-    let card = payment.getCardNumber().replace(/\s/g, "")
+    let card = payment.getCardNumber().replace(/\s/g, "");
 
     return (
         <TouchableOpacity onPress={() => onPressPayment()}>

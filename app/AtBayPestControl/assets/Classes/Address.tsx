@@ -23,19 +23,14 @@ export default class Address implements addressProps{
     city: string = "";
     state: string = "";
     zip: string = "";
-    static singles: Array<Address> = new Array<Address>();
 
     constructor(id: number = 0, address: string = '', address2: string = '', city: string = '', state: string = '', zip:string = '') {
-        if (typeof Address.singles[id] === 'undefined') {
             this.id = id;
             this.address = address;
             this.address2 = address2;
             this.city = city;
             this.state = state;
             this.zip = zip;
-            Address.singles[id] = this;
-        }
-        return Address.singles[id];
     }
 
     toString = () => {
