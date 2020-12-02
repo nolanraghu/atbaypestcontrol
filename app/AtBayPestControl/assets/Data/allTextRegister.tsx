@@ -16,7 +16,7 @@ export const registerText = [
         User.changePassword),
     new TextBox('Address Line 1', User.validateAddress, 'streetAddressLine1',
         User.getLatestAddress().updateAddress),
-    new TextBox('Address Line 2', User.validateAddress, 'streetAddressLine2',
+    new TextBox('Address Line 2', User.validateAddress2, 'streetAddressLine2',
         User.getLatestAddress().updateAddressLine2),
     new TextBox('City', User.validateCity, 'addressCity',
         User.getLatestAddress().updateCity),

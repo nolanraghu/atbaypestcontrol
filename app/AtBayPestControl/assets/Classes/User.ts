@@ -361,41 +361,46 @@ export default class User implements UserProps{
 
     validateUser = () => {
         return this.validateAddress() == '' && this.validateCity() == '' && this.validateEmail() == ''
-            && this.validatePassword() == '' && this.validateState() == '' && this.validateZip() == ''
+            && this.validateAddress2() == '' && this.validatePassword() == '' && this.validateState() == '' && this.validateZip() == ''
     }
 
     validateEmail = () => {
         let index = this.getEmails().length - 1;
-        if (this.getEmailByID(index).getEmail().length != 0 && this.getEmailByID(index).getEmail().includes('@')
-            && this.getEmailByID(index).getEmail().includes('.')) return '';
+        if (this.getLatestEmail().getEmail().length != 0 && this.getLatestEmail().getEmail().includes('@')
+            && this.getLatestEmail().getEmail().includes('.')) return '';
         else return 'Please enter a valid email';
     }
 
     validatePayment = (index: number) => {
-
     }
 
     validateAddress = () => {
+        console.log("")
         let index = this.getAddresses().length - 1
-        if (this.getAddressByID(index).getAddress.length != 0) return '';
+        if (this.getLatestAddress().getAddress().length != 0) return '';
         else return 'Please enter a valid address'
     }
 
+    validateAddress2 = () => {
+        return '';
+    }
+
+
     validateCity = () => {
         let index = this.getAddresses().length - 1
-        if (this.getAddressByID(index).getCity().length != 0) return ''
+        if (this.getLatestAddress().getCity().length != 0) return ''
         else return 'Please enter a valid address'
     }
 
     validateState = () => {
         let index = this.getAddresses().length - 1
-        if (this.getAddressByID(index).getState().length != 0) return ''
+        if (this.getLatestAddress().getState().length != 0) return ''
         else return 'Please enter a valid state'
     }
 
     validateZip = () => {
         let index = this.getAddresses().length - 1
-        if (this.getAddressByID(index).getZip().length != 0) return ''
+        if (this.getLatestAddress().getZip().length != 0) return ''
         else return 'Please enter a valid zip code'
     }
 

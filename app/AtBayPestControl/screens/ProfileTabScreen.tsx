@@ -14,7 +14,7 @@ import Email from '../components/RenderEmail'
 import Payment from '../components/RenderPayment'
 import ShippingLocations from '../components/RenderShippingLocations';
 import Separator from '../components/Separator'
-import {PLAN} from "../assets/Data/Data";
+import {PLAN, getAddrByID, getEmailAddrByID, getPaymentByID} from "../assets/Data/Data";
 import { useNavigation } from '@react-navigation/native';
 import PlanTabScreen from "./PlanTabScreen";
 import LoginScreen from "./LoginScreen";
@@ -120,9 +120,9 @@ function renderEmail () {
 
   let EmailArray = User.getEmails().map(function(email, index) {
     return  <Email
-              key={email.getType()}
+              key={getEmailAddrByID(email).getType()}
               index={index}
-              email={email}
+              email={getEmailAddrByID(email)}
               onPressEmail={onPressEmail}
             />
   })
@@ -184,8 +184,8 @@ function renderPay () {
 
   let PayArray = User.getPayments().map(function(payment, index) {
     return  <Payment
-        key={payment.getCardNumber().substr(payment.getCardNumber().length-4)}
-        payment={payment}
+        key={getPaymentByID(payment).getCardNumber().substr(getPaymentByID(payment).getCardNumber().length-4)}
+        payment={getPaymentByID(payment)}
         index={index}
         onPressEdit={onPressEdit}
         onPressPayment={onPressPayment}
@@ -210,9 +210,9 @@ function renderLoc () {
 
   let LocationArray = User.getAddresses().map(function(address, index) {
     return  <ShippingLocations
-        key={address.getAddress()}
+        key={getAddrByID(address).getAddress()}
         index={index}
-        address={address}
+        address={getAddrByID(address)}
         onPressPlace={onPressPlace}
     />
   })
