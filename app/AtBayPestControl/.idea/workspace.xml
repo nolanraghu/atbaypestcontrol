@@ -14,16 +14,17 @@
       <path>
         <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
         <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="BRANCH:Anuja-New" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:Kahero" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </select>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f11504bf-41dd-4bca-92fa-bafd18444296" name="Default Changelist" comment="basic database">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/Data/Data.ts" beforeDir="false" afterPath="$PROJECT_DIR$/assets/Data/Data.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/redux/reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/redux/reducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens/BugsTabScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/screens/BugsTabScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/Classes/Infestation.ts" beforeDir="false" afterPath="$PROJECT_DIR$/assets/Classes/Infestation.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/Classes/Plan.ts" beforeDir="false" afterPath="$PROJECT_DIR$/assets/Classes/Plan.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/Data/allInfestations.ts" beforeDir="false" afterPath="$PROJECT_DIR$/assets/Data/allInfestations.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/InfestationPulling.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/controller/InfestationPulling.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

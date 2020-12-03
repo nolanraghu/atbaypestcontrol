@@ -12,7 +12,7 @@ export function getInfestationInfo(bId: number) {
         products: [0],
         upfrontPrice: 0,
         monthlyPrice: 0,
-        duration: 0
+        duration: 0,
     };
     switch(bId){
         case 0:
