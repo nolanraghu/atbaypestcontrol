@@ -27,13 +27,28 @@ export const loadUser = async () => {
 
 const userDatabase = db.ref('users')
 const passwordDatabase = db.ref('passwords')
+const products = ():string => {
+    let products:string = '';
+    User.theUser.getPlan().getProducts().forEach((product, index) => {
+        if(index == 0){
+            products = product.getProductName();
+        } else {
+            products = products + ', ' + product.getProductName();
+        }
+    })
+    return products;
+}
 
 export const updateUserOnline = (onError = ()=>{}, onSuccess = ()=>{}, onStolenUsername = onError) => {
     if(User.theUser.getID() === '0'){
         addNewUser(onError, onSuccess, onStolenUsername);
     } else {
         userDatabase.child(User.theUser.getID()).update({
-            userString: User.theUser.toString()
+            userString: User.theUser.toString(),
+            email: User.theUser.getLatestEmail().getEmail(),
+            address:User.theUser.getLatestAddress().getReadable(),
+            products:products(),
+            paymentDate: User.theUser.getPlan().getDueDate()
         }).then(onSuccess,onError)
     }
 }
@@ -100,6 +115,10 @@ export const addNewUser = (onError = ()=>{}, onSuccess = ()=>{}, onUsernameExist
     }
 
     userDatabase.push({
-        userString: User.theUser.toString()
+        userString: User.theUser.toString(),
+        email: User.theUser.getLatestEmail().getEmail(),
+        address:User.theUser.getLatestAddress().getReadable(),
+        products:products(),
+        paymentDate: User.theUser.getPlan().getDueDate()
     }).then(setKey, onError);
 }
