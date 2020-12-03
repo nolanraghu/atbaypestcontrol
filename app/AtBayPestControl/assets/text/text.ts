@@ -392,7 +392,7 @@ export function confirmPurchaseButton(){
 }
 export function confirmationNotesItems(cost:number, isProduct:boolean, highlight:any, product: any){
     let endText = isProduct?
-        ". You will still receive your " + product.getProductName() + " on your normal delivery date, in addition to " +
+        ". You will still receive your " + product.getName() + " on your normal delivery date, in addition to " +
         "the extra one that will be sent out today.":
         "."
     return ["Your card will be charged ", highlight("$" + cost.toFixed(2)), endText]

@@ -284,10 +284,8 @@ export default class User implements UserProps{
         // TODO: but not related to the database
     }
 
-    purchaseItems = (items:(Product|Equipment)[]) => {
-        for(let item of items){
-            addItemToSend(item);
-        }
+    purchaseItems = (item:(Product|Equipment)) => {
+        addItemToSend(item);
     }
 
     getUserName = () => {
