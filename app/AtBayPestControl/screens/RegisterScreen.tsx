@@ -4,7 +4,7 @@ import {buttonColor, getOffButtonColor, getStyle} from '../assets/Stylesheets/St
 import InputBox from "../components/RenderTextBox";
 import {registerText} from "../assets/Data/allTextRegister";
 import {getUser} from "../assets/Data/Data";
-import {logIn} from "../redux/action";
+import {changePlan, changeProfile, logIn} from "../redux/action";
 import {useDispatch} from "react-redux";
 import {addNewUser} from "../assets/Data/Storage";
 import {makeAlert} from "../components/errorMessage";
@@ -59,6 +59,8 @@ export default function RegisterScreen({ route, navigation }: any) {
                             navigation.goBack();
                         }
                         dispatch(logIn());
+                        dispatch(changePlan());
+                        dispatch(changeProfile());
                         setRegistering(false);
                     },
                     ()=>{
@@ -74,9 +76,11 @@ export default function RegisterScreen({ route, navigation }: any) {
     }
 
     function onPressText () {
-        User.changeUserName('')
-        User.changePassword('')
-        navigation.navigate('LoginScreen')
+        if(!registering){
+            User.changeUserName('')
+            User.changePassword('')
+            navigation.navigate('LoginScreen', {goingBack: goingBack})
+        }
     }
 
     function getButtonColor () {

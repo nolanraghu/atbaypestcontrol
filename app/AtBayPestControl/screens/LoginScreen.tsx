@@ -1,14 +1,16 @@
 import React, {useState} from 'react'
 import {Button, Text, TextInput, TouchableOpacity, useColorScheme, View} from 'react-native'
-import {buttonColor, getStyle} from '../assets/Stylesheets/Styles'
+import {buttonColor, getOffButtonColor, getStyle} from '../assets/Stylesheets/Styles'
 import {Input} from "react-native-elements";
 import {getUser} from "../assets/Data/Data";
 import {loginText} from '../assets/Data/allTextLogin'
 import InputBox from "../components/RenderTextBox";
 import {StackActions} from "react-navigation";
 import {useDispatch} from "react-redux";
-import {LOG_IN, logIn} from "../redux/action";
+import {changePlan, changeProfile, LOG_IN, logIn} from "../redux/action";
 import {getUserFromOnline} from "../assets/Data/Storage";
+import {makeAlert} from "../components/errorMessage";
+import {loginError} from "../assets/text/text";
 
 export default function LoginScreen ({route, navigation}: any) {
     const params = route.params;
@@ -19,6 +21,8 @@ export default function LoginScreen ({route, navigation}: any) {
     }
 
     const [isSubmitted, submit] = useState(false);
+    const [loggingIn, setLoggingIn] = useState(false);
+    let validUser = false, validPass = false;
 
     const dispatch = useDispatch();
 
@@ -26,16 +30,22 @@ export default function LoginScreen ({route, navigation}: any) {
     let styles = getStyle(scheme);
     let User = getUser();
 
-    let InputArray = loginText.map(function(Text, index) {
-        return  <InputBox
-                    key={index}
-                    errorMessage={Text.getErrorMessage()}
-                    type={Text.getType()}
-                    placeHolder={Text.getPlaceHolder()}
-                    onSubmitEditing={Text.onSubmit}
-                    submitted = {isSubmitted}
-                />
-    })
+    let InputArray = [
+        <InputBox placeHolder={'Username'}
+                  errorMessage={()=> {return validUser? '':'Username does not exist'}}
+                  type={"username"}
+                  onSubmitEditing={User.changeUserName}
+                  submitted={isSubmitted}/>,
+        <InputBox placeHolder={'Password'}
+                  errorMessage={()=> {if(User.validatePassword() === ""){
+                      return validPass? '':'Incorrect Password'
+                  } else {
+                      return User.validatePassword();
+                  }}}
+                  type={"password"}
+                  onSubmitEditing={User.changePassword}
+                  submitted={isSubmitted}/>
+    ]
 
     function onPressText () {
         User.changeUserName('')
@@ -44,21 +54,48 @@ export default function LoginScreen ({route, navigation}: any) {
     }
 
     function onPressButton () {
-        if (User.validatePassword() === '') {
-            const onSuccess = () => {
-                getUser().logIn();
-                if(goingBack){
-                    navigation.goBack();
-                }
-                dispatch(logIn());
+        if(!loggingIn){
+            if (User.validatePassword() === '') {
+                setLoggingIn(true);
+                getUserFromOnline(User.getUserName(),
+                    User.getPassword(),
+                    ()=> {
+                        makeAlert(loginError());
+                        setLoggingIn(false);
+                    },
+                    () => {
+                        getUser().logIn();
+                        if(goingBack){
+                            navigation.goBack();
+                        }
+                        dispatch(logIn());
+                        dispatch(changePlan());
+                        dispatch(changeProfile());
+                        setLoggingIn(false);
+                    },
+                    () => {
+                        validUser = true;
+                        validPass = false;
+                        submit(true);
+                        setLoggingIn(false);
+                    },
+                    ()=> {
+                        validUser = false;
+                        validPass = true;
+                        submit(true);
+                        setLoggingIn(false);
+                    })
+            } else {
+                submit(true);
             }
-            getUserFromOnline('kobin',
-                'asdfghjk',
-                () => console.log('error'),
-                onSuccess,
-                () => console.log('incorrect username/password'));
+        }
+    }
+
+    function getButtonColor () {
+        if (loggingIn){
+            return getOffButtonColor(scheme);
         } else {
-            submit(true);
+            return buttonColor;
         }
     }
 
@@ -73,7 +110,7 @@ export default function LoginScreen ({route, navigation}: any) {
                     {InputArray}
                 </View>
                 <TouchableOpacity>
-                    <Button  title={'Submit'} onPress={onPressButton} color={buttonColor}/>
+                    <Button  title={'Submit'} onPress={onPressButton} color={getButtonColor()}/>
                 </TouchableOpacity>
                 <View style={styles.wordRow}>
                     <Text style={styles.subText}>Don't have an account? </Text>

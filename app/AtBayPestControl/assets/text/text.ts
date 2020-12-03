@@ -36,6 +36,9 @@ export function errorDismiss(){
 export function usernameStolen(){
     return 'Oops! We messed up. Your username has been taken. Please contact support.'
 }
+export function loginError(){
+    return 'Not able to access your account.'
+}
 
 //Potentially general use text
 export function costText(price:number){
