@@ -153,7 +153,7 @@ export default class User implements UserProps{
         console.log("User.delete() called");
         this.emails = [];
         this.addresses = [];
-        payments = [new Payment()];
+        this.payments = [new Payment()];
         this.name ="";
         this.password="";
         this.id= '0';
