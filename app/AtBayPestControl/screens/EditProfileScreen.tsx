@@ -57,14 +57,6 @@ export default function EditProfileScreen() {
             editText={email.updateEmail}
         />
     });
-    let paymentArray = user.getPayments().map(function (payment, index) {
-        return (
-            <View>
-                <Editable textIn={payment.cardNumber} editText={payment.setCardNumber} type={"Card Number"}/>
-                <Editable textIn={payment.type} editText={payment.setCardType} type={"Card Type"}/>
-            </View>
-        )
-    });
 
     return (
         <ScrollView style={styles.scroll}>
@@ -74,7 +66,6 @@ export default function EditProfileScreen() {
                     {pword}
                     {AddyArray}
                     {EmailArray}
-                    {paymentArray}
                 </Card>
             </View>
         </ScrollView>
