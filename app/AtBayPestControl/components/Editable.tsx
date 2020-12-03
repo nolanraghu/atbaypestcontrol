@@ -15,7 +15,7 @@ export default function Editable ({textIn, editText, type}: renderProps) {
     let x = type + ": ";
 
     return (
-        <View style={{flexDirection: "row"}}>
+        <View style={{flexDirection: "row", paddingTop: 20}}>
             <Text style={styles.Text}>{x}</Text>
             <TextInput style={[styles.inputText]}
                        onChangeText={text=>{onChangeText(text); editText(text);save();dispatch(changePlan())}}

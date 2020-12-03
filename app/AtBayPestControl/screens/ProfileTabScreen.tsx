@@ -14,7 +14,7 @@ import Email from '../components/RenderEmail'
 import Payment from '../components/RenderPayment'
 import ShippingLocations from '../components/RenderShippingLocations';
 import Separator from '../components/Separator'
-import {PLAN} from "../assets/Data/Data";
+import {gimmekey, PLAN} from "../assets/Data/Data";
 import { useNavigation } from '@react-navigation/native';
 import PlanTabScreen from "./PlanTabScreen";
 import LoginScreen from "./LoginScreen";
@@ -123,7 +123,7 @@ function renderEmail () {
 
   let EmailArray = User.getEmails().map(function(email, index) {
     return  <Email
-              key={email.getType()}
+              key={gimmekey()}
               index={index}
               email={email}
               onPressEmail={onPressEmail}
@@ -214,7 +214,7 @@ function renderLoc () {
 
   let LocationArray = User.getAddresses().map(function(address, index) {
     return  <ShippingLocations
-        key={address.getAddress()}
+        key={gimmekey()}
         index={index}
         address={address}
         onPressPlace={onPressPlace}

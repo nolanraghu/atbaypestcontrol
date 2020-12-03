@@ -50,7 +50,9 @@ export function getEquipmentByID(id:number):Equipment{
     return Equipment.singles[id];
 }
 
-
+export function gimmekey() {
+    return new Date().getTime();
+}
 
 export function getPreventionPlan():Infestation{
     return getBugByID(0);
@@ -70,7 +72,7 @@ function instantiateUser(){
         User.theUser = hi;
         console.log("The user instantiated from Async at "+ User.theUser.toString());
         instantiated = true;
-        }, 
+        },
         (hi) => { throw Error(hi)}
         );
 }

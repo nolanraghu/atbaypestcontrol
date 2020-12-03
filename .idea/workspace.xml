@@ -117,6 +117,7 @@
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/screens/RegisterScreen.tsx" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/screens/UpdatePlanPopup.tsx" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/src/config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/AtBayPestControl/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/app/AtBayPestControl/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/AtBayPestControl/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/AtBayPestControl/App.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/AtBayPestControl/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/AtBayPestControl/app.json" afterDir="false" />
@@ -235,6 +236,7 @@
       <workItem from="1606965055262" duration="6728000" />
       <workItem from="1606971887683" duration="2546000" />
       <workItem from="1606974799103" duration="313000" />
+      <workItem from="1607027347765" duration="1626000" />
     </task>
     <task id="LOCAL-00001" summary="First Commit. Renaming screens/tabs to fit our needs.">
       <created>1602888296289</created>
