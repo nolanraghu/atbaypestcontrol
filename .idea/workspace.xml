@@ -115,6 +115,7 @@
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/screens/PlanProductPopup.tsx" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/screens/RegisterScreen.tsx" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/screens/UpdatePlanPopup.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/src/config.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/AtBayPestControl/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/app/AtBayPestControl/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/AtBayPestControl/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/AtBayPestControl/App.tsx" afterDir="false" />
@@ -230,6 +231,7 @@
       <workItem from="1606883395106" duration="103000" />
       <workItem from="1606883521528" duration="2974000" />
       <workItem from="1606886543347" duration="3317000" />
+      <workItem from="1606958813292" duration="659000" />
     </task>
     <task id="LOCAL-00001" summary="First Commit. Renaming screens/tabs to fit our needs.">
       <created>1602888296289</created>
@@ -304,25 +306,25 @@
       <screen x="0" y="23" width="1792" height="1033" />
     </state>
     <state x="730" y="261" key="#com.intellij.ide.util.MemberChooser/0.23.1792.1033@0.23.1792.1033" timestamp="1604619596708" />
-    <state width="1448" height="279" key="GridCell.Tab.0.bottom" timestamp="1606159570164">
+    <state width="1771" height="279" key="GridCell.Tab.0.bottom" timestamp="1606958834945">
       <screen x="0" y="23" width="1792" height="1026" />
     </state>
-    <state width="1448" height="279" key="GridCell.Tab.0.bottom/0.23.1792.1026@0.23.1792.1026" timestamp="1606159570164" />
+    <state width="1771" height="279" key="GridCell.Tab.0.bottom/0.23.1792.1026@0.23.1792.1026" timestamp="1606958834945" />
     <state width="1771" height="274" key="GridCell.Tab.0.bottom/0.23.1792.1028@0.23.1792.1028" timestamp="1603982707390" />
-    <state width="1448" height="279" key="GridCell.Tab.0.center" timestamp="1606159570163">
+    <state width="1771" height="279" key="GridCell.Tab.0.center" timestamp="1606958834944">
       <screen x="0" y="23" width="1792" height="1026" />
     </state>
-    <state width="1448" height="279" key="GridCell.Tab.0.center/0.23.1792.1026@0.23.1792.1026" timestamp="1606159570163" />
+    <state width="1771" height="279" key="GridCell.Tab.0.center/0.23.1792.1026@0.23.1792.1026" timestamp="1606958834944" />
     <state width="1771" height="274" key="GridCell.Tab.0.center/0.23.1792.1028@0.23.1792.1028" timestamp="1603982707390" />
-    <state width="1448" height="279" key="GridCell.Tab.0.left" timestamp="1606159570162">
+    <state width="1771" height="279" key="GridCell.Tab.0.left" timestamp="1606958834944">
       <screen x="0" y="23" width="1792" height="1026" />
     </state>
-    <state width="1448" height="279" key="GridCell.Tab.0.left/0.23.1792.1026@0.23.1792.1026" timestamp="1606159570162" />
+    <state width="1771" height="279" key="GridCell.Tab.0.left/0.23.1792.1026@0.23.1792.1026" timestamp="1606958834944" />
     <state width="1771" height="274" key="GridCell.Tab.0.left/0.23.1792.1028@0.23.1792.1028" timestamp="1603982707389" />
-    <state width="1448" height="279" key="GridCell.Tab.0.right" timestamp="1606159570163">
+    <state width="1771" height="279" key="GridCell.Tab.0.right" timestamp="1606958834945">
       <screen x="0" y="23" width="1792" height="1026" />
     </state>
-    <state width="1448" height="279" key="GridCell.Tab.0.right/0.23.1792.1026@0.23.1792.1026" timestamp="1606159570163" />
+    <state width="1771" height="279" key="GridCell.Tab.0.right/0.23.1792.1026@0.23.1792.1026" timestamp="1606958834945" />
     <state width="1771" height="274" key="GridCell.Tab.0.right/0.23.1792.1028@0.23.1792.1028" timestamp="1603982707390" />
     <state x="734" y="414" key="VCS.EditChangelistDialog" timestamp="1603076356758">
       <screen x="0" y="23" width="1792" height="1030" />
