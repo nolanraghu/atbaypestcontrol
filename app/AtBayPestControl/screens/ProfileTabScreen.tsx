@@ -110,12 +110,12 @@ interface RenderHProps {
 }
 
 function renderEmail () {
-
+  const navigation = useNavigation();
   const scheme = useColorScheme();
   let styles = getStyle(scheme);
 
   function onPressEmail () {
-    console.log('email')
+    navigation.navigate('AddSubscriptions');
   }
 
   let EmailArray = User.getEmails().map(function(email, index) {

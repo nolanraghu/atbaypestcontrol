@@ -357,6 +357,11 @@ export default class User implements UserProps{
             && this.validateAddress2() == '' && this.validatePassword() == '' && this.validateState() == '' && this.validateZip() == ''
     }
 
+    validateUserName = () => {
+        if (this.getUserName().length != 0) return '';
+        else return 'Please enter a valid username'
+    }
+
     validateEmail = () => {
         let index = this.getEmails().length - 1;
         if (this.getLatestEmail().getEmail().length != 0 && this.getLatestEmail().getEmail().includes('@')

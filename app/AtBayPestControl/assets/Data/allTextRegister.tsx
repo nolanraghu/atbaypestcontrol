@@ -4,7 +4,7 @@ import {getUser} from "./Data";
 let User = getUser()
 
 export const registerText = [
-    new TextBox('Username', User.validateEmail, 'username',
+    new TextBox('Username', User.validateUserName, 'username',
         (newText) => User.changeUserName(newText)),
     new TextBox('Email Address', User.validateEmail, 'emailAddress',
         (newText) => User.getLatestEmail().updateEmail(newText)),

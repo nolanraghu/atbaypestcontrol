@@ -77,4 +77,9 @@ export default class Email implements EmailProps{
     updateDefaultE = (defaultE: boolean) => {
         this.defaultE = defaultE;
     }
+
+    equals = (email: string) => {
+        if (this.getEmail().toLowerCase() === email.toLowerCase()) return '';
+        else return 'Emails must match'
+    }
 }
