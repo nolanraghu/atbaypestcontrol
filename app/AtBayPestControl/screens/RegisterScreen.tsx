@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import {Button, ScrollView, Text, TextInput, TouchableOpacity, useColorScheme, View} from 'react-native'
-import {buttonColor, getStyle} from '../assets/Stylesheets/Styles'
+import {buttonColor, getOffButtonColor, getStyle} from '../assets/Stylesheets/Styles'
 import InputBox from "../components/RenderTextBox";
 import {registerText} from "../assets/Data/allTextRegister";
 import {getUser} from "../assets/Data/Data";
@@ -21,6 +21,8 @@ export default function RegisterScreen({ route, navigation }: any) {
 
     const [isSubmitted, submit] = useState(false);
 
+    const [registering, setRegistering] = useState(false);
+
     const scheme = useColorScheme();
     let styles = getStyle(scheme);
 
@@ -38,33 +40,51 @@ export default function RegisterScreen({ route, navigation }: any) {
     })
 
     let register = () => {
-        if (User.validateUser()) {
-            addNewUser(
-                ()=>{
-                    makeAlert(userNotAddedError())
-                },
-                ()=>{
-                    User.logIn();
-                    if(goingBack){
-                        navigation.pop();
-                        navigation.goBack();
-                    }
-                    dispatch(logIn());
-                },
-                ()=>{
-                    makeAlert(usernameExists());
-                }
-            )
-        } else {
-            submit(true);
+        let load = () => {
+            //You can add a function here if you want something to happen while it's loading
         }
 
+        if (!registering){
+            if (User.validateUser()) {
+                setRegistering(true);
+                addNewUser(
+                    ()=>{
+                        makeAlert(userNotAddedError())
+                        setRegistering(false);
+                    },
+                    ()=>{
+                        User.logIn();
+                        if(goingBack){
+                            navigation.pop();
+                            navigation.goBack();
+                        }
+                        dispatch(logIn());
+                        setRegistering(false);
+                    },
+                    ()=>{
+                        makeAlert(usernameExists());
+                        setRegistering(false);
+                    }
+                )
+                load();
+            } else {
+                submit(true);
+            }
+        }
     }
 
     function onPressText () {
         User.changeUserName('')
         User.changePassword('')
         navigation.navigate('LoginScreen')
+    }
+
+    function getButtonColor () {
+        if (registering){
+            return getOffButtonColor(scheme);
+        } else {
+            return buttonColor;
+        }
     }
 
     return (
@@ -78,7 +98,7 @@ export default function RegisterScreen({ route, navigation }: any) {
                     {InputArray}
                 </View>
                 <TouchableOpacity style={styles.submitButton}>
-                    <Button title={'Register'} onPress={register} color={buttonColor}/>
+                    <Button title={'Register'} onPress={register} color={getButtonColor()}/>
                 </TouchableOpacity>
                 <View style={styles.wordRow}>
                     <Text style={styles.subText}>Already have an account? </Text>
