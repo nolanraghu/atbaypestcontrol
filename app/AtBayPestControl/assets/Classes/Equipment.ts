@@ -45,7 +45,7 @@ export default class Equipment {
     getEquipmentDescription = () => {
         return this.description
     }
-    getEquipmentName = () => {
+    getName = () => {
         return this.name;
     }
     getPrice = () => {

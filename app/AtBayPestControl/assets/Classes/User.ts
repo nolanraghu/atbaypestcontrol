@@ -10,7 +10,7 @@ import Product from "./Product";
 import Payment from "../Classes/Payment"
 import {PAY} from "../Data/allPayments"
 import images from "../images";
-import {deleteUser, storeUser} from "../Data/Storage";
+import {addItemToSend, deleteUser, storeUser} from "../Data/Storage";
 import Infestation from "./Infestation";
 import {save} from "../Data/Data";
 import {makeAlert} from "../../components/errorMessage";
@@ -111,6 +111,7 @@ export default class User implements UserProps{
 
         this.userPlan = new Plan().fromString(json.userPlan);
         this.id = json.id;
+        this.name = json.name;
         this.loggedIn = json.loggedIn;
         this.pendingPayments = json.pendingPayments;
         let curEq = new Set(this.currentEquipment);
@@ -158,7 +159,7 @@ export default class User implements UserProps{
 
     delete = () => {
         console.log("User.delete() called");
-        deleteUser(() => makeAlert(deleteUserError()) );
+        //deleteUser(this.name, this.id,() => makeAlert(deleteUserError()) );
         this.emails = [];
         this.addresses = [];
         this.payments = [new Payment()];
@@ -182,12 +183,6 @@ export default class User implements UserProps{
         this.id = newID;
         save();
     }
-
-    hasAccount = () => {
-        //I'm assuming this means something with signing up, so I'm just gonna return true
-        return this.loggedIn;
-    }
-
     logIn = () => {
         this.loggedIn = true;
         save();
@@ -289,10 +284,10 @@ export default class User implements UserProps{
         // TODO: but not related to the database
     }
 
-    purchaseItems = (item:(Product|Equipment)[]) => {
-        // Sends the list of items that the user has purchased (separate from the plan) to the client
-        // TODO
-        console.log("Purchased")
+    purchaseItems = (items:(Product|Equipment)[]) => {
+        for(let item of items){
+            addItemToSend(item);
+        }
     }
 
     getUserName = () => {

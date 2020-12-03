@@ -77,7 +77,7 @@ export default function PlanProductPopup({route, navigation}:any){
     return(
         <View style={styles.screen}>
             <View style={styles.header}>
-                <Text style={styles.title}>{product.getProductName()}</Text>
+                <Text style={styles.title}>{product.getName()}</Text>
             </View>
             <ScrollView>
                 <View style={styles.container}>

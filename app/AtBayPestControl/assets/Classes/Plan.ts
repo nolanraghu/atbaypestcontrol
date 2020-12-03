@@ -9,8 +9,9 @@
 import Infestation from "./Infestation";
 import Product from "./Product";
 import Equipment from "./Equipment";
-import {getBugsList, getEquipmentByID, getProductByID, save} from "../Data/Data";
+import {getBugByID, getBugsList, getEquipmentByID, getProductByID, save} from "../Data/Data";
 import {makeArray} from "./ClassHelpers";
+import {addChangedProductsOnline, addItemToSend} from "../Data/Storage";
 
 interface PlanAsJsON {
     addingInfestations: Array<number>;
@@ -264,19 +265,26 @@ export default class Plan {
         return equipmentRemoved.map(eID => getEquipmentByID(eID));
     }
     addChangesToPlan = () => {
-        //TODO: This should send all of this.pendingEquipment to the client (Ortho/Brandon), as well as the
-        // changes to the plan
+        // Sends changes to client
+        for (let equipment of this.pendingEquipment){
+            addItemToSend(getEquipmentByID(equipment));
+        }
+        for (let product of this.countProducts(this.addingInfestations.map(id=>getBugByID(id)))){
+            addChangedProductsOnline(product, true);
+        }
+        for (let product of this.countProducts(this.removingInfestations.map(id=>getBugByID(id)))){
+            addChangedProductsOnline(product, false);
+        }
 
+        //Adds changes to plan locally
         let curSet = new Set(this.currentInfestations);
         let minusSet = new Set(this.removingInfestations);
         let plusSet = new Set(this.addingInfestations);
 
         for (let elem of minusSet){
-            //Send removal orders to client
             curSet.delete(elem);
         }
         for (let elem of plusSet){
-            //Send new infestation to client
             curSet.add(elem);
         }
         this.currentInfestations = [...curSet];

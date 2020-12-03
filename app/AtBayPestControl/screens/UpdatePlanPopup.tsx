@@ -87,7 +87,11 @@ export default function UpdatePlanPopup({route, navigation}:any) {
                 },
                 () => {
                     dispatch(changePlan());
-                    navigation.navigate('AddSubscriptions');
+                    if(user.getPendingPayment() != 0){
+                        navigation.navigate('AddSubscriptions');
+                    } else {
+                        navigation.navigate('BugsTabScreen');
+                    }
                     setUpdating(false);
                 },
                 () => {

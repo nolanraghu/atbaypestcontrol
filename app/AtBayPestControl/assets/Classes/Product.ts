@@ -54,7 +54,7 @@ export default class Product{
         return this.image;
     }
 
-    getProductName = () => {
+    getName = () => {
         return this.name;
     }
 

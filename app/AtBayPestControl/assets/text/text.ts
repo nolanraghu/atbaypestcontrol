@@ -52,7 +52,7 @@ export function confirmPayment(){
 }
     // Different ways to make caption images for various situations
 export function captionProductDescription(product:Product){
-    return product.getProductName() +
+    return product.getName() +
         ':\n' + product.getProductDetails() +
         productPrice(product);
 }
@@ -61,17 +61,17 @@ export function captionProductAndReqEquipment(product:Product){
     let equipment:Equipment[] = makeArray(product.getEquipmentList(), 'e');
     for(let i = equipment.length - 1; i >= 0; i--){
         if(i == equipment.length - 1){
-            equipmentText = equipment[i].getEquipmentName();
+            equipmentText = equipment[i].getName();
         } else if (i == equipment.length - 2) {
-            equipmentText = equipment[i].getEquipmentName() + " and " + equipmentText;
+            equipmentText = equipment[i].getName() + " and " + equipmentText;
         } else {
-            equipmentText = equipment[i].getEquipmentName() + ", " + equipmentText;
+            equipmentText = equipment[i].getName() + ", " + equipmentText;
         }
     }
     if (equipmentText.length != 0){
         equipmentText = "\nYou will need the " + equipmentText + " to apply this product."
     }
-    return product.getProductName() + ':\n' + product.getProductDetails() + equipmentText + productPrice(product);
+    return product.getName() + ':\n' + product.getProductDetails() + equipmentText + productPrice(product);
 }
 export function captionProductWithLink(product:Product, linkFunction:any){
     let text = orderEarly();
@@ -85,7 +85,7 @@ function productPrice(product:Product){
     ' to reorder if you need it before your regular shipment date.'
 }
 export function captionEquipmentDescription(equipment:Equipment){
-    return equipment.getEquipmentName() + ':\n' + equipment.getEquipmentDescription() + equipmentPrice(equipment);
+    return equipment.getName() + ':\n' + equipment.getEquipmentDescription() + equipmentPrice(equipment);
 }
 export function equipmentDescription(equipment:Equipment,
                                      products:Product[],
@@ -100,11 +100,11 @@ export function equipmentDescription(equipment:Equipment,
     let productText:string = '';
     for(let i = products.length - 1; i >= 0; i--){
         if(i == products.length - 1){
-            productText = products[i].getProductName();
+            productText = products[i].getName();
         } else if (i == products.length - 2) {
-            productText = products[i].getProductName() + " and " + productText;
+            productText = products[i].getName() + " and " + productText;
         } else {
-            productText = products[i].getProductName() + ", " + productText;
+            productText = products[i].getName() + ", " + productText;
         }
     }
 
@@ -112,7 +112,7 @@ export function equipmentDescription(equipment:Equipment,
     // product, using equipmentDescription. It's in an array so you can add a link
     let equipmentText:string[] | any = [
         'This is the ' +
-        equipment.getEquipmentName() +
+        equipment.getName() +
         '. You will need it to apply the ' +
         productText +
         '.\n'
@@ -134,7 +134,7 @@ export function equipmentDescription(equipment:Equipment,
 export function justEquipmentDescription(equipment:Equipment, link:any){
     let text = lostEquipment();
     return [
-        equipment.getEquipmentName() + ":\n",
+        equipment.getName() + ":\n",
         link('Click here'),
         text + equipment.getEquipmentDescription(),
         equipmentPrice(equipment)
