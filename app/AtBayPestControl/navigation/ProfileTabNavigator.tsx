@@ -27,7 +27,7 @@ export default function ProfileTabNavigator() {
                 component={ContactUsScreen}
                 options={{headerTitle: appName()}}
                 key={1}
-            />
+            />,
             ]) :
         ([
             <ProfileTabStack.Screen
