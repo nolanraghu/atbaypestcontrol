@@ -19,7 +19,7 @@ import { useNavigation } from '@react-navigation/native';
 import PlanTabScreen from "./PlanTabScreen";
 import LoginScreen from "./LoginScreen";
 import {getUser} from "../assets/Data/Data";
-import {deleteProfile} from "../assets/text/text";
+import {deleteProfile, submit} from "../assets/text/text";
 import {changePlan, LOG_OUT, logOut} from "../redux/action";
 import {useDispatch} from "react-redux";
 import images from "../assets/images";
@@ -30,6 +30,7 @@ import Editable from "../components/Editable";
 export default function EditProfileScreen() {
     const scheme = useColorScheme();
     let styles = getStyle(scheme);
+    const navigation = useNavigation();
 
     const user = getUser();
     let name = <Editable
@@ -57,6 +58,16 @@ export default function EditProfileScreen() {
             editText={email.updateEmail}
         />
     });
+    let endButton = <View style={styles.deleteProfile}>
+        <Pressable onPress={() => {navigation.navigate("ProfileTabScreen",
+            {changed: true}
+            )}}>
+            <Text style ={[styles.Text, {color: 'blue', fontWeight:"bold"}]}>
+                {submit()}
+            </Text>
+        </Pressable>
+    </View>
+
 
     return (
         <ScrollView style={styles.scroll}>
@@ -66,6 +77,7 @@ export default function EditProfileScreen() {
                     {pword}
                     {AddyArray}
                     {EmailArray}
+                    {endButton}
                 </Card>
             </View>
         </ScrollView>

@@ -113,7 +113,6 @@
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/screens/ContactUsScreen.tsx" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/screens/EditProfileScreen.tsx" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/screens/LoginScreen.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/screens/PaymentPopup.tsx" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/screens/PlanProductPopup.tsx" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/screens/RegisterScreen.tsx" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/screens/UpdatePlanPopup.tsx" afterDir="false" />
@@ -147,12 +146,11 @@
       <list>
         <option value="TypeScript File" />
         <option value="TypeScript JSX File" />
-        <option value="JavaScript File" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/app/AtBayPestControl" />
   </component>
   <component name="ProjectId" id="1iyg1HRAc0Q3o3JPDrMBhZjTu7Q" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -235,7 +233,8 @@
       <workItem from="1606883521528" duration="2974000" />
       <workItem from="1606886543347" duration="3317000" />
       <workItem from="1606958813292" duration="2089000" />
-      <workItem from="1606965055262" duration="5501000" />
+      <workItem from="1606965055262" duration="6728000" />
+      <workItem from="1606971887683" duration="2546000" />
     </task>
     <task id="LOCAL-00001" summary="First Commit. Renaming screens/tabs to fit our needs.">
       <created>1602888296289</created>
@@ -310,25 +309,25 @@
       <screen x="0" y="23" width="1792" height="1033" />
     </state>
     <state x="730" y="261" key="#com.intellij.ide.util.MemberChooser/0.23.1792.1033@0.23.1792.1033" timestamp="1604619596708" />
-    <state width="1771" height="279" key="GridCell.Tab.0.bottom" timestamp="1606965047668">
+    <state width="1771" height="279" key="GridCell.Tab.0.bottom" timestamp="1606971856544">
       <screen x="0" y="23" width="1792" height="1026" />
     </state>
-    <state width="1771" height="279" key="GridCell.Tab.0.bottom/0.23.1792.1026@0.23.1792.1026" timestamp="1606965047668" />
+    <state width="1771" height="279" key="GridCell.Tab.0.bottom/0.23.1792.1026@0.23.1792.1026" timestamp="1606971856544" />
     <state width="1771" height="274" key="GridCell.Tab.0.bottom/0.23.1792.1028@0.23.1792.1028" timestamp="1603982707390" />
-    <state width="1771" height="279" key="GridCell.Tab.0.center" timestamp="1606965047668">
+    <state width="1771" height="279" key="GridCell.Tab.0.center" timestamp="1606971856543">
       <screen x="0" y="23" width="1792" height="1026" />
     </state>
-    <state width="1771" height="279" key="GridCell.Tab.0.center/0.23.1792.1026@0.23.1792.1026" timestamp="1606965047668" />
+    <state width="1771" height="279" key="GridCell.Tab.0.center/0.23.1792.1026@0.23.1792.1026" timestamp="1606971856543" />
     <state width="1771" height="274" key="GridCell.Tab.0.center/0.23.1792.1028@0.23.1792.1028" timestamp="1603982707390" />
-    <state width="1771" height="279" key="GridCell.Tab.0.left" timestamp="1606965047667">
+    <state width="1771" height="279" key="GridCell.Tab.0.left" timestamp="1606971856542">
       <screen x="0" y="23" width="1792" height="1026" />
     </state>
-    <state width="1771" height="279" key="GridCell.Tab.0.left/0.23.1792.1026@0.23.1792.1026" timestamp="1606965047667" />
+    <state width="1771" height="279" key="GridCell.Tab.0.left/0.23.1792.1026@0.23.1792.1026" timestamp="1606971856542" />
     <state width="1771" height="274" key="GridCell.Tab.0.left/0.23.1792.1028@0.23.1792.1028" timestamp="1603982707389" />
-    <state width="1771" height="279" key="GridCell.Tab.0.right" timestamp="1606965047668">
+    <state width="1771" height="279" key="GridCell.Tab.0.right" timestamp="1606971856544">
       <screen x="0" y="23" width="1792" height="1026" />
     </state>
-    <state width="1771" height="279" key="GridCell.Tab.0.right/0.23.1792.1026@0.23.1792.1026" timestamp="1606965047668" />
+    <state width="1771" height="279" key="GridCell.Tab.0.right/0.23.1792.1026@0.23.1792.1026" timestamp="1606971856544" />
     <state width="1771" height="274" key="GridCell.Tab.0.right/0.23.1792.1028@0.23.1792.1028" timestamp="1603982707390" />
     <state x="734" y="414" key="VCS.EditChangelistDialog" timestamp="1603076356758">
       <screen x="0" y="23" width="1792" height="1030" />

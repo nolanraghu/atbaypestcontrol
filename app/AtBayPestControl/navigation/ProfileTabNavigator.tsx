@@ -10,6 +10,7 @@ import {useSelector} from "react-redux";
 import {RootState} from "../redux/store";
 import ContactUsScreen from "../screens/ContactUsScreen";
 import AddSubscription from "../screens/AddSubscriptions";
+import EditProfileScreen from "../screens/EditProfileScreen";
 
 const ProfileTabStack = createStackNavigator<ProfileTabParamList>();
 
@@ -22,6 +23,12 @@ export default function ProfileTabNavigator() {
                 component={ProfileTabScreen}
                 options={{headerTitle: appName()}}
                 key={0}
+            />,
+            <ProfileTabStack.Screen
+                name="EditProfileScreen"
+                component={EditProfileScreen}
+                options={{headerTitle:appName()}}
+                key={3}
             />,
             <ProfileTabStack.Screen
                 name='ContactUsScreen'

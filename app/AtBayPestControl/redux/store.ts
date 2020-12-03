@@ -5,6 +5,7 @@ const store = createStore(reducer);
 
 export interface RootState {
     planVersion: number,
+    profileVersion: number,
     planPendingVersion: number,
     equipmentVersion: number,
     loggedIn: boolean

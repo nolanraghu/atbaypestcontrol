@@ -23,12 +23,15 @@ import {deleteProfile} from "../assets/text/text";
 import {changePlan, LOG_OUT, logOut} from "../redux/action";
 import {useDispatch} from "react-redux";
 import images from "../assets/images";
+import {NavigationActions} from "react-navigation";
+
+
 
 //TODO: make editable, have a situation for no user yet
 
 let User = getUser();
 
-export default function ProfileTabScreen() {
+export default function ProfileTabScreen({route, navigation}: any) {
   const scheme = useColorScheme();
   let styles = getStyle(scheme);
 
@@ -115,7 +118,7 @@ function renderEmail () {
   let styles = getStyle(scheme);
 
   function onPressEmail () {
-    navigation.navigate('AddSubscriptions');
+    navigation.navigate('EditProfileScreen');
   }
 
   let EmailArray = User.getEmails().map(function(email, index) {
@@ -143,7 +146,7 @@ function renderPlan () {
   let styles = getStyle(scheme);
 
   function onPressPlan () {
-    navigation.navigate('PlanTabScreen')
+    navigation.navigate('EditProfileScreen');
   }
 
   return (
@@ -170,6 +173,7 @@ function renderPlan () {
 }
 
 function renderPay () {
+  const navigation = useNavigation();
 
   const scheme = useColorScheme();
   let styles = getStyle(scheme);
@@ -179,7 +183,7 @@ function renderPay () {
   }
 
   function onPressEdit () {
-    console.log('edit')
+    navigation.navigate('PlanTabScreen');
   }
 
   let PayArray = User.getPayments().map(function(payment, index) {
