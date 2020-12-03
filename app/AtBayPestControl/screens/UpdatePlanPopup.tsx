@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {Button, ScrollView, useColorScheme, Text, View} from "react-native";
-import {buttonColor, getStyle} from "../assets/Stylesheets/Styles";
+import {buttonColor, getOffButtonColor, getStyle} from "../assets/Stylesheets/Styles";
 import Payment from "../components/RenderPayment";
 import {getUser} from "../assets/Data/Data";
 import {
@@ -9,8 +9,8 @@ import {
     confirmationTitle,
     confirmButton, confirmPayment,
     newEquipmentConfirm, newPriceTextFooter,
-    newProductsConfirm,
-    removeProductsConfirm
+    newProductsConfirm, notUpdated,
+    removeProductsConfirm, usernameStolen
 } from "../assets/text/text";
 import Product from "../assets/Classes/Product";
 import CaptionImage from "../components/CaptionImage";
@@ -18,6 +18,8 @@ import Equipment from "../assets/Classes/Equipment";
 import {useDispatch} from "react-redux";
 import {changePlan} from "../redux/action";
 import {updateUserOnline} from "../assets/Data/Storage";
+import {makeAlert} from "../components/errorMessage";
+import {useState} from "react";
 
 export default function UpdatePlanPopup({route, navigation}:any) {
     const params = route.params;
@@ -29,6 +31,8 @@ export default function UpdatePlanPopup({route, navigation}:any) {
     }
     const scheme = useColorScheme();
     const styles = getStyle(scheme);
+
+    const [updating, setUpdating] = useState(false);
 
     // Hook to use Redux
     const dispatch = useDispatch()
@@ -61,19 +65,38 @@ export default function UpdatePlanPopup({route, navigation}:any) {
     }
 
     function pressButton(){
-        if(deleting){
-            user.removeManyEquipment(plan.removePendingChanges());
-        } else {
-            user.makePayment(plan.getNewPrice().upfront);
-            if(isChangingPlan){
-                let nextDate = plan.setDueDate(plan.getDueDate());
-                user.setMonthlyPayments(plan.getNewPrice().monthly, nextDate);
+        if(!updating){
+            let load = () => {
+                // You can do stuff when it's loading here
             }
-            plan.addChangesToPlan();
+            setUpdating(true);
+            if(deleting){
+                user.removeManyEquipment(plan.removePendingChanges());
+            } else {
+                user.makePayment(plan.getNewPrice().upfront);
+                if(isChangingPlan){
+                    let nextDate = plan.setDueDate(plan.getDueDate());
+                    user.setMonthlyPayments(plan.getNewPrice().monthly, nextDate);
+                }
+                plan.addChangesToPlan();
+            }
+            updateUserOnline(
+                () => {
+                    makeAlert(notUpdated());
+                    setUpdating(false);
+                },
+                () => {
+                    dispatch(changePlan());
+                    navigation.navigate('BugsTabScreen');
+                    setUpdating(false);
+                },
+                () => {
+                    makeAlert(usernameStolen());
+                    setUpdating(false);
+                }
+            );
+            load();
         }
-        updateUserOnline();
-        dispatch(changePlan());
-        navigation.navigate('BugsTabScreen');
     }
 
     function newProducts(){
@@ -171,12 +194,20 @@ export default function UpdatePlanPopup({route, navigation}:any) {
         }
     }
 
+    function getButtonColor(){
+        if (updating){
+            return getOffButtonColor(scheme);
+        } else {
+            return buttonColor;
+        }
+    }
+
     return(
         <View style={styles.screen}>
             <View style={styles.header}>
                 <Text style={styles.title}>{confirmationTitle(deleting, isChangingPlan)}</Text>
                 <Button title= {confirmButton(deleting, isChangingPlan)}
-                        color= {buttonColor}
+                        color= {getButtonColor()}
                         onPress={pressButton}/>
             </View>
             <ScrollView>

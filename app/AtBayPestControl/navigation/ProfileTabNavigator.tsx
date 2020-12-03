@@ -9,6 +9,7 @@ import {getUser} from "../assets/Data/Data";
 import {useSelector} from "react-redux";
 import {RootState} from "../redux/store";
 import ContactUsScreen from "../screens/ContactUsScreen";
+import AddSubscription from "../screens/AddSubscriptions";
 
 const ProfileTabStack = createStackNavigator<ProfileTabParamList>();
 
@@ -28,6 +29,12 @@ export default function ProfileTabNavigator() {
                 options={{headerTitle: appName()}}
                 key={1}
             />,
+            <ProfileTabStack.Screen
+                name='AddSubscriptions'
+                component={AddSubscription}
+                options={{headerTitle: appName()}}
+                key={2}
+            />
             ]) :
         ([
             <ProfileTabStack.Screen

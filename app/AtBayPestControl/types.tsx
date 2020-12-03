@@ -26,6 +26,7 @@ export type ProfileTabParamList = {
   LoginScreen: undefined;
   RegisterScreen: undefined;
   ContactUsScreen: undefined;
+  AddSubscriptions: undefined;
 };
 
 export type BugInfoPopupParamList = {
