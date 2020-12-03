@@ -27,6 +27,8 @@ export const loadUser = async () => {
 
 const userDatabase = db.ref('users')
 const passwordDatabase = db.ref('passwords')
+const equipmentToSendDatabase = db.ref('equipmentToSend')
+const productsChangedDatabase = db.ref('productsChanged')
 const products = ():string => {
     let products:string = '';
     User.theUser.getPlan().getProducts().forEach((product, index) => {

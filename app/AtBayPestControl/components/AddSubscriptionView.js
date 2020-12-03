@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
-import KeyboardSpacer from 'react-native-keyboard-spacer';
+//import KeyboardSpacer from 'react-native-keyboard-spacer';
 import PaymentFormView from './PaymentFormView';
 import {getUser} from "../assets/Data/Data";
 /**
@@ -10,7 +10,7 @@ export default class AddSubscriptionView extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <ScrollView style={styles.container} ref={ref => (this.scrollViewRef = ref)}>
+                <ScrollView style={styles.container}>
                     <View style={styles.textWrapper}>
                         <Text style={styles.infoText}>
                             Please Enter your payment information to complete this purchase.
@@ -26,9 +26,9 @@ export default class AddSubscriptionView extends React.Component {
                     </View>
                 </ScrollView>
                 {/* Scrolls to the payment form */}
-                <KeyboardSpacer
-                    onToggle={() => { setTimeout(() => this.scrollViewRef.scrollToEnd({ animated: true }),0)} }
-                />
+                {/*<KeyboardSpacer*/}
+                {/*    onToggle={() => { setTimeout(() => this.scrollViewRef.scrollToEnd({ animated: true }),0)} }*/}
+                {/*/>*/}
             </View>
         );
     }
