@@ -52,6 +52,7 @@ export default class Address implements addressProps{
         this.address = json.address;
         this.address2 = json.address2;
         this.city = json.city;
+        this.state = json.state;
         this.zip = json.zip;
 
         return this;
@@ -102,7 +103,11 @@ export default class Address implements addressProps{
     }
 
     getReadable = () => {
-        return this.address + ', ' + this.address2 + '\n' + this.city + ', ' + this.state + ' ' + this.zip;
+        let address = this.address;
+        if (this.address2 != '') {
+            address = address + ', ' + this.address2;
+        }
+        return address + '\n' + this.city + ', ' + this.state + ' ' + this.zip;
     }
 
 }

@@ -10,24 +10,27 @@ import Product from "./Product";
 import Payment from "../Classes/Payment"
 import {PAY} from "../Data/allPayments"
 import images from "../images";
-import {storeUser} from "../Data/Storage";
+import {deleteUser, storeUser} from "../Data/Storage";
 import Infestation from "./Infestation";
 import {save} from "../Data/Data";
+import {makeAlert} from "../../components/errorMessage";
+import {deleteUserError} from "../text/text";
 
 
 interface UserProps {
-    name: string,
-    password: string,
-    emails: Array<Email>,
-    addresses: Array<Address>,
-    payments: Array<Payment>,
-    profilePic: NodeRequire,
-    backgroundPic: NodeRequire,
+    name: string
+    password: string
+    emails: Array<Email>
+    addresses: Array<Address>
+    payments: Array<Payment>
+    profilePic: NodeRequire
+    backgroundPic: NodeRequire
     id: string
     userPlan: Plan
     currentEquipment: Array<number>
-    removedEquipment: Array<number>,
+    removedEquipment: Array<number>
     loggedIn: boolean
+    pendingPayments: number
 }
 
 interface UserasJSON {
@@ -40,7 +43,8 @@ interface UserasJSON {
     emails: Array<string>,
     addresses: Array<string>,
     payments: Array<string>,
-    loggedIn: boolean
+    loggedIn: boolean,
+    pendingPayments: number
 }
 export default class User implements UserProps{
     //TODO: Add all of the personal information here and have it be used by Profile tab
@@ -94,7 +98,8 @@ export default class User implements UserProps{
                 payments: this.stringList(this.payments),
                 name: this.name,
                 password: this.password,
-                loggedIn: this.loggedIn
+                loggedIn: this.loggedIn,
+                pendingPayments: this.pendingPayments
             }
         );
     }
@@ -107,6 +112,7 @@ export default class User implements UserProps{
         this.userPlan = new Plan().fromString(json.userPlan);
         this.id = json.id;
         this.loggedIn = json.loggedIn;
+        this.pendingPayments = json.pendingPayments;
         let curEq = new Set(this.currentEquipment);
         let remEq = new Set(this.removedEquipment);
         let setEmails = new Set(this.emails);
@@ -152,6 +158,7 @@ export default class User implements UserProps{
 
     delete = () => {
         console.log("User.delete() called");
+        deleteUser(() => makeAlert(deleteUserError()) );
         this.emails = [];
         this.addresses = [];
         this.payments = [new Payment()];
@@ -164,9 +171,9 @@ export default class User implements UserProps{
         this.loggedIn = false;
         this.profilePic= images.user.profile_picture;
         this.backgroundPic = images.user.background;
+        this.pendingPayments = 0;
         User.theUser = this;
         save();
-        //TODO: Delete from online database
     }
     getID = () => {
         return this.id;
@@ -264,16 +271,17 @@ export default class User implements UserProps{
     }
 
     makePayment = (price:number) => {
-        // TODO: but not related to the database
-        this.pendingPayments += price
+        this.pendingPayments += price;
+        save();
     }
 
     resetPendingPayments = () => {
-        this.pendingPayments = 0
+        this.pendingPayments = 0;
+        save();
     }
 
     getPendingPayment = () => {
-        return this.pendingPayments
+        return this.pendingPayments;
     }
 
     setMonthlyPayments = (price:number, nextDate:Date) => {

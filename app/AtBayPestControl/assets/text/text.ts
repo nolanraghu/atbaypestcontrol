@@ -39,6 +39,9 @@ export function usernameStolen(){
 export function loginError(){
     return 'Not able to access your account.'
 }
+export function deleteUserError(){
+    return 'User not deleted online. Please contact support.'
+}
 
 //Potentially general use text
 export function costText(price:number){

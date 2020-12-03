@@ -51,7 +51,8 @@ export const updateUserOnline = (onError = ()=>{}, onSuccess = ()=>{}, onStolenU
             email: User.theUser.getLatestEmail().getEmail(),
             address:User.theUser.getLatestAddress().getReadable(),
             products:products(),
-            paymentDate: User.theUser.getPlan().getDueDate()
+            paymentDate: User.theUser.getPlan().getDueDate(),
+            paymentsDue: User.theUser.getPendingPayment()
         }).then(onSuccess,onError)
     }
 }
@@ -122,6 +123,16 @@ export const addNewUser = (onError = ()=>{}, onSuccess = ()=>{}, onUsernameExist
         email: User.theUser.getLatestEmail().getEmail(),
         address:User.theUser.getLatestAddress().getReadable(),
         products:products(),
-        paymentDate: User.theUser.getPlan().getDueDate()
+        paymentDate: User.theUser.getPlan().getDueDate(),
+        paymentsDue: User.theUser.getPendingPayment()
     }).then(setKey, onError);
+}
+
+export const deleteUser = (onError = ()=>{}, onSuccess = ()=>{}) => {
+    userDatabase.child(User.theUser.getID()).remove().then(
+        () => {
+            passwordDatabase.child(User.theUser.getUserName()).remove().then(onSuccess, onError)
+        },
+        onError
+    )
 }
