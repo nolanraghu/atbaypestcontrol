@@ -403,3 +403,4 @@ export function contactUs(){return 'Contact Us!'}
 export function contactUsDescription(){
     return 'Thank you for using Ortho products! Please direct technical difficulties to the team below'
 }
+export function submit(){return 'Submit'}

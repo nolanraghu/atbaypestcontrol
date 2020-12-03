@@ -52,4 +52,13 @@ export default class Payment implements PayProps{
     getID = () => {
         return this.id;
     }
+
+    setCardNumber = (s:string) => {
+        this.cardNumber = s;
+    }
+
+    setCardType = (s:string) => {
+        this.type = s;
+    }
+
 }

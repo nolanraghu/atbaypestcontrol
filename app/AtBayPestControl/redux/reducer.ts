@@ -1,9 +1,10 @@
-import {CHANGE_PLAN, CHANGE_PENDING, EQUIPMENT_PENDING, LOG_IN, LOG_OUT} from "./action";
+import {CHANGE_PLAN, CHANGE_PENDING, EQUIPMENT_PENDING, LOG_IN, LOG_OUT, CHANGE_PROFILE} from "./action";
 
 const initialState = {
     planVersion: 0,
     planPendingVersion: 0,
     equipmentVersion: 0,
+    profileVersion:0,
     loggedIn: false
 };
 
@@ -35,6 +36,11 @@ const reducer = (state = initialState, action:any) => {
             return {
                 ...state,
                 loggedIn: false
+            }
+        case CHANGE_PROFILE:
+            return {
+                ...state,
+                profileVersion: state.profileVersion+1
             }
         default:
             return state
