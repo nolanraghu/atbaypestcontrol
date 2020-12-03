@@ -21,8 +21,10 @@ export default function LoginScreen ({route, navigation}: any) {
     }
 
     const [isSubmitted, submit] = useState(false);
+    const [i, update] = useState(0);
     const [loggingIn, setLoggingIn] = useState(false);
-    let validUser = false, validPass = false;
+    const [validUser, setValidUser] = useState(false);
+    const [validPass, setValidPass] = useState(false);
 
     const dispatch = useDispatch();
 
@@ -74,19 +76,22 @@ export default function LoginScreen ({route, navigation}: any) {
                         setLoggingIn(false);
                     },
                     () => {
-                        validUser = true;
-                        validPass = false;
+                        setValidUser(true);
+                        setValidPass(false);
                         submit(true);
+                        update(i+1);
                         setLoggingIn(false);
                     },
                     ()=> {
-                        validUser = false;
-                        validPass = true;
+                        setValidUser(false);
+                        setValidPass(true);
                         submit(true);
+                        update(i+1);
                         setLoggingIn(false);
                     })
             } else {
                 submit(true);
+                update(i+1);
             }
         }
     }

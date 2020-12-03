@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import {Button, ScrollView, Text, TextInput, TouchableOpacity, useColorScheme, View} from 'react-native'
 import {buttonColor, getOffButtonColor, getStyle} from '../assets/Stylesheets/Styles'
 import InputBox from "../components/RenderTextBox";
-import {registerText} from "../assets/Data/allTextRegister";
+import {registerInputs, registerText} from "../assets/Data/allTextRegister";
 import {getUser} from "../assets/Data/Data";
 import {changePlan, changeProfile, logIn} from "../redux/action";
 import {useDispatch} from "react-redux";
@@ -20,6 +20,7 @@ export default function RegisterScreen({ route, navigation }: any) {
     }
 
     const [isSubmitted, submit] = useState(false);
+    const [i, update] = useState(0);
 
     const [registering, setRegistering] = useState(false);
 
@@ -28,16 +29,7 @@ export default function RegisterScreen({ route, navigation }: any) {
 
     const dispatch = useDispatch();
 
-    let InputArray = registerText.map(function(Text, index) {
-        return  <InputBox
-            key={index}
-            errorMessage={Text.getErrorMessage()}
-            type={Text.getType()}
-            placeHolder={Text.getPlaceHolder()}
-            onSubmitEditing={Text.onSubmit}
-            submitted = {isSubmitted}
-        />
-    })
+    let InputArray = registerInputs(isSubmitted);
 
     let register = () => {
         let load = () => {
@@ -71,6 +63,7 @@ export default function RegisterScreen({ route, navigation }: any) {
                 load();
             } else {
                 submit(true);
+                update(i + 1);
             }
         }
     }
