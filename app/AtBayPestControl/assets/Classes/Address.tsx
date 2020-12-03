@@ -101,4 +101,8 @@ export default class Address implements addressProps{
         this.zip = zip
     }
 
+    getReadable = () => {
+        return this.address + ', ' + this.address2 + '\n' + this.city + ', ' + this.state + ' ' + this.zip;
+    }
+
 }

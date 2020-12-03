@@ -27,7 +27,7 @@ export const allInfestations = [
         products: [6],
         upfrontPrice: 6.99,
         monthlyPrice: 0,
-        duration: 60
+        duration: 0
     },
     {
         id: 3,
@@ -36,6 +36,6 @@ export const allInfestations = [
         products: [7, 8],
         upfrontPrice: 10.99,
         monthlyPrice: 4.99,
-        duration: 30
+        duration: 180
     }
 ];
