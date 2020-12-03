@@ -2,17 +2,6 @@ import {getInfestationInfo} from "../../controller/InfestationPulling";
 import image from '../images/index';
 import {NUMBER_OF_INFESTATIONS} from "../Data/UsefulConstants";
 
-interface InfestationasJSON {
-    id: number,
-    name: string,
-    image: string, // Is this still a string? Jinkies
-    description: string,
-    products: Array<number>,
-    upfrontPrice: number,
-    monthlyPrice: number,
-    duration: number
-}
-
 export default class Infestation {
     private id: number = -1;
     private image: NodeRequire = image.error;
@@ -22,6 +11,7 @@ export default class Infestation {
     private upfrontPrice: number = -1
     private monthlyPrice: number = -1
     private duration: number = -1
+    private purchaseDate: Date = new Date(0);
     static singles: Array<Infestation> = new Array<Infestation>(NUMBER_OF_INFESTATIONS);
     constructor(id:number) {
         if(typeof Infestation.singles[id] === 'undefined') {
@@ -37,6 +27,7 @@ export default class Infestation {
             this.upfrontPrice = pData.upfrontPrice;
             this.monthlyPrice = pData.monthlyPrice;
             this.duration = pData.duration;
+            this.purchaseDate = new Date(0);
             Infestation.singles[id] = this;
         }
         return Infestation.singles[id];
@@ -107,4 +98,17 @@ export default class Infestation {
         // Note: returns time in days
         return this.duration;
     }
+
+    getPurchaseDate = () => {
+        // Gets the day that the first purchase was made. If it hasn't been set, return today's date
+        let nullDate = new Date(0);
+        return this.purchaseDate != nullDate? this.purchaseDate: new Date();
+    }
+
+    getPaymentExpiryDate = ():Date => {
+        let purDate = this.getPurchaseDate(); // sets purDate to current Date
+        let expDateMS = purDate.setDate((purDate.getDate() + this.duration))
+        return new Date(expDateMS);
+    }
+
 }

@@ -151,9 +151,9 @@ export default class User implements UserProps{
 
     delete = () => {
         console.log("User.delete() called");
-        this.emails = []
-        this.addresses = []
-        this.payments= []
+        this.emails = [];
+        this.addresses = [];
+        this.payments = [new Payment()];
         this.name ="";
         this.password="";
         this.id= '0';
@@ -161,6 +161,8 @@ export default class User implements UserProps{
         this.currentEquipment = [];
         this.removedEquipment = [];
         this.loggedIn = false;
+        this.profilePic= images.user.profile_picture;
+        this.backgroundPic = images.user.background;
         User.theUser = this;
         save();
         //TODO: Delete from online database

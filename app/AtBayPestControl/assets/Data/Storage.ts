@@ -27,22 +27,29 @@ export const loadUser = async () => {
 
 const userDatabase = db.ref('users')
 const passwordDatabase = db.ref('passwords')
+const products = ():string => {
+    let products:string = '';
+    User.theUser.getPlan().getProducts().forEach((product, index) => {
+        if(index == 0){
+            products = product.getProductName();
+        } else {
+            products = products + ', ' + product.getProductName();
+        }
+    })
+    return products;
+}
 
-export const updateUserOnline = (onError = ()=>{}, onSuccess = ()=>{}):boolean => {
+export const updateUserOnline = (onError = ()=>{}, onSuccess = ()=>{}, onStolenUsername = onError) => {
     if(User.theUser.getID() === '0'){
-        return addNewUser(onError,onSuccess);
+        addNewUser(onError, onSuccess, onStolenUsername);
     } else {
         userDatabase.child(User.theUser.getID()).update({
-            userString: User.theUser.toString()
-        })
-
-        let successful = true;
-        if(successful){
-            onSuccess();
-        } else {
-            onError()
-        }
-        return successful;
+            userString: User.theUser.toString(),
+            email: User.theUser.getLatestEmail().getEmail(),
+            address:User.theUser.getLatestAddress().getReadable(),
+            products:products(),
+            paymentDate: User.theUser.getPlan().getDueDate()
+        }).then(onSuccess,onError)
     }
 }
 
@@ -50,14 +57,19 @@ export const getUserFromOnline = (username:string,
                                   password:string,
                                   onError = ()=>{},
                                   onSuccess = ()=>{},
-                                  onInvalid = ()=>{}) => {
+                                  onInvalid = ()=>{},
+                                  onDNE = () => {}) => {
     let readUser = (userID:string) => {
         userDatabase.child(userID).once('value').then(
             snapshot => {
-                let userString = snapshot.val().userString;
-                User.theUser.fromString(userString);
-                User.theUser.setID(userID);
-                onSuccess();
+                if (snapshot.val() === null){
+                    onError()
+                } else {
+                    let userString = snapshot.val().userString;
+                    User.theUser.fromString(userString);
+                    User.theUser.setID(userID);
+                    onSuccess();
+                }
             },
             onError
         )
@@ -65,38 +77,48 @@ export const getUserFromOnline = (username:string,
 
     passwordDatabase.child(username).once('value').then(
         snapshot => {
-            let readPassword = snapshot.val().password;
-            let readID = snapshot.val().userID;
-            if (readPassword === password){
-                readUser(readID);
+            if(snapshot.val() === null){
+                onDNE();
             } else {
-                onInvalid();
+                let readPassword = snapshot.val().password;
+                let readID = snapshot.val().userID;
+                if (readPassword === password){
+                    readUser(readID);
+                } else {
+                    onInvalid();
+                }
             }
         },
         onError
     )
 }
 
-export const addNewUser = (onError = ()=>{}, onSuccess = ()=>{}):boolean => {
-    let successful = false;
-    let userKey = userDatabase.push({
-        userString: User.theUser.toString()
-    }).key;
-    if(userKey != null){
+export const addNewUser = (onError = ()=>{}, onSuccess = ()=>{}, onUsernameExists = onError) => {
+    let userKey:string;
+
+    let setKey = (val:any) => {
+        userKey = val.key;
         User.theUser.setID(userKey);
-        passwordDatabase.child(User.theUser.getUserName()).set({
-            userID: userKey,
-            password: User.theUser.getPassword()
-        })
-        successful = true;
+        passwordDatabase.child(User.theUser.getUserName()).once('value').then(
+            snapshot => {
+                if(snapshot.val() === null){
+                    passwordDatabase.child(User.theUser.getUserName()).set({
+                        userID: userKey,
+                        password: User.theUser.getPassword()
+                    }).then(onSuccess, onError);
+                } else {
+                    onUsernameExists();
+                }
+            }, onError
+        )
+
     }
 
-    console.log(User.theUser.toString())
-
-    if(successful){
-        onSuccess();
-    } else {
-        onError()
-    }
-    return successful;
+    userDatabase.push({
+        userString: User.theUser.toString(),
+        email: User.theUser.getLatestEmail().getEmail(),
+        address:User.theUser.getLatestAddress().getReadable(),
+        products:products(),
+        paymentDate: User.theUser.getPlan().getDueDate()
+    }).then(setKey, onError);
 }

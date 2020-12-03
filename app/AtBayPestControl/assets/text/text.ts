@@ -18,6 +18,24 @@ export function tab2label(){
 export function tab3label(){
     return "Profile";
 }
+export function errorTitle(){
+    return 'Error'
+}
+export function userNotAddedError(){
+    return 'Did not register user'
+}
+export function usernameExists(){
+    return 'Username already exists'
+}
+export function notUpdated(){
+    return 'Your profile did not get updated'
+}
+export function errorDismiss(){
+    return 'OK'
+}
+export function usernameStolen(){
+    return 'Oops! We messed up. Your username has been taken. Please contact support.'
+}
 
 //Potentially general use text
 export function costText(price:number){

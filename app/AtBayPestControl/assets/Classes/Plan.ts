@@ -178,8 +178,9 @@ export default class Plan {
     isRemovable = (bug:Infestation) => {
         // False if this infestation cannot be removed (ex. if you have to pay for at least three months
         // once you get the package)
-        // TODO
-        return true;
+        let today = new Date().getTime();
+        let expiryDay = bug.getPaymentExpiryDate().getTime();
+        return today >= expiryDay;
     }
     getButtonStatus = (bug:Infestation) => {
         if (this.isPendingInfestation(bug)){
