@@ -27,7 +27,7 @@ export default function renderItem ({email, index, onPressEmail}: renderProps) {
                     </View>
                     <View style={styles.nameColumn}>
                         {email.getType().length !== 0 && (
-                            <Text style={styles.subText}>{email.getType()}</Text>
+                            <Text style={styles.subText}>{'Main Email'}</Text>
                         )}
                     </View>
                 </View>
