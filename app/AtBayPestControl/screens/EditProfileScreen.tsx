@@ -32,7 +32,6 @@ export default function EditProfileScreen() {
     const navigation = useNavigation();
 
     const user = getUser();
-    let keyGiver = 0;
 
 
     let name = <Editable

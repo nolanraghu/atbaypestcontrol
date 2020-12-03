@@ -9,7 +9,7 @@ import {
 import {getStyle, buttonColor, getOffButtonColor} from '../assets/Stylesheets/Styles';
 import CaptionImage from "../components/CaptionImage";
 import {useState} from "react";
-import {getBugByID, getUser} from "../assets/Data/Data";
+import {getBugByID, getUser, gimmekey} from "../assets/Data/Data";
 import {
     changePlan,
     captionProductDescription,
@@ -107,12 +107,12 @@ export default function BugInfoPopup({route, navigation}: any) {
 
                 return <CaptionImage source={product.getProductImage()}
                                      text={captionProductDescription(product)}
-                                     key={keys++}/>;
+                                     key={gimmekey()}/>;
             })
 
             // Makes the list of new equipment that will need to be added, if any
             if (newEquipment.size != 0){
-                retVal.push(<Text style={styles.title} key={keys++}>{productEquipmentText(adding)}</Text> );
+                retVal.push(<Text style={styles.title} key={gimmekey()}>{productEquipmentText(adding)}</Text> );
                 let {imageList:imageList, price:price} = equipmentImages(newEquipment)
                 retVal = retVal.concat(imageList);
                 equipmentPrice = price;
@@ -120,7 +120,7 @@ export default function BugInfoPopup({route, navigation}: any) {
 
             // Makes the list of equipment they already own, and gives them the option to add it if they don't have it
             if (ownedEquipment.size != 0){
-                retVal.push(<Text style={styles.title} key={keys++}>{productOwnedEquipmentText(adding)}</Text> );
+                retVal.push(<Text style={styles.title} key={gimmekey()}>{productOwnedEquipmentText(adding)}</Text> );
                 retVal = retVal.concat(equipmentImages(ownedEquipment, true).imageList);
             }
         }
@@ -153,14 +153,14 @@ export default function BugInfoPopup({route, navigation}: any) {
                               // This makes the screen re-render
                               dispatch(justEquipmentPending())
                           }}
-                          key={keys++}>{text}</Text>
+                          key={gimmekey()}>{text}</Text>
                 )
             }
 
             //This adds the equipment and description to the return array
             imageList.push(<CaptionImage source={equipment.getEquipmentImage()}
                                          text={equipmentDescription(equipment, products, owned, link, onceOwned)}
-                                         key={keys++}/>)
+                                         key={gimmekey()}/>)
         })
 
         // Returns the array of CaptionImages for the equipment

@@ -236,7 +236,7 @@
       <workItem from="1606965055262" duration="6728000" />
       <workItem from="1606971887683" duration="2546000" />
       <workItem from="1606974799103" duration="313000" />
-      <workItem from="1607027347765" duration="1626000" />
+      <workItem from="1607027347765" duration="2573000" />
     </task>
     <task id="LOCAL-00001" summary="First Commit. Renaming screens/tabs to fit our needs.">
       <created>1602888296289</created>
@@ -297,69 +297,6 @@
     <MESSAGE value="Nolan Commit two. Started on PlanTabScreen.tsx" />
     <MESSAGE value="fixed issue w/yarn start, cleaned up extra files" />
     <option name="LAST_COMMIT_MESSAGE" value="fixed issue w/yarn start, cleaned up extra files" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="275" y="219" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1605741943485">
-      <screen x="0" y="23" width="1792" height="1026" />
-    </state>
-    <state x="275" y="219" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1792.1026@0.23.1792.1026" timestamp="1605741943485" />
-    <state x="582" y="334" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1606586153602">
-      <screen x="0" y="23" width="1792" height="1026" />
-    </state>
-    <state x="582" y="334" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1792.1026@0.23.1792.1026" timestamp="1606586153602" />
-    <state x="730" y="261" key="#com.intellij.ide.util.MemberChooser" timestamp="1604619596708">
-      <screen x="0" y="23" width="1792" height="1033" />
-    </state>
-    <state x="730" y="261" key="#com.intellij.ide.util.MemberChooser/0.23.1792.1033@0.23.1792.1033" timestamp="1604619596708" />
-    <state width="1771" height="279" key="GridCell.Tab.0.bottom" timestamp="1606971856544">
-      <screen x="0" y="23" width="1792" height="1026" />
-    </state>
-    <state width="1771" height="279" key="GridCell.Tab.0.bottom/0.23.1792.1026@0.23.1792.1026" timestamp="1606971856544" />
-    <state width="1771" height="274" key="GridCell.Tab.0.bottom/0.23.1792.1028@0.23.1792.1028" timestamp="1603982707390" />
-    <state width="1771" height="279" key="GridCell.Tab.0.center" timestamp="1606971856543">
-      <screen x="0" y="23" width="1792" height="1026" />
-    </state>
-    <state width="1771" height="279" key="GridCell.Tab.0.center/0.23.1792.1026@0.23.1792.1026" timestamp="1606971856543" />
-    <state width="1771" height="274" key="GridCell.Tab.0.center/0.23.1792.1028@0.23.1792.1028" timestamp="1603982707390" />
-    <state width="1771" height="279" key="GridCell.Tab.0.left" timestamp="1606971856542">
-      <screen x="0" y="23" width="1792" height="1026" />
-    </state>
-    <state width="1771" height="279" key="GridCell.Tab.0.left/0.23.1792.1026@0.23.1792.1026" timestamp="1606971856542" />
-    <state width="1771" height="274" key="GridCell.Tab.0.left/0.23.1792.1028@0.23.1792.1028" timestamp="1603982707389" />
-    <state width="1771" height="279" key="GridCell.Tab.0.right" timestamp="1606971856544">
-      <screen x="0" y="23" width="1792" height="1026" />
-    </state>
-    <state width="1771" height="279" key="GridCell.Tab.0.right/0.23.1792.1026@0.23.1792.1026" timestamp="1606971856544" />
-    <state width="1771" height="274" key="GridCell.Tab.0.right/0.23.1792.1028@0.23.1792.1028" timestamp="1603982707390" />
-    <state x="734" y="414" key="VCS.EditChangelistDialog" timestamp="1603076356758">
-      <screen x="0" y="23" width="1792" height="1030" />
-    </state>
-    <state x="734" y="414" key="VCS.EditChangelistDialog/0.23.1792.1030@0.23.1792.1030" timestamp="1603076356758" />
-    <state x="496" y="279" key="Vcs.Push.Dialog.v2" timestamp="1603076440675">
-      <screen x="0" y="23" width="1792" height="1030" />
-    </state>
-    <state x="496" y="278" key="Vcs.Push.Dialog.v2/0.23.1792.1026@0.23.1792.1026" timestamp="1602892515801" />
-    <state x="496" y="278" key="Vcs.Push.Dialog.v2/0.23.1792.1028@0.23.1792.1028" timestamp="1602890251425" />
-    <state x="496" y="279" key="Vcs.Push.Dialog.v2/0.23.1792.1030@0.23.1792.1030" timestamp="1603076440675" />
-    <state x="694" y="461" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1603336820403">
-      <screen x="0" y="23" width="1792" height="1033" />
-    </state>
-    <state x="694" y="459" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1792.1028@0.23.1792.1028" timestamp="1603067051274" />
-    <state x="694" y="461" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1792.1033@0.23.1792.1033" timestamp="1603336820403" />
-    <state x="276" y="59" width="1218" height="874" key="dock-window-1" timestamp="1604618880663">
-      <screen x="0" y="23" width="1792" height="1031" />
-    </state>
-    <state x="1161" y="23" width="631" height="1031" key="dock-window-1/0.0.1792.1120@0.0.1792.1120" timestamp="1604618110087" />
-    <state x="276" y="59" width="1218" height="874" key="dock-window-1/0.23.1792.1031@0.23.1792.1031" timestamp="1604618880663" />
-    <state width="600" height="428" key="javadoc.popup" timestamp="1606623162862">
-      <screen x="0" y="23" width="1792" height="1026" />
-    </state>
-    <state width="600" height="428" key="javadoc.popup/0.23.1792.1026@0.23.1792.1026" timestamp="1606623162862" />
-    <state x="661" y="441" width="670" height="672" key="search.everywhere.popup" timestamp="1606622655516">
-      <screen x="0" y="23" width="1792" height="1026" />
-    </state>
-    <state x="661" y="441" width="670" height="672" key="search.everywhere.popup/0.23.1792.1026@0.23.1792.1026" timestamp="1606622655516" />
-    <state x="661" y="444" width="670" height="676" key="search.everywhere.popup/0.23.1792.1033@0.23.1792.1033" timestamp="1603157958240" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
