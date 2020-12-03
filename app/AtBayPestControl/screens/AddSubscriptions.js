@@ -100,6 +100,9 @@ export default class AddSubscription extends React.Component {
 
             this.setState({token: creditCardToken})
             await this.makePayment()
+            getUser().resetPendingPayments()
+            navigation.goBack()
+            navigation.pop()
         }
     };
 
@@ -108,7 +111,7 @@ export default class AddSubscription extends React.Component {
             method: 'POST',
             url:'https://us-central1-atbaypestcontrol-acd63.cloudfunctions.net/completePaymentWithStripe',
             data:{
-                amount: 100,
+                amount: Math.round(getUser().getPendingPayment()*100),
                 currency: 'usd',
                 token: this.state.token
             }

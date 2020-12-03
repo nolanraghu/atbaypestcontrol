@@ -115,7 +115,6 @@ function renderEmail () {
   let styles = getStyle(scheme);
 
   function onPressEmail () {
-    navigation.navigate('AddSubscriptions');
   }
 
   let EmailArray = User.getEmails().map(function(email, index) {

@@ -87,7 +87,7 @@ export default function UpdatePlanPopup({route, navigation}:any) {
                 },
                 () => {
                     dispatch(changePlan());
-                    navigation.navigate('BugsTabScreen');
+                    navigation.navigate('AddSubscriptions');
                     setUpdating(false);
                 },
                 () => {

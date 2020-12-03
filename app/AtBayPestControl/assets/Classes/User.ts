@@ -58,6 +58,7 @@ export default class User implements UserProps{
     currentEquipment: Array<number> = [];
     removedEquipment: Array<number> = [];
     loggedIn: boolean = false;
+    pendingPayments: number = 0;
     static theUser: User
 
     constructor(){
@@ -264,7 +265,17 @@ export default class User implements UserProps{
 
     makePayment = (price:number) => {
         // TODO: but not related to the database
+        this.pendingPayments += price
     }
+
+    resetPendingPayments = () => {
+        this.pendingPayments = 0
+    }
+
+    getPendingPayment = () => {
+        return this.pendingPayments
+    }
+
     setMonthlyPayments = (price:number, nextDate:Date) => {
         // Note: the date of nextDate should be <= 28
         // TODO: but not related to the database
