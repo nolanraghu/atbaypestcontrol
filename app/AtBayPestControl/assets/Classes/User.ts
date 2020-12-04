@@ -8,13 +8,10 @@ import Email from "./Email"
 import Address from "./Address";
 import Product from "./Product";
 import Payment from "../Classes/Payment"
-import {PAY} from "../Data/allPayments"
 import images from "../images";
-import {addItemToSend, deleteUser, storeUser} from "../Data/Storage";
-import Infestation from "./Infestation";
+import {addItemToSend} from "../Data/Storage";
 import {save} from "../Data/Data";
-import {makeAlert} from "../../components/errorMessage";
-import {deleteUserError} from "../text/text";
+
 
 
 interface UserProps {

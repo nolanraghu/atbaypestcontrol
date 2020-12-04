@@ -24,8 +24,6 @@ export default function renderText ({placeHolder, errorMessage, type, onSubmitEd
             errorMessage={showErrorMessage()}
             errorStyle={{color: 'red'}}
             secureTextEntry={type === 'none'}
-            onSubmitEditing={(val) =>
-                onSubmitEditing(val.nativeEvent.text)}
             onChangeText={text => onSubmitEditing(text)}
             textContentType={type}
         />

@@ -63,7 +63,7 @@ export function registerInputs (isSubmitted:boolean,
             <InputBox placeHolder={'Password'}
                       key={keys++}
                       errorMessage={User.validatePassword}
-                      type={"none"}
+                      type={"password"}
                       onSubmitEditing={(newText) => User.changePassword(newText)}
                       submitted={isSubmitted}/>,
             <InputBox placeHolder={'Confirm Password'}
@@ -75,7 +75,7 @@ export function registerInputs (isSubmitted:boolean,
                               return 'Passwords do not match'
                           }
                       }}
-                      type={"none"}
+                      type={"password"}
                       onSubmitEditing={newText => setPassMatch(newText)}
                       submitted={isSubmitted}/>,
             <InputBox placeHolder={'Address Line 1'}

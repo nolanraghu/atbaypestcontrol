@@ -5,13 +5,7 @@ import {getEquipmentInfo} from "../../controller/EquipmentPulling";
 import Images from '../images/index';
 import {NUMBER_OF_EQUIPMENT} from "../Data/UsefulConstants";
 
-interface EquipmentasJSON {
-    id: number,
-    image: string, // String?!?
-    name: string,
-    description: string,
-    price: number
-}
+
 
 export default class Equipment {
     private readonly id: number = -1

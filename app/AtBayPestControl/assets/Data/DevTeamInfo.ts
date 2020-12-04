@@ -1,4 +1,3 @@
-import {Team} from "expo-cli/build/appleApi";
 
 const TEAM: Array<TeamProps>  = [
     {

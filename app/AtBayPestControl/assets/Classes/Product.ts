@@ -66,9 +66,6 @@ export default class Product{
         return this.equipment;
     }
 
-    getTimeline = () => {
-        return this.timeline;
-    }
     getID = () => {
         return this.id;
     }
