@@ -42,7 +42,7 @@ export function registerInputs (isSubmitted:boolean){
                       submitted={isSubmitted}/>,
             <InputBox key={keys++}
                       placeHolder={'Email Address'}
-                      errorMessage={User.validateAddress}
+                      errorMessage={User.validateEmail}
                       type={"emailAddress"}
                       onSubmitEditing={(newText) => User.getLatestEmail().updateEmail(newText)}
                       submitted={isSubmitted}/>,
@@ -70,6 +70,9 @@ export function registerInputs (isSubmitted:boolean){
                           if (User.getPassword() === passMatch){
                               return ''
                           } else {
+                              console.log(User.toString());
+                              console.log(emailMatch);
+                              console.log(passMatch);
                               return 'Passwords do not match'
                           }
                       }}
