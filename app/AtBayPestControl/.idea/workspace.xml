@@ -19,10 +19,10 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f11504bf-41dd-4bca-92fa-bafd18444296" name="Default Changelist" comment="fixed matching">
-      <change beforePath="$PROJECT_DIR$/assets/Classes/TextBox.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/Classes/TextBox.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/Data/allTextRegister.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/Data/allTextRegister.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/RenderTextBox.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/RenderTextBox.tsx" afterDir="false" />
+    <list default="true" id="f11504bf-41dd-4bca-92fa-bafd18444296" name="Default Changelist" comment="fixed ios bug passwordfield">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/ProfileTabScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/screens/ProfileTabScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/UpdatePlanPopup.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/screens/UpdatePlanPopup.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,7 +86,7 @@
       <workItem from="1605755572178" duration="3178000" />
       <workItem from="1606882954363" duration="6325000" />
       <workItem from="1606956795235" duration="37558000" />
-      <workItem from="1607046293723" duration="4947000" />
+      <workItem from="1607046293723" duration="5613000" />
     </task>
     <task id="LOCAL-00001" summary="idk">
       <created>1606893147512</created>
@@ -200,7 +200,14 @@
       <option name="project" value="LOCAL" />
       <updated>1607051491561</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="fixed ios bug passwordfield">
+      <created>1607051763448</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1607051763448</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -247,7 +254,8 @@
     <MESSAGE value="idk more fixins" />
     <MESSAGE value="oops fix bugs" />
     <MESSAGE value="fixed matching" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed matching" />
+    <MESSAGE value="fixed ios bug passwordfield" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed ios bug passwordfield" />
   </component>
   <component name="WindowStateProjectService">
     <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1606940830516">

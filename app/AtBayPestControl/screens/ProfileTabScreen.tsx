@@ -174,6 +174,8 @@ function renderPlan () {
 }
 
 function renderPay () {
+  let keys = 0;
+
   const navigation = useNavigation();
 
   const scheme = useColorScheme();
@@ -189,7 +191,7 @@ function renderPay () {
 
   let PayArray = User.getPayments().map(function(payment, index) {
     return  <Payment
-        key={payment.getCardNumber().substr(payment.getCardNumber().length-4)}
+        key={keys++}
         payment={payment}
         index={index}
         onPressEdit={onPressEdit}

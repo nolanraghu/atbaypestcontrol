@@ -53,6 +53,10 @@ export default function UpdatePlanPopup({route, navigation}:any) {
             console.log('edit')
         }
 
+        if(getUser().getPayments().length == 0){
+            return '';
+        }
+
         return (
             <View style={{width: '100%'}} key={keys++}>
                 <Payment
