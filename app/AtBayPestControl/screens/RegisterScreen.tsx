@@ -33,6 +33,7 @@ export default function RegisterScreen({ route, navigation }: any) {
 
     let register = () => {
         let load = () => {
+            console.log(User);
             //You can add a function here if you want something to happen while it's loading
         }
 

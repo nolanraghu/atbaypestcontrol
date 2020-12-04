@@ -31,14 +31,17 @@ export default function LoginScreen ({route, navigation}: any) {
     const scheme = useColorScheme();
     let styles = getStyle(scheme);
     let User = getUser();
+    let keys=0;
 
     let InputArray = [
         <InputBox placeHolder={'Username'}
+                  key={keys++}
                   errorMessage={()=> {return validUser? '':'Username does not exist'}}
                   type={"username"}
                   onSubmitEditing={User.changeUserName}
                   submitted={isSubmitted}/>,
         <InputBox placeHolder={'Password'}
+                  key={keys++}
                   errorMessage={()=> {if(User.validatePassword() === ""){
                       return validPass? '':'Incorrect Password'
                   } else {
