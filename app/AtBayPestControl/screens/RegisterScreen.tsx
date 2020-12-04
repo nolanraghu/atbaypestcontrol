@@ -21,6 +21,8 @@ export default function RegisterScreen({ route, navigation }: any) {
 
     const [isSubmitted, submit] = useState(false);
     const [i, update] = useState(0);
+    const [emailMatch, setEmailMatch] = useState('');
+    const [passMatch, setPassMatch] = useState('');
 
     const [registering, setRegistering] = useState(false);
 
@@ -29,7 +31,7 @@ export default function RegisterScreen({ route, navigation }: any) {
 
     const dispatch = useDispatch();
 
-    let InputArray = registerInputs(isSubmitted);
+    let InputArray = registerInputs(isSubmitted, emailMatch, setEmailMatch, passMatch, setPassMatch);
 
     let register = () => {
         let load = () => {

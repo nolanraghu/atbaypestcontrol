@@ -28,9 +28,11 @@ export const registerText = [
         (newText) => User.getLatestAddress().updateZip(newText)),
 ]
 
-export function registerInputs (isSubmitted:boolean){
-    let emailMatch = '';
-    let passMatch = '';
+export function registerInputs (isSubmitted:boolean,
+                                emailMatch:string,
+                                setEmailMatch:any,
+                                passMatch:string,
+                                setPassMatch:any){
     let keys = 0;
     return (
         [
@@ -56,7 +58,7 @@ export function registerInputs (isSubmitted:boolean){
                           }
                       }}
                       type={"emailAddress"}
-                      onSubmitEditing={newText => emailMatch = newText}
+                      onSubmitEditing={newText => setEmailMatch(newText)}
                       submitted={isSubmitted}/>,
             <InputBox placeHolder={'Password'}
                       key={keys++}
@@ -70,14 +72,11 @@ export function registerInputs (isSubmitted:boolean){
                           if (User.getPassword() === passMatch){
                               return ''
                           } else {
-                              console.log(User.toString());
-                              console.log(emailMatch);
-                              console.log(passMatch);
                               return 'Passwords do not match'
                           }
                       }}
                       type={"password"}
-                      onSubmitEditing={newText => passMatch = newText}
+                      onSubmitEditing={newText => setPassMatch(newText)}
                       submitted={isSubmitted}/>,
             <InputBox placeHolder={'Address Line 1'}
                       key={keys++}
