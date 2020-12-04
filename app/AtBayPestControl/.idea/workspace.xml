@@ -19,10 +19,10 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f11504bf-41dd-4bca-92fa-bafd18444296" name="Default Changelist" comment="oops fix bugs">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="f11504bf-41dd-4bca-92fa-bafd18444296" name="Default Changelist" comment="fixed matching">
+      <change beforePath="$PROJECT_DIR$/assets/Classes/TextBox.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/Classes/TextBox.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/Data/allTextRegister.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/Data/allTextRegister.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens/RegisterScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/screens/RegisterScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/RenderTextBox.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/RenderTextBox.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,7 +86,7 @@
       <workItem from="1605755572178" duration="3178000" />
       <workItem from="1606882954363" duration="6325000" />
       <workItem from="1606956795235" duration="37558000" />
-      <workItem from="1607046293723" duration="4486000" />
+      <workItem from="1607046293723" duration="4947000" />
     </task>
     <task id="LOCAL-00001" summary="idk">
       <created>1606893147512</created>
@@ -193,7 +193,14 @@
       <option name="project" value="LOCAL" />
       <updated>1607012442286</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="fixed matching">
+      <created>1607051491561</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1607051491561</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -239,7 +246,8 @@
     <MESSAGE value="Fixed some display and saving stuff" />
     <MESSAGE value="idk more fixins" />
     <MESSAGE value="oops fix bugs" />
-    <option name="LAST_COMMIT_MESSAGE" value="oops fix bugs" />
+    <MESSAGE value="fixed matching" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed matching" />
   </component>
   <component name="WindowStateProjectService">
     <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1606940830516">

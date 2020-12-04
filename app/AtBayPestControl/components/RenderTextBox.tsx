@@ -23,7 +23,7 @@ export default function renderText ({placeHolder, errorMessage, type, onSubmitEd
             inputStyle={styles.inputText}
             errorMessage={showErrorMessage()}
             errorStyle={{color: 'red'}}
-            secureTextEntry={type === 'password'}
+            secureTextEntry={type === 'none'}
             onSubmitEditing={(val) =>
                 onSubmitEditing(val.nativeEvent.text)}
             onChangeText={text => onSubmitEditing(text)}
@@ -36,7 +36,7 @@ interface renderProps {
     placeHolder: string
     errorMessage: () => string
     type: 'username' | 'password' | 'addressCity' | 'addressState' | 'streetAddressLine1' | 'streetAddressLine2' |
-        'postalCode' | 'emailAddress'
+        'postalCode' | 'emailAddress' | 'none'
     onSubmitEditing: (text: string) => void
     submitted: boolean
 }

@@ -6,7 +6,7 @@ interface textProps {
     placeHolder: string
     errorMessage: () => string
     type: 'username' | 'password' | 'addressCity' | 'addressState' | 'streetAddressLine1' | 'streetAddressLine2' |
-        'postalCode' | 'emailAddress'
+        'postalCode' | 'emailAddress' | 'none'
     onSubmit: (text: string) => void
 }
 
@@ -14,11 +14,11 @@ export default class textBox implements textProps {
     placeHolder: string = '';
     errorMessage: () => string = User.validatePassword;
     type: 'username' | 'password' | 'addressCity' | 'addressState' | 'streetAddressLine1' | 'streetAddressLine2' |
-        'postalCode' | 'emailAddress' = 'username';
+        'postalCode' | 'emailAddress' | 'none' = 'username';
     onSubmit: (text: string) => void = User.getBackgroundPic;
 
     constructor(placeHolder: string, errorMessage: () => string, type: 'username' | 'password' | 'addressCity' | 'addressState' | 'streetAddressLine1' | 'streetAddressLine2' |
-        'postalCode' | 'emailAddress' = 'username', onSubmit: (text: string) => void) {
+        'postalCode' | 'emailAddress' | 'none' = 'username', onSubmit: (text: string) => void) {
         this.placeHolder = placeHolder;
         this.errorMessage = errorMessage;
         this.type = type;
