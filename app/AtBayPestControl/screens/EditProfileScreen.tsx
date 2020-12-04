@@ -32,7 +32,7 @@ export default function EditProfileScreen() {
     const navigation = useNavigation();
 
     const user = getUser();
-
+    let key = 0;
 
     let name = <Editable
         type={"Username"}
@@ -43,17 +43,17 @@ export default function EditProfileScreen() {
     let AddyArray = user.getAddresses().map(function (addy, index) {
         return (
             <View style={{justifyContent: 'center'}}>
-                <Editable key={gimmekey()} textIn={addy.address} editText={addy.updateAddress} type={"Address (Line 1)"}/>
-                <Editable key={gimmekey()} textIn={addy.address2} editText={addy.updateAddressLine2} type={"Address (Line 2)"}/>
-                <Editable key={gimmekey()} textIn={addy.city} editText={addy.updateCity} type={"City"}/>
-                <Editable key={gimmekey()} textIn={addy.state} editText={addy.updateState} type={"State"}/>
-                <Editable key={gimmekey()} textIn={addy.zip} editText={addy.updateZip} type={"Zip"}/>
+                <Editable key={key++} textIn={addy.address} editText={addy.updateAddress} type={"Address (Line 1)"}/>
+                <Editable key={key++} textIn={addy.address2} editText={addy.updateAddressLine2} type={"Address (Line 2)"}/>
+                <Editable key={key++} textIn={addy.city} editText={addy.updateCity} type={"City"}/>
+                <Editable key={key++} textIn={addy.state} editText={addy.updateState} type={"State"}/>
+                <Editable key={key++} textIn={addy.zip} editText={addy.updateZip} type={"Zip"}/>
             </View>
         )
     });
     let EmailArray = user.getEmails().map(function (email, index) {
         return <Editable
-            key={gimmekey()}
+            key={key++}
             type={"Email"}
             textIn={email.getEmail()}
             editText={email.updateEmail}

@@ -116,6 +116,7 @@ function renderEmail () {
   const navigation = useNavigation();
   const scheme = useColorScheme();
   let styles = getStyle(scheme);
+  let keys = 0;
 
   function onPressEmail () {
     navigation.navigate('EditProfileScreen');
@@ -123,7 +124,7 @@ function renderEmail () {
 
   let EmailArray = User.getEmails().map(function(email, index) {
     return  <Email
-              key={gimmekey()}
+              key={keys++}
               index={index}
               email={email}
               onPressEmail={onPressEmail}
@@ -208,13 +209,14 @@ function renderPay () {
 }
 
 function renderLoc () {
+  let keys=0;
 
   const scheme = useColorScheme();
   let styles = getStyle(scheme);
 
   let LocationArray = User.getAddresses().map(function(address, index) {
     return  <ShippingLocations
-        key={gimmekey()}
+        key={keys++}
         index={index}
         address={address}
         onPressPlace={onPressPlace}

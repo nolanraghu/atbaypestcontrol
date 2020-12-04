@@ -21,6 +21,7 @@
   <component name="ChangeListManager">
     <list default="true" id="a7ddd241-6d14-413e-a90c-d44a72595648" name="Default Changelist" comment="fixed issue w/yarn start, cleaned up extra files">
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/.expo-shared/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/.firebaserc" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/.idea/workspace.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/README.md" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/Classes/Address.tsx" afterDir="false" />
@@ -84,19 +85,32 @@
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/images/splash1 (2).png" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/images/sprayer2.jpg" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/assets/images/spreader.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/components/AddSubscriptionView.js" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/components/BugPressable.tsx" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/components/CaptionImage.tsx" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/components/Contact.tsx" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/components/Editable.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/components/PaymentFormView.js" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/components/ProductItem.tsx" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/components/RenderEmail.tsx" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/components/RenderPayment.tsx" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/components/RenderShippingLocations.tsx" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/components/RenderTextBox.tsx" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/components/Separator.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/components/errorMessage.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/controller/EquipmentPulling.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/controller/InfestationPulling.tsx" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/controller/ProductPulling.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/firebase.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/functions/.eslintrc.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/functions/.expo/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/functions/.expo/packager-info.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/functions/.expo/settings.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/functions/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/functions/firebase-debug.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/functions/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/functions/package-lock.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/functions/package.json" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/navigation/BugsTabNavigator.tsx" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/navigation/LoginScreenNavigator.tsx" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/navigation/PlanTabNavigator.tsx" afterDir="false" />
@@ -108,6 +122,7 @@
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/redux/action.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/redux/reducer.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/redux/store.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/screens/AddSubscriptions.js" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/screens/BugInfoPopup.tsx" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/screens/ConfirmPurchasePopup.tsx" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/AtBayPestControl/screens/ContactUsScreen.tsx" afterDir="false" />
@@ -236,7 +251,8 @@
       <workItem from="1606965055262" duration="6728000" />
       <workItem from="1606971887683" duration="2546000" />
       <workItem from="1606974799103" duration="313000" />
-      <workItem from="1607027347765" duration="2573000" />
+      <workItem from="1607027347765" duration="3170000" />
+      <workItem from="1607045768474" duration="1072000" />
     </task>
     <task id="LOCAL-00001" summary="First Commit. Renaming screens/tabs to fit our needs.">
       <created>1602888296289</created>
