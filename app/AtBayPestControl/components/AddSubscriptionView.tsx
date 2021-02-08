@@ -1,28 +1,28 @@
 import React from 'react';
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
-//import KeyboardSpacer from 'react-native-keyboard-spacer';
+import {StyleSheet, Text, View, ScrollView, useColorScheme} from 'react-native';
 import PaymentFormView from './PaymentFormView';
 import {getUser} from "../assets/Data/Data";
+import {getStyle} from "../assets/Stylesheets/Styles";
+
 /**
- * The class renders a view with PaymentFormView
+ * The function renders a view with PaymentFormView
  */
-export default class AddSubscriptionView extends React.Component {
-    render() {
+export default function AddSubscriptionView({onSubmit, submitted, error}:any) {
+    const scheme = useColorScheme();
+    let styles = getStyle(scheme);
         return (
-            <View style={styles.container}>
-                <ScrollView style={styles.container}>
-                    <View style={styles.textWrapper}>
-                        <Text style={styles.infoText}>
+            <View style={styles.screen}>
+                <ScrollView style={styles.scroll}>
+                    <View style={[styles.header, {flexWrap: 'wrap'}]}>
+                        <Text style={[styles.title, {marginBottom: 2}]}>
                             Please Enter your payment information to complete this purchase.
                         </Text>
-                    </View>
-                    <View style={styles.textWrapper}>
-                        <Text style={styles.infoText}>
+                        <Text style={[styles.caption, {marginBottom: 0}]}>
                             Subscription Plan: {getUser().getPlan().getCurrentPrice()}$/month
                         </Text>
                     </View>
-                    <View style={styles.cardFormWrapper}>
-                        <PaymentFormView {...this.props}/>
+                    <View style={styles.section}>
+                        {PaymentFormView({onSubmit, submitted, error})}
                     </View>
                 </ScrollView>
                 {/* Scrolls to the payment form */}
@@ -31,7 +31,6 @@ export default class AddSubscriptionView extends React.Component {
                 {/*/>*/}
             </View>
         );
-    }
 }
 const styles = StyleSheet.create({
     container: {

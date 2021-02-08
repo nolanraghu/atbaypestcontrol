@@ -1,10 +1,14 @@
-import React from 'react';
+import React, {useState} from 'react';
 import AddSubscriptionView from '../components/AddSubscriptionView';
 import axios from 'axios';
 import {getUser} from "../assets/Data/Data";
+import {useNavigation} from "@react-navigation/native";
+import {View} from "react-native";
 const STRIPE_ERROR = 'Payment service error. Try again later.';
 const SERVER_ERROR = 'Server error. Try again later.';
-const STRIPE_PUBLISHABLE_KEY = 'pk_test_51Hth3nKdUJ252rMhMm75qbcTnKrppn9GcvnGmEadjSPEqyKrI9oY3zW3ljLP3rgGyInLgOKIYrK9vCXwBd5QwvGf00DdT2X9P1';
+const STRIPE_PUBLISHABLE_KEY = 'pk_test_51Hth3nKdUJ252rMhMm75qbcTnKrppn9GcvnGmEadjSPEqyKrI9oY3zW3ljLP3rgGyInLgOKI' +
+    'YrK9vCXwBd5QwvGf00DdT2X9P1';
+
 /**
  * The method sends HTTP requests to the Stripe API.
  * It's necessary to manually send the payment data
@@ -14,7 +18,7 @@ const STRIPE_PUBLISHABLE_KEY = 'pk_test_51Hth3nKdUJ252rMhMm75qbcTnKrppn9GcvnGmEa
  * @param creditCardData the credit card data
  * @return Promise with the Stripe data
  */
-const getCreditCardToken = (creditCardData) => {
+const getCreditCardToken = (creditCardData:any) => {
     const card = {
         'card[number]': creditCardData.values.number.replace(/ /g, ''),
         'card[exp_month]': creditCardData.values.expiry.split('/')[0],
@@ -34,9 +38,8 @@ const getCreditCardToken = (creditCardData) => {
         method: 'post',
         // Format the credit card data to a string of key-value pairs
         // divided by &
-        body: Object.keys(card)
-            .map(key => key + '=' + card[key])
-            .join('&')
+        // @ts-ignore
+        body: Object.keys(card).map((key) => key + '=' + card[key]).join('&')
     }).then(response => response.json());
 };
 /**
@@ -45,7 +48,7 @@ const getCreditCardToken = (creditCardData) => {
  * @param creditCardToken
  * @return {Promise<Response>}
  */
-const subscribeUser = (creditCardToken) => {
+const subscribeUser = (creditCardToken:any) => {
     return new Promise((resolve) => {
         console.log('Credit card token\n', creditCardToken);
         setTimeout(() => {
@@ -57,23 +60,15 @@ const subscribeUser = (creditCardToken) => {
  * The main class that submits the credit card data and
  * handles the response from Stripe.
  */
-export default class AddSubscription extends React.Component {
-    static navigationOptions = {
-        title: 'Subscription page',
-    };
-    constructor(props) {
-        super(props);
-        this.state = {
-            submitted: false,
-            error: null,
-            token: null
-        }
-    }
+export default function AddSubscription(){
+    const [submitted, setSubmitted] = useState(false);
+    const [error, setError]:[any,any] = useState(null);
+    const [token, setToken] = useState(null);
+    const navigation = useNavigation();
     // Handles submitting the payment request
-    onSubmit = async (creditCardInput) => {
-        const { navigation } = this.props;
+    const onSubmit = async (creditCardInput:any) => {
         // Disable the Submit button after the request is sent
-        this.setState({ submitted: true });
+        setSubmitted(true);
         let creditCardToken;
         try {
             // Create a credit card token
@@ -81,54 +76,54 @@ export default class AddSubscription extends React.Component {
             if (creditCardToken.error) {
                 // Reset the state if Stripe responds with an error
                 // Set submitted to false to let the user subscribe again
-                this.setState({ submitted: false, error: STRIPE_ERROR });
+                setSubmitted(false);
+                setError(STRIPE_ERROR);
                 return;
             }
         } catch (e) {
             // Reset the state if the request was sent with an error
             // Set submitted to false to let the user subscribe again
-            this.setState({ submitted: false, error: STRIPE_ERROR });
+            setSubmitted(false);
+            setError(STRIPE_ERROR);
             return;
         }
         // Send a request to your server with the received credit card token
+        // @ts-ignore
         const { error } = await subscribeUser(creditCardToken);
         // Handle any errors from your server
         if (error) {
-            this.setState({ submitted: false, error: SERVER_ERROR });
+            setSubmitted(false);
+            setError(SERVER_ERROR);
         } else {
-            this.setState({ submitted: false, error: null });
+            setSubmitted(false);
+            setError(null);
+            setToken(creditCardToken);
 
-            this.setState({token: creditCardToken})
-            await this.makePayment()
+            await makePayment()
             getUser().resetPendingPayments()
-            navigation.goBack()
-            navigation.pop()
+            navigation.goBack();
+            //navigation.pop();
         }
     };
 
-    makePayment = async() =>{
+    const makePayment = async() =>{
         axios({
             method: 'POST',
             url:'https://us-central1-atbaypestcontrol-acd63.cloudfunctions.net/completePaymentWithStripe',
             data:{
                 amount: Math.round(getUser().getPendingPayment()*100),
                 currency: 'usd',
-                token: this.state.token
+                token: token
             }
         }).then(response => {
             console.log(response);
         });
     };
 
-    // render the subscription view component and pass the props to it
-    render() {
-        const { submitted, error } = this.state;
-        return (
-            <AddSubscriptionView
-                error={error}
-                submitted={submitted}
-                onSubmit={this.onSubmit}
-            />
-        );
-    }
+    return (
+        <View>
+            {AddSubscriptionView({onSubmit, submitted, error})}
+        </View>
+    );
+
 }
