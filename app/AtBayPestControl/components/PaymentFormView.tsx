@@ -7,20 +7,19 @@ import { FontAwesome } from '@expo/vector-icons';
  * Renders the payment form and handles the credit card data
  * using the CreditCardInput component.
  */
-// state = { cardData: { valid: false } };
 export default function PaymentFormView({onSubmit, submitted, error}:any) {
-    const [valid, setValid] = useState(false);
+    const [cardState, setCardState] = useState<any>({valid:false});
     return (
         <View>
             <View>
-                <CreditCardInput requiresName onChange={(cardValid:boolean) => setValid(cardValid)} />
+                <CreditCardInput requiresName onChange={(cardState:any) => {setCardState(cardState)}} />
             </View>
             <View style={styles.buttonWrapper}>
                 <Button
                     title='Pay'
                     color='red'
-                    disabled={!valid || submitted}
-                    onPress={() => onSubmit({Valid:valid})}
+                    disabled={!cardState.valid || submitted}
+                    onPress={() => onSubmit(cardState)}
                 />
                 {/* Show errors */}
                 {error && (

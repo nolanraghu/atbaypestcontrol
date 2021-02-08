@@ -21,13 +21,7 @@
   <component name="ChangeListManager">
     <list default="true" id="f11504bf-41dd-4bca-92fa-bafd18444296" name="Default Changelist" comment="fixed updatePlan error fears">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/app.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/AddSubscriptionView.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/AddSubscriptionView.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/PaymentFormView.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/PaymentFormView.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/functions/firebase-debug.log" beforeDir="false" afterPath="$PROJECT_DIR$/functions/firebase-debug.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/functions/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/functions/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/functions/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/functions/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens/AddSubscriptions.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/AddSubscriptions.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/PaymentFormView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/PaymentFormView.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,7 +38,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$/../.." value="Anuja-New" />
+        <entry key="$PROJECT_DIR$/../.." value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
