@@ -52,7 +52,7 @@ export default class User implements UserProps{
     // If this is 0, that should mean they haven't made an account yet
     emails: Array<Email> = [];
     addresses: Array<Address> = [];
-    payments: Array<Payment> = [new Payment()];
+    payments: Array<Payment> = [];
     name: string = "";
     password: string = "";
     profilePic: NodeRequire = images.user.profile_picture;

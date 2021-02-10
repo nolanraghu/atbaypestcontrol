@@ -1,4 +1,4 @@
-import { Ionicons } from '@expo/vector-icons';
+import {FontAwesome5, Ionicons} from '@expo/vector-icons';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import * as React from 'react';
 
@@ -41,7 +41,7 @@ export default function BottomTabNavigator() {
         name="PlanTab"
         component={PlanTabNavigator}
         options={{
-            tabBarIcon: renderIcon('ios-paper'),
+            tabBarIcon: renderIcon('spray-can'),
             tabBarLabel: tab2label()
         }}
       />
@@ -60,7 +60,11 @@ export default function BottomTabNavigator() {
 // You can explore the built-in icon families and icons on the web at:
 // https://icons.expo.fyi/
 function TabBarIcon(props: { name: string; color: string }) {
-  return <Ionicons size={30} style={{ marginBottom: -3 }} {...props} />;
+    if (props.name === 'spray-can'){
+        return <FontAwesome5 size={24} style={{ marginBottom: -3, marginTop:2 }} {...props} />
+    } else {
+        return <Ionicons size={30} style={{ marginBottom: -3, marginRight:-3 }} {...props} />;
+    }
 }
 
 

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import AddSubscriptionView from '../components/AddSubscriptionView';
+import PaymentMethodScreen from '../components/PaymentMethodScreen';
 import axios from 'axios';
 import {getUser} from "../assets/Data/Data";
 import {useNavigation} from "@react-navigation/native";
@@ -122,7 +122,7 @@ export default function AddSubscription(){
 
     return (
         <View>
-            {AddSubscriptionView({onSubmit, submitted, error})}
+            {PaymentMethodScreen({onSubmit, submitted, error})}
         </View>
     );
 

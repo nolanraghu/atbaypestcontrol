@@ -7,21 +7,18 @@ import {getStyle} from "../assets/Stylesheets/Styles";
 /**
  * The function renders a view with PaymentFormView
  */
-export default function AddSubscriptionView({onSubmit, submitted, error}:any) {
+export default function PaymentMethodScreen({onSubmit, submitted, error}:any) {
     const scheme = useColorScheme();
     let styles = getStyle(scheme);
         return (
             <View style={styles.screen}>
+                <View style={styles.header}>
+                    <Text style={styles.title}>
+                        Use this form to add a new card to your account
+                    </Text>
+                </View>
                 <ScrollView style={styles.scroll}>
-                    <View style={[styles.header, {flexWrap: 'wrap'}]}>
-                        <Text style={[styles.title, {marginBottom: 2}]}>
-                            Please Enter your payment information to complete this purchase.
-                        </Text>
-                        <Text style={[styles.caption, {marginBottom: 0}]}>
-                            Subscription Plan: {getUser().getPlan().getCurrentPrice()}$/month
-                        </Text>
-                    </View>
-                    <View style={styles.section}>
+                    <View style={styles.cardArea}>
                         {PaymentFormView({onSubmit, submitted, error})}
                     </View>
                 </ScrollView>

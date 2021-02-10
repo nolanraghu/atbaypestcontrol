@@ -505,6 +505,54 @@ export function getStyle(state:ColorSchemeName) {
             borderRadius: 10,
             */
         },
-        contactUs: {width: 30, height: 30, alignSelf:"flex-end"}
+        contactUs: {width: 30, height: 30, alignSelf:"flex-end"},
+        cardArea: {
+            width: '94%',
+            margin: '3%',
+            marginBottom: '3.5%',
+            padding: '3%',
+            paddingVertical: '5.5%',
+            backgroundColor: backgroundLight,
+            shadowColor: 'black',
+            shadowOffset: {width: 0, height: 2},
+            shadowOpacity: 0.5,
+            shadowRadius: 2,
+            elevation: 4,
+            borderRadius: 20,
+            justifyContent: "center",
+        },
+        alertTextWrapper: {
+            flex: 20,
+            justifyContent: 'center',
+            alignItems: 'center'
+        },
+        alertIconWrapper: {
+            padding: 5,
+            flex: 4,
+            justifyContent: 'center',
+            alignItems: 'center'
+        },
+        alertText: {
+            color: '#c22',
+            fontSize: 16,
+            fontWeight: '400'
+        },
+        alertWrapper: {
+            backgroundColor: '#ecb7b7',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+            borderRadius: 5,
+            paddingVertical: 5,
+            marginTop: 10
+        },
+        buttonView: {
+            width: '100%',
+            alignContent: "center",
+            flexDirection: "column",
+            padding: '6%',
+            paddingBottom: 0
+        }
     });
 }

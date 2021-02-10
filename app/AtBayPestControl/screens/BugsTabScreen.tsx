@@ -7,7 +7,6 @@ import {
     currentPriceText,
     deleteChanges,
     newPriceText,
-    planBriefDescription,
     productPageDescription,
     updatePlan
 } from "../assets/text/text";

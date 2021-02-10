@@ -9,7 +9,7 @@ import {getUser} from "../assets/Data/Data";
 import {useSelector} from "react-redux";
 import {RootState} from "../redux/store";
 import ContactUsScreen from "../screens/ContactUsScreen";
-import AddSubscription from "../screens/AddSubscriptions";
+import AddSubscription from "../screens/PaymentScreen";
 import EditProfileScreen from "../screens/EditProfileScreen";
 
 const ProfileTabStack = createStackNavigator<ProfileTabParamList>();
