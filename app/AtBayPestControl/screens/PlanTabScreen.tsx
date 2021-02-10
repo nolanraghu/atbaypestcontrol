@@ -27,7 +27,7 @@ export default function PlanTabScreen() {
       <View style={styles.screen}>
         <View style={[styles.header, {flexWrap: 'wrap'}]}>
           <Text style={[styles.title, {marginBottom: 2}]}>
-            {planTitle()}
+            {planTitle(plan)}
           </Text>
           <Text style={[styles.caption, {marginBottom: 0}]}>
               {planBriefDescription(plan)}

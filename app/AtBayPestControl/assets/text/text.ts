@@ -162,7 +162,7 @@ export function newPriceText(plan:Plan){
     let oldPriceText = currentPriceText(plan);
 
     if(changing){
-        let text = oldPriceText + "\nNew Price: $" + price.monthly.toFixed(2) + ' per month';
+        let text = oldPriceText + "\nNew Plan: $" + price.monthly.toFixed(2) + ' per month';
         if (price.upfront != 0) {
             text = text + ', plus $' + price.upfront.toFixed(2) + ' for equipment and fees'
         }
@@ -190,6 +190,10 @@ export function updatePlan(newPlan:boolean){
 }
 export function deleteChanges(){
     return "Delete Pending Changes";
+}
+export function productPageDescription(){
+    return "Use this screen to explore and edit the packages in your plan. Click on the package to learn " +
+        "more about the pests treated, the products and equipment you will receive, and the package's price."
 }
     //Bug Info Popup Text
 export function infestationName(infestation:Infestation){
@@ -351,8 +355,8 @@ export function newPriceTextFooter(plan:Plan){
 export function noProductText(){
     return "Nothing here yet! Go to the packages page to start adding products to your plan!";
 }
-export function planTitle(){
-    return "Your Plan";
+export function planTitle(plan:Plan){
+    return "Your Plan: $" + plan.getCurrentPrice().toFixed(2) + " per month";
 }
 export function planBriefDescription(plan:Plan){
     const bugslist = plan.getInfestations();
@@ -366,16 +370,12 @@ export function planBriefDescription(plan:Plan){
             infestationsText = bugslist[i].getBugName() + ", " + infestationsText;
         }
     }
-    if(bugslist.length == 1){
-        infestationsText = infestationsText
-    } else {
-        infestationsText = infestationsText
-    }
 
-    let text:string = "With this plan, you receive the following products."
+    let text:string = "With this plan, you receive the following products. Click on a product to learn more " +
+        "about how to apply it, or to purchase extra before your regular shipment date."
     if(plan.containsInfestation(getPreventionPlan())){
         if (bugslist.length == 0){
-            return "You are currently on the prevention plan. " + text;
+            return "You are currently on the general prevention plan. " + text;
         } else {
             return "Your current plan includes the general prevention plan and the " +
                 infestationsText + ". " + text;

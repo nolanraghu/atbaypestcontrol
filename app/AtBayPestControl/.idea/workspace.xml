@@ -19,10 +19,11 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f11504bf-41dd-4bca-92fa-bafd18444296" name="Default Changelist" comment="some changes now">
+    <list default="true" id="f11504bf-41dd-4bca-92fa-bafd18444296" name="Default Changelist" comment="some text changes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/text/text.ts" beforeDir="false" afterPath="$PROJECT_DIR$/assets/text/text.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/screens/BugsTabScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/screens/BugsTabScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/PlanTabScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/screens/PlanTabScreen.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -222,7 +223,14 @@
       <option name="project" value="LOCAL" />
       <updated>1612759202184</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="some text changes">
+      <created>1612939364213</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1612939364213</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -272,7 +280,8 @@
     <MESSAGE value="fixed ios bug passwordfield" />
     <MESSAGE value="fixed updatePlan error fears" />
     <MESSAGE value="some changes now" />
-    <option name="LAST_COMMIT_MESSAGE" value="some changes now" />
+    <MESSAGE value="some text changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="some text changes" />
   </component>
   <component name="WindowStateProjectService">
     <state x="449" y="148" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1612717270840">
