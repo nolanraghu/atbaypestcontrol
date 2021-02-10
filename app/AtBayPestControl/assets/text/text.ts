@@ -13,7 +13,7 @@ export function tab1label(){
     return "Packages";
 }
 export function tab2label(){
-    return "Your Plan";
+    return "Your Products";
 }
 export function tab3label(){
     return "Profile";
@@ -151,26 +151,31 @@ function equipmentPrice(equipment:Equipment){
 }
 
 //Bugs Screen Text
+export function currentPriceText(plan:Plan){
+    return "Current Plan: $" + plan.getCurrentPrice().toFixed(2) + " per month";
+}
 export function newPriceText(plan:Plan){
     // This is when you are about to update your plan from bugs tab
     let price = plan.getNewPrice();
     let changing = price.monthly != plan.getCurrentPrice();
 
+    let oldPriceText = currentPriceText(plan);
+
     if(changing){
-        let text = "New Price: $" + price.monthly.toFixed(2) + ' per month';
+        let text = oldPriceText + "\nNew Price: $" + price.monthly.toFixed(2) + ' per month';
         if (price.upfront != 0) {
             text = text + ', plus $' + price.upfront.toFixed(2) + ' for equipment and fees'
         }
         return text;
     } else {
         if (price.upfront != 0) {
-            let text = "New equipment: $" + price.upfront.toFixed(2);
+            let text = "\nNew equipment: $" + price.upfront.toFixed(2);
             if (plan.hasPendingChanges()){
-                text += "\nNo price change"
+                text = " (This isn't changing)" + text
             }
-            return text;
+            return oldPriceText + text;
         } else {
-            return "No price change"
+            return oldPriceText + " (This isn't changing)"
         }
     }
 }
@@ -280,15 +285,19 @@ export function confirmationNotes(plan:Plan, isChangingPlan:boolean, highlight:a
     }
 
     let changeText:string;
-    if (currentMonthly != 0){
+    let recurringBillingText:string = " Then, your card will automatically be billed ";
+    if (currentMonthly != 0 && currentMonthly != price.monthly){
         changeText = ', instead of $' + currentMonthly.toFixed(2);
     } else {
         changeText = '';
+        if (currentMonthly == price.monthly){
+            recurringBillingText = " Your card will continue to be automatically billed "
+        }
     }
 
     let notesText = [highlight(todayText + "$" + todayCharge.toFixed(2) + '.')];
     if (isChangingPlan){
-        notesText = notesText.concat([" Then, your card will automatically be billed ",
+        notesText = notesText.concat([recurringBillingText,
             highlight("$" + price.monthly.toFixed(2) + " on the " + dateText(day) + " of each month"),
             changeText + ". You will receive an email reminder before that day each month. If you need " +
             "a new product before it is scheduled to ship, you can purchase it from the \'"
