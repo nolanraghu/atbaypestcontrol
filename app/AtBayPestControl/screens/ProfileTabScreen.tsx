@@ -17,7 +17,7 @@ import Separator from '../components/Separator'
 import { useNavigation } from '@react-navigation/native';
 import PlanTabScreen from "./PlanTabScreen";
 import {getUser} from "../assets/Data/Data";
-import {deleteProfile} from "../assets/text/text";
+import {deleteProfile, planText} from "../assets/text/text";
 import {changePlan, logOut} from "../redux/action";
 import {useDispatch} from "react-redux";
 
@@ -42,10 +42,6 @@ export default function ProfileTabScreen() {
       </ScrollView>
   )
 
-}
-
-function onPressPlace () {
-  console.log('place')
 }
 
 function renderHeader ({avatar = User.getProfilePic(), avatarBackground = User.getBackgroundPic(),
@@ -80,7 +76,7 @@ function renderHeader ({avatar = User.getProfilePic(), avatarBackground = User.g
                     name="place"
                     underlayColor="transparent"
                     iconStyle={styles.placeIcon}
-                    onPress={onPressPlace}
+                    onPress={()=>{}}
                 />
               </View>
               <View style={styles.userCityRow}>
@@ -110,7 +106,7 @@ function renderEmail () {
   let styles = getStyle(scheme);
   let keys = 0;
 
-  function onPressEmail () {
+  function onPressEdit () {
     navigation.navigate('EditProfileScreen');
   }
 
@@ -119,7 +115,8 @@ function renderEmail () {
               key={keys++}
               index={index}
               email={email}
-              onPressEmail={onPressEmail}
+              onPressEmail={()=>{}}
+              onPressEdit={onPressEdit}
             />
   })
 
@@ -139,7 +136,7 @@ function renderPlan () {
   let styles = getStyle(scheme);
 
   function onPressPlan () {
-    navigation.navigate('EditProfileScreen');
+    navigation.navigate('PlanTabScreen');
   }
 
   return (
@@ -156,7 +153,7 @@ function renderPlan () {
               />
             </View>
             <View style={styles.Row}>
-              <Text style={styles.Text}>{"Go to Current Plan"}</Text>
+              <Text style={styles.Text}>{planText()}</Text>
             </View>
           </View>
         </TouchableOpacity>
@@ -173,12 +170,8 @@ function renderPay () {
   const scheme = useColorScheme();
   let styles = getStyle(scheme);
 
-  function onPressPayment () {
-    console.log('payed')
-  }
-
   function onPressEdit () {
-    navigation.navigate('PlanTabScreen');
+    navigation.navigate('EditProfileScreen');
   }
 
   let PayArray = User.getPayments().map(function(payment, index) {
@@ -187,8 +180,7 @@ function renderPay () {
         payment={payment}
         index={index}
         onPressEdit={onPressEdit}
-        onPressPayment={onPressPayment}
-
+        onPressPayment={()=>{}}
     />
   })
 
@@ -213,7 +205,7 @@ function renderLoc () {
         key={keys++}
         index={index}
         address={address}
-        onPressPlace={onPressPlace}
+        onPressPlace={()=>{}}
     />
   })
 

@@ -411,15 +411,23 @@ export function purchaseListTitle(){
 }
 
 //Profile Screen Text
+export function planText(){
+    return "View Current Plan info"
+}
+export function defaultMarker(){
+    return '(Default)';
+}
 export function deleteProfile(){
     return 'Delete Profile'
 }
+    //Contact Us Screen
 export function contactUs(){
     return 'Contact Us!'
 }
 export function contactUsDescription(){
     return 'Thank you for using Ortho products! Please direct technical difficulties to the team below'
 }
+    //Edit Profile Screen
 export function submit(){
     return 'Submit'
 }

@@ -3,6 +3,7 @@ import {Text, TouchableOpacity, useColorScheme, View} from 'react-native'
 import { Icon } from 'react-native-elements'
 import {getStyle} from '../assets/Stylesheets/Styles'
 import Email from "../assets/Classes/Email";
+import {defaultMarker} from "../assets/text/text";
 
 export default function renderItem ({email, index, onPressEmail, onPressEdit = ()=>{}}: renderProps) {
     const scheme = useColorScheme();
@@ -10,9 +11,9 @@ export default function renderItem ({email, index, onPressEmail, onPressEdit = (
     let subText = email.getType();
     if (index == 0) {
         if (subText === ''){
-            subText += '(Default)';
+            subText += defaultMarker();
         } else {
-            subText += ' (Default)';
+            subText += ' ' + defaultMarker();
         }
     }
 
@@ -60,6 +61,6 @@ interface renderProps {
     email: Email
     index: number
     onPressEmail: (email?: string) => void
-    onPressEdit: () => void
+    onPressEdit?: () => void
 }
 

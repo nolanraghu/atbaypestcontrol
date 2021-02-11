@@ -19,14 +19,9 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f11504bf-41dd-4bca-92fa-bafd18444296" name="Default Changelist" comment="some icon and style changes">
+    <list default="true" id="f11504bf-41dd-4bca-92fa-bafd18444296" name="Default Changelist" comment="fixed some profile item rendering">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/Classes/User.ts" beforeDir="false" afterPath="$PROJECT_DIR$/assets/Classes/User.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/Data/Storage.ts" beforeDir="false" afterPath="$PROJECT_DIR$/assets/Data/Storage.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/Data/allTextRegister.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/Data/allTextRegister.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/Stylesheets/Styles.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/Stylesheets/Styles.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/text/text.ts" beforeDir="false" afterPath="$PROJECT_DIR$/assets/text/text.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/PaymentFormView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/PaymentFormView.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/RenderEmail.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/RenderEmail.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/RenderPayment.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/RenderPayment.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/RenderShippingLocations.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/RenderShippingLocations.tsx" afterDir="false" />
@@ -98,7 +93,7 @@
       <workItem from="1612458086411" duration="12032000" />
       <workItem from="1612992727338" duration="2067000" />
       <workItem from="1612995442185" duration="5811000" />
-      <workItem from="1613024753457" duration="3693000" />
+      <workItem from="1613024753457" duration="4913000" />
     </task>
     <task id="LOCAL-00001" summary="idk">
       <created>1606893147512</created>
@@ -254,7 +249,14 @@
       <option name="project" value="LOCAL" />
       <updated>1612996023613</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="fixed some profile item rendering">
+      <created>1613077649725</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1613077649725</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -307,7 +309,8 @@
     <MESSAGE value="some text changes" />
     <MESSAGE value="more text changes" />
     <MESSAGE value="some icon and style changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="some icon and style changes" />
+    <MESSAGE value="fixed some profile item rendering" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed some profile item rendering" />
   </component>
   <component name="WindowStateProjectService">
     <state x="449" y="148" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1612717270840">

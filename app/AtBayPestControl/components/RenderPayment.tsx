@@ -3,6 +3,7 @@ import {Text, TouchableOpacity, useColorScheme, View} from 'react-native'
 import { Icon } from 'react-native-elements'
 import {getStyle} from "../assets/Stylesheets/Styles";
 import Payment from "../assets/Classes/Payment";
+import {defaultMarker} from "../assets/text/text";
 
 export default function renderItem ({payment, index, onPressEdit, onPressPayment}: renderProps) {
     const scheme = useColorScheme();
@@ -13,9 +14,9 @@ export default function renderItem ({payment, index, onPressEdit, onPressPayment
     let subText = payment.getCardType();
     if (index == 0) {
         if (subText === ''){
-            subText += '(Default)';
+            subText += defaultMarker();
         } else {
-            subText += ' (Default)';
+            subText += ' ' + defaultMarker();
         }
     }
 
