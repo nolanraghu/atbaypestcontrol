@@ -19,13 +19,23 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f11504bf-41dd-4bca-92fa-bafd18444296" name="Default Changelist" comment="fixed some profile item rendering">
+    <list default="true" id="f11504bf-41dd-4bca-92fa-bafd18444296" name="Default Changelist" comment="Code cleanup">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/text/text.ts" beforeDir="false" afterPath="$PROJECT_DIR$/assets/text/text.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/RenderEmail.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/RenderEmail.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/RenderPayment.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/RenderPayment.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/RenderShippingLocations.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/RenderShippingLocations.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens/ProfileTabScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/screens/ProfileTabScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/Classes/TextBox.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/Classes/User.ts" beforeDir="false" afterPath="$PROJECT_DIR$/assets/Classes/User.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/Data/Data.ts" beforeDir="false" afterPath="$PROJECT_DIR$/assets/Data/Data.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/Data/UsefulConstants.ts" beforeDir="false" afterPath="$PROJECT_DIR$/assets/Data/UsefulConstants.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/Data/allAddresses.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/Data/allEmails.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/Data/allPaymentText.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/Data/allPayments.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/Data/allTextLogin.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/Data/allTextRegister.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/Data/allTextRegister.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/Contact.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Contact.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/ContactUsScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/screens/ContactUsScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/EditProfileScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/screens/EditProfileScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/LoginScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/screens/LoginScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/RegisterScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/screens/RegisterScreen.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,7 +103,7 @@
       <workItem from="1612458086411" duration="12032000" />
       <workItem from="1612992727338" duration="2067000" />
       <workItem from="1612995442185" duration="5811000" />
-      <workItem from="1613024753457" duration="4913000" />
+      <workItem from="1613024753457" duration="6155000" />
     </task>
     <task id="LOCAL-00001" summary="idk">
       <created>1606893147512</created>
@@ -256,7 +266,14 @@
       <option name="project" value="LOCAL" />
       <updated>1613077649725</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="more item rendering and navigation fixes">
+      <created>1613078866123</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1613078866123</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -310,17 +327,19 @@
     <MESSAGE value="more text changes" />
     <MESSAGE value="some icon and style changes" />
     <MESSAGE value="fixed some profile item rendering" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed some profile item rendering" />
+    <MESSAGE value="more item rendering and navigation fixes" />
+    <MESSAGE value="Code cleanup" />
+    <option name="LAST_COMMIT_MESSAGE" value="Code cleanup" />
   </component>
   <component name="WindowStateProjectService">
     <state x="449" y="148" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1612717270840">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="449" y="148" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1536.824@0.0.1536.824" timestamp="1612717270840" />
-    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1606940830516">
+    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1613079559300">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1606940830516" />
+    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1613079559300" />
     <state width="1515" height="197" key="GridCell.Tab.0.bottom" timestamp="1607015603905">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

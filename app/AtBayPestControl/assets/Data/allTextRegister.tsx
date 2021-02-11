@@ -1,38 +1,13 @@
-import TextBox from "../Classes/TextBox";
 import {getUser} from "./Data";
 import InputBox from "../../components/RenderTextBox";
 import React from "react";
-
-let User = getUser()
-
-export const registerText = [
-    new TextBox('Username', User.validateUserName, 'username',
-        (newText) => User.changeUserName(newText)),
-    new TextBox('Email Address', User.validateEmail, 'emailAddress',
-        (newText) => User.defaultEmail().updateEmail(newText)),
-    new TextBox('Confirm Email Address', User.validateEmail, 'emailAddress',
-        (newText) => User.defaultEmail().updateEmail(newText)),
-    new TextBox('Password', User.validatePassword, 'password',
-        (newText) => User.changePassword(newText)),
-    new TextBox('Confirm Password', User.validatePassword, 'password',
-        (newText) => User.changePassword(newText)),
-    new TextBox('Address Line 1', User.validateAddress, 'streetAddressLine1',
-        (newText) => User.defaultAddress().updateAddress(newText)),
-    new TextBox('Address Line 2', User.validateAddress2, 'streetAddressLine2',
-        (newText) => User.defaultAddress().updateAddressLine2(newText)),
-    new TextBox('City', User.validateCity, 'addressCity',
-        (newText) => User.defaultAddress().updateCity(newText)),
-    new TextBox('State', User.validateState, 'addressState',
-        (newText) => User.defaultAddress().updateState(newText)),
-    new TextBox('Zip Code', User.validateZip, 'postalCode',
-        (newText) => User.defaultAddress().updateZip(newText)),
-]
 
 export function registerInputs (isSubmitted:boolean,
                                 emailMatch:string,
                                 setEmailMatch:any,
                                 passMatch:string,
                                 setPassMatch:any){
+    let User = getUser()
     let keys = 0;
     return (
         [

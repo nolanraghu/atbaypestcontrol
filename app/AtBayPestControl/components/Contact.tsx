@@ -1,5 +1,5 @@
-import {Image, Pressable, Text, useColorScheme, View} from "react-native";
-import {getBackgroundColor, getStyle} from "../assets/Stylesheets/Styles";
+import {Text, useColorScheme, View} from "react-native";
+import {getStyle} from "../assets/Stylesheets/Styles";
 import TEAM from "../assets/Data/DevTeamInfo";
 import * as React from "react";
 import Separator from "./Separator";
@@ -10,16 +10,15 @@ export default function ProductItem(person: number) {
     const first = "Email: " + TEAM[person].email;
     const second = "GitHub Username: " + TEAM[person].gitHub;
 
-    let view =
+    return (
         <View>
             <Text style={[styles.Text, {fontWeight:"bold"}]}>{TEAM[person].name}</Text>
             <Text style={styles.Text}>{first}</Text>
             <Text style={styles.Text}>{second}</Text>
-            <Text></Text>
-            <Text></Text>
-            <Text></Text>
+            <Text> </Text>
+            <Text> </Text>
             {Separator()}
         </View>
-    return view;
+    );
 }
 

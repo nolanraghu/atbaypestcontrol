@@ -1,29 +1,16 @@
 import * as React from 'react';
-import {Card, Icon} from 'react-native-elements';
+import {Card} from 'react-native-elements';
 import {
     ScrollView,
     useColorScheme,
-    ImageBackground,
-    Image,
-    TouchableOpacity,
     Text,
     View, Pressable
 } from 'react-native';
 import {getStyle} from '../assets/Stylesheets/Styles'
 import Email from '../components/RenderEmail'
-import Payment from '../components/RenderPayment'
-import ShippingLocations from '../components/RenderShippingLocations';
-import Separator from '../components/Separator'
-import {PLAN} from "../assets/Data/Data";
 import { useNavigation } from '@react-navigation/native';
-import PlanTabScreen from "./PlanTabScreen";
-import LoginScreen from "./LoginScreen";
-import {getUser, gimmekey} from "../assets/Data/Data";
-import {deleteProfile, submit} from "../assets/text/text";
-import {changePlan, LOG_OUT, logOut} from "../redux/action";
-import {useDispatch} from "react-redux";
-import images from "../assets/images";
-import {useState} from "react";
+import {getUser} from "../assets/Data/Data";
+import {submit} from "../assets/text/text";
 import Editable from "../components/Editable";
 
 export default function EditProfileScreen() {
@@ -40,7 +27,7 @@ export default function EditProfileScreen() {
         editText={user.changeUserName}
     />;
     let pword = <Editable textIn={user.getPassword()} editText={user.changePassword} type={"Password"}/>;
-    let AddyArray = user.getAddresses().map(function (addy, index) {
+    let AddyArray = user.getAddresses().map(function (addy) {
         return (
             <View style={{justifyContent: 'center'}}>
                 <Editable key={key++} textIn={addy.address} editText={addy.updateAddress} type={"Address (Line 1)"}/>
@@ -51,7 +38,7 @@ export default function EditProfileScreen() {
             </View>
         )
     });
-    let EmailArray = user.getEmails().map(function (email, index) {
+    let EmailArray = user.getEmails().map(function (email) {
         return <Editable
             key={key++}
             type={"Email"}

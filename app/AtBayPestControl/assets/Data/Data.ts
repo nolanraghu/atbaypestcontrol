@@ -2,20 +2,8 @@ import Infestation from "../Classes/Infestation";
 import User from "../Classes/User";
 import Product from "../Classes/Product";
 import Equipment from "../Classes/Equipment";
-import Email from "../Classes/Email";
-import Address from "../Classes/Address";
-import Payment from "../Classes/Payment";
 import {loadUser, storeUser} from "./Storage";
 import {NUMBER_OF_INFESTATIONS} from "./UsefulConstants";
-
-//EXAMPLE FORMATS
-
-export const PLAN = "Current Plan"
-
-
-//Infestation pulls from Async
-//User from a database
-
 
 export let instantiated = false;
 

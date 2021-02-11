@@ -1,8 +1,7 @@
 import React, {useState} from 'react'
-import {Button, ScrollView, Text, TextInput, TouchableOpacity, useColorScheme, View} from 'react-native'
+import {Button, ScrollView, Text, TouchableOpacity, useColorScheme, View} from 'react-native'
 import {buttonColor, getOffButtonColor, getStyle} from '../assets/Stylesheets/Styles'
-import InputBox from "../components/RenderTextBox";
-import {registerInputs, registerText} from "../assets/Data/allTextRegister";
+import {registerInputs} from "../assets/Data/allTextRegister";
 import {getUser} from "../assets/Data/Data";
 import {changePlan, changeProfile, logIn} from "../redux/action";
 import {useDispatch} from "react-redux";

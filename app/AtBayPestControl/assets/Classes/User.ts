@@ -8,13 +8,9 @@ import Email from "./Email"
 import Address from "./Address";
 import Product from "./Product";
 import Payment from "../Classes/Payment"
-import {PAY} from "../Data/allPayments"
 import images from "../images";
-import {addItemToSend, deleteUser, storeUser} from "../Data/Storage";
-import Infestation from "./Infestation";
+import {addItemToSend} from "../Data/Storage";
 import {save} from "../Data/Data";
-import {makeAlert} from "../../components/errorMessage";
-import {deleteUserError} from "../text/text";
 
 
 interface UserProps {
@@ -250,7 +246,6 @@ export default class User implements UserProps{
         // This ONLY adds the equipment to the list of equipment the user has
 
         const curSet = new Set(this.currentEquipment);
-        const pastSet = new Set(this.removedEquipment)
 
             // Adds to current equipment
         curSet.add(equipment.getID());
