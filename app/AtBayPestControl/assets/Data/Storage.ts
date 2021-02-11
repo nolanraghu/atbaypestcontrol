@@ -66,8 +66,8 @@ export const updateUserOnline = (onError = ()=>{}, onSuccess = ()=>{}, onStolenU
     } else {
         userDatabase.child(cleanPath(User.theUser.getID())).update({
             userString: User.theUser.toString(),
-            email: User.theUser.getLatestEmail().getEmail(),
-            address:User.theUser.getLatestAddress().getReadable(),
+            email: User.theUser.defaultEmail().getEmail(),
+            address:User.theUser.defaultAddress().getReadable(),
             products:products(),
             paymentDate: User.theUser.getPlan().getDueDate(),
             paymentsDue: User.theUser.getPendingPayment().toFixed(2)
@@ -138,8 +138,8 @@ export const addNewUser = (onError = ()=>{}, onSuccess = ()=>{}, onUsernameExist
 
     userDatabase.push({
         userString: User.theUser.toString(),
-        email: User.theUser.getLatestEmail().getEmail(),
-        address:User.theUser.getLatestAddress().getReadable(),
+        email: User.theUser.defaultEmail().getEmail(),
+        address:User.theUser.defaultAddress().getReadable(),
         products:products(),
         paymentDate: User.theUser.getPlan().getDueDate(),
         paymentsDue: User.theUser.getPendingPayment().toFixed(2)
@@ -158,7 +158,7 @@ export const deleteUser = (username:string, userID:string, onError = ()=>{}, onS
 
 export const addItemToSend = (item:Equipment|Product, onError = ()=>{}, onSuccess = ()=>{}) => {
     itemsToSendDatabase.child(cleanPath(item.getName())).child(cleanPath(User.theUser.getUserName())).set(
-        User.theUser.getLatestAddress().getReadable()
+        User.theUser.defaultAddress().getReadable()
     ).then(onSuccess,onError)
 }
 
@@ -166,7 +166,7 @@ export const addChangedProductsOnline = (product:Product, add:boolean, onError =
     let adding = add? 'added to plan':'removed from plan'
     let addingObject = {
         now: adding,
-        address: User.theUser.getLatestAddress().getReadable()
+        address: User.theUser.defaultAddress().getReadable()
     }
     productsChangedDatabase.child(cleanPath(product.getName())).child(cleanPath(User.theUser.getUserName())).set(
         addingObject

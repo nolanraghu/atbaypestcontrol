@@ -10,6 +10,15 @@ export default function renderItem ({payment, index, onPressEdit, onPressPayment
 
     let card = payment.getCardNumber().replace(/\s/g, "");
 
+    let subText = payment.getCardType();
+    if (index == 0) {
+        if (subText === ''){
+            subText += '(Default)';
+        } else {
+            subText += ' (Default)';
+        }
+    }
+
     return (
         <TouchableOpacity onPress={() => onPressPayment()}>
             <View style={styles.container}>
@@ -28,18 +37,22 @@ export default function renderItem ({payment, index, onPressEdit, onPressPayment
                         <Text style={styles.payText}>{"xxxx-xxxx-xxxx-" + card.substr(card.length - 4,)}</Text>
                     </View>
                     <View style={styles.nameColumn}>
-                        {payment.getCardType().length !== 0 && (
-                            <Text style={styles.subText}>{payment.getCardType()}</Text>
+                        {subText !== '' && (
+                            <Text style={styles.subText}>
+                                {subText}
+                            </Text>
                         )}
                     </View>
                 </View>
                 <View style={styles.editRow}>
-                    <Icon
-                        name="edit"
-                        underlayColor="transparent"
-                        iconStyle={styles.Icon}
-                        onPress={() => onPressEdit()}
-                    />
+                    {index === 0 && (
+                        <Icon
+                            name="edit"
+                            underlayColor="transparent"
+                            iconStyle={styles.Icon}
+                            onPress={() => onPressEdit()}
+                        />
+                    )}
                 </View>
             </View>
         </TouchableOpacity>

@@ -4,6 +4,8 @@ import {StyleSheet, Text, View, Button, useColorScheme} from 'react-native';
 import { CreditCardInput } from 'react-native-credit-card-input';
 import { FontAwesome, FontAwesome5 } from '@expo/vector-icons';
 import {buttonColor, getStyle} from "../assets/Stylesheets/Styles";
+import CheckBox from "@react-native-community/checkbox";
+import {getUser} from "../assets/Data/Data";
 /**
  * Renders the payment form and handles the credit card data
  * using the CreditCardInput component.
@@ -12,13 +14,19 @@ export default function PaymentFormView({onSubmit, submitted, error}:any) {
     const scheme = useColorScheme();
     let styles = getStyle(scheme);
     const [cardState, setCardState] = useState<any>({valid:false});
+    const [defaultCard, setDefault] = useState(true);
+    let firstCard = !getUser().hasPayment();
     return (
         <View>
             <View>
                 <CreditCardInput requiresName onChange={(cardState:any) => {setCardState(cardState)}} />
             </View>
-            <View style={{flexDirection: 'row'}}>
-
+            <View style={styles.checkboxView}>
+                <CheckBox onCheckColor={buttonColor}
+                          disabled={firstCard}
+                          value={defaultCard}
+                          onValueChange={value => setDefault(value)}/>
+                <Text style={styles.checkboxText}>Use as default card</Text>
             </View>
             <View style={styles.buttonView}>
                 <Button

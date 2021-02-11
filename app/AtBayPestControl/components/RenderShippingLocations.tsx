@@ -4,7 +4,7 @@ import { Icon } from 'react-native-elements'
 import {getStyle} from '../assets/Stylesheets/Styles'
 import Address from "../assets/Classes/Address";
 
-export default function renderItem ({address, index, onPressPlace}: renderProps) {
+export default function renderItem ({address, index, onPressPlace, onPressEdit = ()=>{}}: renderProps) {
 
     const scheme = useColorScheme();
     let styles = getStyle(scheme);
@@ -32,6 +32,16 @@ export default function renderItem ({address, index, onPressPlace}: renderProps)
                         )}
                     </View>
                 </View>
+                <View style={styles.editRow}>
+                    {index === 0 && (
+                        <Icon
+                            name="edit"
+                            underlayColor="transparent"
+                            iconStyle={styles.Icon}
+                            onPress={() => onPressEdit()}
+                        />
+                    )}
+                </View>
             </View>
         </TouchableOpacity>
     )
@@ -41,4 +51,5 @@ interface renderProps {
     address: Address
     index: number
     onPressPlace: () => void
+    onPressEdit: () => void
 }

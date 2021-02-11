@@ -345,10 +345,12 @@ export function getStyle(state:ColorSchemeName) {
             paddingBottom: 30,
             paddingTop: 10,
             paddingHorizontal:10,
+            alignItems: "flex-end"
         },
         headerContainer: {},
         headerColumn: {
             backgroundColor: 'transparent',
+            alignSelf: 'center',
             ...Platform.select({
                 ios: {
                     alignItems: 'center',
@@ -505,7 +507,12 @@ export function getStyle(state:ColorSchemeName) {
             borderRadius: 10,
             */
         },
-        contactUs: {width: 30, height: 30, alignSelf:"flex-end"},
+        contactUs: {
+            width: 30,
+            height: 30,
+            alignSelf:"flex-end",
+            color: 'white'
+        },
         cardArea: {
             width: '94%',
             margin: '3%',
@@ -552,7 +559,17 @@ export function getStyle(state:ColorSchemeName) {
             alignContent: "center",
             flexDirection: "column",
             padding: '6%',
-            paddingBottom: 0
+            paddingBottom: 3
+        },
+        checkboxView: {
+            flexDirection: 'row',
+            alignItems: 'center',
+            marginBottom: -5,
+            marginLeft: '6%'
+        },
+        checkboxText: {
+            color: 'black',
+            opacity: .7
         }
     });
 }

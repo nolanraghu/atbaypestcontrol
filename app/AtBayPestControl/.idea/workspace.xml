@@ -19,16 +19,18 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f11504bf-41dd-4bca-92fa-bafd18444296" name="Default Changelist" comment="more text changes">
+    <list default="true" id="f11504bf-41dd-4bca-92fa-bafd18444296" name="Default Changelist" comment="some icon and style changes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/Classes/User.ts" beforeDir="false" afterPath="$PROJECT_DIR$/assets/Classes/User.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/Data/Storage.ts" beforeDir="false" afterPath="$PROJECT_DIR$/assets/Data/Storage.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/Data/allTextRegister.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/Data/allTextRegister.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/Stylesheets/Styles.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/Stylesheets/Styles.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/AddSubscriptionView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/PaymentMethodScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/text/text.ts" beforeDir="false" afterPath="$PROJECT_DIR$/assets/text/text.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/PaymentFormView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/PaymentFormView.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/navigation/BottomTabNavigator.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/navigation/BottomTabNavigator.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/navigation/ProfileTabNavigator.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/navigation/ProfileTabNavigator.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens/AddSubscriptions.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/screens/PaymentScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens/BugsTabScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/screens/BugsTabScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/RenderEmail.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/RenderEmail.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/RenderPayment.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/RenderPayment.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/RenderShippingLocations.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/RenderShippingLocations.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/ProfileTabScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/screens/ProfileTabScreen.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,7 +97,8 @@
       <workItem from="1607046293723" duration="8041000" />
       <workItem from="1612458086411" duration="12032000" />
       <workItem from="1612992727338" duration="2067000" />
-      <workItem from="1612995442185" duration="552000" />
+      <workItem from="1612995442185" duration="5811000" />
+      <workItem from="1613024753457" duration="3693000" />
     </task>
     <task id="LOCAL-00001" summary="idk">
       <created>1606893147512</created>
@@ -244,7 +247,14 @@
       <option name="project" value="LOCAL" />
       <updated>1612940601246</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="some icon and style changes">
+      <created>1612996023613</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1612996023613</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -296,7 +306,8 @@
     <MESSAGE value="some changes now" />
     <MESSAGE value="some text changes" />
     <MESSAGE value="more text changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="more text changes" />
+    <MESSAGE value="some icon and style changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="some icon and style changes" />
   </component>
   <component name="WindowStateProjectService">
     <state x="449" y="148" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1612717270840">

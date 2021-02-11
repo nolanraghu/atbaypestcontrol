@@ -9,29 +9,21 @@ import {
   Text,
   View, Pressable
 } from 'react-native';
-import {getStyle} from '../assets/Stylesheets/Styles'
+import {buttonColor, getStyle} from '../assets/Stylesheets/Styles'
 import Email from '../components/RenderEmail'
 import Payment from '../components/RenderPayment'
 import ShippingLocations from '../components/RenderShippingLocations';
 import Separator from '../components/Separator'
-import {gimmekey, PLAN} from "../assets/Data/Data";
 import { useNavigation } from '@react-navigation/native';
 import PlanTabScreen from "./PlanTabScreen";
-import LoginScreen from "./LoginScreen";
 import {getUser} from "../assets/Data/Data";
 import {deleteProfile} from "../assets/text/text";
-import {changePlan, LOG_OUT, logOut} from "../redux/action";
+import {changePlan, logOut} from "../redux/action";
 import {useDispatch} from "react-redux";
-import images from "../assets/images";
-import {NavigationActions} from "react-navigation";
-
-
-
-//TODO: make editable, have a situation for no user yet
 
 let User = getUser();
 
-export default function ProfileTabScreen({route, navigation}: any) {
+export default function ProfileTabScreen() {
   const scheme = useColorScheme();
   let styles = getStyle(scheme);
 
@@ -57,14 +49,12 @@ function onPressPlace () {
 }
 
 function renderHeader ({avatar = User.getProfilePic(), avatarBackground = User.getBackgroundPic(),
-                         name = User.getUserName(), city = User.getLatestAddress().city,
-                         state = User.getLatestAddress().state}: RenderHProps) {
+                         name = User.getUserName(), city = User.defaultAddress().city,
+                         state = User.defaultAddress().state}: RenderHProps) {
 
   const scheme = useColorScheme();
   let styles = getStyle(scheme);
   const navigation = useNavigation();
-
-  console.log(avatar, avatarBackground)
 
   return (
       <View>
@@ -73,7 +63,9 @@ function renderHeader ({avatar = User.getProfilePic(), avatarBackground = User.g
             blurRadius={10}
             source={avatarBackground}
         >
-          <Icon name='info' underlayColor={'transparent'} style={styles.contactUs}
+          <Icon name='info'
+                style={styles.contactUs}
+                color={buttonColor}
                 onPress={()=>{navigation.navigate("ContactUsScreen")}}
           />
           <View style={styles.headerColumn}>

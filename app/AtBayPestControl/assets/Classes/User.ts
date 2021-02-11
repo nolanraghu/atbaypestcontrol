@@ -162,7 +162,7 @@ export default class User implements UserProps{
         //deleteUser(this.name, this.id,() => makeAlert(deleteUserError()) );
         this.emails = [];
         this.addresses = [];
-        this.payments = [new Payment()];
+        this.payments = [];
         this.name ="";
         this.password="";
         this.id= '0';
@@ -344,26 +344,36 @@ export default class User implements UserProps{
         // profile page
     }
 
-    addEmail = (email: Email) => {
+    addEmail = (email: Email, defaultEmail:boolean = false) => {
         // Adds the email to the list of emails
-        const newEmailSet = new Set(this.emails);
-        newEmailSet.add(email);
-        this.emails = [... newEmailSet];
+        if (defaultEmail) {
+            this.emails = [email].concat(this.emails)
+        } else {
+            this.emails.push(email)
+        }
         save()
     }
 
-    addAddress = (address: Address) => {
-        const newAddressSet = new Set(this.addresses);
-        newAddressSet.add(address);
-        this.addresses = [... newAddressSet];
+    addAddress = (address: Address, defaultAddress:boolean = false) => {
+        if (defaultAddress) {
+            this.addresses = [address].concat(this.addresses)
+        } else {
+            this.addresses.push(address)
+        }
         save();
     }
 
-    addPayment = (payment: Payment) => {
-        const newPaymentSet = new Set(this.payments);
-        newPaymentSet.add(payment);
-        this.payments = [... newPaymentSet];
+    addPayment = (payment: Payment, defaultPayment:boolean = false) => {
+        if (defaultPayment) {
+            this.payments = [payment].concat(this.payments);
+        } else {
+            this.payments.push(payment);
+        }
         save();
+    }
+
+    hasPayment = () => {
+        return this.payments.length > 0;
     }
 
     validateUser = () => {
@@ -377,9 +387,8 @@ export default class User implements UserProps{
     }
 
     validateEmail = () => {
-        let index = this.getEmails().length - 1;
-        if (this.getLatestEmail().getEmail().length != 0 && this.getLatestEmail().getEmail().includes('@')
-            && this.getLatestEmail().getEmail().includes('.')) return '';
+        if (this.defaultEmail().getEmail().length != 0 && this.defaultEmail().getEmail().includes('@')
+            && this.defaultEmail().getEmail().includes('.')) return '';
         else return 'Please enter a valid email';
     }
 
@@ -387,7 +396,7 @@ export default class User implements UserProps{
     }
 
     validateAddress = () => {
-        if (this.getLatestAddress().getAddress().length != 0) return '';
+        if (this.defaultAddress().getAddress().length != 0) return '';
         else return 'Please enter a valid address'
     }
 
@@ -397,17 +406,17 @@ export default class User implements UserProps{
 
 
     validateCity = () => {
-        if (this.getLatestAddress().getCity().length != 0) return ''
+        if (this.defaultAddress().getCity().length != 0) return ''
         else return 'Please enter a valid address'
     }
 
     validateState = () => {
-        if (this.getLatestAddress().getState().length != 0) return ''
+        if (this.defaultAddress().getState().length != 0) return ''
         else return 'Please enter a valid state'
     }
 
     validateZip = () => {
-        if (this.getLatestAddress().getZip().length != 0) return ''
+        if (this.defaultAddress().getZip().length != 0) return ''
         else return 'Please enter a valid zip code'
     }
 
@@ -416,18 +425,11 @@ export default class User implements UserProps{
         else return 'Password must be at least 5 characters long'
     }
 
-    getLatestEmail = () => {
-        if (this.emails.length === 0){
-            this.emails.push(new Email());
-        }
-        return this.emails[this.emails.length-1];
+    defaultEmail = () => {
+        return this.emails[0];
     }
 
-    getLatestAddress = () => {
-        if (this.addresses.length === 0){
-            this.addresses.push(new Address());
-            console.log('new address made')
-        }
-        return this.addresses[this.addresses.length-1];
+    defaultAddress = () => {
+        return this.addresses[0];
     }
 }
