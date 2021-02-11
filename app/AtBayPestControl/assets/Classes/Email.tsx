@@ -33,7 +33,7 @@ export default class Email implements EmailProps{
             {
                 id: this.id,
                 email: this.email,
-                type: this.email,
+                type: this.type,
                 defaultE: this.defaultE
             }
         );
