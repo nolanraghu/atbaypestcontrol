@@ -15,12 +15,13 @@ import {
 import Product from "../assets/Classes/Product";
 import CaptionImage from "../components/CaptionImage";
 import Equipment from "../assets/Classes/Equipment";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {changePlan} from "../redux/action";
 import {updateUserOnline} from "../assets/Data/Storage";
 import {makeAlert} from "../components/errorMessage";
 import {useState} from "react";
 import {noPayment} from "../components/noPayment";
+import {RootState} from "../redux/store";
 
 export default function UpdatePlanPopup({route, navigation}:any) {
     const params = route.params;
@@ -41,21 +42,24 @@ export default function UpdatePlanPopup({route, navigation}:any) {
     const user = getUser();
     const plan = user.getPlan();
     const isChangingPlan = plan.hasPendingChanges();
+    const hasPayment = user.getPayments().length != 0;
+
+    // This makes the screen rerender if hasPayment might have changed
+    useSelector((state:RootState) => state.hasPaymentVersion);
 
     let keys = 0;
 
     function renderPay () {
-        //TODO
         function onPressPayment () {
-            console.log('payed')
+
         }
 
         function onPressEdit () {
-            console.log('edit')
+
         }
 
         if(getUser().getPayments().length == 0){
-            return noPayment();
+            return noPayment('PlanUpdatePopupScreen');
         }
 
         return (
@@ -70,7 +74,7 @@ export default function UpdatePlanPopup({route, navigation}:any) {
     }
 
     function pressButton(){
-        if(!updating){
+        if(!updating && hasPayment){
             let load = () => {
                 // You can do stuff when it's loading here
             }
@@ -92,11 +96,7 @@ export default function UpdatePlanPopup({route, navigation}:any) {
                 },
                 () => {
                     dispatch(changePlan());
-                    if(user.getPendingPayment() != 0){
-                        navigation.navigate('AddSubscriptions');
-                    } else {
-                        navigation.navigate('BugsTabScreen');
-                    }
+                    navigation.navigate('BugsTabScreen');
                     setUpdating(false);
                 },
                 () => {
@@ -204,7 +204,7 @@ export default function UpdatePlanPopup({route, navigation}:any) {
     }
 
     function getButtonColor(){
-        if (updating){
+        if (updating || !hasPayment){
             return getOffButtonColor(scheme);
         } else {
             return buttonColor;

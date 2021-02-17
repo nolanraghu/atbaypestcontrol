@@ -17,16 +17,20 @@ import Separator from '../components/Separator'
 import { useNavigation } from '@react-navigation/native';
 import PlanTabScreen from "./PlanTabScreen";
 import {getUser} from "../assets/Data/Data";
-import {deleteProfile, noPaymentText, planText} from "../assets/text/text";
+import {deleteProfile, planText} from "../assets/text/text";
 import {changePlan, logOut} from "../redux/action";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {noPayment} from "../components/noPayment";
+import {RootState} from "../redux/store";
 
 let User = getUser();
 
 export default function ProfileTabScreen() {
   const scheme = useColorScheme();
   let styles = getStyle(scheme);
+
+  // This makes the screen rerender if hasPayment might have changed
+  useSelector((state:RootState) => state.hasPaymentVersion);
 
   return (
       <ScrollView style={styles.scroll}>
@@ -172,7 +176,7 @@ function renderPay () {
   let styles = getStyle(scheme);
 
   if(!User.hasPayment()){
-    return noPayment();
+    return noPayment('ProfileTabScreen');
   }
 
   function onPressEdit () {

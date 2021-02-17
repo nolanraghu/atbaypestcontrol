@@ -4,6 +4,7 @@ const EQUIPMENT_PENDING:string = 'EQUIPMENT_PENDING';
 const LOG_IN:string = 'LOG_IN';
 const LOG_OUT:string = 'LOG_OUT';
 const CHANGE_PROFILE:string = 'CHANGE_PROFILE';
+const CHANGE_PAYMENT:string = 'CHANGE_PAYMENT';
 
 // This will change any screen that doesn't care what's pending, and also any screen that is pending
 const changePlan = () => ({type: CHANGE_PLAN});
@@ -19,6 +20,9 @@ const changePending = () => ({type: CHANGE_PENDING});
 // as you leave the bug info popup...
 const justEquipmentPending = () => ({type: EQUIPMENT_PENDING});
 
+// This is for if you might be changing if you have a payment or not
+const changePayment = () => ({type:CHANGE_PAYMENT});
+
 const logIn = () => ({type: LOG_IN});
 const logOut = () => ({type: LOG_OUT});
 
@@ -29,10 +33,12 @@ export {
     EQUIPMENT_PENDING,
     LOG_IN,
     LOG_OUT,
+    CHANGE_PAYMENT,
     changePlan,
     changePending,
     justEquipmentPending,
     logIn,
     logOut,
     changeProfile,
+    changePayment,
 }

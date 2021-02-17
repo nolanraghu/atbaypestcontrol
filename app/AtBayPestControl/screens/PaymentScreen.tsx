@@ -4,6 +4,9 @@ import axios from 'axios';
 import {getUser} from "../assets/Data/Data";
 import {useNavigation} from "@react-navigation/native";
 import {View} from "react-native";
+import Payment from "../assets/Classes/Payment";
+import {useDispatch} from "react-redux";
+import {changePayment} from "../redux/action";
 const STRIPE_ERROR = 'Payment service error. Try again later.';
 const SERVER_ERROR = 'Server error. Try again later.';
 const STRIPE_PUBLISHABLE_KEY = 'pk_test_51Hth3nKdUJ252rMhMm75qbcTnKrppn9GcvnGmEadjSPEqyKrI9oY3zW3ljLP3rgGyInLgOKI' +
@@ -60,11 +63,14 @@ const subscribeUser = (creditCardToken:any) => {
  * The main class that submits the credit card data and
  * handles the response from Stripe.
  */
-export default function AddSubscription(){
+export default function AddSubscription({route, navigation}:any){
     const [submitted, setSubmitted] = useState(false);
     const [error, setError]:[any,any] = useState(null);
     const [token, setToken] = useState(null);
-    const navigation = useNavigation();
+    let {lastScreen} = route.params;
+
+    const dispatch = useDispatch();
+
     // Handles submitting the payment request
     const onSubmit = async (creditCardInput:any) => {
         // Disable the Submit button after the request is sent
@@ -98,14 +104,15 @@ export default function AddSubscription(){
             setSubmitted(false);
             setError(null);
             setToken(creditCardToken);
+            getUser().addPayment(new Payment(creditCardToken.card.last4, creditCardToken.card.funding))
+            dispatch(changePayment());
 
-            await makePayment()
-            getUser().resetPendingPayments()
+            navigation.navigate(lastScreen);
             navigation.goBack();
-            //navigation.pop();
         }
     };
 
+    //We need to make customers first so we can set up recurring payments from saved cards
     const makePayment = async() =>{
         axios({
             method: 'POST',
@@ -117,6 +124,7 @@ export default function AddSubscription(){
             }
         }).then(response => {
             console.log(response);
+            getUser().resetPendingPayments();
         });
     };
 

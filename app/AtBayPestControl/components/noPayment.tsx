@@ -5,13 +5,16 @@ import * as React from "react";
 import {getStyle} from "../assets/Stylesheets/Styles";
 import { useNavigation } from "@react-navigation/native";
 
-export function noPayment(){
+export function noPayment(screen:string){
     const scheme = useColorScheme();
     let styles = getStyle(scheme);
     let navigation = useNavigation();
 
     return (
-        <TouchableOpacity style={{width: '100%'}} onPress={()=>{navigation.navigate('AddSubscriptions')}}>
+        <TouchableOpacity
+            style={{width: '100%'}}
+            onPress={()=>{navigation.navigate('AddSubscriptions', {lastScreen:screen})}}
+        >
             <View style={styles.container}>
                 <View style={styles.iconRow}>
                     <Icon
