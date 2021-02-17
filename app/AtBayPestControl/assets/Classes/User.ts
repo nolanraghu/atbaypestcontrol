@@ -421,10 +421,23 @@ export default class User implements UserProps{
     }
 
     defaultEmail = () => {
-        return this.emails[0];
+        if (this.emails.length == 0){
+            let newEmail = new Email();
+            this.emails = [newEmail];
+            return newEmail;
+        } else {
+            console.log("hello?");
+            return this.emails[0];
+        }
     }
 
     defaultAddress = () => {
-        return this.addresses[0];
+        if (this.addresses.length == 0){
+            let newAddress = new Address();
+            this.addresses = [newAddress];
+            return newAddress;
+        } else {
+            return this.addresses[0];
+        }
     }
 }

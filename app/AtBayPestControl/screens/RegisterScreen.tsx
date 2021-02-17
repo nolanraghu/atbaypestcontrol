@@ -33,6 +33,7 @@ export default function RegisterScreen({ route, navigation }: any) {
     let InputArray = registerInputs(isSubmitted, emailMatch, setEmailMatch, passMatch, setPassMatch);
 
     let register = () => {
+        console.log(User)
         let load = () => {
             console.log(User);
             //You can add a function here if you want something to happen while it's loading

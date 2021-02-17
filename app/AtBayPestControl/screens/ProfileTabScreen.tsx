@@ -17,9 +17,10 @@ import Separator from '../components/Separator'
 import { useNavigation } from '@react-navigation/native';
 import PlanTabScreen from "./PlanTabScreen";
 import {getUser} from "../assets/Data/Data";
-import {deleteProfile, planText} from "../assets/text/text";
+import {deleteProfile, noPaymentText, planText} from "../assets/text/text";
 import {changePlan, logOut} from "../redux/action";
 import {useDispatch} from "react-redux";
+import {noPayment} from "../components/noPayment";
 
 let User = getUser();
 
@@ -169,6 +170,10 @@ function renderPay () {
 
   const scheme = useColorScheme();
   let styles = getStyle(scheme);
+
+  if(!User.hasPayment()){
+    return noPayment();
+  }
 
   function onPressEdit () {
     navigation.navigate('EditProfileScreen');

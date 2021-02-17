@@ -11,6 +11,7 @@ import {getEquipmentByID, getProductByID, getUser} from "../assets/Data/Data";
 import Payment from "../components/RenderPayment";
 import CaptionImage from "../components/CaptionImage";
 import Product from "../assets/Classes/Product";
+import {noPayment} from "../components/noPayment";
 
 export default function ConfirmPurchasePopup({route, navigation}:any){
     const {itemID:itemID, type:type} = route.params;
@@ -33,7 +34,6 @@ export default function ConfirmPurchasePopup({route, navigation}:any){
     let keys = 0;
 
     function renderPay () {
-        //TODO
         function onPressPayment () {
             console.log('payed')
         }
@@ -43,7 +43,7 @@ export default function ConfirmPurchasePopup({route, navigation}:any){
         }
 
         if(getUser().getPayments().length == 0){
-            return '';
+            return noPayment();
         }
 
         return (

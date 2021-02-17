@@ -412,10 +412,13 @@ export function purchaseListTitle(){
 
 //Profile Screen Text
 export function planText(){
-    return "View Current Plan info"
+    return "View Current Plan info";
 }
 export function defaultMarker(){
     return '(Default)';
+}
+export function noPaymentText(){
+    return 'Add a payment method';
 }
 export function deleteProfile(){
     return 'Delete Profile'

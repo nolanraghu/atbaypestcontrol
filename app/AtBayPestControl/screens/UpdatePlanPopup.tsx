@@ -20,6 +20,7 @@ import {changePlan} from "../redux/action";
 import {updateUserOnline} from "../assets/Data/Storage";
 import {makeAlert} from "../components/errorMessage";
 import {useState} from "react";
+import {noPayment} from "../components/noPayment";
 
 export default function UpdatePlanPopup({route, navigation}:any) {
     const params = route.params;
@@ -54,7 +55,7 @@ export default function UpdatePlanPopup({route, navigation}:any) {
         }
 
         if(getUser().getPayments().length == 0){
-            return '';
+            return noPayment();
         }
 
         return (
