@@ -1,8 +1,6 @@
 import React, {useState} from 'react'
-import {Text, TextInput, TouchableOpacity, useColorScheme, View} from 'react-native'
-import { Icon } from 'react-native-elements'
+import {Text, TextInput, useColorScheme, View} from 'react-native'
 import {getStyle} from '../assets/Stylesheets/Styles'
-import Email from "../assets/Classes/Email";
 import {save} from "../assets/Data/Data";
 import {useDispatch} from "react-redux";
 import {changePlan} from "../redux/action";
@@ -12,12 +10,12 @@ export default function Editable ({textIn, editText, type}: renderProps) {
     let styles = getStyle(scheme);
     const dispatch = useDispatch()
     const [text, onChangeText] = useState(textIn);
-    let x = type + ": ";
+    let x = type + ":  ";
 
     return (
-        <View style={{flexDirection: "row", paddingTop: 20}}>
-            <Text style={styles.Text}>{x}</Text>
-            <TextInput style={[styles.inputText]}
+        <View style={styles.inputView}>
+            <Text style={styles.subText}>{x}</Text>
+            <TextInput style={styles.inputText}
                        onChangeText={text=>{onChangeText(text); editText(text);save();dispatch(changePlan())}}
                        value={text}
             />

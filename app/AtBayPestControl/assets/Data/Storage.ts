@@ -75,6 +75,30 @@ export const updateUserOnline = (onError = ()=>{}, onSuccess = ()=>{}, onStolenU
     }
 }
 
+export const updateUsernamePasswordOnline = (onError = ()=>{},
+                                             onSuccess = ()=>{},
+                                             onStolenUsername = onError) => {
+    let setKey = () => {
+        let userKey = User.theUser.getID();
+        passwordDatabase.child(cleanPath(User.theUser.getUserName())).once('value').then(
+            snapshot => {
+                if(snapshot.val() === null || snapshot.val().userID === userKey){
+                    console.log('um?')
+                    passwordDatabase.child(cleanPath(User.theUser.getUserName())).set({
+                        userID: userKey,
+                        password: User.theUser.getPassword()
+                    }).then(onSuccess, onError);
+                } else {
+                    onStolenUsername();
+                }
+            }, onError
+        )
+
+    }
+
+    updateUserOnline(onError, setKey, onStolenUsername)
+}
+
 export const getUserFromOnline = (username:string,
                                   password:string,
                                   onError = ()=>{},

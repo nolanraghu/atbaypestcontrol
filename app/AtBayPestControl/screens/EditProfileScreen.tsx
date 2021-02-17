@@ -3,15 +3,16 @@ import {Card} from 'react-native-elements';
 import {
     ScrollView,
     useColorScheme,
-    Text,
-    View, Pressable
+    View, Button
 } from 'react-native';
-import {getStyle} from '../assets/Stylesheets/Styles'
-import Email from '../components/RenderEmail'
+import {buttonColor, getOffButtonColor, getStyle} from '../assets/Stylesheets/Styles'
 import { useNavigation } from '@react-navigation/native';
 import {getUser} from "../assets/Data/Data";
-import {submit} from "../assets/text/text";
+import {notUpdated, submit, usernameExists} from "../assets/text/text";
 import Editable from "../components/Editable";
+import {useState} from "react";
+import {updateUsernamePasswordOnline} from "../assets/Data/Storage";
+import {makeAlert} from "../components/errorMessage";
 
 export default function EditProfileScreen() {
     const scheme = useColorScheme();
@@ -19,42 +20,62 @@ export default function EditProfileScreen() {
     const navigation = useNavigation();
 
     const user = getUser();
-    let key = 0;
 
-    let name = <Editable
-        type={"Username"}
-        textIn={user.getUserName()}
-        editText={user.changeUserName}
-    />;
-    let pword = <Editable textIn={user.getPassword()} editText={user.changePassword} type={"Password"}/>;
-    let AddyArray = user.getAddresses().map(function (addy) {
-        return (
-            <View style={{justifyContent: 'center'}}>
-                <Editable key={key++} textIn={addy.address} editText={addy.updateAddress} type={"Address (Line 1)"}/>
-                <Editable key={key++} textIn={addy.address2} editText={addy.updateAddressLine2} type={"Address (Line 2)"}/>
-                <Editable key={key++} textIn={addy.city} editText={addy.updateCity} type={"City"}/>
-                <Editable key={key++} textIn={addy.state} editText={addy.updateState} type={"State"}/>
-                <Editable key={key++} textIn={addy.zip} editText={addy.updateZip} type={"Zip"}/>
-            </View>
-        )
-    });
-    let EmailArray = user.getEmails().map(function (email) {
-        return <Editable
-            key={key++}
-            type={"Email"}
-            textIn={email.getEmail()}
-            editText={email.updateEmail}
-        />
-    });
-    let endButton = <View style={styles.deleteProfile}>
-        <Pressable onPress={() => {navigation.navigate("ProfileTabScreen",
-            {changed: true}
-            )}}>
-            <Text style ={[styles.Text, {color: 'blue', fontWeight:"bold"}]}>
-                {submit()}
-            </Text>
-        </Pressable>
-    </View>
+    const [username, setUsername] = useState(user.getUserName());
+    const [password, setPassword] = useState(user.getPassword());
+    const [updating, setUpdating] = useState(false);
+
+    let name = <Editable type={"Username"}
+                         textIn={username}
+                         editText={setUsername}/>;
+
+    let passwordBox = <Editable textIn={password}
+                                editText={setPassword}
+                                type={"Password"}/>;
+
+    let pressButton = () => {
+        if(!updating) {
+            let oldUsername = user.getUserName();
+            let oldPassword = user.getPassword();
+            user.changeUserName(username);
+            user.changePassword(password);
+            setUpdating(true);
+            updateUsernamePasswordOnline(
+                () => {
+                    user.changeUserName(oldUsername);
+                    user.changePassword(oldPassword);
+                    makeAlert(notUpdated());
+                    setUpdating(false);
+                },
+                () => {
+                    setUpdating(false);
+                    navigation.navigate("ProfileTabScreen", {changed: true});
+                },
+                () => {
+                    user.changeUserName(oldUsername);
+                    user.changePassword(oldPassword);
+                    makeAlert(usernameExists());
+                    setUpdating(false);
+                }
+            )
+        }
+    }
+
+    let getButtonColor = () => {
+        if (updating) {
+            return getOffButtonColor(scheme);
+        } else {
+            return buttonColor
+        }
+    }
+
+    let endButton =
+        <View style={styles.deleteProfile}>
+            <Button
+                title={submit()}
+                onPress={pressButton}
+                color={getButtonColor()}/>
+        </View>
 
 
     return (
@@ -62,9 +83,7 @@ export default function EditProfileScreen() {
             <View style={styles.container}>
                 <Card containerStyle={[styles.cardContainer]}>
                     {name}
-                    {pword}
-                    {AddyArray}
-                    {EmailArray}
+                    {passwordBox}
                     {endButton}
                 </Card>
             </View>

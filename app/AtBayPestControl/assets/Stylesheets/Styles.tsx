@@ -467,7 +467,18 @@ export function getStyle(state:ColorSchemeName) {
             justifyContent: "flex-start",
             alignContent: "flex-start",
             color: text,
-            fontSize: 20
+            fontSize: 20,
+            width: '100%'
+        },
+        inputView: {
+            flexDirection: "row",
+            padding: 10,
+            paddingHorizontal: 13,
+            margin: 10,
+            borderWidth:1,
+            borderRadius: 10,
+            borderColor: fadedItem,
+            alignItems:'center'
         },
         hyperLink: {
             color: highlight,

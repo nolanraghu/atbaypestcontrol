@@ -432,5 +432,5 @@ export function contactUsDescription(){
 }
     //Edit Profile Screen
 export function submit(){
-    return 'Submit'
+    return 'Update'
 }
