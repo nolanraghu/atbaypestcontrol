@@ -13,7 +13,6 @@ import {buttonColor, getStyle} from '../assets/Stylesheets/Styles'
 import Email from '../components/RenderEmail'
 import Payment from '../components/RenderPayment'
 import ShippingLocations from '../components/RenderShippingLocations';
-import Separator from '../components/Separator'
 import { useNavigation } from '@react-navigation/native';
 import PlanTabScreen from "./PlanTabScreen";
 import {getUser} from "../assets/Data/Data";
@@ -22,6 +21,7 @@ import {changePlan, logOut} from "../redux/action";
 import {useDispatch, useSelector} from "react-redux";
 import {noPayment} from "../components/noPayment";
 import {RootState} from "../redux/store";
+import profileComponent from "../components/profileComponent";
 
 let User = getUser();
 
@@ -36,17 +36,186 @@ export default function ProfileTabScreen() {
       <ScrollView style={styles.scroll}>
         <View style={styles.container}>
           <Card containerStyle={styles.cardContainer}>
-            {renderHeader({})}
+            {renderUserPassword()}
             {renderEmail()}
             {renderPlan()}
             {renderLoc()}
             {renderPay()}
-            {renderDeleteButton()}
+            {contactUsLogOut()}
           </Card>
         </View>
       </ScrollView>
   )
 
+}
+
+function contactUsLogOut(){
+  const scheme = useColorScheme();
+  let styles = getStyle(scheme);
+  const dispatch = useDispatch();
+  const navigation = useNavigation();
+  return(
+      <View style={{paddingHorizontal: 30,
+        paddingVertical: 20,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center'}}>
+        <Text style={styles.link} onPress={()=>{navigation.navigate("ContactUsScreen")}}>Contact Us</Text>
+        <Text style={[styles.captionFade, {fontSize: 30, paddingBottom: 18}]}>.</Text>
+        <Text style={styles.link} onPress={()=>{getUser().delete(); dispatch(changePlan()); dispatch(logOut())}}>Log Out</Text>
+      </View>
+  )
+}
+
+function renderUserPassword(){
+  let codedPass = '*'.repeat(User.getPassword().length);
+  return(
+      profileComponent('account-circle', User.getUserName(), codedPass)
+  )
+}
+
+function renderEmail () {
+  const navigation = useNavigation();
+  const scheme = useColorScheme();
+  let styles = getStyle(scheme);
+  let keys = 0;
+
+  function onPressEdit () {
+    navigation.navigate('EditProfileScreen');
+  }
+
+  let EmailArray = User.getEmails().map(function(email, index) {
+    return  <Email
+              key={keys++}
+              index={index}
+              email={email}
+              onPressEmail={()=>{}}
+              onPressEdit={onPressEdit}
+            />
+  })
+
+  if (User.getEmails().length != 0) {
+    return (
+        <View style={styles.emailContainer}>
+          {EmailArray}
+          {/*Separator()*/}
+        </View>
+    )
+  } else return
+}
+
+function renderPlan () {
+  const navigation = useNavigation();
+  const scheme = useColorScheme();
+  let styles = getStyle(scheme);
+
+  function onPressPlan () {
+    navigation.navigate('PlanTabScreen');
+  }
+
+  return (
+      <View style={styles.emailContainer}>
+        <TouchableOpacity onPress={() => onPressPlan()}>
+          <View style={styles.container}>
+            <View style={styles.iconRow}>
+              <Icon
+                  name= 'ios-paper'
+                  type= 'ionicon'
+                  underlayColor = 'transparent'
+                  iconStyle={styles.Icon}
+                  onPress={() => onPressPlan()}
+              />
+            </View>
+            <View style={styles.Row}>
+              <Text style={styles.Text}>{planText()}</Text>
+            </View>
+            <View style={styles.editRow}>
+
+            </View>
+          </View>
+        </TouchableOpacity>
+        {/*Separator()*/}
+      </View>
+  )
+}
+
+function renderPay () {
+  let keys = 0;
+
+  const navigation = useNavigation();
+
+  const scheme = useColorScheme();
+  let styles = getStyle(scheme);
+
+  let payArray;
+
+  if(!User.hasPayment()){
+    payArray = noPayment('ProfileTabScreen');
+  } else {
+    payArray = User.getPayments().map(function(payment, index) {
+      return  <Payment
+          key={keys++}
+          payment={payment}
+          index={index}
+          onPressEdit={()=>{navigation.navigate('EditProfileScreen');}}
+          onPressPayment={()=>{}}
+      />
+    })
+  }
+
+  return (
+      <View style={styles.emailContainer}>
+        {payArray}
+        {/*Separator()*/}
+      </View>
+  )
+}
+
+function renderLoc () {
+  let keys=0;
+
+  const scheme = useColorScheme();
+  let styles = getStyle(scheme);
+
+  let LocationArray = User.getAddresses().map(function(address, index) {
+    return  <ShippingLocations
+        key={keys++}
+        index={index}
+        address={address}
+        onPressPlace={()=>{}}
+    />
+  })
+
+  if (User.getAddresses().length != 0){
+    return (
+        <View style={styles.emailContainer}>
+          {LocationArray}
+          {/*{Separator()}*/}
+        </View>
+    )
+  } else return
+}
+
+function renderDeleteButton () {
+  const scheme = useColorScheme();
+  let styles = getStyle(scheme);
+  const dispatch = useDispatch();
+  let myRed = styles.deleteProfile.borderColor;
+
+  let deleteButton =
+      <Pressable onPress={() => {getUser().delete(); dispatch(changePlan()); dispatch(logOut())}}>
+        <Text style ={[styles.Text, {color: myRed, fontWeight:"bold"}]}>
+          {deleteProfile()}
+        </Text>
+      </Pressable>;
+
+  return (
+      <View style={{paddingHorizontal: 30, paddingVertical: 20}}>
+        <View style={styles.deleteProfile}>
+          {deleteButton}
+        </View>
+      </View>
+  )
 }
 
 function renderHeader ({avatar = User.getProfilePic(), avatarBackground = User.getBackgroundPic(),
@@ -103,147 +272,4 @@ interface RenderHProps {
   city?: string
   state?: string
 
-}
-
-function renderEmail () {
-  const navigation = useNavigation();
-  const scheme = useColorScheme();
-  let styles = getStyle(scheme);
-  let keys = 0;
-
-  function onPressEdit () {
-    navigation.navigate('EditProfileScreen');
-  }
-
-  let EmailArray = User.getEmails().map(function(email, index) {
-    return  <Email
-              key={keys++}
-              index={index}
-              email={email}
-              onPressEmail={()=>{}}
-              onPressEdit={onPressEdit}
-            />
-  })
-
-  if (User.getEmails().length != 0) {
-    return (
-        <View style={styles.emailContainer}>
-          {EmailArray}
-          {Separator()}
-        </View>
-    )
-  } else return
-}
-
-function renderPlan () {
-  const navigation = useNavigation();
-  const scheme = useColorScheme();
-  let styles = getStyle(scheme);
-
-  function onPressPlan () {
-    navigation.navigate('PlanTabScreen');
-  }
-
-  return (
-      <View style={styles.emailContainer}>
-        <TouchableOpacity onPress={() => onPressPlan()}>
-          <View style={styles.planContainer}>
-            <View style={styles.iconRow}>
-              <Icon
-                  name= 'ios-paper'
-                  type= 'ionicon'
-                  underlayColor = 'transparent'
-                  iconStyle={styles.Icon}
-                  onPress={() => onPressPlan()}
-              />
-            </View>
-            <View style={styles.Row}>
-              <Text style={styles.Text}>{planText()}</Text>
-            </View>
-          </View>
-        </TouchableOpacity>
-        {Separator()}
-      </View>
-  )
-}
-
-function renderPay () {
-  let keys = 0;
-
-  const navigation = useNavigation();
-
-  const scheme = useColorScheme();
-  let styles = getStyle(scheme);
-
-  let payArray:any;
-
-  if(!User.hasPayment()){
-    payArray = noPayment('ProfileTabScreen');
-  } else {
-    payArray = User.getPayments().map(function(payment, index) {
-      return  <Payment
-          key={keys++}
-          payment={payment}
-          index={index}
-          onPressEdit={()=>{navigation.navigate('EditProfileScreen');}}
-          onPressPayment={()=>{}}
-      />
-    })
-  }
-
-  if (User.getPayments().length != 0) {
-    return (
-        <View style={styles.emailContainer}>
-          {payArray}
-          {Separator()}
-        </View>
-    )
-  } else return
-}
-
-function renderLoc () {
-  let keys=0;
-
-  const scheme = useColorScheme();
-  let styles = getStyle(scheme);
-
-  let LocationArray = User.getAddresses().map(function(address, index) {
-    return  <ShippingLocations
-        key={keys++}
-        index={index}
-        address={address}
-        onPressPlace={()=>{}}
-    />
-  })
-
-  if (User.getAddresses().length != 0){
-    return (
-        <View style={styles.emailContainer}>
-          {LocationArray}
-          {Separator()}
-        </View>
-    )
-  } else return
-}
-
-function renderDeleteButton () {
-  const scheme = useColorScheme();
-  let styles = getStyle(scheme);
-  const dispatch = useDispatch();
-  let myRed = styles.deleteProfile.borderColor;
-
-  let deleteButton =
-      <Pressable onPress={() => {getUser().delete(); dispatch(changePlan()); dispatch(logOut())}}>
-        <Text style ={[styles.Text, {color: myRed, fontWeight:"bold"}]}>
-          {deleteProfile()}
-        </Text>
-      </Pressable>;
-
-  return (
-      <View style={{paddingHorizontal: 30, paddingVertical: 20}}>
-        <View style={styles.deleteProfile}>
-          {deleteButton}
-        </View>
-      </View>
-  )
 }

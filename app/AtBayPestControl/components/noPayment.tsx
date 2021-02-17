@@ -21,7 +21,7 @@ export function noPayment(screen:string){
                         name={'add'}
                         underlayColor = 'transparent'
                         iconStyle={styles.Icon}
-                        onPress={()=>{}}
+                        onPress={()=>{navigation.navigate('AddSubscriptions', {lastScreen:screen})}}
                     />
                 </View>
                 <View style={styles.Row}>

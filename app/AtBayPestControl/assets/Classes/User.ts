@@ -108,6 +108,7 @@ export default class User implements UserProps{
         this.userPlan = new Plan().fromString(json.userPlan);
         this.id = json.id;
         this.name = json.name;
+        this.password = json.password;
         this.loggedIn = json.loggedIn;
         this.pendingPayments = json.pendingPayments;
         let curEq = new Set(this.currentEquipment);
