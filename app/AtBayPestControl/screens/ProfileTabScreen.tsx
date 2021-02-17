@@ -175,28 +175,26 @@ function renderPay () {
   const scheme = useColorScheme();
   let styles = getStyle(scheme);
 
+  let payArray:any;
+
   if(!User.hasPayment()){
-    return noPayment('ProfileTabScreen');
+    payArray = noPayment('ProfileTabScreen');
+  } else {
+    payArray = User.getPayments().map(function(payment, index) {
+      return  <Payment
+          key={keys++}
+          payment={payment}
+          index={index}
+          onPressEdit={()=>{navigation.navigate('EditProfileScreen');}}
+          onPressPayment={()=>{}}
+      />
+    })
   }
-
-  function onPressEdit () {
-    navigation.navigate('EditProfileScreen');
-  }
-
-  let PayArray = User.getPayments().map(function(payment, index) {
-    return  <Payment
-        key={keys++}
-        payment={payment}
-        index={index}
-        onPressEdit={onPressEdit}
-        onPressPayment={()=>{}}
-    />
-  })
 
   if (User.getPayments().length != 0) {
     return (
         <View style={styles.emailContainer}>
-          {PayArray}
+          {payArray}
           {Separator()}
         </View>
     )

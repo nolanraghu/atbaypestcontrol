@@ -50,27 +50,21 @@ export default function UpdatePlanPopup({route, navigation}:any) {
     let keys = 0;
 
     function renderPay () {
-        function onPressPayment () {
-
-        }
-
-        function onPressEdit () {
-
-        }
 
         if(getUser().getPayments().length == 0){
-            return noPayment('PlanUpdatePopupScreen');
+            return noPayment('ConfirmPurchasePopup');
+        } else {
+            return (
+                <View style={{width: '100%'}} key={keys++}>
+                    <Payment
+                        payment={getUser().getPayments()[0]}
+                        index={0}
+                        onPressEdit={()=>{}}
+                        onPressPayment={()=>{}}/>
+                </View>
+            )
         }
 
-        return (
-            <View style={{width: '100%'}} key={keys++}>
-                <Payment
-                    payment={getUser().getPayments()[0]}
-                    index={0}
-                    onPressEdit={onPressEdit}
-                    onPressPayment={onPressPayment}/>
-            </View>
-        )
     }
 
     function pressButton(){
