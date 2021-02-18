@@ -339,7 +339,7 @@ export function getStyle(state:ColorSchemeName) {
         emailContainer: {
             backgroundColor: background,
             flex: 1,
-            paddingTop: 30,
+            paddingVertical: 15,
         },
         headerBackgroundImage: {
             paddingBottom: 30,

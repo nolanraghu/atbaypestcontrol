@@ -14,7 +14,7 @@ import {useState} from "react";
 import {updateUsernamePasswordOnline} from "../assets/Data/Storage";
 import {makeAlert} from "../components/errorMessage";
 
-export default function EditProfileScreen() {
+export default function EditEmails() {
     const scheme = useColorScheme();
     let styles = getStyle(scheme);
     const navigation = useNavigation();
@@ -25,7 +25,7 @@ export default function EditProfileScreen() {
     const [password, setPassword] = useState(user.getPassword());
     const [updating, setUpdating] = useState(false);
 
-    let name = <Editable type={"Username"}
+    let name = <Editable type={"Email"}
                          textIn={username}
                          editText={setUsername}/>;
 

@@ -13,7 +13,7 @@ export default function profileComponent (iconName:string,
     let styles = getStyle(scheme);
 
     function onPressEdit () {
-        navigation.navigate('EditProfileScreen');
+        navigation.navigate('EditUsernamePasswordScreen');
     }
 
     return (

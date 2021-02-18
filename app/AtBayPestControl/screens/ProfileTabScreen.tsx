@@ -56,7 +56,7 @@ function contactUsLogOut(){
   const navigation = useNavigation();
   return(
       <View style={{paddingHorizontal: 30,
-        paddingVertical: 20,
+        paddingVertical: 0,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center'}}>
@@ -81,7 +81,7 @@ function renderEmail () {
   let keys = 0;
 
   function onPressEdit () {
-    navigation.navigate('EditProfileScreen');
+    navigation.navigate('EditEmails');
   }
 
   let EmailArray = User.getEmails().map(function(email, index) {
@@ -157,7 +157,7 @@ function renderPay () {
           key={keys++}
           payment={payment}
           index={index}
-          onPressEdit={()=>{navigation.navigate('EditProfileScreen');}}
+          onPressEdit={()=>{navigation.navigate('EditPayments');}}
           onPressPayment={()=>{}}
       />
     })
@@ -177,12 +177,15 @@ function renderLoc () {
   const scheme = useColorScheme();
   let styles = getStyle(scheme);
 
+  const navigation = useNavigation();
+
   let LocationArray = User.getAddresses().map(function(address, index) {
     return  <ShippingLocations
         key={keys++}
         index={index}
         address={address}
         onPressPlace={()=>{}}
+        onPressEdit={()=>{navigation.navigate('EditAddresses')}}
     />
   })
 
