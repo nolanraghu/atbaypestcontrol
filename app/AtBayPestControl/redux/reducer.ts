@@ -5,7 +5,9 @@ import {
     LOG_IN,
     LOG_OUT,
     CHANGE_PROFILE,
-    CHANGE_PAYMENT
+    CHANGE_PAYMENT,
+    START_EDITING_EMAIL,
+    END_EDITING_EMAIL
 } from "./action";
 
 const initialState = {
@@ -14,7 +16,8 @@ const initialState = {
     equipmentVersion: 0,
     profileVersion:0,
     loggedIn: false,
-    hasPaymentVersion: 0
+    hasPaymentVersion: 0,
+    isEditingEmail: false
 };
 
 const reducer = (state = initialState, action:any) => {
@@ -57,6 +60,16 @@ const reducer = (state = initialState, action:any) => {
             return {
                 ...state,
                 hasPaymentVersion: state.hasPaymentVersion + 1
+            }
+        case START_EDITING_EMAIL:
+            return {
+                ...state,
+                isEditingEmail: true
+            }
+        case END_EDITING_EMAIL:
+            return {
+                ...state,
+                isEditingEmail: false
             }
         default:
             return state

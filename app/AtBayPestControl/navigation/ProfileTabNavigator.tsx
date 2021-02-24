@@ -5,7 +5,6 @@ import * as React from "react";
 import {appName} from "../assets/text/text";
 import LoginScreen from "../screens/LoginScreen";
 import RegisterScreen from "../screens/RegisterScreen";
-import {getUser} from "../assets/Data/Data";
 import {useSelector} from "react-redux";
 import {RootState} from "../redux/store";
 import ContactUsScreen from "../screens/ContactUsScreen";
@@ -14,6 +13,7 @@ import EditUsernamePasswordScreen from "../screens/EditUsernamePasswordScreen";
 import EditEmails from "../screens/EditEmails";
 import EditAddresses from "../screens/EditAddresses";
 import EditPayments from "../screens/EditPayments";
+import CustomBack from "../components/CustomBack";
 
 const ProfileTabStack = createStackNavigator<ProfileTabParamList>();
 
@@ -31,19 +31,24 @@ export default function ProfileTabNavigator() {
                 name="EditUsernamePasswordScreen"
                 component={EditUsernamePasswordScreen}
                 options={{headerTitle:appName()}}
-                key={3}
+                key={4}
             />,
             <ProfileTabStack.Screen
                 name="EditEmails"
                 component={EditEmails}
-                options={{headerTitle:appName()}}
-                key={3}
+                options={{
+                    headerTitle:appName(),
+                    headerLeft: (props) => (
+                        CustomBack(props)
+                    ),
+                }}
+                key={5}
             />,
             <ProfileTabStack.Screen
                 name="EditAddresses"
                 component={EditAddresses}
                 options={{headerTitle:appName()}}
-                key={3}
+                key={6}
             />,
             <ProfileTabStack.Screen
                 name="EditPayments"

@@ -297,6 +297,11 @@ export default class User implements UserProps{
         return this.emails;
     }
 
+    setEmails = (emails:Email[]) => {
+        this.emails = emails;
+        save();
+    }
+
     getAddresses = () => {
         // returns default the users addresses
         return this.addresses;

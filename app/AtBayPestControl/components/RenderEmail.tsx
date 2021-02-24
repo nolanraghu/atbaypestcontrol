@@ -8,7 +8,7 @@ import {defaultMarker} from "../assets/text/text";
 export default function renderItem ({email, index, onPressEmail, onPressEdit = ()=>{}}: renderProps) {
     const scheme = useColorScheme();
     let styles = getStyle(scheme);
-    let subText = email.getType();
+    let subText = '';
     if (index == 0) {
         if (subText === ''){
             subText += defaultMarker();

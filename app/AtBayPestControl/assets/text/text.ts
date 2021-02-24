@@ -33,6 +33,9 @@ export function notUpdated(){
 export function errorDismiss(){
     return 'OK'
 }
+export function errorCancel(){
+    return 'Cancel'
+}
 export function usernameStolen(){
     return 'Oops! We messed up. Your username has been taken. Please contact support.'
 }
@@ -41,6 +44,9 @@ export function loginError(){
 }
 export function deleteUserError(){
     return 'User not deleted online. Please contact support.'
+}
+export function notSavedText(){
+    return "Your changes have not been saved"
 }
 
 //Potentially general use text

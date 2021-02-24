@@ -5,6 +5,8 @@ const LOG_IN:string = 'LOG_IN';
 const LOG_OUT:string = 'LOG_OUT';
 const CHANGE_PROFILE:string = 'CHANGE_PROFILE';
 const CHANGE_PAYMENT:string = 'CHANGE_PAYMENT';
+const START_EDITING_EMAIL:string = 'START_EDITING_EMAIL';
+const END_EDITING_EMAIL:string = 'END_EDITING_EMAIL';
 
 // This will change any screen that doesn't care what's pending, and also any screen that is pending
 const changePlan = () => ({type: CHANGE_PLAN});
@@ -26,6 +28,9 @@ const changePayment = () => ({type:CHANGE_PAYMENT});
 const logIn = () => ({type: LOG_IN});
 const logOut = () => ({type: LOG_OUT});
 
+const startEditingEmail = () => ({type:START_EDITING_EMAIL})
+const endEditingEmail = () => ({type:END_EDITING_EMAIL})
+
 export {
     CHANGE_PLAN,
     CHANGE_PROFILE,
@@ -34,6 +39,8 @@ export {
     LOG_IN,
     LOG_OUT,
     CHANGE_PAYMENT,
+    START_EDITING_EMAIL,
+    END_EDITING_EMAIL,
     changePlan,
     changePending,
     justEquipmentPending,
@@ -41,4 +48,6 @@ export {
     logOut,
     changeProfile,
     changePayment,
+    startEditingEmail,
+    endEditingEmail
 }

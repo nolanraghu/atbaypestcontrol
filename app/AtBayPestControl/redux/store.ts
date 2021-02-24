@@ -9,7 +9,8 @@ export interface RootState {
     planPendingVersion: number,
     equipmentVersion: number,
     loggedIn: boolean,
-    hasPaymentVersion: number
+    hasPaymentVersion: number,
+    isEditingEmail: boolean
 }
 
 export default store;

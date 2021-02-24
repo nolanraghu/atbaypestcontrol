@@ -8,11 +8,13 @@ import {
 import {buttonColor, getOffButtonColor, getStyle} from '../assets/Stylesheets/Styles'
 import { useNavigation } from '@react-navigation/native';
 import {getUser} from "../assets/Data/Data";
-import {notUpdated, submit, usernameExists} from "../assets/text/text";
+import {notUpdated, submit, usernameStolen} from "../assets/text/text";
 import Editable from "../components/Editable";
 import {useState} from "react";
-import {updateUsernamePasswordOnline} from "../assets/Data/Storage";
+import {updateUserOnline} from "../assets/Data/Storage";
 import {makeAlert} from "../components/errorMessage";
+import {useDispatch} from "react-redux";
+import {endEditingEmail, startEditingEmail} from "../redux/action";
 
 export default function EditEmails() {
     const scheme = useColorScheme();
@@ -21,40 +23,46 @@ export default function EditEmails() {
 
     const user = getUser();
 
-    const [username, setUsername] = useState(user.getUserName());
-    const [password, setPassword] = useState(user.getPassword());
+    const [emails, setEmails] = useState(user.getEmails().map(email => email.getEmail()));
     const [updating, setUpdating] = useState(false);
 
-    let name = <Editable type={"Email"}
-                         textIn={username}
-                         editText={setUsername}/>;
+    const dispatch = useDispatch();
 
-    let passwordBox = <Editable textIn={password}
-                                editText={setPassword}
-                                type={"Password"}/>;
+    let keys = 0;
+
+    let editEmailArray = emails.map((email, index) =>
+            <Editable type={"Email"}
+                      textIn={email}
+                      editText={(newEmail)=>{
+                          let mEmails = emails;
+                          mEmails[index] = newEmail;
+                          setEmails(mEmails);
+                          dispatch(startEditingEmail())
+                      }}
+                      onEndEditing={()=>{
+                          if (!(emails[index].includes('.') && emails[index].includes('@'))){
+                              makeAlert('Not a valid email');
+                          }
+                      }}
+                      key={keys++}/>);
+
 
     let pressButton = () => {
         if(!updating) {
-            let oldUsername = user.getUserName();
-            let oldPassword = user.getPassword();
-            user.changeUserName(username);
-            user.changePassword(password);
+            setEmails(emails);
             setUpdating(true);
-            updateUsernamePasswordOnline(
+            updateUserOnline(
                 () => {
-                    user.changeUserName(oldUsername);
-                    user.changePassword(oldPassword);
                     makeAlert(notUpdated());
                     setUpdating(false);
                 },
                 () => {
                     setUpdating(false);
+                    dispatch(endEditingEmail());
                     navigation.navigate("ProfileTabScreen", {changed: true});
                 },
                 () => {
-                    user.changeUserName(oldUsername);
-                    user.changePassword(oldPassword);
-                    makeAlert(usernameExists());
+                    makeAlert(usernameStolen());
                     setUpdating(false);
                 }
             )
@@ -70,7 +78,7 @@ export default function EditEmails() {
     }
 
     let endButton =
-        <View style={styles.deleteProfile}>
+        <View style={styles.deleteProfile} key={keys++}>
             <Button
                 title={submit()}
                 onPress={pressButton}
@@ -82,13 +90,10 @@ export default function EditEmails() {
         <ScrollView style={styles.scroll}>
             <View style={styles.container}>
                 <Card containerStyle={[styles.cardContainer]}>
-                    {name}
-                    {passwordBox}
+                    {editEmailArray}
                     {endButton}
                 </Card>
             </View>
         </ScrollView>
-
     )
 };
-
