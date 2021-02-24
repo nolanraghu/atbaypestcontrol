@@ -33,6 +33,37 @@ export default function EditAddresses() {
 
     let keys = i;
 
+    let isValidAddress = (address:string) => {
+        address = address.trim();
+        let addressLines = address.split('\n');
+        console.log(addressLines)
+        if (addressLines.length == 2 || addressLines.length == 3){
+            if(addressLines[0].length == 0){
+                console.log(1);
+                return false;
+            }
+            let lastAddressLine = addressLines[addressLines.length - 1].split(',');
+            if (lastAddressLine.length != 2 ||
+                lastAddressLine[0].length == 0 ||
+                lastAddressLine[1].length == 0){
+                console.log(2);
+                return false;
+            }
+            let lastSpaceIndex = lastAddressLine[1].lastIndexOf(' ');
+            let state = lastAddressLine[1].slice(0, lastSpaceIndex);
+            let zip = lastAddressLine[1].slice(lastSpaceIndex + 1);
+            if (state.length == 0 || zip.length == 0){
+                console.log(3);
+                return false;
+            }
+        } else {
+            console.log(4);
+            return false;
+        }
+
+        return true;
+    }
+
     let editAddressArray = addresses.map((address, index) =>
         <Editable type={index == 0? "Default" : "Address"}
                   textIn={address}
@@ -43,7 +74,7 @@ export default function EditAddresses() {
                       dispatch(startEditingAddress())
                   }}
                   onEndEditing={()=>{
-                      if (!(addresses[index].includes('.') && addresses[index].includes('@'))){
+                      if (!isValidAddress(addresses[index])){
                           if(editingAddresses){
                               makeAlert('Not a valid address');
                           }
@@ -57,11 +88,12 @@ export default function EditAddresses() {
                       dispatch(startEditingAddress());
                       update(keys++);
                   }}
+                  multiline={true}
                   key={keys++}/>);
 
     let addAddress = () => {
         let mAddresses = addresses;
-        mAddresses.push('\n');
+        mAddresses.push('');
         setAddresses(mAddresses);
         dispatch(startEditingAddress());
         update(keys++);
@@ -87,7 +119,7 @@ export default function EditAddresses() {
 
     let checkAddresses = (addressArray:string[]) => {
         for(let address of addressArray){
-            if(!(address.includes('@') && address.includes('.'))){
+            if(!isValidAddress(address)){
                 return false;
             }
         }
