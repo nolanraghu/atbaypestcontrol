@@ -19,9 +19,9 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f11504bf-41dd-4bca-92fa-bafd18444296" name="Default Changelist" comment="Custom back buttons&#10;on EditAddresses and EditUsernamePassword">
+    <list default="true" id="f11504bf-41dd-4bca-92fa-bafd18444296" name="Default Changelist" comment="check addresses">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Editable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Editable.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/Classes/Address.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/Classes/Address.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/screens/EditAddresses.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/screens/EditAddresses.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -94,7 +94,7 @@
       <workItem from="1613024753457" duration="7605000" />
       <workItem from="1613517664567" duration="24780000" />
       <workItem from="1613603425786" duration="12785000" />
-      <workItem from="1614126531592" duration="20361000" />
+      <workItem from="1614126531592" duration="21294000" />
     </task>
     <task id="LOCAL-00001" summary="idk">
       <created>1606893147512</created>
@@ -341,7 +341,14 @@
       <option name="project" value="LOCAL" />
       <updated>1614146667633</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="check addresses">
+      <created>1614149814502</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1614149814502</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -372,7 +379,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="login works" />
     <MESSAGE value="Input debugging" />
     <MESSAGE value="Fixed some display and saving stuff" />
     <MESSAGE value="idk more fixins" />
@@ -397,6 +403,7 @@
     <MESSAGE value="edited back button" />
     <MESSAGE value="edit email screen finished" />
     <MESSAGE value="Custom back buttons&#10;on EditAddresses and EditUsernamePassword" />
-    <option name="LAST_COMMIT_MESSAGE" value="Custom back buttons&#10;on EditAddresses and EditUsernamePassword" />
+    <MESSAGE value="check addresses" />
+    <option name="LAST_COMMIT_MESSAGE" value="check addresses" />
   </component>
 </project>
