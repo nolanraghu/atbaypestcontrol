@@ -38,7 +38,7 @@ export function getOffButtonColor(state:ColorSchemeName){
 }
 
 export function getStyle(state:ColorSchemeName) {
-    let background, header, text, button, fadedItem, highlight, fadedText, highlightRemoving
+    let background, header, text, button, fadedItem, highlight, fadedText, highlightRemoving, inputBackground
 
     if (state === 'dark') {
         background = backgroundDark;
@@ -49,6 +49,7 @@ export function getStyle(state:ColorSchemeName) {
         highlight = highlightDark;
         fadedText = fadedTextDark;
         highlightRemoving = highlightRemovingDark;
+        inputBackground = backgroundDark;
     } else {
         background = backgroundLight;
         header = headerLight;
@@ -58,6 +59,7 @@ export function getStyle(state:ColorSchemeName) {
         highlight = highlightLight;
         fadedText = fadedTextLight;
         highlightRemoving = highlightRemovingLight;
+        inputBackground = buttonLight;
     }
     return StyleSheet.create({
         screen: {
@@ -405,6 +407,19 @@ export function getStyle(state:ColorSchemeName) {
             color: fadedText,
             fontSize: 30,
         },
+        Icon2: {
+            color: fadedText,
+            fontSize: 30,
+            alignSelf: 'flex-start',
+            margin: 10,
+            marginLeft: 15
+        },
+        Icon3: {
+            color: highlightRemoving,
+            fontSize: 20,
+            flexShrink: 0,
+            marginLeft: 5
+        },
         Row: {
             flex: 8,
             flexDirection: 'column',
@@ -468,9 +483,11 @@ export function getStyle(state:ColorSchemeName) {
             alignContent: "flex-start",
             color: text,
             fontSize: 20,
-            width: '100%'
+            flexGrow: 1,
+            flexShrink: 1
         },
         inputView: {
+            backgroundColor: inputBackground,
             flexDirection: "row",
             padding: 10,
             paddingHorizontal: 13,

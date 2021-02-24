@@ -19,19 +19,12 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f11504bf-41dd-4bca-92fa-bafd18444296" name="Default Changelist" comment="set up new screens">
-      <change afterPath="$PROJECT_DIR$/components/CustomBack.tsx" afterDir="false" />
+    <list default="true" id="f11504bf-41dd-4bca-92fa-bafd18444296" name="Default Changelist" comment="edited back button">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/Classes/Email.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/Classes/Email.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/Classes/User.ts" beforeDir="false" afterPath="$PROJECT_DIR$/assets/Classes/User.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/text/text.ts" beforeDir="false" afterPath="$PROJECT_DIR$/assets/text/text.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/Stylesheets/Styles.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/Stylesheets/Styles.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/Editable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Editable.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/RenderEmail.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/RenderEmail.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/errorMessage.ts" beforeDir="false" afterPath="$PROJECT_DIR$/components/errorMessage.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/navigation/ProfileTabNavigator.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/navigation/ProfileTabNavigator.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/redux/action.ts" beforeDir="false" afterPath="$PROJECT_DIR$/redux/action.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/redux/reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/redux/reducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/redux/store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/redux/store.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/noPayment.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/noPayment.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/screens/EditEmails.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/screens/EditEmails.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -104,7 +97,7 @@
       <workItem from="1613024753457" duration="7605000" />
       <workItem from="1613517664567" duration="24780000" />
       <workItem from="1613603425786" duration="12785000" />
-      <workItem from="1614126531592" duration="6455000" />
+      <workItem from="1614126531592" duration="15097000" />
     </task>
     <task id="LOCAL-00001" summary="idk">
       <created>1606893147512</created>
@@ -330,7 +323,14 @@
       <option name="project" value="LOCAL" />
       <updated>1613606593686</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="edited back button">
+      <created>1614135650348</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1614135650348</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -361,7 +361,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="made the user store more readably" />
     <MESSAGE value="Updates plan online" />
     <MESSAGE value="almostnothing" />
     <MESSAGE value="login works" />
@@ -386,6 +385,7 @@
     <MESSAGE value="changed profile screen layout" />
     <MESSAGE value="username password edit" />
     <MESSAGE value="set up new screens" />
-    <option name="LAST_COMMIT_MESSAGE" value="set up new screens" />
+    <MESSAGE value="edited back button" />
+    <option name="LAST_COMMIT_MESSAGE" value="edited back button" />
   </component>
 </project>

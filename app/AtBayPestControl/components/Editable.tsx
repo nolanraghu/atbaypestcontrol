@@ -1,14 +1,12 @@
 import React, {useState} from 'react'
 import {Text, TextInput, useColorScheme, View} from 'react-native'
 import {getStyle} from '../assets/Stylesheets/Styles'
-import {save} from "../assets/Data/Data";
-import {useDispatch} from "react-redux";
-import {changePlan} from "../redux/action";
+import {Icon} from "react-native-elements";
 
-export default function Editable ({textIn, editText, type, onEndEditing = ()=>{}}: renderProps) {
+export default function Editable ({textIn, editText, type, onEndEditing = ()=>{}, deletable = false,
+                                      onDelete = ()=>{}}: renderProps) {
     const scheme = useColorScheme();
     let styles = getStyle(scheme);
-    const dispatch = useDispatch()
     const [text, onChangeText] = useState(textIn);
     let x = type + ":  ";
 
@@ -20,6 +18,12 @@ export default function Editable ({textIn, editText, type, onEndEditing = ()=>{}
                        value={text}
                        onEndEditing={onEndEditing}
             />
+            {deletable && <Icon name={'remove-circle'}
+                                underlayColor = 'transparent'
+                                iconStyle={styles.Icon3}
+                                onPress={onDelete}/>
+            }
+
         </View>
 
     )
@@ -29,5 +33,7 @@ interface renderProps {
     textIn: string,
     editText: (text:string) => void
     type:string,
-    onEndEditing?: ()=>void
+    onEndEditing?: ()=>void,
+    deletable?: boolean,
+    onDelete?: ()=>void
 }

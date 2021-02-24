@@ -297,8 +297,12 @@ export default class User implements UserProps{
         return this.emails;
     }
 
-    setEmails = (emails:Email[]) => {
-        this.emails = emails;
+    setEmails = (emailStrings:string[]) => {
+        let newEmails:Email[] = [];
+        for (let emailString of emailStrings){
+            newEmails.push(new Email(emailString));
+        }
+        this.emails = newEmails;
         save();
     }
 
