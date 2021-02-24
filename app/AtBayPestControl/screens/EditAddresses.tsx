@@ -138,7 +138,7 @@ export default function EditAddresses() {
                     () => {
                         setUpdating(false);
                         dispatch(endEditingAddress());
-                        navigation.navigate("ProfileTabScreen", {changed: true});
+                        navigation.navigate("ProfileTabScreen");
                     },
                     () => {
                         makeAlert(usernameStolen());

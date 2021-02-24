@@ -55,7 +55,7 @@ export default function EditUsernamePasswordScreen() {
                 () => {
                     setUpdating(false);
                     dispatch(endEditingUsernamePassword())
-                    navigation.navigate("ProfileTabScreen", {changed: true});
+                    navigation.navigate("ProfileTabScreen");
                 },
                 () => {
                     user.changeUserName(oldUsername);
