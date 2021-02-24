@@ -9,7 +9,11 @@ export default function renderItem ({address, index, onPressPlace, onPressEdit =
 
     const scheme = useColorScheme();
     let styles = getStyle(scheme);
-    let subText = address.getState() + ', ' + address.getZip();
+    let mainText = address.getAddress();
+    if(address.getAddress2().length != 0){
+        mainText = mainText + ', ' + address.getAddress2();
+    }
+    let subText = address.getCity() + ', ' + address.getState() + ' ' + address.getZip();
     if (index == 0) {
         if (subText === ''){
             subText += defaultMarker();
@@ -33,7 +37,7 @@ export default function renderItem ({address, index, onPressPlace, onPressEdit =
                 </View>
                 <View style={styles.Row}>
                     <View style={styles.column}>
-                        <Text style={styles.Text}>{address.getAddress() + ', ' + address.getCity()}</Text>
+                        <Text style={styles.Text}>{mainText}</Text>
                     </View>
                     <View style={styles.nameColumn}>
                         {subText !== '' && (

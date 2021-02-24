@@ -132,11 +132,11 @@ export default class Address implements addressProps{
             return false;
         }
 
-        this.address = address;
-        this.address2 = address2;
-        this.city = city;
-        this.state = state;
-        this.zip = zip;
+        this.address = address.trim();
+        this.address2 = address2.trim();
+        this.city = city.trim();
+        this.state = state.trim();
+        this.zip = zip.trim();
         return true;
     }
 
