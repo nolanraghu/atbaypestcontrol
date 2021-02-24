@@ -33,7 +33,7 @@ export default function PaymentFormView({onSubmit, submitted, error}:any) {
                     title='Add card'
                     color={buttonColor}
                     disabled={!cardState.valid || submitted}
-                    onPress={() => onSubmit(cardState)}
+                    onPress={() => onSubmit(cardState, defaultCard)}
                 />
                 {/* Show errors */}
                 {error && (

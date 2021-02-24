@@ -72,7 +72,7 @@ export default function AddSubscription({route, navigation}:any){
     const dispatch = useDispatch();
 
     // Handles submitting the payment request
-    const onSubmit = async (creditCardInput:any) => {
+    const onSubmit = async (creditCardInput:any, defaultCard:boolean) => {
         // Disable the Submit button after the request is sent
         setSubmitted(true);
         let creditCardToken;
@@ -104,7 +104,7 @@ export default function AddSubscription({route, navigation}:any){
             setSubmitted(false);
             setError(null);
             setToken(creditCardToken);
-            getUser().addPayment(new Payment(creditCardToken.card.last4, creditCardToken.card.funding))
+            getUser().addPayment(new Payment(creditCardToken.card.last4, creditCardToken.card.funding), defaultCard)
             dispatch(changePayment());
 
             navigation.navigate(lastScreen);

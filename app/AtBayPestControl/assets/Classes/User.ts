@@ -387,6 +387,20 @@ export default class User implements UserProps{
         save();
     }
 
+    setDefaultPayment = (newDefault: number) => {
+        if (this.payments.length > newDefault){
+            let newDefaultPayment = this.payments[newDefault];
+            this.payments[newDefault] = this.payments[0];
+            this.payments[0] = newDefaultPayment;
+        }
+    }
+
+    deletePayment = (deleteIndex: number) => {
+        if (this.payments.length > deleteIndex){
+            this.payments.splice(deleteIndex, 1)
+        }
+    }
+
     hasPayment = () => {
         return this.payments.length > 0;
     }

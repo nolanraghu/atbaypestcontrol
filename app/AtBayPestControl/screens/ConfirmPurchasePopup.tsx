@@ -49,7 +49,7 @@ export default function ConfirmPurchasePopup({route, navigation}:any){
                     <Payment
                         payment={getUser().getPayments()[0]}
                         index={0}
-                        onPressEdit={()=>{}}
+                        onPressEdit={()=>{navigation.navigate('EditPayments')}}
                         onPressPayment={()=>{}}/>
                 </View>
             )

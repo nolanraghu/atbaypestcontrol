@@ -10,6 +10,7 @@ import { useNavigation } from '@react-navigation/native';
 import {getUser} from "../assets/Data/Data";
 import {addPayment} from "../components/addPayment";
 import Payment from "../components/RenderEditPayment";
+import {useState} from "react";
 
 export default function EditPayments() {
     const scheme = useColorScheme();
@@ -17,6 +18,8 @@ export default function EditPayments() {
     const navigation = useNavigation();
 
     const user = getUser();
+
+    const [i, update] = useState(0);
 
     let keys = 0;
 
@@ -30,8 +33,8 @@ export default function EditPayments() {
                 key={keys++}
                 payment={payment}
                 index={index}
-                onPressDefault={()=>{}}
-                onPressDelete={()=>{}}
+                onPressDefault={()=>{user.setDefaultPayment(index); update(i+1)}}
+                onPressDelete={()=>{user.deletePayment(index); update(i+1)}}
                 onView={()=>{}}
             />
         })
