@@ -19,10 +19,10 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f11504bf-41dd-4bca-92fa-bafd18444296" name="Default Changelist" comment="Finished everything almost">
+    <list default="true" id="f11504bf-41dd-4bca-92fa-bafd18444296" name="Default Changelist" comment="cleanup">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens/EditAddresses.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/screens/EditAddresses.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens/EditUsernamePasswordScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/screens/EditUsernamePasswordScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/redux/reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/redux/reducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/PaymentScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/screens/PaymentScreen.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/screens/ProfileTabScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/screens/ProfileTabScreen.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -100,7 +100,7 @@
       <workItem from="1613024753457" duration="7605000" />
       <workItem from="1613517664567" duration="24780000" />
       <workItem from="1613603425786" duration="12785000" />
-      <workItem from="1614126531592" duration="29599000" />
+      <workItem from="1614126531592" duration="30506000" />
     </task>
     <task id="LOCAL-00001" summary="idk">
       <created>1606893147512</created>
@@ -396,7 +396,14 @@
       <option name="project" value="LOCAL" />
       <updated>1614157804639</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="cleanup">
+      <created>1614159227820</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1614159227820</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -427,7 +434,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fixed ios bug passwordfield" />
     <MESSAGE value="fixed updatePlan error fears" />
     <MESSAGE value="some changes now" />
     <MESSAGE value="some text changes" />
@@ -452,6 +458,7 @@
     <MESSAGE value="editPayments styling" />
     <MESSAGE value="editPayments functionality" />
     <MESSAGE value="Finished everything almost" />
-    <option name="LAST_COMMIT_MESSAGE" value="Finished everything almost" />
+    <MESSAGE value="cleanup" />
+    <option name="LAST_COMMIT_MESSAGE" value="cleanup" />
   </component>
 </project>

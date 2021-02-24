@@ -104,8 +104,8 @@ export default function AddSubscription({route, navigation}:any){
             setSubmitted(false);
             setError(null);
             setToken(creditCardToken);
-            getUser().addPayment(new Payment(creditCardToken.card.last4, creditCardToken.card.funding), defaultCard)
             dispatch(changePayment());
+            getUser().addPayment(new Payment(creditCardToken.card.last4, creditCardToken.card.funding), defaultCard)
 
             navigation.navigate(lastScreen);
             navigation.goBack();

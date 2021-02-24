@@ -49,13 +49,11 @@ const reducer = (state = initialState, action:any) => {
             return {
                 ...state,
                 loggedIn: true,
-                hasPaymentVersion: state.hasPaymentVersion + 1
             }
         case LOG_OUT:
             return {
                 ...state,
                 loggedIn: false,
-                hasPaymentVersion: state.hasPaymentVersion + 1
             }
         case CHANGE_PROFILE:
             return {

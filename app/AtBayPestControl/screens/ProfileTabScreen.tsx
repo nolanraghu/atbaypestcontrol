@@ -43,7 +43,11 @@ export default function ProfileTabScreen() {
                 justifyContent: 'center'}}>
                 <Text style={styles.link} onPress={()=>{navigation.navigate("ContactUsScreen")}}>Contact Us</Text>
                 <Text style={[styles.captionFade, {fontSize: 30, paddingBottom: 18}]}>.</Text>
-                <Text style={styles.link} onPress={()=>{getUser().delete(); dispatch(changePlan()); dispatch(logOut())}}>Log Out</Text>
+                <Text style={styles.link} onPress={()=>{
+                    dispatch(changePlan());
+                    dispatch(logOut())
+                    getUser().delete();
+                }}>Log Out</Text>
             </View>
         )
     }
