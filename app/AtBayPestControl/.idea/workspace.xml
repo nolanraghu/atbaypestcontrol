@@ -19,10 +19,16 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f11504bf-41dd-4bca-92fa-bafd18444296" name="Default Changelist" comment="update addresses">
+    <list default="true" id="f11504bf-41dd-4bca-92fa-bafd18444296" name="Default Changelist" comment="address trimming">
+      <change afterPath="$PROJECT_DIR$/components/RenderEditPayment.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/Classes/Address.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/Classes/Address.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/RenderShippingLocations.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/RenderShippingLocations.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/Stylesheets/Styles.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/Stylesheets/Styles.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/RenderPayment.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/RenderPayment.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/noPayment.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/addPayment.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/ConfirmPurchasePopup.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/screens/ConfirmPurchasePopup.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/EditPayments.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/screens/EditPayments.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/ProfileTabScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/screens/ProfileTabScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/UpdatePlanPopup.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/screens/UpdatePlanPopup.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,7 +64,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="dart.analysis.tool.window.visible" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/components" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -68,6 +74,11 @@
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\kobin\Documents\Vanderbilt\Senior year\(Fall Semester)\Software Developing\Development stuff\atbaypestcontrol\app\AtBayPestControl\components" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -94,7 +105,7 @@
       <workItem from="1613024753457" duration="7605000" />
       <workItem from="1613517664567" duration="24780000" />
       <workItem from="1613603425786" duration="12785000" />
-      <workItem from="1614126531592" duration="21861000" />
+      <workItem from="1614126531592" duration="24844000" />
     </task>
     <task id="LOCAL-00001" summary="idk">
       <created>1606893147512</created>
@@ -362,7 +373,14 @@
       <option name="project" value="LOCAL" />
       <updated>1614150920316</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="address trimming">
+      <created>1614151288097</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1614151288097</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -393,7 +411,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fixed some display and saving stuff" />
     <MESSAGE value="idk more fixins" />
     <MESSAGE value="oops fix bugs" />
     <MESSAGE value="fixed matching" />
@@ -418,6 +435,7 @@
     <MESSAGE value="Custom back buttons&#10;on EditAddresses and EditUsernamePassword" />
     <MESSAGE value="check addresses" />
     <MESSAGE value="update addresses" />
-    <option name="LAST_COMMIT_MESSAGE" value="update addresses" />
+    <MESSAGE value="address trimming" />
+    <option name="LAST_COMMIT_MESSAGE" value="address trimming" />
   </component>
 </project>

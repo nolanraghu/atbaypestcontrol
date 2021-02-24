@@ -5,14 +5,11 @@ import {
     useColorScheme,
     View, Button
 } from 'react-native';
-import {buttonColor, getOffButtonColor, getStyle} from '../assets/Stylesheets/Styles'
+import {buttonColor, getStyle} from '../assets/Stylesheets/Styles'
 import { useNavigation } from '@react-navigation/native';
 import {getUser} from "../assets/Data/Data";
-import {notUpdated, submit, usernameExists} from "../assets/text/text";
-import Editable from "../components/Editable";
-import {useState} from "react";
-import {updateUsernamePasswordOnline} from "../assets/Data/Storage";
-import {makeAlert} from "../components/errorMessage";
+import {addPayment} from "../components/addPayment";
+import Payment from "../components/RenderEditPayment";
 
 export default function EditPayments() {
     const scheme = useColorScheme();
@@ -21,60 +18,37 @@ export default function EditPayments() {
 
     const user = getUser();
 
-    const [username, setUsername] = useState(user.getUserName());
-    const [password, setPassword] = useState(user.getPassword());
-    const [updating, setUpdating] = useState(false);
+    let keys = 0;
 
-    let name = <Editable type={"Payment"}
-                         textIn={username}
-                         editText={setUsername}/>;
+    let payArray;
 
-    let passwordBox = <Editable textIn={password}
-                                editText={setPassword}
-                                type={"Password"}/>;
-
-    let pressButton = () => {
-        if(!updating) {
-            let oldUsername = user.getUserName();
-            let oldPassword = user.getPassword();
-            user.changeUserName(username);
-            user.changePassword(password);
-            setUpdating(true);
-            updateUsernamePasswordOnline(
-                () => {
-                    user.changeUserName(oldUsername);
-                    user.changePassword(oldPassword);
-                    makeAlert(notUpdated());
-                    setUpdating(false);
-                },
-                () => {
-                    setUpdating(false);
-                    navigation.navigate("ProfileTabScreen", {changed: true});
-                },
-                () => {
-                    user.changeUserName(oldUsername);
-                    user.changePassword(oldPassword);
-                    makeAlert(usernameExists());
-                    setUpdating(false);
-                }
-            )
-        }
+    if(!user.hasPayment()){
+        payArray = addPayment('EditPayments');
+    } else {
+        payArray = user.getPayments().map(function(payment, index) {
+            return  <Payment
+                key={keys++}
+                payment={payment}
+                index={index}
+                onPressDefault={()=>{}}
+                onPressDelete={()=>{}}
+                onView={()=>{}}
+            />
+        })
     }
 
-    let getButtonColor = () => {
-        if (updating) {
-            return getOffButtonColor(scheme);
-        } else {
-            return buttonColor
-        }
+    let addButton = addPayment('EditPayments', true);
+
+    let pressButton = () => {
+        navigation.navigate("ProfileTabScreen", {changed: true});
     }
 
     let endButton =
-        <View style={styles.deleteProfile}>
+        <View style={styles.deleteProfile} key={keys++}>
             <Button
-                title={submit()}
+                title={"done"}
                 onPress={pressButton}
-                color={getButtonColor()}/>
+                color={buttonColor}/>
         </View>
 
 
@@ -82,13 +56,14 @@ export default function EditPayments() {
         <ScrollView style={styles.scroll}>
             <View style={styles.container}>
                 <Card containerStyle={[styles.cardContainer]}>
-                    {name}
-                    {passwordBox}
+                    <View style={styles.emailContainer}>
+                        {payArray}
+                    </View>
+                    {addButton}
                     {endButton}
                 </Card>
             </View>
         </ScrollView>
-
     )
 };
 

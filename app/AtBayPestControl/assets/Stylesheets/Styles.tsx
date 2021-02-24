@@ -420,6 +420,10 @@ export function getStyle(state:ColorSchemeName) {
             flexShrink: 0,
             marginLeft: 5
         },
+        Icon4: {
+            color: highlightRemoving,
+            fontSize: 25,
+        },
         Row: {
             flex: 8,
             flexDirection: 'column',

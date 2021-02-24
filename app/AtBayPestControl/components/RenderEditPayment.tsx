@@ -5,7 +5,7 @@ import {getStyle} from "../assets/Stylesheets/Styles";
 import Payment from "../assets/Classes/Payment";
 import {defaultMarker} from "../assets/text/text";
 
-export default function renderItem ({payment, index, onPressEdit, onPressPayment}: renderProps) {
+export default function renderEditPayment ({payment, index, onPressDelete, onPressDefault, onView}: renderProps) {
     const scheme = useColorScheme();
     let styles = getStyle(scheme);
 
@@ -21,17 +21,15 @@ export default function renderItem ({payment, index, onPressEdit, onPressPayment
     }
 
     return (
-        <TouchableOpacity onPress={() => onPressPayment()}>
+        <TouchableOpacity onPress={onView}>
             <View style={styles.container}>
                 <View style={styles.iconRow}>
-                    {index === 0 && (
-                        <Icon
-                            name= 'payment'
-                            underlayColor = 'transparent'
-                            iconStyle={styles.Icon}
-                            onPress={() => onPressPayment()}
-                        />
-                    )}
+                    <Icon
+                        name= 'remove-circle'
+                        underlayColor = 'transparent'
+                        iconStyle={styles.Icon4}
+                        onPress={onPressDelete}
+                    />
                 </View>
                 <View style={styles.Row}>
                     <View style={styles.column}>
@@ -48,13 +46,10 @@ export default function renderItem ({payment, index, onPressEdit, onPressPayment
                     </View>
                 </View>
                 <View style={styles.editRow}>
-                    {index === 0 && (
-                        <Icon
-                            name="edit"
-                            underlayColor="transparent"
-                            iconStyle={styles.Icon}
-                            onPress={() => onPressEdit()}
-                        />
+                    {index != 0 && (
+                        <Text style={styles.link} onPress={onPressDefault}>
+                            Set as Default
+                        </Text>
                     )}
                 </View>
             </View>
@@ -65,6 +60,7 @@ export default function renderItem ({payment, index, onPressEdit, onPressPayment
 interface renderProps {
     payment: Payment
     index: number
-    onPressEdit: () => void
-    onPressPayment: () => void
+    onPressDelete: () => void
+    onPressDefault: () => void
+    onView: () => void
 }

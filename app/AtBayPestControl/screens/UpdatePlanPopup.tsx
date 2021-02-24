@@ -20,7 +20,7 @@ import {changePlan} from "../redux/action";
 import {updateUserOnline} from "../assets/Data/Storage";
 import {makeAlert} from "../components/errorMessage";
 import {useState} from "react";
-import {noPayment} from "../components/noPayment";
+import {addPayment} from "../components/addPayment";
 import {RootState} from "../redux/store";
 
 export default function UpdatePlanPopup({route, navigation}:any) {
@@ -52,7 +52,7 @@ export default function UpdatePlanPopup({route, navigation}:any) {
     function renderPay () {
 
         if(getUser().getPayments().length == 0){
-            return noPayment('ConfirmPurchasePopup');
+            return addPayment('ConfirmPurchasePopup');
         } else {
             return (
                 <View style={{width: '100%'}} key={keys++}>

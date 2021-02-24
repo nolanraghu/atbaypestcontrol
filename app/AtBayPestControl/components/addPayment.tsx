@@ -5,7 +5,7 @@ import * as React from "react";
 import {getStyle} from "../assets/Stylesheets/Styles";
 import { useNavigation } from "@react-navigation/native";
 
-export function noPayment(screen:string){
+export function addPayment(screen:string, additional = false){
     const scheme = useColorScheme();
     let styles = getStyle(scheme);
     let navigation = useNavigation();
@@ -26,7 +26,7 @@ export function noPayment(screen:string){
                 </View>
                 <View style={styles.Row}>
                     <View style={[styles.column, {marginVertical: '3%'}]}>
-                        <Text style={styles.Text}>{noPaymentText()}</Text>
+                        <Text style={styles.Text}>{additional? 'Add another payment method':noPaymentText()}</Text>
                     </View>
                 </View>
                 <View style={styles.editRow}>

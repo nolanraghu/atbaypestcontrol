@@ -19,7 +19,7 @@ import {getUser} from "../assets/Data/Data";
 import {deleteProfile, planText} from "../assets/text/text";
 import {changePlan, logOut} from "../redux/action";
 import {useDispatch, useSelector} from "react-redux";
-import {noPayment} from "../components/noPayment";
+import {addPayment} from "../components/addPayment";
 import {RootState} from "../redux/store";
 import profileComponent from "../components/profileComponent";
 
@@ -150,7 +150,7 @@ function renderPay () {
   let payArray;
 
   if(!User.hasPayment()){
-    payArray = noPayment('ProfileTabScreen');
+    payArray = addPayment('EditPayments');
   } else {
     payArray = User.getPayments().map(function(payment, index) {
       return  <Payment
