@@ -111,7 +111,7 @@ export default function EditEmails() {
                     () => {
                         setUpdating(false);
                         dispatch(endEditingEmail());
-                        navigation.navigate("ProfileTabScreen", {changed: true});
+                        navigation.navigate("ProfileTabScreen");
                     },
                     () => {
                         makeAlert(usernameStolen());

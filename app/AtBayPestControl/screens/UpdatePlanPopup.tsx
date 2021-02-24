@@ -52,14 +52,14 @@ export default function UpdatePlanPopup({route, navigation}:any) {
     function renderPay () {
 
         if(getUser().getPayments().length == 0){
-            return addPayment('ConfirmPurchasePopup');
+            return addPayment('PlanUpdatePopupScreen');
         } else {
             return (
                 <View style={{width: '100%'}} key={keys++}>
                     <Payment
                         payment={getUser().getPayments()[0]}
                         index={0}
-                        onPressEdit={()=>{navigation.navigate('EditPayments')}}
+                        onPressEdit={()=>{navigation.navigate('EditPayments', {lastScreen: 'PlanUpdatePopupScreen'})}}
                         onPressPayment={()=>{}}/>
                 </View>
             )

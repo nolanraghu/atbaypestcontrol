@@ -5,21 +5,36 @@ import {
     useColorScheme,
     View, Button
 } from 'react-native';
-import {buttonColor, getStyle} from '../assets/Stylesheets/Styles'
-import { useNavigation } from '@react-navigation/native';
+import {buttonColor, getOffButtonColor, getStyle} from '../assets/Stylesheets/Styles'
 import {getUser} from "../assets/Data/Data";
 import {addPayment} from "../components/addPayment";
 import Payment from "../components/RenderEditPayment";
 import {useState} from "react";
+import {updateUserOnline} from "../assets/Data/Storage";
+import {makeAlert} from "../components/errorMessage";
+import {notUpdated, usernameStolen} from "../assets/text/text";
+import {useDispatch, useSelector} from "react-redux";
+import {changePayment} from "../redux/action";
+import {RootState} from "../redux/store";
 
-export default function EditPayments() {
+export default function EditPayments({route, navigation}:any) {
     const scheme = useColorScheme();
     let styles = getStyle(scheme);
-    const navigation = useNavigation();
+    const params = route.params;
+    let lastScreen:string;
+    if (params != undefined) {
+        lastScreen = params.lastScreen;
+    } else {
+        lastScreen = 'ProfileTabScreen'
+    }
 
     const user = getUser();
 
-    const [i, update] = useState(0);
+    const [updating, setUpdating] = useState(false);
+
+    const dispatch = useDispatch();
+
+    useSelector((state:RootState) => state.hasPaymentVersion);
 
     let keys = 0;
 
@@ -33,8 +48,8 @@ export default function EditPayments() {
                 key={keys++}
                 payment={payment}
                 index={index}
-                onPressDefault={()=>{user.setDefaultPayment(index); update(i+1)}}
-                onPressDelete={()=>{user.deletePayment(index); update(i+1)}}
+                onPressDefault={()=>{user.setDefaultPayment(index); dispatch(changePayment())}}
+                onPressDelete={()=>{user.deletePayment(index); dispatch(changePayment())}}
                 onView={()=>{}}
             />
         })
@@ -43,15 +58,41 @@ export default function EditPayments() {
     let addButton = addPayment('EditPayments', true);
 
     let pressButton = () => {
-        navigation.navigate("ProfileTabScreen", {changed: true});
+        if (!updating){
+            setUpdating(true);
+            updateUserOnline(
+                () => {
+                    makeAlert(notUpdated());
+                    setUpdating(false);
+                },
+                () => {
+                    setUpdating(false);
+                    navigation.navigate(lastScreen);
+                    navigation.goBack();
+                },
+                () => {
+                    makeAlert(usernameStolen());
+                    setUpdating(false);
+                }
+            )
+        }
+        navigation.navigate(lastScreen);
+    }
+
+    let getButtonColor = () => {
+        if (updating) {
+            return getOffButtonColor(scheme);
+        } else {
+            return buttonColor
+        }
     }
 
     let endButton =
         <View style={styles.deleteProfile} key={keys++}>
             <Button
-                title={"done"}
+                title={"Done"}
                 onPress={pressButton}
-                color={buttonColor}/>
+                color={getButtonColor()}/>
         </View>
 
 

@@ -19,13 +19,11 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f11504bf-41dd-4bca-92fa-bafd18444296" name="Default Changelist" comment="editPayments styling">
+    <list default="true" id="f11504bf-41dd-4bca-92fa-bafd18444296" name="Default Changelist" comment="editPayments functionality">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/Classes/User.ts" beforeDir="false" afterPath="$PROJECT_DIR$/assets/Classes/User.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/PaymentFormView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/PaymentFormView.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/screens/ConfirmPurchasePopup.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/screens/ConfirmPurchasePopup.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/EditEmails.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/screens/EditEmails.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/screens/EditPayments.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/screens/EditPayments.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens/PaymentScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/screens/PaymentScreen.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/screens/UpdatePlanPopup.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/screens/UpdatePlanPopup.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -103,7 +101,7 @@
       <workItem from="1613024753457" duration="7605000" />
       <workItem from="1613517664567" duration="24780000" />
       <workItem from="1613603425786" duration="12785000" />
-      <workItem from="1614126531592" duration="26073000" />
+      <workItem from="1614126531592" duration="28258000" />
     </task>
     <task id="LOCAL-00001" summary="idk">
       <created>1606893147512</created>
@@ -385,7 +383,14 @@
       <option name="project" value="LOCAL" />
       <updated>1614154409669</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="editPayments functionality">
+      <created>1614155623619</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1614155623619</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -416,7 +421,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="oops fix bugs" />
     <MESSAGE value="fixed matching" />
     <MESSAGE value="fixed ios bug passwordfield" />
     <MESSAGE value="fixed updatePlan error fears" />
@@ -441,6 +445,7 @@
     <MESSAGE value="update addresses" />
     <MESSAGE value="address trimming" />
     <MESSAGE value="editPayments styling" />
-    <option name="LAST_COMMIT_MESSAGE" value="editPayments styling" />
+    <MESSAGE value="editPayments functionality" />
+    <option name="LAST_COMMIT_MESSAGE" value="editPayments functionality" />
   </component>
 </project>
