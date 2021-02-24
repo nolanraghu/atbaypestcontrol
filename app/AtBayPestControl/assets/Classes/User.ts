@@ -307,7 +307,13 @@ export default class User implements UserProps{
     }
 
     setAddresses = (addressStrings:string[]) => {
-
+        let newAddresses:Address[] = [];
+        for (let addressString of addressStrings){
+            newAddresses.push(new Address());
+            newAddresses[newAddresses.length - 1].setFromString(addressString);
+        }
+        this.addresses = newAddresses;
+        save();
     }
 
     getAddresses = () => {
