@@ -10,7 +10,9 @@ export interface RootState {
     equipmentVersion: number,
     loggedIn: boolean,
     hasPaymentVersion: number,
-    isEditingEmail: boolean
+    isEditingEmail: boolean,
+    isEditingAddresses: boolean,
+    isEditingUsernamePassword: boolean
 }
 
 export default store;

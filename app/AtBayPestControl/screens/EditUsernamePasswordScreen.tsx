@@ -13,11 +13,16 @@ import Editable from "../components/Editable";
 import {useState} from "react";
 import {updateUsernamePasswordOnline} from "../assets/Data/Storage";
 import {makeAlert} from "../components/errorMessage";
+import {useDispatch, useSelector} from "react-redux";
+import {RootState} from "../redux/store";
+import {endEditingUsernamePassword, startEditingUsernamePassword} from "../redux/action";
 
 export default function EditUsernamePasswordScreen() {
     const scheme = useColorScheme();
     let styles = getStyle(scheme);
     const navigation = useNavigation();
+
+    const dispatch = useDispatch();
 
     const user = getUser();
 
@@ -27,10 +32,10 @@ export default function EditUsernamePasswordScreen() {
 
     let name = <Editable type={"Username"}
                          textIn={username}
-                         editText={setUsername}/>;
+                         editText={(text)=>{setUsername(text); dispatch(startEditingUsernamePassword())}}/>;
 
     let passwordBox = <Editable textIn={password}
-                                editText={setPassword}
+                                editText={(text)=>{setPassword(text); dispatch(startEditingUsernamePassword())}}
                                 type={"Password"}/>;
 
     let pressButton = () => {
@@ -49,6 +54,7 @@ export default function EditUsernamePasswordScreen() {
                 },
                 () => {
                     setUpdating(false);
+                    dispatch(endEditingUsernamePassword())
                     navigation.navigate("ProfileTabScreen", {changed: true});
                 },
                 () => {

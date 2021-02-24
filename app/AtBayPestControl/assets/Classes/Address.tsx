@@ -105,7 +105,7 @@ export default class Address implements addressProps{
     getReadable = () => {
         let address = this.address;
         if (this.address2 != '') {
-            address = address + ', ' + this.address2;
+            address = address + '\n' + this.address2;
         }
         return address + '\n' + this.city + ', ' + this.state + ' ' + this.zip;
     }

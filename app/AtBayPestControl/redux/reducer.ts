@@ -7,7 +7,11 @@ import {
     CHANGE_PROFILE,
     CHANGE_PAYMENT,
     START_EDITING_EMAIL,
-    END_EDITING_EMAIL
+    END_EDITING_EMAIL,
+    START_EDITING_ADDRESS,
+    END_EDITING_ADDRESS,
+    START_EDITING_USERNAME_PASSWORD,
+    END_EDITING_USERNAME_PASSWORD
 } from "./action";
 
 const initialState = {
@@ -17,7 +21,9 @@ const initialState = {
     profileVersion:0,
     loggedIn: false,
     hasPaymentVersion: 0,
-    isEditingEmail: false
+    isEditingEmail: false,
+    isEditingAddresses: false,
+    isEditingUsernamePassword: false
 };
 
 const reducer = (state = initialState, action:any) => {
@@ -70,6 +76,26 @@ const reducer = (state = initialState, action:any) => {
             return {
                 ...state,
                 isEditingEmail: false
+            }
+        case START_EDITING_ADDRESS:
+            return {
+                ...state,
+                isEditingAddresses: true
+            }
+        case END_EDITING_ADDRESS:
+            return {
+                ...state,
+                isEditingAddresses: false
+            }
+        case START_EDITING_USERNAME_PASSWORD:
+            return {
+                ...state,
+                isEditingUsernamePassword: true
+            }
+        case END_EDITING_USERNAME_PASSWORD:
+            return {
+                ...state,
+                isEditingUsernamePassword: false
             }
         default:
             return state

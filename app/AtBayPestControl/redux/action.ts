@@ -7,6 +7,10 @@ const CHANGE_PROFILE:string = 'CHANGE_PROFILE';
 const CHANGE_PAYMENT:string = 'CHANGE_PAYMENT';
 const START_EDITING_EMAIL:string = 'START_EDITING_EMAIL';
 const END_EDITING_EMAIL:string = 'END_EDITING_EMAIL';
+const START_EDITING_ADDRESS:string = 'START_EDITING_ADDRESS';
+const END_EDITING_ADDRESS:string = 'END_EDITING_ADDRESS';
+const START_EDITING_USERNAME_PASSWORD:string = 'START_EDITING_USERNAME_PASSWORD';
+const END_EDITING_USERNAME_PASSWORD:string = 'END_EDITING_USERNAME_PASSWORD';
 
 // This will change any screen that doesn't care what's pending, and also any screen that is pending
 const changePlan = () => ({type: CHANGE_PLAN});
@@ -31,6 +35,12 @@ const logOut = () => ({type: LOG_OUT});
 const startEditingEmail = () => ({type:START_EDITING_EMAIL})
 const endEditingEmail = () => ({type:END_EDITING_EMAIL})
 
+const startEditingAddress = () => ({type:START_EDITING_ADDRESS})
+const endEditingAddress = () => ({type:END_EDITING_ADDRESS})
+
+const startEditingUsernamePassword = () => ({type:START_EDITING_USERNAME_PASSWORD})
+const endEditingUsernamePassword = () => ({type:END_EDITING_USERNAME_PASSWORD})
+
 export {
     CHANGE_PLAN,
     CHANGE_PROFILE,
@@ -41,6 +51,10 @@ export {
     CHANGE_PAYMENT,
     START_EDITING_EMAIL,
     END_EDITING_EMAIL,
+    START_EDITING_ADDRESS,
+    END_EDITING_ADDRESS,
+    START_EDITING_USERNAME_PASSWORD,
+    END_EDITING_USERNAME_PASSWORD,
     changePlan,
     changePending,
     justEquipmentPending,
@@ -49,5 +63,9 @@ export {
     changeProfile,
     changePayment,
     startEditingEmail,
-    endEditingEmail
+    endEditingEmail,
+    startEditingAddress,
+    endEditingAddress,
+    startEditingUsernamePassword,
+    endEditingUsernamePassword
 }

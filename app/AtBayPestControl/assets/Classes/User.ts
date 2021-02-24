@@ -306,6 +306,10 @@ export default class User implements UserProps{
         save();
     }
 
+    setAddresses = (addressStrings:string[]) => {
+
+    }
+
     getAddresses = () => {
         // returns default the users addresses
         return this.addresses;

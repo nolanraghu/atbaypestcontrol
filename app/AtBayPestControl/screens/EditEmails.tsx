@@ -29,7 +29,7 @@ export default function EditEmails() {
     const [i, update] = useState(0);
 
     const dispatch = useDispatch();
-    const editingEmails = useSelector((state:RootState) => state.isEditingEmail)
+    const editingEmails = useSelector((state:RootState) => state.isEditingEmail);
 
     let keys = i;
 
@@ -56,7 +56,6 @@ export default function EditEmails() {
                           setEmails(mEmails);
                           dispatch(startEditingEmail());
                           update(keys++);
-                          console.log(emails)
                       }}
                       key={keys++}/>);
 
