@@ -44,7 +44,7 @@ export default function LoginScreen ({route, navigation}: any) {
                   } else {
                       return User.validatePassword();
                   }}}
-                  type={"password"}
+                  type={"none"}
                   onSubmitEditing={User.changePassword}
                   submitted={isSubmitted}/>
     ]

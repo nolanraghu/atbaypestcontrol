@@ -12,3 +12,5 @@ We haven't done anything with this... I suppose it may be possible to change the
 All our images are here. Look for index.ts, where they are made into usable variables, which can be referenced throughout the app
 ## text
 This contains all the text used in the app! Use it to change the title, tab names, or any of the text in the app. It is organized by the screen it is used in, besides some of the text that could be used in multiple screens easily
+
+

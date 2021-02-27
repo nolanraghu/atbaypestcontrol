@@ -1,5 +1,5 @@
 import React from 'react'
-import {Text, useColorScheme, View} from 'react-native'
+import {Keyboard, Text, useColorScheme, View} from 'react-native'
 import {Input} from "react-native-elements";
 import {getStyle} from '../assets/Stylesheets/Styles'
 import {getUser} from "../assets/Data/Data";
@@ -23,9 +23,7 @@ export default function renderText ({placeHolder, errorMessage, type, onSubmitEd
             inputStyle={styles.inputText}
             errorMessage={showErrorMessage()}
             errorStyle={{color: 'red'}}
-            secureTextEntry={type === 'none'}
-            onSubmitEditing={(val) =>
-                onSubmitEditing(val.nativeEvent.text)}
+            secureTextEntry={type === 'password'}
             onChangeText={text => onSubmitEditing(text)}
             textContentType={type}
         />

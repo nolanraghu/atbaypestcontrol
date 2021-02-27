@@ -1,4 +1,3 @@
-import {NUMBER_OF_PRODUCTS} from "../Data/UsefulConstants";
 
 interface PayProps {
     cardNumber: string,
