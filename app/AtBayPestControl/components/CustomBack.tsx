@@ -13,19 +13,23 @@ export default function CustomBack(props:any, screen:"Email"|"Address"|"Username
 
     let dispatchDoneEditing:any, editing:any;
 
+    let emailSelector = useSelector((state:RootState) => state.isEditingEmail);
+    let addressSelector = useSelector((state:RootState) => state.isEditingAddresses);
+    let usernamePasswordSelector = useSelector((state:RootState) => state.isEditingUsernamePassword);
+
     if (screen === "Email"){
         dispatchDoneEditing = ()=>{dispatch(endEditingEmail())};
-        editing = useSelector((state:RootState) => state.isEditingEmail);
+        editing = emailSelector;
     } else if (screen === "Address"){
         dispatchDoneEditing = ()=>{dispatch(endEditingAddress())};
-        editing = useSelector((state:RootState) => state.isEditingAddresses);
+        editing = addressSelector;
     } else if (screen === "UsernamePassword"){
         dispatchDoneEditing = ()=>{dispatch(endEditingUsernamePassword())};
-        editing = useSelector((state:RootState) => state.isEditingUsernamePassword);
+        editing = usernamePasswordSelector;
     } else {
         //Just for errors
         dispatchDoneEditing = ()=>{dispatch(endEditingUsernamePassword())};
-        editing = useSelector((state:RootState) => state.isEditingUsernamePassword);
+        editing = usernamePasswordSelector;
     }
 
     let goingBack = () => {

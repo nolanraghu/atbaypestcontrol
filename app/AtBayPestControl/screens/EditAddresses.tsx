@@ -14,7 +14,7 @@ import {useState} from "react";
 import {updateUserOnline} from "../assets/Data/Storage";
 import {makeAlert} from "../components/errorMessage";
 import {useDispatch, useSelector} from "react-redux";
-import {endEditingAddress, startEditingAddress} from "../redux/action";
+import {changeProfile, endEditingAddress, startEditingAddress} from "../redux/action";
 import {RootState} from "../redux/store";
 
 export default function EditAddresses() {
@@ -138,6 +138,7 @@ export default function EditAddresses() {
                     () => {
                         setUpdating(false);
                         dispatch(endEditingAddress());
+                        dispatch(changeProfile());
                         navigation.navigate("ProfileTabScreen");
                     },
                     () => {

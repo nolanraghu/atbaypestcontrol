@@ -31,6 +31,7 @@ export default function ProfileTabScreen() {
 
   // This makes the screen rerender if hasPayment might have changed
   useSelector((state:RootState) => state.hasPaymentVersion);
+  useSelector((state:RootState) => state.profileVersion);
 
   const dispatch = useDispatch();
   const navigation = useNavigation();

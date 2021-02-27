@@ -13,9 +13,8 @@ import Editable from "../components/Editable";
 import {useState} from "react";
 import {updateUsernamePasswordOnline} from "../assets/Data/Storage";
 import {makeAlert} from "../components/errorMessage";
-import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "../redux/store";
-import {endEditingUsernamePassword, startEditingUsernamePassword} from "../redux/action";
+import {useDispatch} from "react-redux";
+import {changeProfile, endEditingUsernamePassword, startEditingUsernamePassword} from "../redux/action";
 
 export default function EditUsernamePasswordScreen() {
     const scheme = useColorScheme();
@@ -54,7 +53,8 @@ export default function EditUsernamePasswordScreen() {
                 },
                 () => {
                     setUpdating(false);
-                    dispatch(endEditingUsernamePassword())
+                    dispatch(endEditingUsernamePassword());
+                    dispatch(changeProfile());
                     navigation.navigate("ProfileTabScreen");
                 },
                 () => {

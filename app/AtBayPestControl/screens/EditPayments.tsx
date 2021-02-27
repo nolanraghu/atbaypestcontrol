@@ -14,7 +14,7 @@ import {updateUserOnline} from "../assets/Data/Storage";
 import {makeAlert} from "../components/errorMessage";
 import {notUpdated, usernameStolen} from "../assets/text/text";
 import {useDispatch, useSelector} from "react-redux";
-import {changePayment} from "../redux/action";
+import {changePayment, changeProfile} from "../redux/action";
 import {RootState} from "../redux/store";
 
 export default function EditPayments({route, navigation}:any) {
@@ -67,6 +67,7 @@ export default function EditPayments({route, navigation}:any) {
                 },
                 () => {
                     setUpdating(false);
+                    dispatch(changeProfile());
                     navigation.navigate(lastScreen);
                     navigation.goBack();
                 },

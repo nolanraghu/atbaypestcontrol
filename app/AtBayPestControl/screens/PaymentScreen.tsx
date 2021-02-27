@@ -7,6 +7,9 @@ import {useDispatch} from "react-redux";
 import {changePayment} from "../redux/action";
 import PaymentFormView from "../components/PaymentFormView";
 import {getStyle} from "../assets/Stylesheets/Styles";
+import {updateUserOnline} from "../assets/Data/Storage";
+import {makeAlert} from "../components/errorMessage";
+import {notUpdated, usernameStolen} from "../assets/text/text";
 
 /**
  * The main class that submits the credit card data and
@@ -110,24 +113,42 @@ export default function AddSubscription({route, navigation}:any){
             setSubmitted(false);
             setError(SERVER_ERROR);
         } else {
-            setSubmitted(false);
             setError(null);
             setToken(creditCardToken);
+            getUser().addPayment(new Payment(creditCardToken.card.last4, creditCardToken.card.funding), defaultCard);
             dispatch(changePayment());
-            getUser().addPayment(new Payment(creditCardToken.card.last4, creditCardToken.card.funding), defaultCard)
 
-            console.log('Checkpoint A' + lastScreen)
-            if(lastScreen === "EditUsernamePasswordScreen" ||
-                lastScreen === "EditEmails" ||
-                lastScreen === "EditAddresses" ||
-                lastScreen === "EditPayments" ||
-                lastScreen === 'ContactUsScreen'){
-                navigation.goBack();
-                navigation.navigate(lastScreen);
-            } else {
-                navigation.navigate(lastScreen);
-                navigation.goBack();
+            let finishButtonPress = () => {
+                setSubmitted(false);
+
+                if(lastScreen === "EditUsernamePasswordScreen" ||
+                    lastScreen === "EditEmails" ||
+                    lastScreen === "EditAddresses" ||
+                    lastScreen === "EditPayments" ||
+                    lastScreen === 'ContactUsScreen'){
+                    navigation.goBack();
+                    navigation.navigate(lastScreen);
+                } else {
+                    navigation.navigate(lastScreen);
+                    navigation.goBack();
+                }
             }
+
+            updateUserOnline(
+                () => {
+                    makeAlert(notUpdated());
+                    finishButtonPress();
+                },
+                () => {
+                    finishButtonPress();
+                },
+                () => {
+                    makeAlert(usernameStolen());
+                    finishButtonPress();
+                }
+            )
+
+
         }
     };
 

@@ -14,7 +14,7 @@ import {useState} from "react";
 import {updateUserOnline} from "../assets/Data/Storage";
 import {makeAlert} from "../components/errorMessage";
 import {useDispatch, useSelector} from "react-redux";
-import {endEditingEmail, startEditingEmail} from "../redux/action";
+import {changeProfile, endEditingEmail, startEditingEmail} from "../redux/action";
 import {RootState} from "../redux/store";
 
 export default function EditEmails() {
@@ -111,6 +111,7 @@ export default function EditEmails() {
                     () => {
                         setUpdating(false);
                         dispatch(endEditingEmail());
+                        dispatch(changeProfile());
                         navigation.navigate("ProfileTabScreen");
                     },
                     () => {
