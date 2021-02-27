@@ -8,3 +8,5 @@ The App is being buit in Expo/ReactNative with MVC architecture which will allow
 
 * DB: MySQL
 * Payment: Stripe
+
+Go to the Final branch for the most updated version!!
