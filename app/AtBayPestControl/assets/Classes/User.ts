@@ -43,8 +43,6 @@ interface UserasJSON {
     pendingPayments: number
 }
 export default class User implements UserProps{
-    //TODO: Add all of the personal information here and have it be used by Profile tab
-
     // If this is 0, that should mean they haven't made an account yet
     emails: Array<Email> = [];
     addresses: Array<Address> = [];

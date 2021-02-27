@@ -19,13 +19,10 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f11504bf-41dd-4bca-92fa-bafd18444296" name="Default Changelist" comment="Fixed bugs">
+    <list default="true" id="f11504bf-41dd-4bca-92fa-bafd18444296" name="Default Changelist" comment="Fixed most bugs">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/Classes/User.ts" beforeDir="false" afterPath="$PROJECT_DIR$/assets/Classes/User.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/Data/Storage.ts" beforeDir="false" afterPath="$PROJECT_DIR$/assets/Data/Storage.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens/EditPayments.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/screens/EditPayments.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens/PaymentScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/screens/PaymentScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens/ProfileTabScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/screens/ProfileTabScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/BugInfoPopup.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/screens/BugInfoPopup.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,7 +100,7 @@
       <workItem from="1613517664567" duration="24780000" />
       <workItem from="1613603425786" duration="12785000" />
       <workItem from="1614126531592" duration="30681000" />
-      <workItem from="1614196036683" duration="12606000" />
+      <workItem from="1614196036683" duration="15086000" />
     </task>
     <task id="LOCAL-00001" summary="idk">
       <created>1606893147512</created>
@@ -427,7 +424,14 @@
       <option name="project" value="LOCAL" />
       <updated>1614403934786</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="Fixed most bugs">
+      <created>1614406416101</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1614406416101</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -458,7 +462,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="more text changes" />
     <MESSAGE value="some icon and style changes" />
     <MESSAGE value="fixed some profile item rendering" />
     <MESSAGE value="more item rendering and navigation fixes" />
@@ -483,6 +486,7 @@
     <MESSAGE value="trying things..." />
     <MESSAGE value="fixed some stuff" />
     <MESSAGE value="Fixed bugs" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed bugs" />
+    <MESSAGE value="Fixed most bugs" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed most bugs" />
   </component>
 </project>
