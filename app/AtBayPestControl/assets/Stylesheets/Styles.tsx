@@ -38,7 +38,7 @@ export function getOffButtonColor(state:ColorSchemeName){
 }
 
 export function getStyle(state:ColorSchemeName) {
-    let background, header, text, button, fadedItem, highlight, fadedText, highlightRemoving
+    let background, header, text, button, fadedItem, highlight, fadedText, highlightRemoving, inputBackground
 
     if (state === 'dark') {
         background = backgroundDark;
@@ -49,6 +49,7 @@ export function getStyle(state:ColorSchemeName) {
         highlight = highlightDark;
         fadedText = fadedTextDark;
         highlightRemoving = highlightRemovingDark;
+        inputBackground = backgroundDark;
     } else {
         background = backgroundLight;
         header = headerLight;
@@ -58,6 +59,7 @@ export function getStyle(state:ColorSchemeName) {
         highlight = highlightLight;
         fadedText = fadedTextLight;
         highlightRemoving = highlightRemovingLight;
+        inputBackground = buttonLight;
     }
     return StyleSheet.create({
         screen: {
@@ -339,16 +341,18 @@ export function getStyle(state:ColorSchemeName) {
         emailContainer: {
             backgroundColor: background,
             flex: 1,
-            paddingTop: 30,
+            paddingVertical: 15,
         },
         headerBackgroundImage: {
             paddingBottom: 30,
             paddingTop: 10,
             paddingHorizontal:10,
+            alignItems: "flex-end"
         },
         headerContainer: {},
         headerColumn: {
             backgroundColor: 'transparent',
+            alignSelf: 'center',
             ...Platform.select({
                 ios: {
                     alignItems: 'center',
@@ -402,6 +406,23 @@ export function getStyle(state:ColorSchemeName) {
         Icon: {
             color: fadedText,
             fontSize: 30,
+        },
+        Icon2: {
+            color: fadedText,
+            fontSize: 30,
+            alignSelf: 'flex-start',
+            margin: 10,
+            marginLeft: 15
+        },
+        Icon3: {
+            color: highlightRemoving,
+            fontSize: 20,
+            flexShrink: 0,
+            marginLeft: 5
+        },
+        Icon4: {
+            color: highlightRemoving,
+            fontSize: 25,
         },
         Row: {
             flex: 8,
@@ -465,7 +486,20 @@ export function getStyle(state:ColorSchemeName) {
             justifyContent: "flex-start",
             alignContent: "flex-start",
             color: text,
-            fontSize: 20
+            fontSize: 20,
+            flexGrow: 1,
+            flexShrink: 1
+        },
+        inputView: {
+            backgroundColor: inputBackground,
+            flexDirection: "row",
+            padding: 10,
+            paddingHorizontal: 13,
+            margin: 10,
+            borderWidth:1,
+            borderRadius: 10,
+            borderColor: fadedItem,
+            alignItems:'center'
         },
         hyperLink: {
             color: highlight,
@@ -505,6 +539,69 @@ export function getStyle(state:ColorSchemeName) {
             borderRadius: 10,
             */
         },
-        contactUs: {width: 30, height: 30, alignSelf:"flex-end"}
+        contactUs: {
+            width: 30,
+            height: 30,
+            alignSelf:"flex-end",
+            color: 'white'
+        },
+        cardArea: {
+            width: '94%',
+            margin: '3%',
+            marginBottom: '3.5%',
+            padding: '3%',
+            paddingVertical: '5.5%',
+            backgroundColor: backgroundLight,
+            shadowColor: 'black',
+            shadowOffset: {width: 0, height: 2},
+            shadowOpacity: 0.5,
+            shadowRadius: 2,
+            elevation: 4,
+            borderRadius: 20,
+            justifyContent: "center",
+        },
+        alertTextWrapper: {
+            flex: 20,
+            justifyContent: 'center',
+            alignItems: 'center'
+        },
+        alertIconWrapper: {
+            padding: 5,
+            flex: 4,
+            justifyContent: 'center',
+            alignItems: 'center'
+        },
+        alertText: {
+            color: '#c22',
+            fontSize: 16,
+            fontWeight: '400'
+        },
+        alertWrapper: {
+            backgroundColor: '#ecb7b7',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+            borderRadius: 5,
+            paddingVertical: 5,
+            marginTop: 10
+        },
+        buttonView: {
+            width: '100%',
+            alignContent: "center",
+            flexDirection: "column",
+            padding: '6%',
+            paddingBottom: 3
+        },
+        checkboxView: {
+            flexDirection: 'row',
+            alignItems: 'center',
+            marginBottom: -5,
+            marginLeft: '6%'
+        },
+        checkboxText: {
+            color: 'black',
+            opacity: .7
+        }
     });
 }

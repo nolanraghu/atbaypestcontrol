@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {Button, ScrollView, Text, useColorScheme, View} from "react-native";
-import {buttonColor, getStyle} from "../assets/Stylesheets/Styles";
+import {buttonColor, getOffButtonColor, getStyle} from "../assets/Stylesheets/Styles";
 import {
     confirmationNotesItems, confirmPayment,
     confirmPurchaseButton,
@@ -11,6 +11,9 @@ import {getEquipmentByID, getProductByID, getUser} from "../assets/Data/Data";
 import Payment from "../components/RenderPayment";
 import CaptionImage from "../components/CaptionImage";
 import Product from "../assets/Classes/Product";
+import AddPayment from "../components/addPayment";
+import {useSelector} from "react-redux";
+import {RootState} from "../redux/store";
 
 export default function ConfirmPurchasePopup({route, navigation}:any){
     const {itemID:itemID, type:type} = route.params;
@@ -29,32 +32,29 @@ export default function ConfirmPurchasePopup({route, navigation}:any){
 
     const scheme = useColorScheme();
     const styles = getStyle(scheme);
+    const hasPayment = getUser().getPayments().length != 0;
+
+    // This makes the screen rerender if hasPayment might have changed
+    useSelector((state:RootState) => state.hasPaymentVersion);
 
     let keys = 0;
 
     function renderPay () {
-        //TODO
-        function onPressPayment () {
-            console.log('payed')
-        }
-
-        function onPressEdit () {
-            console.log('edit')
-        }
 
         if(getUser().getPayments().length == 0){
-            return '';
+            return <AddPayment screen={'ConfirmPurchasePopup'} key={"addPaymentScreen"}/>
+        } else {
+            return (
+                <View style={{width: '100%'}} key={keys++}>
+                    <Payment
+                        payment={getUser().getPayments()[0]}
+                        index={0}
+                        onPressEdit={()=>{navigation.navigate('EditPayments', {lastScreen: 'ConfirmPurchasePopup'})}}
+                        onPressPayment={()=>{}}/>
+                </View>
+            )
         }
 
-        return (
-            <View style={{width: '100%'}} key={keys++}>
-                <Payment
-                    payment={getUser().getPayments()[0]}
-                    index={0}
-                    onPressEdit={onPressEdit}
-                    onPressPayment={onPressPayment}/>
-            </View>
-        )
     }
 
     function paymentInfo(){
@@ -107,10 +107,20 @@ export default function ConfirmPurchasePopup({route, navigation}:any){
     }
 
     function pressButton(){
-        let user = getUser();
-        user.makePayment(price);
-        user.purchaseItems(item);
-        navigation.goBack();
+        if (hasPayment){
+            let user = getUser();
+            user.makePayment(price);
+            user.purchaseItems(item);
+            navigation.goBack();
+        }
+    }
+
+    function getButtonColor(){
+        if (!hasPayment){
+            return getOffButtonColor(scheme);
+        } else {
+            return buttonColor;
+        }
     }
 
     return (
@@ -119,7 +129,7 @@ export default function ConfirmPurchasePopup({route, navigation}:any){
                 <Text style={styles.title}>
                     {confirmTitle()}
                 </Text>
-                <Button title={confirmPurchaseButton()} onPress={pressButton} color={buttonColor}/>
+                <Button title={confirmPurchaseButton()} onPress={pressButton} color={getButtonColor()}/>
             </View>
             <ScrollView style={styles.scroll}>
                 <View style={styles.container}>

@@ -24,7 +24,7 @@
     "web": {
       "favicon": "./assets/images/favicon.png"
     },
-    "description": "This is essentially the prototype for our pest control subscription service. From this version, you can see some example infestation packages, view some example details for those bugs, and view an example confirmation screen. You can also see a list of example products and an example details screen, as well as an example profile page. This can be viewed with an Android phone, with the Expo app. You can also view it by clicking 'View in Browser' on this page.",
+    "description": "This is essentially the prototype for our pest control subscription service. From this version, you can see some example infestation packages, view some example details for those bugs, and view an example confirmation screen. You can also see a list of example products and an example details screen, as well as an example profile page. This can be viewed with an Android phone, with the Expo app. You can also view it by clicking 'Open Project in the Browser' on this page.",
     "githubUrl": "https://github.com/nolanraghu/atbaypestcontrol/tree/Final-UI"
   }
 }

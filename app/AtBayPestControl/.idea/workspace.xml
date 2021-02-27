@@ -19,10 +19,10 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f11504bf-41dd-4bca-92fa-bafd18444296" name="Default Changelist" comment="fixed ios bug passwordfield">
+    <list default="true" id="f11504bf-41dd-4bca-92fa-bafd18444296" name="Default Changelist" comment="Fixed most bugs">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens/ProfileTabScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/screens/ProfileTabScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens/UpdatePlanPopup.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/screens/UpdatePlanPopup.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/Classes/User.ts" beforeDir="false" afterPath="$PROJECT_DIR$/assets/Classes/User.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/BugInfoPopup.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/screens/BugInfoPopup.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,13 +33,14 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="TypeScript File" />
+        <option value="TypeScript JSX File" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$/../.." value="Anuja-New" />
+        <entry key="$PROJECT_DIR$/../.." value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
@@ -57,7 +58,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="dart.analysis.tool.window.visible" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/components" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -67,6 +68,11 @@
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\kobin\Documents\Vanderbilt\Senior year\(Fall Semester)\Software Developing\Development stuff\atbaypestcontrol\app\AtBayPestControl\components" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -86,7 +92,15 @@
       <workItem from="1605755572178" duration="3178000" />
       <workItem from="1606882954363" duration="6325000" />
       <workItem from="1606956795235" duration="37558000" />
-      <workItem from="1607046293723" duration="5613000" />
+      <workItem from="1607046293723" duration="8041000" />
+      <workItem from="1612458086411" duration="12032000" />
+      <workItem from="1612992727338" duration="2067000" />
+      <workItem from="1612995442185" duration="5811000" />
+      <workItem from="1613024753457" duration="7605000" />
+      <workItem from="1613517664567" duration="24780000" />
+      <workItem from="1613603425786" duration="12785000" />
+      <workItem from="1614126531592" duration="30681000" />
+      <workItem from="1614196036683" duration="15086000" />
     </task>
     <task id="LOCAL-00001" summary="idk">
       <created>1606893147512</created>
@@ -207,7 +221,217 @@
       <option name="project" value="LOCAL" />
       <updated>1607051763448</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="fixed updatePlan error fears">
+      <created>1607052514307</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1607052514307</updated>
+    </task>
+    <task id="LOCAL-00019" summary="some changes now">
+      <created>1612759202184</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1612759202184</updated>
+    </task>
+    <task id="LOCAL-00020" summary="some text changes">
+      <created>1612939364213</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1612939364213</updated>
+    </task>
+    <task id="LOCAL-00021" summary="more text changes">
+      <created>1612940601246</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1612940601246</updated>
+    </task>
+    <task id="LOCAL-00022" summary="some icon and style changes">
+      <created>1612996023613</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1612996023613</updated>
+    </task>
+    <task id="LOCAL-00023" summary="fixed some profile item rendering">
+      <created>1613077649725</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1613077649725</updated>
+    </task>
+    <task id="LOCAL-00024" summary="more item rendering and navigation fixes">
+      <created>1613078866123</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1613078866123</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Code cleanup">
+      <created>1613080191890</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1613080191890</updated>
+    </task>
+    <task id="LOCAL-00026" summary="smol fix">
+      <created>1613080338899</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1613080338899</updated>
+    </task>
+    <task id="LOCAL-00027" summary="fixed payment view for no payment added">
+      <created>1613525119451</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1613525119451</updated>
+    </task>
+    <task id="LOCAL-00028" summary="fixed some payment view stuff and navigation">
+      <created>1613544171172</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1613544171172</updated>
+    </task>
+    <task id="LOCAL-00029" summary="more payment display fixes">
+      <created>1613544972920</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1613544972920</updated>
+    </task>
+    <task id="LOCAL-00030" summary="changed profile screen layout">
+      <created>1613548741722</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1613548741722</updated>
+    </task>
+    <task id="LOCAL-00031" summary="username password edit">
+      <created>1613553656835</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1613553656835</updated>
+    </task>
+    <task id="LOCAL-00032" summary="set up new screens">
+      <created>1613606593686</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1613606593686</updated>
+    </task>
+    <task id="LOCAL-00033" summary="edited back button">
+      <created>1614135650348</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1614135650348</updated>
+    </task>
+    <task id="LOCAL-00034" summary="edit email screen finished">
+      <created>1614144470373</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1614144470373</updated>
+    </task>
+    <task id="LOCAL-00035" summary="Custom back buttons&#10;on EditAddresses and EditUsernamePassword">
+      <created>1614146667633</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1614146667633</updated>
+    </task>
+    <task id="LOCAL-00036" summary="check addresses">
+      <created>1614149814502</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1614149814502</updated>
+    </task>
+    <task id="LOCAL-00037" summary="check addresses">
+      <created>1614150607340</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1614150607340</updated>
+    </task>
+    <task id="LOCAL-00038" summary="update addresses">
+      <created>1614150920316</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1614150920316</updated>
+    </task>
+    <task id="LOCAL-00039" summary="address trimming">
+      <created>1614151288097</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1614151288097</updated>
+    </task>
+    <task id="LOCAL-00040" summary="editPayments styling">
+      <created>1614154409669</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1614154409669</updated>
+    </task>
+    <task id="LOCAL-00041" summary="editPayments functionality">
+      <created>1614155623619</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1614155623619</updated>
+    </task>
+    <task id="LOCAL-00042" summary="Finished everything almost">
+      <created>1614157804639</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1614157804639</updated>
+    </task>
+    <task id="LOCAL-00043" summary="cleanup">
+      <created>1614159227820</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1614159227820</updated>
+    </task>
+    <task id="LOCAL-00044" summary="trying things...">
+      <created>1614160229756</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1614160229756</updated>
+    </task>
+    <task id="LOCAL-00045" summary="fixed some stuff">
+      <created>1614400176694</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1614400176694</updated>
+    </task>
+    <task id="LOCAL-00046" summary="Fixed bugs">
+      <created>1614403934786</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1614403934786</updated>
+    </task>
+    <task id="LOCAL-00047" summary="Fixed most bugs">
+      <created>1614406416101</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1614406416101</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -238,76 +462,31 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="idk" />
-    <MESSAGE value="Used thunks!!!&#10;to fix the delete profile and how emails are recreated" />
-    <MESSAGE value="Database!&#10;There's still a lot of error handling to be done tho, as well as some UI stuff" />
-    <MESSAGE value="created error message function" />
-    <MESSAGE value="potentially excessive error handling" />
-    <MESSAGE value="working on register" />
-    <MESSAGE value="finished register function" />
-    <MESSAGE value="made the user store more readably" />
-    <MESSAGE value="Updates plan online" />
-    <MESSAGE value="almostnothing" />
-    <MESSAGE value="login works" />
-    <MESSAGE value="Input debugging" />
-    <MESSAGE value="Fixed some display and saving stuff" />
-    <MESSAGE value="idk more fixins" />
-    <MESSAGE value="oops fix bugs" />
-    <MESSAGE value="fixed matching" />
-    <MESSAGE value="fixed ios bug passwordfield" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed ios bug passwordfield" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1606940830516">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1606940830516" />
-    <state width="1515" height="197" key="GridCell.Tab.0.bottom" timestamp="1607015603905">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="949" height="304" key="GridCell.Tab.0.bottom/0.0.1440.900/-264.-1080.1920.1080@-264.-1080.1920.1080" timestamp="1606235240630" />
-    <state width="1419" height="245" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1605575889239" />
-    <state width="1515" height="197" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1607015603905" />
-    <state width="1515" height="197" key="GridCell.Tab.0.center" timestamp="1607015603905">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="949" height="304" key="GridCell.Tab.0.center/0.0.1440.900/-264.-1080.1920.1080@-264.-1080.1920.1080" timestamp="1606235240628" />
-    <state width="1419" height="245" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1605575889237" />
-    <state width="1515" height="197" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1607015603905" />
-    <state width="1515" height="197" key="GridCell.Tab.0.left" timestamp="1607015603905">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="949" height="304" key="GridCell.Tab.0.left/0.0.1440.900/-264.-1080.1920.1080@-264.-1080.1920.1080" timestamp="1606235240627" />
-    <state width="1419" height="245" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1605575889236" />
-    <state width="1515" height="197" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1607015603905" />
-    <state width="1515" height="197" key="GridCell.Tab.0.right" timestamp="1607015603905">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="949" height="304" key="GridCell.Tab.0.right/0.0.1440.900/-264.-1080.1920.1080@-264.-1080.1920.1080" timestamp="1606235240629" />
-    <state width="1419" height="245" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1605575889238" />
-    <state width="1515" height="197" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1607015603905" />
-    <state x="147" y="65" key="MergeDialog" timestamp="1606962474801">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="147" y="65" key="MergeDialog/0.0.1536.824@0.0.1536.824" timestamp="1606962474801" />
-    <state x="329" y="115" key="RollbackChangesDialog" timestamp="1606992152000">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="329" y="115" key="RollbackChangesDialog/0.0.1536.824@0.0.1536.824" timestamp="1606992152000" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1607012446548">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1607012446548" />
-    <state x="556" y="327" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1607050751327">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="556" y="327" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1607050751327" />
-    <state x="521" y="371" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1440.877@0.23.1440.877" timestamp="1605586059948" />
-    <state x="410" y="179" width="716" height="620" key="search.everywhere.popup" timestamp="1606940307502">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="-1407" y="235" width="894" height="812" key="search.everywhere.popup/0.0.1440.900/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1606883024957" />
-    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup/0.0.1440.900@0.0.1440.900" timestamp="1605583318186" />
-    <state x="410" y="179" width="716" height="620" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1606940307502" />
+    <MESSAGE value="some icon and style changes" />
+    <MESSAGE value="fixed some profile item rendering" />
+    <MESSAGE value="more item rendering and navigation fixes" />
+    <MESSAGE value="Code cleanup" />
+    <MESSAGE value="smol fix" />
+    <MESSAGE value="fixed payment view for no payment added" />
+    <MESSAGE value="fixed some payment view stuff and navigation" />
+    <MESSAGE value="more payment display fixes" />
+    <MESSAGE value="changed profile screen layout" />
+    <MESSAGE value="username password edit" />
+    <MESSAGE value="set up new screens" />
+    <MESSAGE value="edited back button" />
+    <MESSAGE value="edit email screen finished" />
+    <MESSAGE value="Custom back buttons&#10;on EditAddresses and EditUsernamePassword" />
+    <MESSAGE value="check addresses" />
+    <MESSAGE value="update addresses" />
+    <MESSAGE value="address trimming" />
+    <MESSAGE value="editPayments styling" />
+    <MESSAGE value="editPayments functionality" />
+    <MESSAGE value="Finished everything almost" />
+    <MESSAGE value="cleanup" />
+    <MESSAGE value="trying things..." />
+    <MESSAGE value="fixed some stuff" />
+    <MESSAGE value="Fixed bugs" />
+    <MESSAGE value="Fixed most bugs" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed most bugs" />
   </component>
 </project>

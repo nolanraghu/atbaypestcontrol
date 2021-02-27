@@ -3,11 +3,24 @@ import {Text, TouchableOpacity, useColorScheme, View} from 'react-native'
 import { Icon } from 'react-native-elements'
 import {getStyle} from '../assets/Stylesheets/Styles'
 import Address from "../assets/Classes/Address";
+import {defaultMarker} from "../assets/text/text";
 
-export default function renderItem ({address, index, onPressPlace}: renderProps) {
+export default function renderItem ({address, index, onPressPlace, onPressEdit = ()=>{}}: renderProps) {
 
     const scheme = useColorScheme();
     let styles = getStyle(scheme);
+    let mainText = address.getAddress();
+    if(address.getAddress2().length != 0){
+        mainText = mainText + ', ' + address.getAddress2();
+    }
+    let subText = address.getCity() + ', ' + address.getState() + ' ' + address.getZip();
+    if (index == 0) {
+        if (subText === ''){
+            subText += defaultMarker();
+        } else {
+            subText += ' ' + defaultMarker();
+        }
+    }
 
     return (
         <TouchableOpacity onPress={() => onPressPlace()}>
@@ -24,13 +37,25 @@ export default function renderItem ({address, index, onPressPlace}: renderProps)
                 </View>
                 <View style={styles.Row}>
                     <View style={styles.column}>
-                        <Text style={styles.Text}>{address.getAddress() + ', ' + address.getCity()}</Text>
+                        <Text style={styles.Text}>{mainText}</Text>
                     </View>
                     <View style={styles.nameColumn}>
-                        {address.getState().length !== 0 && (
-                            <Text style={styles.subText}>{address.getState() + ', ' + address.getZip()}</Text>
+                        {subText !== '' && (
+                            <Text style={styles.subText}>
+                                {subText}
+                            </Text>
                         )}
                     </View>
+                </View>
+                <View style={styles.editRow}>
+                    {index === 0 && (
+                        <Icon
+                            name="edit"
+                            underlayColor="transparent"
+                            iconStyle={styles.Icon}
+                            onPress={() => onPressEdit()}
+                        />
+                    )}
                 </View>
             </View>
         </TouchableOpacity>
@@ -41,4 +66,5 @@ interface renderProps {
     address: Address
     index: number
     onPressPlace: () => void
+    onPressEdit?: () => void
 }

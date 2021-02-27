@@ -3,7 +3,13 @@ import {Button, ScrollView, useColorScheme, Text, View} from 'react-native';
 import {getStyle, buttonColor} from '../assets/Stylesheets/Styles'
 import BugPressable from "../components/BugPressable";
 import {getPreventionPlan, getUser} from "../assets/Data/Data";
-import {deleteChanges, newPriceText, updatePlan} from "../assets/text/text";
+import {
+    currentPriceText,
+    deleteChanges,
+    newPriceText,
+    productPageDescription,
+    updatePlan
+} from "../assets/text/text";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../redux/store";
 import {useNavigation} from "@react-navigation/native";
@@ -62,7 +68,16 @@ export default function BugsTabScreen() {
               </View>
           )
       } else {
-          return ;
+          return (
+              <View style={[styles.header, {flexWrap: 'wrap'}]}>
+                  <Text style={[styles.title, {marginBottom: 2}]}>
+                      {currentPriceText(plan)}
+                  </Text>
+                  <Text style={[styles.caption, {marginBottom: 0}]}>
+                      {productPageDescription()}
+                  </Text>
+              </View>
+          )
       }
     }
 

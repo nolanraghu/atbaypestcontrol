@@ -1,38 +1,13 @@
-import TextBox from "../Classes/TextBox";
 import {getUser} from "./Data";
 import InputBox from "../../components/RenderTextBox";
 import React from "react";
-
-let User = getUser()
-
-export const registerText = [
-    new TextBox('Username', User.validateUserName, 'username',
-        (newText) => User.changeUserName(newText)),
-    new TextBox('Email Address', User.validateEmail, 'emailAddress',
-        (newText) => User.getLatestEmail().updateEmail(newText)),
-    new TextBox('Confirm Email Address', User.validateEmail, 'emailAddress',
-        (newText) => User.getLatestEmail().updateEmail(newText)),
-    new TextBox('Password', User.validatePassword, 'password',
-        (newText) => User.changePassword(newText)),
-    new TextBox('Confirm Password', User.validatePassword, 'password',
-        (newText) => User.changePassword(newText)),
-    new TextBox('Address Line 1', User.validateAddress, 'streetAddressLine1',
-        (newText) => User.getLatestAddress().updateAddress(newText)),
-    new TextBox('Address Line 2', User.validateAddress2, 'streetAddressLine2',
-        (newText) => User.getLatestAddress().updateAddressLine2(newText)),
-    new TextBox('City', User.validateCity, 'addressCity',
-        (newText) => User.getLatestAddress().updateCity(newText)),
-    new TextBox('State', User.validateState, 'addressState',
-        (newText) => User.getLatestAddress().updateState(newText)),
-    new TextBox('Zip Code', User.validateZip, 'postalCode',
-        (newText) => User.getLatestAddress().updateZip(newText)),
-]
 
 export function registerInputs (isSubmitted:boolean,
                                 emailMatch:string,
                                 setEmailMatch:any,
                                 passMatch:string,
                                 setPassMatch:any){
+    let User = getUser()
     let keys = 0;
     return (
         [
@@ -46,12 +21,12 @@ export function registerInputs (isSubmitted:boolean,
                       placeHolder={'Email Address'}
                       errorMessage={User.validateEmail}
                       type={"emailAddress"}
-                      onSubmitEditing={(newText) => User.getLatestEmail().updateEmail(newText)}
+                      onSubmitEditing={(newText) => User.defaultEmail().updateEmail(newText)}
                       submitted={isSubmitted}/>,
             <InputBox key={keys++}
                       placeHolder={'Confirm Email Address'}
                       errorMessage={()=> {
-                          if (User.getLatestEmail().getEmail() === emailMatch){
+                          if (User.defaultEmail().getEmail() === emailMatch){
                               return '';
                           } else {
                               return 'Emails do not match';
@@ -82,31 +57,31 @@ export function registerInputs (isSubmitted:boolean,
                       key={keys++}
                       errorMessage={User.validateAddress}
                       type={'streetAddressLine1'}
-                      onSubmitEditing={(newText) => User.getLatestAddress().updateAddress(newText)}
+                      onSubmitEditing={(newText) => User.defaultAddress().updateAddress(newText)}
                       submitted={isSubmitted}/>,
             <InputBox placeHolder={'Address Line 2'}
                       key={keys++}
                       errorMessage={User.validateAddress2}
                       type={'streetAddressLine2'}
-                      onSubmitEditing={(newText) => User.getLatestAddress().updateAddressLine2(newText)}
+                      onSubmitEditing={(newText) => User.defaultAddress().updateAddressLine2(newText)}
                       submitted={isSubmitted}/>,
             <InputBox placeHolder={'City'}
                       key={keys++}
                       errorMessage={User.validateCity}
                       type={'addressCity'}
-                      onSubmitEditing={(newText) => User.getLatestAddress().updateCity(newText)}
+                      onSubmitEditing={(newText) => User.defaultAddress().updateCity(newText)}
                       submitted={isSubmitted}/>,
             <InputBox placeHolder={'State'}
                       key={keys++}
                       errorMessage={User.validateState}
                       type={'addressState'}
-                      onSubmitEditing={(newText) => User.getLatestAddress().updateState(newText)}
+                      onSubmitEditing={(newText) => User.defaultAddress().updateState(newText)}
                       submitted={isSubmitted}/>,
             <InputBox placeHolder={'Zip Code'}
                       key={keys++}
                       errorMessage={User.validateZip}
                       type={'postalCode'}
-                      onSubmitEditing={(newText) => User.getLatestAddress().updateZip(newText)}
+                      onSubmitEditing={(newText) => User.defaultAddress().updateZip(newText)}
                       submitted={isSubmitted}/>
         ]
     );

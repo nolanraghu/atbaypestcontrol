@@ -3,10 +3,19 @@ import {Text, TouchableOpacity, useColorScheme, View} from 'react-native'
 import { Icon } from 'react-native-elements'
 import {getStyle} from '../assets/Stylesheets/Styles'
 import Email from "../assets/Classes/Email";
+import {defaultMarker} from "../assets/text/text";
 
-export default function renderItem ({email, index, onPressEmail}: renderProps) {
+export default function renderItem ({email, index, onPressEmail, onPressEdit = ()=>{}}: renderProps) {
     const scheme = useColorScheme();
     let styles = getStyle(scheme);
+    let subText = '';
+    if (index == 0) {
+        if (subText === ''){
+            subText += defaultMarker();
+        } else {
+            subText += ' ' + defaultMarker();
+        }
+    }
 
     return (
         <TouchableOpacity onPress={() => onPressEmail(email.getEmail())}>
@@ -26,10 +35,22 @@ export default function renderItem ({email, index, onPressEmail}: renderProps) {
                         <Text style={styles.Text}>{email.getEmail()}</Text>
                     </View>
                     <View style={styles.nameColumn}>
-                        {email.getType().length !== 0 && (
-                            <Text style={styles.subText}>{'Main Email'}</Text>
+                        {subText !== '' && (
+                            <Text style={styles.subText}>
+                                {subText}
+                            </Text>
                         )}
                     </View>
+                </View>
+                <View style={styles.editRow}>
+                    {index === 0 && (
+                        <Icon
+                            name="edit"
+                            underlayColor="transparent"
+                            iconStyle={styles.Icon}
+                            onPress={() => onPressEdit()}
+                        />
+                    )}
                 </View>
             </View>
         </TouchableOpacity>
@@ -40,5 +61,6 @@ interface renderProps {
     email: Email
     index: number
     onPressEmail: (email?: string) => void
+    onPressEdit?: () => void
 }
 

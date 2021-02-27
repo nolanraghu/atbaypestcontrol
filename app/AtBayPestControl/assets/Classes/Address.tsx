@@ -1,5 +1,4 @@
 interface addressProps {
-    id: number,
     address: string,
     address2: string,
     city: string,
@@ -8,7 +7,6 @@ interface addressProps {
 }
 
 interface AddressasJSON {
-    id: number,
     address: string,
     address2: string,
     city: string,
@@ -17,15 +15,13 @@ interface AddressasJSON {
 }
 
 export default class Address implements addressProps{
-    id: number = 0;
     address: string = "";
     address2: string = "";
     city: string = "";
     state: string = "";
     zip: string = "";
 
-    constructor(id: number = 0, address: string = '', address2: string = '', city: string = '', state: string = '', zip:string = '') {
-            this.id = id;
+    constructor(address: string = '', address2: string = '', city: string = '', state: string = '', zip:string = '') {
             this.address = address;
             this.address2 = address2;
             this.city = city;
@@ -36,7 +32,6 @@ export default class Address implements addressProps{
     toString = () => {
         return JSON.stringify(
             {
-                id: this.id,
                 address: this.address,
                 address2: this.address2,
                 city: this.city,
@@ -48,7 +43,6 @@ export default class Address implements addressProps{
 
     fromString = (jsonString: string) => {
         let json = JSON.parse(jsonString) as AddressasJSON;
-        this.id = json.id;
         this.address = json.address;
         this.address2 = json.address2;
         this.city = json.city;
@@ -56,10 +50,6 @@ export default class Address implements addressProps{
         this.zip = json.zip;
 
         return this;
-    }
-
-    getID = () => {
-        return this.id;
     }
 
     getAddress = () => {
@@ -105,9 +95,49 @@ export default class Address implements addressProps{
     getReadable = () => {
         let address = this.address;
         if (this.address2 != '') {
-            address = address + ', ' + this.address2;
+            address = address + '\n' + this.address2;
         }
         return address + '\n' + this.city + ', ' + this.state + ' ' + this.zip;
+    }
+
+    //returns false on failure
+    setFromString = (addressString:string) => {
+        let address = '', address2 = '', city = '', state = '', zip = '';
+        let trimmedAddressString = addressString.trim();
+        let addressLines = trimmedAddressString.split('\n');
+        if (addressLines.length == 2 || addressLines.length == 3){
+            if(addressLines[0].length == 0){
+                return false;
+            } else {
+                address = addressLines[0];
+                if(addressLines.length == 3){
+                    address2 = addressLines[1];
+                }
+            }
+            let lastAddressLine = addressLines[addressLines.length - 1].split(',');
+            if (lastAddressLine.length != 2 ||
+                lastAddressLine[0].length == 0 ||
+                lastAddressLine[1].length == 0){
+                return false;
+            } else {
+                city = lastAddressLine[0];
+            }
+            let lastSpaceIndex = lastAddressLine[1].lastIndexOf(' ');
+            state = lastAddressLine[1].slice(0, lastSpaceIndex);
+            zip = lastAddressLine[1].slice(lastSpaceIndex + 1);
+            if (state.length == 0 || zip.length == 0){
+                return false;
+            }
+        } else {
+            return false;
+        }
+
+        this.address = address.trim();
+        this.address2 = address2.trim();
+        this.city = city.trim();
+        this.state = state.trim();
+        this.zip = zip.trim();
+        return true;
     }
 
 }

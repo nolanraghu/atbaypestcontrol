@@ -19,7 +19,7 @@ export const loadUser = async () => {
         let u = new User();
         const value = await AsyncStorage.getItem('user')
         if(value !== null) {
-            u = u.fromString(value);
+            u.fromString(value);
         }
         return u;
     } catch(e) {
@@ -66,13 +66,36 @@ export const updateUserOnline = (onError = ()=>{}, onSuccess = ()=>{}, onStolenU
     } else {
         userDatabase.child(cleanPath(User.theUser.getID())).update({
             userString: User.theUser.toString(),
-            email: User.theUser.getLatestEmail().getEmail(),
-            address:User.theUser.getLatestAddress().getReadable(),
+            email: User.theUser.defaultEmail().getEmail(),
+            address:User.theUser.defaultAddress().getReadable(),
             products:products(),
             paymentDate: User.theUser.getPlan().getDueDate(),
             paymentsDue: User.theUser.getPendingPayment().toFixed(2)
         }).then(onSuccess,onError)
     }
+}
+
+export const updateUsernamePasswordOnline = (onError = ()=>{},
+                                             onSuccess = ()=>{},
+                                             onStolenUsername = onError) => {
+    let setKey = () => {
+        let userKey = User.theUser.getID();
+        passwordDatabase.child(cleanPath(User.theUser.getUserName())).once('value').then(
+            snapshot => {
+                if(snapshot.val() === null || snapshot.val().userID === userKey){
+                    passwordDatabase.child(cleanPath(User.theUser.getUserName())).set({
+                        userID: userKey,
+                        password: User.theUser.getPassword()
+                    }).then(onSuccess, onError);
+                } else {
+                    onStolenUsername();
+                }
+            }, onError
+        )
+
+    }
+
+    updateUserOnline(onError, setKey, onStolenUsername)
 }
 
 export const getUserFromOnline = (username:string,
@@ -138,8 +161,8 @@ export const addNewUser = (onError = ()=>{}, onSuccess = ()=>{}, onUsernameExist
 
     userDatabase.push({
         userString: User.theUser.toString(),
-        email: User.theUser.getLatestEmail().getEmail(),
-        address:User.theUser.getLatestAddress().getReadable(),
+        email: User.theUser.defaultEmail().getEmail(),
+        address:User.theUser.defaultAddress().getReadable(),
         products:products(),
         paymentDate: User.theUser.getPlan().getDueDate(),
         paymentsDue: User.theUser.getPendingPayment().toFixed(2)
@@ -158,7 +181,7 @@ export const deleteUser = (username:string, userID:string, onError = ()=>{}, onS
 
 export const addItemToSend = (item:Equipment|Product, onError = ()=>{}, onSuccess = ()=>{}) => {
     itemsToSendDatabase.child(cleanPath(item.getName())).child(cleanPath(User.theUser.getUserName())).set(
-        User.theUser.getLatestAddress().getReadable()
+        User.theUser.defaultAddress().getReadable()
     ).then(onSuccess,onError)
 }
 
@@ -166,7 +189,7 @@ export const addChangedProductsOnline = (product:Product, add:boolean, onError =
     let adding = add? 'added to plan':'removed from plan'
     let addingObject = {
         now: adding,
-        address: User.theUser.getLatestAddress().getReadable()
+        address: User.theUser.defaultAddress().getReadable()
     }
     productsChangedDatabase.child(cleanPath(product.getName())).child(cleanPath(User.theUser.getUserName())).set(
         addingObject

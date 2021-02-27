@@ -1,12 +1,14 @@
 import {Alert} from "react-native";
-import {errorDismiss, errorTitle} from "../assets/text/text";
+import {errorCancel, errorDismiss, errorTitle} from "../assets/text/text";
 
-export const makeAlert = (errorMessage:string) =>
+export const makeAlert = (errorMessage:string, onOK = ()=>{}, cancel = false) =>
     Alert.alert(
         errorTitle(),
         errorMessage,
-        [
-            { text: errorDismiss(), onPress: () => {} }
-        ],
+        (cancel?
+            [{ text: errorDismiss(), onPress: onOK },
+                {text: errorCancel(), onPress: ()=>{}}]
+            : [{ text: errorDismiss(), onPress: onOK }]
+        ),
         { cancelable: false }
     );

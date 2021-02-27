@@ -5,15 +5,6 @@ import Equipment from "../Classes/Equipment";
 import {loadUser, storeUser} from "./Storage";
 import {NUMBER_OF_INFESTATIONS} from "./UsefulConstants";
 
-//EXAMPLE FORMATS
-
-export const PLAN = "Current Plan"
-
-
-//Infestation pulls from Async
-//User from a database
-
-
 export let instantiated = false;
 
 

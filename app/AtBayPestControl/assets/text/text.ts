@@ -13,7 +13,7 @@ export function tab1label(){
     return "Packages";
 }
 export function tab2label(){
-    return "Your Plan";
+    return "Your Products";
 }
 export function tab3label(){
     return "Profile";
@@ -33,6 +33,9 @@ export function notUpdated(){
 export function errorDismiss(){
     return 'OK'
 }
+export function errorCancel(){
+    return 'Cancel'
+}
 export function usernameStolen(){
     return 'Oops! We messed up. Your username has been taken. Please contact support.'
 }
@@ -41,6 +44,9 @@ export function loginError(){
 }
 export function deleteUserError(){
     return 'User not deleted online. Please contact support.'
+}
+export function notSavedText(){
+    return "Your changes have not been saved"
 }
 
 //Potentially general use text
@@ -151,26 +157,31 @@ function equipmentPrice(equipment:Equipment){
 }
 
 //Bugs Screen Text
+export function currentPriceText(plan:Plan){
+    return "Current Plan: $" + plan.getCurrentPrice().toFixed(2) + " per month";
+}
 export function newPriceText(plan:Plan){
     // This is when you are about to update your plan from bugs tab
     let price = plan.getNewPrice();
     let changing = price.monthly != plan.getCurrentPrice();
 
+    let oldPriceText = currentPriceText(plan);
+
     if(changing){
-        let text = "New Price: $" + price.monthly.toFixed(2) + ' per month';
+        let text = oldPriceText + "\nNew Plan: $" + price.monthly.toFixed(2) + ' per month';
         if (price.upfront != 0) {
             text = text + ', plus $' + price.upfront.toFixed(2) + ' for equipment and fees'
         }
         return text;
     } else {
         if (price.upfront != 0) {
-            let text = "New equipment: $" + price.upfront.toFixed(2);
+            let text = "\nNew equipment: $" + price.upfront.toFixed(2);
             if (plan.hasPendingChanges()){
-                text += "\nNo price change"
+                text = " (This isn't changing)" + text
             }
-            return text;
+            return oldPriceText + text;
         } else {
-            return "No price change"
+            return oldPriceText + " (This isn't changing)"
         }
     }
 }
@@ -185,6 +196,10 @@ export function updatePlan(newPlan:boolean){
 }
 export function deleteChanges(){
     return "Delete Pending Changes";
+}
+export function productPageDescription(){
+    return "Use this screen to explore and edit the packages in your plan. Click on the package to learn " +
+        "more about the pests treated, the products and equipment you will receive, and the package's price."
 }
     //Bug Info Popup Text
 export function infestationName(infestation:Infestation){
@@ -280,15 +295,19 @@ export function confirmationNotes(plan:Plan, isChangingPlan:boolean, highlight:a
     }
 
     let changeText:string;
-    if (currentMonthly != 0){
+    let recurringBillingText:string = " Then, your card will automatically be billed ";
+    if (currentMonthly != 0 && currentMonthly != price.monthly){
         changeText = ', instead of $' + currentMonthly.toFixed(2);
     } else {
         changeText = '';
+        if (currentMonthly == price.monthly){
+            recurringBillingText = " Your card will continue to be automatically billed "
+        }
     }
 
     let notesText = [highlight(todayText + "$" + todayCharge.toFixed(2) + '.')];
     if (isChangingPlan){
-        notesText = notesText.concat([" Then, your card will automatically be billed ",
+        notesText = notesText.concat([recurringBillingText,
             highlight("$" + price.monthly.toFixed(2) + " on the " + dateText(day) + " of each month"),
             changeText + ". You will receive an email reminder before that day each month. If you need " +
             "a new product before it is scheduled to ship, you can purchase it from the \'"
@@ -342,8 +361,8 @@ export function newPriceTextFooter(plan:Plan){
 export function noProductText(){
     return "Nothing here yet! Go to the packages page to start adding products to your plan!";
 }
-export function planTitle(){
-    return "Your Plan";
+export function planTitle(plan:Plan){
+    return "Your Plan: $" + plan.getCurrentPrice().toFixed(2) + " per month";
 }
 export function planBriefDescription(plan:Plan){
     const bugslist = plan.getInfestations();
@@ -357,16 +376,12 @@ export function planBriefDescription(plan:Plan){
             infestationsText = bugslist[i].getBugName() + ", " + infestationsText;
         }
     }
-    if(bugslist.length == 1){
-        infestationsText = infestationsText
-    } else {
-        infestationsText = infestationsText
-    }
 
-    let text:string = "With this plan, you receive the following products."
+    let text:string = "With this plan, you receive the following products. Click on a product to learn more " +
+        "about how to apply it, or to purchase extra before your regular shipment date."
     if(plan.containsInfestation(getPreventionPlan())){
         if (bugslist.length == 0){
-            return "You are currently on the prevention plan. " + text;
+            return "You are currently on the general prevention plan. " + text;
         } else {
             return "Your current plan includes the general prevention plan and the " +
                 infestationsText + ". " + text;
@@ -402,11 +417,26 @@ export function purchaseListTitle(){
 }
 
 //Profile Screen Text
+export function planText(){
+    return "View Current Plan info";
+}
+export function defaultMarker(){
+    return '(Default)';
+}
+export function noPaymentText(){
+    return 'Add a payment method';
+}
 export function deleteProfile(){
     return 'Delete Profile'
 }
-export function contactUs(){return 'Contact Us!'}
+    //Contact Us Screen
+export function contactUs(){
+    return 'Contact Us!'
+}
 export function contactUsDescription(){
     return 'Thank you for using Ortho products! Please direct technical difficulties to the team below'
 }
-export function submit(){return 'Submit'}
+    //Edit Profile Screen
+export function submit(){
+    return 'Update'
+}

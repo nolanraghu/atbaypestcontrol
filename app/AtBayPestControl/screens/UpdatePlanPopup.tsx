@@ -15,11 +15,13 @@ import {
 import Product from "../assets/Classes/Product";
 import CaptionImage from "../components/CaptionImage";
 import Equipment from "../assets/Classes/Equipment";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {changePlan} from "../redux/action";
 import {updateUserOnline} from "../assets/Data/Storage";
 import {makeAlert} from "../components/errorMessage";
 import {useState} from "react";
+import AddPayment from "../components/addPayment";
+import {RootState} from "../redux/store";
 
 export default function UpdatePlanPopup({route, navigation}:any) {
     const params = route.params;
@@ -40,36 +42,33 @@ export default function UpdatePlanPopup({route, navigation}:any) {
     const user = getUser();
     const plan = user.getPlan();
     const isChangingPlan = plan.hasPendingChanges();
+    const hasPayment = user.getPayments().length != 0;
+
+    // This makes the screen rerender if hasPayment might have changed
+    useSelector((state:RootState) => state.hasPaymentVersion);
 
     let keys = 0;
 
     function renderPay () {
-        //TODO
-        function onPressPayment () {
-            console.log('payed')
-        }
-
-        function onPressEdit () {
-            console.log('edit')
-        }
 
         if(getUser().getPayments().length == 0){
-            return '';
+            return <AddPayment screen={'PlanUpdatePopupScreen'} key={"addPaymentScreen"}/>;
+        } else {
+            return (
+                <View style={{width: '100%'}} key={keys++}>
+                    <Payment
+                        payment={getUser().getPayments()[0]}
+                        index={0}
+                        onPressEdit={()=>{navigation.navigate('EditPayments', {lastScreen: 'PlanUpdatePopupScreen'})}}
+                        onPressPayment={()=>{}}/>
+                </View>
+            )
         }
 
-        return (
-            <View style={{width: '100%'}} key={keys++}>
-                <Payment
-                    payment={getUser().getPayments()[0]}
-                    index={0}
-                    onPressEdit={onPressEdit}
-                    onPressPayment={onPressPayment}/>
-            </View>
-        )
     }
 
     function pressButton(){
-        if(!updating){
+        if(!updating && hasPayment){
             let load = () => {
                 // You can do stuff when it's loading here
             }
@@ -91,11 +90,7 @@ export default function UpdatePlanPopup({route, navigation}:any) {
                 },
                 () => {
                     dispatch(changePlan());
-                    if(user.getPendingPayment() != 0){
-                        navigation.navigate('AddSubscriptions');
-                    } else {
-                        navigation.navigate('BugsTabScreen');
-                    }
+                    navigation.navigate('BugsTabScreen');
                     setUpdating(false);
                 },
                 () => {
@@ -203,7 +198,7 @@ export default function UpdatePlanPopup({route, navigation}:any) {
     }
 
     function getButtonColor(){
-        if (updating){
+        if (updating || !hasPayment){
             return getOffButtonColor(scheme);
         } else {
             return buttonColor;

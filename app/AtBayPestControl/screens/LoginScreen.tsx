@@ -1,13 +1,10 @@
 import React, {useState} from 'react'
-import {Button, Text, TextInput, TouchableOpacity, useColorScheme, View} from 'react-native'
+import {Button, Text, TouchableOpacity, useColorScheme, View} from 'react-native'
 import {buttonColor, getOffButtonColor, getStyle} from '../assets/Stylesheets/Styles'
-import {Input} from "react-native-elements";
 import {getUser} from "../assets/Data/Data";
-import {loginText} from '../assets/Data/allTextLogin'
 import InputBox from "../components/RenderTextBox";
-import {StackActions} from "react-navigation";
 import {useDispatch} from "react-redux";
-import {changePlan, changeProfile, LOG_IN, logIn} from "../redux/action";
+import {changePlan, changeProfile, logIn} from "../redux/action";
 import {getUserFromOnline} from "../assets/Data/Storage";
 import {makeAlert} from "../components/errorMessage";
 import {loginError} from "../assets/text/text";
