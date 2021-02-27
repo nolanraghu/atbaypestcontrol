@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import {buttonColor, getOffButtonColor, getStyle} from '../assets/Stylesheets/Styles'
 import {getUser} from "../assets/Data/Data";
-import {addPayment} from "../components/addPayment";
+import AddPayment from "../components/addPayment";
 import Payment from "../components/RenderEditPayment";
 import {useState} from "react";
 import {updateUserOnline} from "../assets/Data/Storage";
@@ -41,7 +41,7 @@ export default function EditPayments({route, navigation}:any) {
     let payArray;
 
     if(!user.hasPayment()){
-        payArray = addPayment('EditPayments');
+        payArray = <AddPayment screen={'EditPayments'} key={"addPaymentScreen"}/>
     } else {
         payArray = user.getPayments().map(function(payment, index) {
             return  <Payment
@@ -55,7 +55,7 @@ export default function EditPayments({route, navigation}:any) {
         })
     }
 
-    let addButton = addPayment('EditPayments', true);
+    let addButton = <AddPayment screen={'EditPayments'} key={"addPaymentScreen"} additional={true}/>
 
     let pressButton = () => {
         if (!updating){

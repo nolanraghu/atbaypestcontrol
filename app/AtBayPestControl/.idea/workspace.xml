@@ -19,11 +19,18 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f11504bf-41dd-4bca-92fa-bafd18444296" name="Default Changelist" comment="cleanup">
+    <list default="true" id="f11504bf-41dd-4bca-92fa-bafd18444296" name="Default Changelist" comment="trying things...">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/redux/reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/redux/reducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/PaymentFormView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/PaymentFormView.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/addPayment.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/addPayment.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/navigation/ProfileTabNavigator.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/navigation/ProfileTabNavigator.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/ConfirmPurchasePopup.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/screens/ConfirmPurchasePopup.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/EditPayments.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/screens/EditPayments.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/screens/PaymentScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/screens/PaymentScreen.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/screens/ProfileTabScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/screens/ProfileTabScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/UpdatePlanPopup.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/screens/UpdatePlanPopup.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,7 +107,8 @@
       <workItem from="1613024753457" duration="7605000" />
       <workItem from="1613517664567" duration="24780000" />
       <workItem from="1613603425786" duration="12785000" />
-      <workItem from="1614126531592" duration="30506000" />
+      <workItem from="1614126531592" duration="30681000" />
+      <workItem from="1614196036683" duration="7881000" />
     </task>
     <task id="LOCAL-00001" summary="idk">
       <created>1606893147512</created>
@@ -403,7 +411,14 @@
       <option name="project" value="LOCAL" />
       <updated>1614159227820</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="trying things...">
+      <created>1614160229756</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1614160229756</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -434,7 +449,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fixed updatePlan error fears" />
     <MESSAGE value="some changes now" />
     <MESSAGE value="some text changes" />
     <MESSAGE value="more text changes" />
@@ -459,6 +473,7 @@
     <MESSAGE value="editPayments functionality" />
     <MESSAGE value="Finished everything almost" />
     <MESSAGE value="cleanup" />
-    <option name="LAST_COMMIT_MESSAGE" value="cleanup" />
+    <MESSAGE value="trying things..." />
+    <option name="LAST_COMMIT_MESSAGE" value="trying things..." />
   </component>
 </project>

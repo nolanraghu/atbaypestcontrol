@@ -5,7 +5,7 @@ import * as React from "react";
 import {getStyle} from "../assets/Stylesheets/Styles";
 import { useNavigation } from "@react-navigation/native";
 
-export function addPayment(screen:string, additional = false){
+export default function addPayment({screen, additional = false}:addPaymentProps){
     const scheme = useColorScheme();
     let styles = getStyle(scheme);
     let navigation = useNavigation();
@@ -35,4 +35,9 @@ export function addPayment(screen:string, additional = false){
             </View>
         </TouchableOpacity>
     )
+}
+
+interface addPaymentProps {
+    screen: string,
+    additional?: boolean
 }

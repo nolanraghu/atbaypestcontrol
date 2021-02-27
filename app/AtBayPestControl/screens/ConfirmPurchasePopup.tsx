@@ -11,7 +11,7 @@ import {getEquipmentByID, getProductByID, getUser} from "../assets/Data/Data";
 import Payment from "../components/RenderPayment";
 import CaptionImage from "../components/CaptionImage";
 import Product from "../assets/Classes/Product";
-import {addPayment} from "../components/addPayment";
+import AddPayment from "../components/addPayment";
 import {useSelector} from "react-redux";
 import {RootState} from "../redux/store";
 
@@ -42,7 +42,7 @@ export default function ConfirmPurchasePopup({route, navigation}:any){
     function renderPay () {
 
         if(getUser().getPayments().length == 0){
-            return addPayment('ConfirmPurchasePopup');
+            return <AddPayment screen={'ConfirmPurchasePopup'} key={"addPaymentScreen"}/>
         } else {
             return (
                 <View style={{width: '100%'}} key={keys++}>

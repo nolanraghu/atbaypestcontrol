@@ -17,15 +17,17 @@ import {getUser} from "../assets/Data/Data";
 import {planText} from "../assets/text/text";
 import {changePlan, logOut} from "../redux/action";
 import {useDispatch, useSelector} from "react-redux";
-import {addPayment} from "../components/addPayment";
+import AddPayment from "../components/addPayment";
 import {RootState} from "../redux/store";
 import profileComponent from "../components/profileComponent";
-
-let User = getUser();
 
 export default function ProfileTabScreen() {
   const scheme = useColorScheme();
   let styles = getStyle(scheme);
+
+  let User = getUser();
+
+  let keys = 0;
 
   // This makes the screen rerender if hasPayment might have changed
   useSelector((state:RootState) => state.hasPaymentVersion);
@@ -60,7 +62,6 @@ export default function ProfileTabScreen() {
     }
 
     function renderEmail () {
-        let keys = 0;
 
         function onPressEdit () {
             navigation.navigate('EditEmails');
@@ -119,12 +120,11 @@ export default function ProfileTabScreen() {
     }
 
     function renderPay () {
-        let keys = 0;
 
         let payArray;
 
         if(!User.hasPayment()){
-            payArray = addPayment('EditPayments');
+            payArray = <AddPayment screen={'EditPayments'} key={"addPaymentScreen"}/>
         } else {
             payArray = User.getPayments().map(function(payment, index) {
                 return  <Payment
@@ -146,7 +146,6 @@ export default function ProfileTabScreen() {
     }
 
     function renderLoc () {
-        let keys=0;
 
         let LocationArray = User.getAddresses().map(function(address, index) {
             return  <ShippingLocations

@@ -25,7 +25,7 @@ export default function ProfileTabNavigator() {
                 name="ProfileTabScreen"
                 component={ProfileTabScreen}
                 options={{headerTitle: appName()}}
-                key={0}
+                key={"ProfileTabScreen"}
             />,
             <ProfileTabStack.Screen
                 name="EditUsernamePasswordScreen"
@@ -36,7 +36,7 @@ export default function ProfileTabNavigator() {
                         CustomBack(props, "UsernamePassword")
                     ),
                 }}
-                key={4}
+                key={"EditUsernamePasswordScreen"}
             />,
             <ProfileTabStack.Screen
                 name="EditEmails"
@@ -47,7 +47,7 @@ export default function ProfileTabNavigator() {
                         CustomBack(props, "Email")
                     ),
                 }}
-                key={5}
+                key={"EditEmails"}
             />,
             <ProfileTabStack.Screen
                 name="EditAddresses"
@@ -58,25 +58,25 @@ export default function ProfileTabNavigator() {
                         CustomBack(props, "Address")
                     ),
                 }}
-                key={6}
+                key={"EditAddresses"}
             />,
             <ProfileTabStack.Screen
                 name="EditPayments"
                 component={EditPayments}
                 options={{headerTitle:appName()}}
-                key={3}
+                key={"EditPayments"}
             />,
             <ProfileTabStack.Screen
                 name='ContactUsScreen'
                 component={ContactUsScreen}
                 options={{headerTitle: appName()}}
-                key={1}
+                key={'ContactUsScreen'}
             />,
             <ProfileTabStack.Screen
                 name='AddSubscriptions'
                 component={AddSubscription}
                 options={{headerTitle: appName()}}
-                key={2}
+                key={'AddSubscriptions'}
             />
             ]) :
         ([
@@ -84,13 +84,13 @@ export default function ProfileTabNavigator() {
                 name="LoginScreen"
                 component={LoginScreen}
                 options={{headerTitle: appName()}}
-                key={7}
+                key={"LoginScreen"}
             />,
             <ProfileTabStack.Screen
                 name="RegisterScreen"
                 component={RegisterScreen}
                 options={{headerTitle: appName()}}
-                key={8}
+                key={"RegisterScreen"}
             />
         ])
     return (

@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
-import {StyleSheet, Text, View, Button, useColorScheme} from 'react-native';
+import {Text, View, Button, useColorScheme} from 'react-native';
 // @ts-ignore
 import { CreditCardInput } from 'react-native-credit-card-input';
-import { FontAwesome, FontAwesome5 } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons';
 import {buttonColor, getStyle} from "../assets/Stylesheets/Styles";
 import CheckBox from "@react-native-community/checkbox";
 import {getUser} from "../assets/Data/Data";
