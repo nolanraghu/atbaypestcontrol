@@ -125,7 +125,7 @@ export default function ProfileTabScreen() {
         let payArray;
 
         if(!User.hasPayment()){
-            payArray = <AddPayment screen={'EditPayments'} key={"addPaymentScreen"}/>
+            payArray = <AddPayment screen={'ProfileTabScreen'} key={"addPaymentScreen"}/>
         } else {
             payArray = User.getPayments().map(function(payment, index) {
                 return  <Payment

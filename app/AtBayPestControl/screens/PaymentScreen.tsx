@@ -121,12 +121,14 @@ export default function AddSubscription({route, navigation}:any){
             let finishButtonPress = () => {
                 setSubmitted(false);
 
-                if(lastScreen === "EditUsernamePasswordScreen" ||
+                if (lastScreen === "EditUsernamePasswordScreen" ||
                     lastScreen === "EditEmails" ||
                     lastScreen === "EditAddresses" ||
                     lastScreen === "EditPayments" ||
                     lastScreen === 'ContactUsScreen'){
                     navigation.goBack();
+                    navigation.navigate(lastScreen);
+                } else if (lastScreen === 'ProfileTabScreen') {
                     navigation.navigate(lastScreen);
                 } else {
                     navigation.navigate(lastScreen);

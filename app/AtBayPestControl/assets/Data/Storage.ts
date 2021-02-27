@@ -19,7 +19,7 @@ export const loadUser = async () => {
         let u = new User();
         const value = await AsyncStorage.getItem('user')
         if(value !== null) {
-            u = u.fromString(value);
+            u.fromString(value);
         }
         return u;
     } catch(e) {
@@ -83,7 +83,6 @@ export const updateUsernamePasswordOnline = (onError = ()=>{},
         passwordDatabase.child(cleanPath(User.theUser.getUserName())).once('value').then(
             snapshot => {
                 if(snapshot.val() === null || snapshot.val().userID === userKey){
-                    console.log('um?')
                     passwordDatabase.child(cleanPath(User.theUser.getUserName())).set({
                         userID: userKey,
                         password: User.theUser.getPassword()

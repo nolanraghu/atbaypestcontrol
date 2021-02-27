@@ -111,11 +111,11 @@ export default class User implements UserProps{
         this.password = json.password;
         this.loggedIn = json.loggedIn;
         this.pendingPayments = json.pendingPayments;
-        let curEq = new Set(this.currentEquipment);
-        let remEq = new Set(this.removedEquipment);
-        let setEmails = new Set(this.emails);
-        let setAddresses = new Set(this.addresses);
-        let setPayments = new Set(this.payments);
+        let curEq = new Set<number>();
+        let remEq = new Set<number>();
+        let setEmails = new Set<Email>();
+        let setAddresses = new Set<Address>();
+        let setPayments = new Set<Payment>();
 
         json.currentEquipment.forEach(
             (id) =>{
@@ -151,6 +151,7 @@ export default class User implements UserProps{
         this.emails = [...setEmails];
         this.addresses = [...setAddresses];
         this.payments = [...setPayments];
+        save();
         return this;
     }
 

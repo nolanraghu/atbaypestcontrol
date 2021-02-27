@@ -38,10 +38,12 @@ export default function EditPayments({route, navigation}:any) {
 
     let keys = 0;
 
-    let payArray;
+    let payArray, addButton;
 
     if(!user.hasPayment()){
         payArray = <AddPayment screen={'EditPayments'} key={"addPaymentScreen"}/>
+
+        addButton = [];
     } else {
         payArray = user.getPayments().map(function(payment, index) {
             return  <Payment
@@ -53,9 +55,9 @@ export default function EditPayments({route, navigation}:any) {
                 onView={()=>{}}
             />
         })
-    }
 
-    let addButton = <AddPayment screen={'EditPayments'} key={"addPaymentScreen"} additional={true}/>
+        addButton = <AddPayment screen={'EditPayments'} key={"addPaymentScreen"} additional={true}/>
+    }
 
     let pressButton = () => {
         if (!updating){
@@ -69,7 +71,9 @@ export default function EditPayments({route, navigation}:any) {
                     setUpdating(false);
                     dispatch(changeProfile());
                     navigation.navigate(lastScreen);
-                    navigation.goBack();
+                    if(lastScreen != 'ProfileTabScreen'){
+                        navigation.goBack();
+                    }
                 },
                 () => {
                     makeAlert(usernameStolen());
